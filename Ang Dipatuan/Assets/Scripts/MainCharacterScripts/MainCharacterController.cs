@@ -48,6 +48,16 @@ public class MainCharacterController : MonoBehaviour
 			anim.SetBool("isWalking", false);
 		}
 
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+			anim.SetBool("isAttack", true);
+		}
+
+		if (Input.GetKeyUp(KeyCode.Mouse0))
+		{
+			anim.SetBool("isAttack", false);
+		}
+
 	}
 	
 
