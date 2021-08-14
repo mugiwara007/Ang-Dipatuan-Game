@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 331393073224e804ebc6289fd4f0af49
+guid: f07ae74223da2964a8938a12a0635b79
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -8545033212313250856
-    second: KBS_Sword_ATK_Combo_01_001
+    second: swordAttack2
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: KBS_Sword_ATK_Combo_01_001
+      name: swordAttack2
       takeName: KBS_Sword_ATK_Combo_01_001
       internalID: 0
-      firstFrame: 0
-      lastFrame: 164
+      firstFrame: 32
+      lastFrame: 56
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -58,7 +58,28 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.3709507
+        functionName: ComboPossible
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.62681717
+        functionName: Combo
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.73121387
+        functionName: ComboReset
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -526,18 +547,18 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: KBS_Sword_ATK_Combo_01_001(Clone)
+    - name: Sword Attack 2(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Motus_Man_v50
-      parentName: KBS_Sword_ATK_Combo_01_001(Clone)
+      parentName: Sword Attack 2(Clone)
       position: {x: 5.648244e-30, y: 0, z: 0}
       rotation: {x: 4.415418e-33, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Root
-      parentName: KBS_Sword_ATK_Combo_01_001(Clone)
+      parentName: Sword Attack 2(Clone)
       position: {x: 0.00000014028939, y: 0.000000013613705, z: 0}
       rotation: {x: -8.277815e-23, y: 0.000000017867167, z: 0.000000035676855, w: 1}
       scale: {x: 1, y: 1, z: 1}

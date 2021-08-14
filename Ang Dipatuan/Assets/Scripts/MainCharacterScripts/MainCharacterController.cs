@@ -14,6 +14,12 @@ public class MainCharacterController : MonoBehaviour
 
 	private Transform cam;
 
+
+	int comboStep;
+	public bool comboPossible;
+
+
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -48,6 +54,13 @@ public class MainCharacterController : MonoBehaviour
 			anim.SetBool("isWalking", false);
 		}
 
+
+		if (Input.GetKeyDown(KeyCode.Mouse0))
+		{
+			Attack();
+		}
+
+		/*
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
 			anim.SetBool("isAttack", true);
@@ -57,8 +70,49 @@ public class MainCharacterController : MonoBehaviour
 		{
 			anim.SetBool("isAttack", false);
 		}
+		*/
 
 	}
 	
+	public void Attack()
+    {
+		if(comboStep == 0)
+        {
+			anim.Play("sword attack 1");
+			comboStep = 1;
+			return;
+        }
+        if (comboStep != 0)
+        {
+            if (comboPossible)
+            {
+				comboPossible = false;
+				comboStep += 1;
+            }
+        }
+    }
+
+	public void ComboPossible()
+    {
+		comboPossible = true;
+    }
+
+	public void Combo()
+    {
+		if(comboStep == 2)
+        {
+			anim.Play("sword attack 2");
+		}
+		if (comboStep == 3)
+		{
+			anim.Play("sword attack 3");
+		}
+	}
+
+	public void ComboReset()
+    {
+		comboPossible = false;
+		comboStep = 0;
+	}
 
 }
