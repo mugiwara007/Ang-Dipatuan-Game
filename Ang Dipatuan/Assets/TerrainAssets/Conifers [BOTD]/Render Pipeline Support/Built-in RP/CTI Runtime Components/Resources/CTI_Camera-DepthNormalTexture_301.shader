@@ -1,6 +1,6 @@
-﻿// Upgrade NOTE: removed variant '__' where variant LOD_FADE_PERCENTAGE is used.
+// Upgrade NOTE: removed variant '__' where variant LOD_FADE_PERCENTAGE is used.
 
-Shader "Hidden/CTI_Camera-DepthNormalTexture_301" {
+Shader "Hidden/Camera-DepthNormalTexture" {
 //Shader "Hidden/Internal-DepthNormalsTexture" { // this would be the new name (unity 5.5.) but it does not get overwritten automatically
 Properties {
 	_MainTex ("", 2D) = "white" {}

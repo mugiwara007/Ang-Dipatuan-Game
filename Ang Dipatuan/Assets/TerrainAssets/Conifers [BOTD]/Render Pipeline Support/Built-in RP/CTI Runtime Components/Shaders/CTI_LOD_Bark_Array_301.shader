@@ -1,4 +1,4 @@
-﻿// Upgrade NOTE: removed variant '__' where variant LOD_FADE_PERCENTAGE is used.
+// Upgrade NOTE: removed variant '__' where variant LOD_FADE_PERCENTAGE is used.
 
 Shader "CTI/LOD Bark Array 301" {
 Properties {
@@ -21,15 +21,11 @@ Properties {
 	[NoScaleOffset] _DetailNormalMapX	("    Normal Map (GA) Specular (R) AO (B)", 2D) = "gray" {}
 	_DetailNormalMapScale				("    Normal Strength", Float) = 1.0
 
-	_OcclusionStrength 					("Occlusion Strength", Range(0,1)) = 1
-
-
 	[Header(Wind)]
 	[Space(3)]
 	_BaseWindMultipliers 				("Wind Multipliers (XYZ)*", Vector) = (1,1,1,0)
 	[Space(5)]
-	[Toggle(_METALLICGLOSSMAP)]
-	_LODTerrain 						("Use Wind from Script", Float) = 0.0
+	[Toggle(_METALLICGLOSSMAP)] _LODTerrain ("Use Wind from Script", Float) = 0.0
 
 	[Header(Options for lowest LOD)]
 	[Space(5)]
@@ -56,7 +52,7 @@ SubShader {
 		#pragma surface surf StandardSpecular vertex:CTI_TreeVertBark nodynlightmap keepalpha dithercrossfade
 // nolightmap
 		#pragma target 3.0
-		#pragma multi_compile  LOD_FADE_PERCENTAGE LOD_FADE_CROSSFADE
+		#pragma multi_compile __ LOD_FADE_CROSSFADE
 		#pragma multi_compile __ _METALLICGLOSSMAP
 		#pragma multi_compile_instancing
 
@@ -70,7 +66,6 @@ SubShader {
 
 		#define IS_BARK
 		#define IS_LODTREE
-		#define IS_SURFACESHADER
 		#define IS_CTIARRAY
 
 		// #include "UnityBuiltin3xTreeLibrary.cginc" // We can not do this as we want instancing
@@ -94,8 +89,6 @@ SubShader {
 			fixed4 color : COLOR;
 			UNITY_DITHER_CROSSFADE_COORDS
 		};*/
-
-		fixed _OcclusionStrength;
 
 		void surf (Input IN, inout SurfaceOutputStandardSpecular o) {
 
@@ -140,9 +133,7 @@ SubShader {
 
 			o.Albedo = lerp(c.rgb, (c.rgb + _HueVariation.rgb) * 0.5, IN.color.r * _HueVariation.a);
 			o.Smoothness = c.a * _HueVariation.r;
-			
-			o.Occlusion = lerp(1, bumpSpecAO.b * IN.color.a, _OcclusionStrength);
-
+			o.Occlusion = bumpSpecAO.b * IN.color.a;
 			o.Alpha = c.a;
 			o.Specular = bumpSpecAO.r;
 
