@@ -16,7 +16,7 @@ public class MainCharacterController : MonoBehaviour
 
 
 	int comboStep;
-	public bool comboPossible;
+	public bool comboPossible,isAttacking;
 
 
 
@@ -43,8 +43,12 @@ public class MainCharacterController : MonoBehaviour
 			float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 			transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-			Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            if (isAttacking == false)
+            {
+				Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 				controller.Move(moveDir.normalized * speed * Time.deltaTime);
+			}
+			
 
 			anim.SetBool("isWalking", true);
 
@@ -76,7 +80,8 @@ public class MainCharacterController : MonoBehaviour
 	
 	public void Attack()
     {
-		if(comboStep == 0)
+		isAttacking = true;
+		if (comboStep == 0)
         {
 			anim.Play("sword attack 1");
 			comboStep = 1;
@@ -117,6 +122,7 @@ public class MainCharacterController : MonoBehaviour
     {
 		comboPossible = false;
 		comboStep = 0;
+		isAttacking = false;
 	}
 
 }
