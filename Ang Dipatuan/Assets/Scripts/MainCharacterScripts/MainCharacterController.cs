@@ -107,6 +107,10 @@ public class MainCharacterController : MonoBehaviour
 		{
 			anim.Play("sword attack 3");
 		}
+		if (comboStep == 4)
+		{
+			anim.Play("sword attack 4");
+		}
 	}
 
 	public void ComboReset()
