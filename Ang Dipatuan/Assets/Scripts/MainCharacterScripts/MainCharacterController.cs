@@ -16,13 +16,17 @@ public class MainCharacterController : MonoBehaviour
 
 	//for light attack
 	int comboStep;
-	public bool comboPossible,isAttacking;
+	public bool comboPossible,isAttacking,isBlocking;
 
 	//for heavy attack
 	int heavyAttackcomboStep;
 	public bool heavyAttackcomboPossible, isHeavyAttacking;
 
 	private bool heavyAttackPossible = true, lightAttackPossible = true;
+
+	//FOR JUMPING
+	public bool groundedPlayer;
+
 
 	// Start is called before the first frame update
 	void Start()
@@ -47,7 +51,7 @@ public class MainCharacterController : MonoBehaviour
 			float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 			transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-			if (isAttacking == false && isHeavyAttacking == false)
+			if (isAttacking == false && isHeavyAttacking == false && isBlocking == false)
 			{
 				Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 				controller.Move(moveDir.normalized * speed * Time.deltaTime);
@@ -75,29 +79,47 @@ public class MainCharacterController : MonoBehaviour
 		}
 
 
-		if (Input.GetKeyDown(KeyCode.Mouse0) && lightAttackPossible == true)
+		if (Input.GetKeyDown(KeyCode.Mouse0) && lightAttackPossible == true && isBlocking == false)
 		{
 			Attack();
 			heavyAttackPossible = false;
 		}
 
-		if (Input.GetKeyDown(KeyCode.Mouse1) && heavyAttackPossible == true)
+		if (Input.GetKeyDown(KeyCode.Mouse1) && heavyAttackPossible == true && isBlocking == false)
 		{
 			HeavyAttack();
 			lightAttackPossible = false;
 		}
 
-		/*
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+
+
+		//Block
+		if (Input.GetButton("Left Ctrl"))
+		{
+			anim.Play("Block");
+			anim.SetBool("isBlocking", true);
+			isBlocking = true;
+			ComboReset();
+			HeavyComboReset();
+		}
+        else
         {
-			anim.SetBool("isAttack", true);
+			anim.SetBool("isBlocking", false);
+			isBlocking = false;
 		}
 
-		if (Input.GetKeyUp(KeyCode.Mouse0))
+
+
+
+		//JUMP
+		groundedPlayer = controller.isGrounded;
+
+		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			anim.SetBool("isAttack", false);
+			anim.Play("Jump");
+
+			anim.SetBool("isJumping", false);
 		}
-		*/
 
 	}
 
