@@ -14,11 +14,15 @@ public class MainCharacterController : MonoBehaviour
 
 	private Transform cam;
 
-
+	//for light attack
 	int comboStep;
 	public bool comboPossible,isAttacking;
 
+	//for heavy attack
+	int heavyAttackcomboStep;
+	public bool heavyAttackcomboPossible, isHeavyAttacking;
 
+	private bool heavyAttackPossible = true, lightAttackPossible = true;
 
 	// Start is called before the first frame update
 	void Start()
@@ -37,31 +41,50 @@ public class MainCharacterController : MonoBehaviour
 		float vertical = Input.GetAxisRaw("Vertical");
 		Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-		if(direction.magnitude >= 0.1f)
-        {
+		if (direction.magnitude >= 0.1f)
+		{
 			float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
 			float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 			transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            if (isAttacking == false)
-            {
+			if (isAttacking == false && isHeavyAttacking == false)
+			{
 				Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 				controller.Move(moveDir.normalized * speed * Time.deltaTime);
 			}
-			
+
 
 			anim.SetBool("isWalking", true);
 
-        }
-        else
-        {
+			if (Input.GetButton("Shift"))
+			{
+				anim.SetBool("isRunning", true);
+				speed = 20f;
+			}
+			else
+			{
+				anim.SetBool("isRunning", false);
+				speed = 6f;
+			}
+
+		}
+		else
+		{ 			
+			anim.SetBool("isRunning", false);
 			anim.SetBool("isWalking", false);
 		}
 
 
-		if (Input.GetKeyDown(KeyCode.Mouse0))
+		if (Input.GetKeyDown(KeyCode.Mouse0) && lightAttackPossible == true)
 		{
 			Attack();
+			heavyAttackPossible = false;
+		}
+
+		if (Input.GetKeyDown(KeyCode.Mouse1) && heavyAttackPossible == true)
+		{
+			HeavyAttack();
+			lightAttackPossible = false;
 		}
 
 		/*
@@ -77,7 +100,8 @@ public class MainCharacterController : MonoBehaviour
 		*/
 
 	}
-	
+
+	//LIGHT ATTACK
 	public void Attack()
     {
 		isAttacking = true;
@@ -123,6 +147,52 @@ public class MainCharacterController : MonoBehaviour
 		comboPossible = false;
 		comboStep = 0;
 		isAttacking = false;
+		heavyAttackPossible = true;
+	}
+
+	//HEAVY ATTACK
+	public void HeavyAttack()
+	{
+		isHeavyAttacking = true;
+		if (heavyAttackcomboStep == 0)
+		{
+			anim.Play("heavy attack 1");
+			heavyAttackcomboStep = 1;
+			return;
+		}
+		if (heavyAttackcomboStep != 0)
+		{
+			if (heavyAttackcomboPossible)
+			{
+				heavyAttackcomboPossible = false;
+				heavyAttackcomboStep += 1;
+			}
+		}
+	}
+
+	public void HeavyComboPossible()
+	{
+		heavyAttackcomboPossible = true;
+	}
+
+	public void HeavyCombo()
+	{
+		if (heavyAttackcomboStep == 2)
+		{
+			anim.Play("heavy attack 2");
+		}
+		if (heavyAttackcomboStep == 3)
+		{
+			anim.Play("heavy attack 3");
+		}
+	}
+
+	public void HeavyComboReset()
+	{
+		heavyAttackcomboPossible = false;
+		heavyAttackcomboStep = 0;
+		isHeavyAttacking = false;
+		lightAttackPossible = true;
 	}
 
 }
