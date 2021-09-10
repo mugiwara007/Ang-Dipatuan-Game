@@ -32,6 +32,11 @@ public class MainCharacterController : MonoBehaviour
 	private bool isJumping;
 	private float groundedTimer;     // to allow jumping when going down ramps
 
+	//For Crouching
+	private GameObject followCamera;
+	private float followCamPosition = 1.51f;
+	private bool isCrouching;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -39,6 +44,9 @@ public class MainCharacterController : MonoBehaviour
 		anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
 
 		cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+
+		followCamera = GameObject.FindGameObjectWithTag("followCamera");
+
 	}
 
 
@@ -161,7 +169,7 @@ public class MainCharacterController : MonoBehaviour
 
 
 		//Block
-		if (Input.GetButton("Left Ctrl"))
+		if (Input.GetButton("Left Ctrl") && isCrouching == false && isJumping == false)
 		{
 			anim.Play("Block");
 			anim.SetBool("isBlocking", true);
@@ -175,6 +183,26 @@ public class MainCharacterController : MonoBehaviour
 			isBlocking = false;
 		}
 
+		//Crouch
+		if(Input.GetButton("Crouch") && isJumping == false)
+        {
+			isCrouching = true;
+			var currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Crouch"));
+			anim.SetLayerWeight(anim.GetLayerIndex("Crouch"), Mathf.Lerp(currentWeight, 1.0f, 7f*Time.deltaTime));
+			speed = 2f;
+
+			Vector3 NewPos = new Vector3(followCamera.transform.localPosition.x, followCamPosition - 0.5f, followCamera.transform.localPosition.z);
+			followCamera.transform.localPosition = Vector3.Lerp(followCamera.transform.localPosition, NewPos, 7f*Time.deltaTime);
+		}
+        else 
+		{
+			isCrouching = false;
+			var currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Crouch"));
+			anim.SetLayerWeight(anim.GetLayerIndex("Crouch"), Mathf.Lerp(currentWeight, 0f, 7f * Time.deltaTime));
+
+			Vector3 NewPos = new Vector3(followCamera.transform.localPosition.x, followCamPosition, followCamera.transform.localPosition.z);
+			followCamera.transform.localPosition = Vector3.Lerp(followCamera.transform.localPosition, NewPos, 7f * Time.deltaTime);
+		}
 
 	}
 
