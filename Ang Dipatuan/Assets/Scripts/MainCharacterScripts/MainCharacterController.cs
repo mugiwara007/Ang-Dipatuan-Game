@@ -14,6 +14,8 @@ public class MainCharacterController : MonoBehaviour
 
 	private Transform cam;
 
+	//For Attacks
+
 	//for light attack
 	int comboStep;
 	public bool comboPossible,isAttacking,isBlocking;
@@ -23,6 +25,8 @@ public class MainCharacterController : MonoBehaviour
 	public bool heavyAttackcomboPossible, isHeavyAttacking;
 
 	private bool heavyAttackPossible = true, lightAttackPossible = true;
+	//Attack End
+
 
 	//FOR JUMPING
 	public bool groundedPlayer;
@@ -37,6 +41,10 @@ public class MainCharacterController : MonoBehaviour
 	private float followCamPosition = 1.51f;
 	private bool isCrouching;
 
+	//For Sword
+	GameObject kampilan;
+
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -47,6 +55,7 @@ public class MainCharacterController : MonoBehaviour
 
 		followCamera = GameObject.FindGameObjectWithTag("followCamera");
 
+		kampilan = GameObject.FindGameObjectWithTag("KampilanArmed");
 	}
 
 
@@ -153,14 +162,15 @@ public class MainCharacterController : MonoBehaviour
 			anim.SetBool("isWalking", false);
 		}
 
-
-		if (Input.GetKeyDown(KeyCode.Mouse0) && lightAttackPossible == true && isBlocking == false)
+		//For LightAttack
+		if (Input.GetKeyDown(KeyCode.Mouse0) && lightAttackPossible == true && isBlocking == false && isCrouching == false)
 		{
 			Attack();
 			heavyAttackPossible = false;
 		}
 
-		if (Input.GetKeyDown(KeyCode.Mouse1) && heavyAttackPossible == true && isBlocking == false)
+		//For Heavy Attack
+		if (Input.GetKeyDown(KeyCode.Mouse1) && heavyAttackPossible == true && isBlocking == false && isCrouching == false)
 		{
 			HeavyAttack();
 			lightAttackPossible = false;
@@ -182,6 +192,8 @@ public class MainCharacterController : MonoBehaviour
 			anim.SetBool("isBlocking", false);
 			isBlocking = false;
 		}
+		//END CROUCHING
+
 
 		//Crouch
 		if(Input.GetButton("Crouch") && isJumping == false)
@@ -202,6 +214,17 @@ public class MainCharacterController : MonoBehaviour
 
 			Vector3 NewPos = new Vector3(followCamera.transform.localPosition.x, followCamPosition, followCamera.transform.localPosition.z);
 			followCamera.transform.localPosition = Vector3.Lerp(followCamera.transform.localPosition, NewPos, 7f * Time.deltaTime);
+		}
+		//END CROUCHING
+
+		//Hides Kampilan on Hand when Attacking
+		if (isAttacking || isHeavyAttacking || isBlocking)
+		{
+			kampilan.gameObject.SetActive(true);
+		}
+        else
+        {
+			kampilan.gameObject.SetActive(false);
 		}
 
 	}
