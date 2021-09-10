@@ -57,7 +57,7 @@ public class MainCharacterController : MonoBehaviour
 		if (groundedPlayer)
 		{
 			// cooldown interval to allow reliable jumping even whem coming down ramps
-			groundedTimer = 0.2f;
+			groundedTimer = 0.5f;
 		}
 		if (groundedTimer > 0)
 		{
