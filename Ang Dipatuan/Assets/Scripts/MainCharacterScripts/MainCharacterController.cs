@@ -26,7 +26,11 @@ public class MainCharacterController : MonoBehaviour
 
 	//FOR JUMPING
 	public bool groundedPlayer;
-
+	private Vector3 playerVelocity;
+	private float jumpHeight = 2.6f;
+	private float gravityValue = -9.81f;
+	private bool isJumping;
+	private float groundedTimer;     // to allow jumping when going down ramps
 
 	// Start is called before the first frame update
 	void Start()
@@ -41,6 +45,55 @@ public class MainCharacterController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		groundedPlayer = controller.isGrounded;
+
+		// slam into the ground
+		if (groundedPlayer && playerVelocity.y < 0)
+		{
+			// hit ground
+			playerVelocity.y = 0f;
+		}
+
+		if (groundedPlayer)
+		{
+			// cooldown interval to allow reliable jumping even whem coming down ramps
+			groundedTimer = 0.2f;
+		}
+		if (groundedTimer > 0)
+		{
+			groundedTimer -= Time.deltaTime;
+		}
+
+		//JUMP
+		// allow jump as long as the player is on the ground
+		if (Input.GetButtonDown("Jump"))
+		{
+			// must have been grounded recently to allow jump
+			if (groundedTimer > 0)
+			{
+				// no more until we recontact ground
+				groundedTimer = 0;
+
+				// Physics dynamics formula for calculating jump up velocity based on height and gravity
+				playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+
+				anim.SetBool("isJumping", true);
+				isJumping = true;
+			}
+		}
+		else if (groundedPlayer)
+		{
+			anim.SetBool("isJumping", false);
+			isJumping = false;
+		}
+
+		
+		playerVelocity.y += gravityValue * Time.deltaTime; //Creates Gravity to Player
+
+		controller.Move(playerVelocity * Time.deltaTime);
+		//END JUMP
+
+
 		float horizontal = Input.GetAxisRaw("Horizontal");
 		float vertical = Input.GetAxisRaw("Vertical");
 		Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
@@ -57,18 +110,32 @@ public class MainCharacterController : MonoBehaviour
 				controller.Move(moveDir.normalized * speed * Time.deltaTime);
 			}
 
-
 			anim.SetBool("isWalking", true);
 
+			//JUMP WHEN WALKING
+			if (isJumping)
+			{
+				anim.SetTrigger("isJump");
+				anim.SetBool("isJumping", true);
+			}
+
+			//RUNNING
 			if (Input.GetButton("Shift"))
 			{
 				anim.SetBool("isRunning", true);
-				speed = 20f;
+				speed = 13f;
+
+				//JUMP WHEN RUNNING
+				if (isJumping)
+				{
+					anim.SetTrigger("isJump");
+					anim.SetBool("isJumping", true);
+				}
 			}
 			else
 			{
 				anim.SetBool("isRunning", false);
-				speed = 6f;
+				speed = 4f;
 			}
 
 		}
@@ -108,18 +175,6 @@ public class MainCharacterController : MonoBehaviour
 			isBlocking = false;
 		}
 
-
-
-
-		//JUMP
-		groundedPlayer = controller.isGrounded;
-
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			anim.Play("Jump");
-
-			anim.SetBool("isJumping", false);
-		}
 
 	}
 
