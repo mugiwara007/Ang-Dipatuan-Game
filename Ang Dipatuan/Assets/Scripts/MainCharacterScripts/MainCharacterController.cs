@@ -42,10 +42,10 @@ public class MainCharacterController : MonoBehaviour
 	private bool isCrouching;
 
 	//For Sword
-	GameObject kampilan;
-	public bool isSheathing;
-	public float timeToSheathe;
-	public bool isSwordRecentlyUsed;
+	GameObject kampilan,scabbard,scabbardWithSword;
+	private bool isHoldingSword;
+	private float timeToSheathe;
+	private bool isSwordRecentlyUsed;
 
 	// Start is called before the first frame update
 	void Start()
@@ -57,9 +57,13 @@ public class MainCharacterController : MonoBehaviour
 
 		followCamera = GameObject.FindGameObjectWithTag("followCamera");
 
-		kampilan = GameObject.FindGameObjectWithTag("KampilanArmed");
 
-		
+		kampilan = GameObject.FindGameObjectWithTag("KampilanArmed");
+		scabbardWithSword = GameObject.FindGameObjectWithTag("KampilanUnarmed");
+		scabbard = GameObject.FindGameObjectWithTag("Scabbard");
+
+		kampilan.gameObject.SetActive(false);
+		scabbard.gameObject.SetActive(false);
 	}
 
 
@@ -80,7 +84,7 @@ public class MainCharacterController : MonoBehaviour
 		Crouch();
 
 		Sheathe();
-		
+		Debug.Log(timeToSheathe);
 
 	}
 
@@ -247,23 +251,24 @@ public class MainCharacterController : MonoBehaviour
 
 	public void Sheathe()
     {
-		
 
-		//Hides Kampilan on Hand when Attacking
-		if (isAttacking || isHeavyAttacking || isBlocking)
+		//Show Kampilan on Hand when Attacking
+		if (isAttacking || isHeavyAttacking || isBlocking )
 		{
 			kampilan.gameObject.SetActive(true);
 			timeToSheathe = 0f;
+			
 		}
 		else
 		{
+
+
 			if (isSwordRecentlyUsed)
             {
 				timeToSheathe += Time.deltaTime;
-				Debug.Log(timeToSheathe);
 			}
 			
-			if (timeToSheathe >= 2f)
+			if (timeToSheathe >= 5f)
             {
 				StartCoroutine("SheatheSword");
 				anim.SetBool("isSheathing", true);
@@ -271,7 +276,6 @@ public class MainCharacterController : MonoBehaviour
 				kampilan.gameObject.transform.localRotation = Quaternion.Euler(-77.863f, -148.234f, 319.526f);
 
 				timeToSheathe = 0f;
-				Debug.Log(timeToSheathe);
 				isSwordRecentlyUsed = false;
 			}
             else
@@ -290,6 +294,10 @@ public class MainCharacterController : MonoBehaviour
     {
 		yield return new WaitForSeconds(0.5f);
 		kampilan.gameObject.SetActive(false);
+		isHoldingSword = false;
+
+		scabbard.gameObject.SetActive(false);
+		scabbardWithSword.gameObject.SetActive(true);
 	}
 
 	//LIGHT ATTACK
@@ -298,8 +306,20 @@ public class MainCharacterController : MonoBehaviour
 		//For LightAttack
 		if (Input.GetKeyDown(KeyCode.Mouse0) && lightAttackPossible == true && isBlocking == false && isCrouching == false)
 		{
-			Attack();
-			heavyAttackPossible = false;
+			//if player is not holding the sword then withdraw the sword
+			if (!isHoldingSword)
+			{
+				anim.SetBool("withdrawSword", true);
+				StartCoroutine("ShowSwordOnHand");
+				StartCoroutine("SetWithdrawSwordAnimationToFalse");
+				StartCoroutine("canAttack");
+			}
+            else
+            {
+				Attack();
+				heavyAttackPossible = false;
+			}
+			
 		}
 	}
 
@@ -356,11 +376,23 @@ public class MainCharacterController : MonoBehaviour
 	//HEAVY ATTACK
 	public void HeavyAttackActionListener()
 	{
+
 		//For Heavy Attack
 		if (Input.GetKeyDown(KeyCode.Mouse1) && heavyAttackPossible == true && isBlocking == false && isCrouching == false)
 		{
-			HeavyAttack();
-			lightAttackPossible = false;
+			//if player is not holding the sword then withdraw the sword
+			if (!isHoldingSword)
+			{
+				anim.SetBool("withdrawSword", true);
+				StartCoroutine("ShowSwordOnHand");
+				StartCoroutine("SetWithdrawSwordAnimationToFalse");
+				StartCoroutine("canAttack");
+			}
+			else
+            {
+				HeavyAttack();
+				lightAttackPossible = false;
+			}
 		}
 	}
 
@@ -410,4 +442,24 @@ public class MainCharacterController : MonoBehaviour
 		isSwordRecentlyUsed = true;
 	}
 
+	IEnumerator SetWithdrawSwordAnimationToFalse()
+    {
+		yield return new WaitForSeconds(0.3f);
+		anim.SetBool("withdrawSword", false);
+	}
+
+	IEnumerator ShowSwordOnHand()
+	{
+		yield return new WaitForSeconds(0.7f);
+		kampilan.gameObject.SetActive(true);
+		isSwordRecentlyUsed = true;
+
+		scabbard.gameObject.SetActive(true);
+		scabbardWithSword.gameObject.SetActive(false);
+	}
+	IEnumerator canAttack()
+	{
+		yield return new WaitForSeconds(0.7f);
+		isHoldingSword = true;
+	}
 }
