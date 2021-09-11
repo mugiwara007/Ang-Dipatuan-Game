@@ -43,6 +43,9 @@ public class MainCharacterController : MonoBehaviour
 
 	//For Sword
 	GameObject kampilan;
+	public bool isSheathing;
+	public float timeToSheathe;
+	public bool isSwordRecentlyUsed;
 
 
 	// Start is called before the first frame update
@@ -56,12 +59,36 @@ public class MainCharacterController : MonoBehaviour
 		followCamera = GameObject.FindGameObjectWithTag("followCamera");
 
 		kampilan = GameObject.FindGameObjectWithTag("KampilanArmed");
+
+		
 	}
 
 
 	// Update is called once per frame
 	void Update()
 	{
+
+		Jump();
+
+		Movement();
+
+		LightAttackActionListener();
+
+		HeavyAttackActionListener();
+
+		Block();
+
+		Crouch();
+
+		Sheathe();
+		
+
+	}
+
+
+	public void Jump()
+    {
+		//JUMP
 		groundedPlayer = controller.isGrounded;
 
 		// slam into the ground
@@ -81,7 +108,7 @@ public class MainCharacterController : MonoBehaviour
 			groundedTimer -= Time.deltaTime;
 		}
 
-		//JUMP
+
 		// allow jump as long as the player is on the ground
 		if (Input.GetButtonDown("Jump"))
 		{
@@ -104,13 +131,19 @@ public class MainCharacterController : MonoBehaviour
 			isJumping = false;
 		}
 
-		
+
 		playerVelocity.y += gravityValue * Time.deltaTime; //Creates Gravity to Player
 
 		controller.Move(playerVelocity * Time.deltaTime);
 		//END JUMP
+	}
 
 
+
+
+	public void Movement()
+    {
+		//For Movement
 		float horizontal = Input.GetAxisRaw("Horizontal");
 		float vertical = Input.GetAxisRaw("Vertical");
 		Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
@@ -157,27 +190,18 @@ public class MainCharacterController : MonoBehaviour
 
 		}
 		else
-		{ 			
+		{
 			anim.SetBool("isRunning", false);
 			anim.SetBool("isWalking", false);
 		}
 
-		//For LightAttack
-		if (Input.GetKeyDown(KeyCode.Mouse0) && lightAttackPossible == true && isBlocking == false && isCrouching == false)
-		{
-			Attack();
-			heavyAttackPossible = false;
-		}
-
-		//For Heavy Attack
-		if (Input.GetKeyDown(KeyCode.Mouse1) && heavyAttackPossible == true && isBlocking == false && isCrouching == false)
-		{
-			HeavyAttack();
-			lightAttackPossible = false;
-		}
+		//End Movement
+	}
 
 
 
+	public void Block()
+    {
 		//Block
 		if (Input.GetButton("Left Ctrl") && isCrouching == false && isJumping == false)
 		{
@@ -187,26 +211,30 @@ public class MainCharacterController : MonoBehaviour
 			ComboReset();
 			HeavyComboReset();
 		}
-        else
-        {
+		else
+		{
 			anim.SetBool("isBlocking", false);
 			isBlocking = false;
+
+			
 		}
-		//END CROUCHING
+		//END Block
+	}
 
-
+	public void Crouch()
+    {
 		//Crouch
-		if(Input.GetButton("Crouch") && isJumping == false)
-        {
+		if (Input.GetButton("Crouch") && isJumping == false)
+		{
 			isCrouching = true;
 			var currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Crouch"));
-			anim.SetLayerWeight(anim.GetLayerIndex("Crouch"), Mathf.Lerp(currentWeight, 1.0f, 7f*Time.deltaTime));
+			anim.SetLayerWeight(anim.GetLayerIndex("Crouch"), Mathf.Lerp(currentWeight, 1.0f, 7f * Time.deltaTime));
 			speed = 2f;
 
 			Vector3 NewPos = new Vector3(followCamera.transform.localPosition.x, followCamPosition - 0.5f, followCamera.transform.localPosition.z);
-			followCamera.transform.localPosition = Vector3.Lerp(followCamera.transform.localPosition, NewPos, 7f*Time.deltaTime);
+			followCamera.transform.localPosition = Vector3.Lerp(followCamera.transform.localPosition, NewPos, 7f * Time.deltaTime);
 		}
-        else 
+		else
 		{
 			isCrouching = false;
 			var currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Crouch"));
@@ -216,20 +244,62 @@ public class MainCharacterController : MonoBehaviour
 			followCamera.transform.localPosition = Vector3.Lerp(followCamera.transform.localPosition, NewPos, 7f * Time.deltaTime);
 		}
 		//END CROUCHING
+	}
+
+	public void Sheathe()
+    {
+		
 
 		//Hides Kampilan on Hand when Attacking
 		if (isAttacking || isHeavyAttacking || isBlocking)
 		{
 			kampilan.gameObject.SetActive(true);
+
 		}
-        else
-        {
-			kampilan.gameObject.SetActive(false);
+		else
+		{
+            if (isSwordRecentlyUsed)
+            {
+				timeToSheathe += Time.deltaTime;
+				Debug.Log(timeToSheathe);
+			}
+			
+			if (timeToSheathe >= 2f)
+            {
+				StartCoroutine("SheatheSword");
+				anim.SetBool("isSheathing", true);
+
+				timeToSheathe = 0f;
+				Debug.Log(timeToSheathe);
+				isSwordRecentlyUsed = false;
+			}
+            else
+            {
+				anim.SetBool("isSheathing", false);
+			}
+			
 		}
+
 
 	}
 
+	IEnumerator SheatheSword()
+    {
+		yield return new WaitForSeconds(0.4f);
+		kampilan.gameObject.SetActive(false);
+	}
+
 	//LIGHT ATTACK
+	public void LightAttackActionListener()
+    {
+		//For LightAttack
+		if (Input.GetKeyDown(KeyCode.Mouse0) && lightAttackPossible == true && isBlocking == false && isCrouching == false)
+		{
+			Attack();
+			heavyAttackPossible = false;
+		}
+	}
+
 	public void Attack()
     {
 		isAttacking = true;
@@ -276,9 +346,21 @@ public class MainCharacterController : MonoBehaviour
 		comboStep = 0;
 		isAttacking = false;
 		heavyAttackPossible = true;
+
+		isSwordRecentlyUsed = true;
 	}
 
 	//HEAVY ATTACK
+	public void HeavyAttackActionListener()
+	{
+		//For Heavy Attack
+		if (Input.GetKeyDown(KeyCode.Mouse1) && heavyAttackPossible == true && isBlocking == false && isCrouching == false)
+		{
+			HeavyAttack();
+			lightAttackPossible = false;
+		}
+	}
+
 	public void HeavyAttack()
 	{
 		isHeavyAttacking = true;
@@ -321,6 +403,8 @@ public class MainCharacterController : MonoBehaviour
 		heavyAttackcomboStep = 0;
 		isHeavyAttacking = false;
 		lightAttackPossible = true;
+
+		isSwordRecentlyUsed = true;
 	}
 
 }
