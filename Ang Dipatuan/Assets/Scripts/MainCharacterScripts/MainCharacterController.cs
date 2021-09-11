@@ -47,7 +47,6 @@ public class MainCharacterController : MonoBehaviour
 	public float timeToSheathe;
 	public bool isSwordRecentlyUsed;
 
-
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -254,11 +253,11 @@ public class MainCharacterController : MonoBehaviour
 		if (isAttacking || isHeavyAttacking || isBlocking)
 		{
 			kampilan.gameObject.SetActive(true);
-
+			timeToSheathe = 0f;
 		}
 		else
 		{
-            if (isSwordRecentlyUsed)
+			if (isSwordRecentlyUsed)
             {
 				timeToSheathe += Time.deltaTime;
 				Debug.Log(timeToSheathe);
@@ -268,6 +267,8 @@ public class MainCharacterController : MonoBehaviour
             {
 				StartCoroutine("SheatheSword");
 				anim.SetBool("isSheathing", true);
+				kampilan.gameObject.transform.localPosition = new Vector3(0.1094f, -0.0691f, -0.396f);
+				kampilan.gameObject.transform.localRotation = Quaternion.Euler(-77.863f, -148.234f, 319.526f);
 
 				timeToSheathe = 0f;
 				Debug.Log(timeToSheathe);
@@ -275,6 +276,8 @@ public class MainCharacterController : MonoBehaviour
 			}
             else
             {
+				kampilan.gameObject.transform.localPosition = new Vector3(0.177f, 0.0628f, -0.349f);
+				kampilan.gameObject.transform.localRotation = Quaternion.Euler(-37.614f, -100.303f, 259.229f);
 				anim.SetBool("isSheathing", false);
 			}
 			
@@ -285,7 +288,7 @@ public class MainCharacterController : MonoBehaviour
 
 	IEnumerator SheatheSword()
     {
-		yield return new WaitForSeconds(0.4f);
+		yield return new WaitForSeconds(0.5f);
 		kampilan.gameObject.SetActive(false);
 	}
 
