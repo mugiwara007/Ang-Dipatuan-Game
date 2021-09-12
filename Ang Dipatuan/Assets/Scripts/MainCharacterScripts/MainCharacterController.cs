@@ -157,7 +157,7 @@ public class MainCharacterController : MonoBehaviour
 			float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 			transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-			if (isAttacking == false && isHeavyAttacking == false && isBlocking == false)
+			if (isAttacking == false && isHeavyAttacking == false && isBlocking == false && !isJumping)
 			{
 				Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 				controller.Move(moveDir.normalized * speed * Time.deltaTime);
@@ -168,7 +168,6 @@ public class MainCharacterController : MonoBehaviour
 			//JUMP WHEN WALKING
 			if (isJumping)
 			{
-				anim.SetTrigger("isJump");
 				anim.SetBool("isJumping", true);
 			}
 
@@ -181,7 +180,6 @@ public class MainCharacterController : MonoBehaviour
 				//JUMP WHEN RUNNING
 				if (isJumping)
 				{
-					anim.SetTrigger("isJump");
 					anim.SetBool("isJumping", true);
 				}
 			}
