@@ -457,7 +457,7 @@ public class MainCharacterController : MonoBehaviour
 	}
 	IEnumerator canAttack()
 	{
-		yield return new WaitForSeconds(0.7f);
+		yield return new WaitForSeconds(0.8f);
 		isHoldingSword = true;
 	}
 }
