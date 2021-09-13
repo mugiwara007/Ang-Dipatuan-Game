@@ -18,7 +18,7 @@ public class MainCharacterController : MonoBehaviour
 
 	//for light attack
 	int comboStep;
-	public bool comboPossible,isAttacking,isBlocking;
+	public bool comboPossible,isLightAttacking,isBlocking;
 
 	//for heavy attack
 	int heavyAttackcomboStep;
@@ -84,6 +84,29 @@ public class MainCharacterController : MonoBehaviour
 		Crouch();
 
 		Sheathe();
+
+        if (isJumping)
+        {
+			if (Input.GetKeyDown(KeyCode.Mouse0))
+			{
+				kampilan.gameObject.transform.localPosition = new Vector3(0.179f, -0.122f, -0.281f);
+				kampilan.gameObject.transform.localRotation = Quaternion.Euler(-35.251f, -128.959f, 297.612f);
+
+
+				anim.SetBool("isJumpAttack", true);
+				isHeavyAttacking = true;
+				isHoldingSword = true;
+				isSwordRecentlyUsed = true;
+				lightAttackPossible = false;
+				heavyAttackPossible = false;
+				StartCoroutine("movementDelay");
+			}
+            else
+            {
+				anim.SetBool("isJumpAttack", false);
+			}
+		}
+
 		Debug.Log(timeToSheathe);
 
 	}
@@ -134,6 +157,11 @@ public class MainCharacterController : MonoBehaviour
 			isJumping = false;
 		}
 
+		if (Input.GetButtonUp("Shift"))
+		{
+			jumpHeight = 2.6f;
+		}
+
 
 		playerVelocity.y += gravityValue * Time.deltaTime; //Creates Gravity to Player
 
@@ -157,7 +185,7 @@ public class MainCharacterController : MonoBehaviour
 			float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 			transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-			if (isAttacking == false && isHeavyAttacking == false && isBlocking == false && !isJumping)
+			if (isLightAttacking == false && isHeavyAttacking == false && isBlocking == false && !isJumping)
 			{
 				Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 				controller.Move(moveDir.normalized * speed * Time.deltaTime);
@@ -168,7 +196,7 @@ public class MainCharacterController : MonoBehaviour
 			//JUMP WHEN WALKING
 			if (isJumping)
 			{
-				anim.SetBool("isJumping", true);
+				anim.SetBool("isJumping", true);			
 			}
 
 			//RUNNING
@@ -176,19 +204,22 @@ public class MainCharacterController : MonoBehaviour
 			{
 				anim.SetBool("isRunning", true);
 				speed = 13f;
-
+				jumpHeight = 3.6f;
+				
 				//JUMP WHEN RUNNING
 				if (isJumping)
 				{
 					anim.SetBool("isJumping", true);
 				}
+
+				
 			}
 			else
 			{
 				anim.SetBool("isRunning", false);
 				speed = 4f;
-			}
-
+				jumpHeight = 2.6f;
+			}	
 		}
 		else
 		{
@@ -251,7 +282,7 @@ public class MainCharacterController : MonoBehaviour
     {
 
 		//Show Kampilan on Hand when Attacking
-		if (isAttacking || isHeavyAttacking || isBlocking )
+		if (isLightAttacking || isHeavyAttacking || isBlocking )
 		{
 			kampilan.gameObject.SetActive(true);
 			timeToSheathe = 0f;
@@ -302,7 +333,7 @@ public class MainCharacterController : MonoBehaviour
 	public void LightAttackActionListener()
     {
 		//For LightAttack
-		if (Input.GetKeyDown(KeyCode.Mouse0) && lightAttackPossible == true && isBlocking == false && isCrouching == false)
+		if (Input.GetKeyDown(KeyCode.Mouse0) && lightAttackPossible == true && isBlocking == false && isCrouching == false && groundedPlayer)
 		{
 			//if player is not holding the sword then withdraw the sword
 			if (!isHoldingSword)
@@ -323,7 +354,7 @@ public class MainCharacterController : MonoBehaviour
 
 	public void Attack()
     {
-		isAttacking = true;
+		isLightAttacking = true;
 		if (comboStep == 0)
         {
 			anim.Play("sword attack 1");
@@ -365,7 +396,7 @@ public class MainCharacterController : MonoBehaviour
     {
 		comboPossible = false;
 		comboStep = 0;
-		isAttacking = false;
+		isLightAttacking = false;
 		heavyAttackPossible = true;
 
 		isSwordRecentlyUsed = true;
@@ -376,7 +407,7 @@ public class MainCharacterController : MonoBehaviour
 	{
 
 		//For Heavy Attack
-		if (Input.GetKeyDown(KeyCode.Mouse1) && heavyAttackPossible == true && isBlocking == false && isCrouching == false)
+		if (Input.GetKeyDown(KeyCode.Mouse1) && heavyAttackPossible == true && isBlocking == false && isCrouching == false && groundedPlayer)
 		{
 			//if player is not holding the sword then withdraw the sword
 			if (!isHoldingSword)
@@ -459,5 +490,13 @@ public class MainCharacterController : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.8f);
 		isHoldingSword = true;
+	}
+
+	IEnumerator movementDelay()
+    {
+		yield return new WaitForSeconds(1.2f);
+		isHeavyAttacking = false;
+		lightAttackPossible = true;
+		heavyAttackPossible = true;
 	}
 }
