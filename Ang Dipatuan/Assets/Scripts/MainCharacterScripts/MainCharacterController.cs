@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
+using Cinemachine.Editor;
+using Cinemachine.Utility;
 
 public class MainCharacterController : MonoBehaviour
 {
@@ -47,6 +50,13 @@ public class MainCharacterController : MonoBehaviour
 	private float timeToSheathe;
 	private bool isSwordRecentlyUsed;
 
+
+	private CinemachineFreeLook cinemachineFreeLookCam;
+	private float amplitudeGain = 5f;
+	private float frequemcyGain = 2f;
+	private float shakeDuration = 0.2f;
+	NoiseSettings JumpAttackShake,DefaultCamShake;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -64,13 +74,17 @@ public class MainCharacterController : MonoBehaviour
 
 		kampilan.gameObject.SetActive(false);
 		scabbard.gameObject.SetActive(false);
+
+		cinemachineFreeLookCam = GameObject.FindGameObjectWithTag("cinemachineFreeLook").GetComponent<CinemachineFreeLook>();
+		JumpAttackShake = Resources.Load("JumpAttackShake") as NoiseSettings;
+		DefaultCamShake = Resources.Load("DefaultCamShake") as NoiseSettings;
 	}
 
 
 	// Update is called once per frame
 	void Update()
 	{
-
+		
 		Jump();
 
 		Movement();
@@ -85,13 +99,17 @@ public class MainCharacterController : MonoBehaviour
 
 		Sheathe();
 
-        if (isJumping)
+
+		if (isJumping)
         {
 			if (Input.GetKeyDown(KeyCode.Mouse0))
 			{
 				kampilan.gameObject.transform.localPosition = new Vector3(0.179f, -0.122f, -0.281f);
 				kampilan.gameObject.transform.localRotation = Quaternion.Euler(-35.251f, -128.959f, 297.612f);
 
+
+				scabbard.gameObject.SetActive(true);
+				scabbardWithSword.gameObject.SetActive(false);
 
 				anim.SetBool("isJumpAttack", true);
 				isHeavyAttacking = true;
@@ -100,14 +118,14 @@ public class MainCharacterController : MonoBehaviour
 				lightAttackPossible = false;
 				heavyAttackPossible = false;
 				StartCoroutine("movementDelay");
+
+				//DoShake();
 			}
             else
             {
 				anim.SetBool("isJumpAttack", false);
 			}
 		}
-
-		Debug.Log(timeToSheathe);
 
 	}
 
@@ -499,4 +517,29 @@ public class MainCharacterController : MonoBehaviour
 		lightAttackPossible = true;
 		heavyAttackPossible = true;
 	}
+
+	public void DoShake()
+	{
+		StartCoroutine(Shake());
+	}
+	public IEnumerator Shake()
+	{
+		cinemachineFreeLookCam.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_NoiseProfile = JumpAttackShake;
+		Noise(amplitudeGain, frequemcyGain);
+
+		yield return new WaitForSeconds(shakeDuration);
+
+		Debug.Log("BUMALIK");
+		cinemachineFreeLookCam.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_NoiseProfile = DefaultCamShake;
+		Noise(0,0);
+	}
+	void Noise(float amplitude, float frequency)
+	{
+		cinemachineFreeLookCam.GetRig(0).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = amplitude;
+		cinemachineFreeLookCam.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = amplitude;
+
+		cinemachineFreeLookCam.GetRig(0).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = frequency;
+		cinemachineFreeLookCam.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = frequency;
+	}
+
 }
