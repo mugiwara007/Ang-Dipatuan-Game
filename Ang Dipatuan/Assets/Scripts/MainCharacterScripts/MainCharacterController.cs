@@ -529,9 +529,8 @@ public class MainCharacterController : MonoBehaviour
 
 		yield return new WaitForSeconds(shakeDuration);
 
-		Debug.Log("BUMALIK");
 		cinemachineFreeLookCam.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_NoiseProfile = DefaultCamShake;
-		Noise(0,0);
+		Noise(0.7f, 1f);
 	}
 	void Noise(float amplitude, float frequency)
 	{
