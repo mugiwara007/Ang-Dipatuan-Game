@@ -147,6 +147,9 @@ public class MainCharacterController : MonoBehaviour
 
 				anim.SetBool("isJumping", true);
 				isJumping = true;
+
+				PlayerHealthBar playerHealth = GetComponent<PlayerHealthBar>();
+				playerHealth.Damage(15);
 			}
 		}
 		else if (groundedPlayer)
