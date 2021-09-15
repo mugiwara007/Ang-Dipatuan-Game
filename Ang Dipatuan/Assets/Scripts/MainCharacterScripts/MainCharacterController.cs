@@ -50,16 +50,21 @@ public class MainCharacterController : MonoBehaviour
 	private float timeToSheathe;
 	private bool isSwordRecentlyUsed;
 
-
+	//For Camera Shake When Jump Drop Down Attack
 	private CinemachineFreeLook cinemachineFreeLookCam;
-	private float amplitudeGain = 5f;
-	private float frequemcyGain = 2f;
-	private float shakeDuration = 0.2f;
+	private float amplitudeGain = 2f;
+	private float frequemcyGain = 1f;
+	private float shakeDuration = 0.1f;
 	NoiseSettings JumpAttackShake,DefaultCamShake;
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		StartVariables();
+	}
+
+	public void StartVariables()
+    {
 		controller = GetComponent<CharacterController>();
 		anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
 
@@ -78,6 +83,7 @@ public class MainCharacterController : MonoBehaviour
 		cinemachineFreeLookCam = GameObject.FindGameObjectWithTag("cinemachineFreeLook").GetComponent<CinemachineFreeLook>();
 		JumpAttackShake = Resources.Load("JumpAttackShake") as NoiseSettings;
 		DefaultCamShake = Resources.Load("DefaultCamShake") as NoiseSettings;
+
 	}
 
 
@@ -99,33 +105,7 @@ public class MainCharacterController : MonoBehaviour
 
 		Sheathe();
 
-
-		if (isJumping)
-        {
-			if (Input.GetKeyDown(KeyCode.Mouse0))
-			{
-				kampilan.gameObject.transform.localPosition = new Vector3(0.179f, -0.122f, -0.281f);
-				kampilan.gameObject.transform.localRotation = Quaternion.Euler(-35.251f, -128.959f, 297.612f);
-
-
-				scabbard.gameObject.SetActive(true);
-				scabbardWithSword.gameObject.SetActive(false);
-
-				anim.SetBool("isJumpAttack", true);
-				isHeavyAttacking = true;
-				isHoldingSword = true;
-				isSwordRecentlyUsed = true;
-				lightAttackPossible = false;
-				heavyAttackPossible = false;
-				StartCoroutine("movementDelay");
-
-				//DoShake();
-			}
-            else
-            {
-				anim.SetBool("isJumpAttack", false);
-			}
-		}
+		JumpDropDownAttack();
 
 	}
 
@@ -510,14 +490,45 @@ public class MainCharacterController : MonoBehaviour
 		isHoldingSword = true;
 	}
 
+	public void JumpDropDownAttack()
+    {
+		if (isJumping)
+		{
+			if (Input.GetKeyDown(KeyCode.Mouse0))
+			{
+				kampilan.gameObject.transform.localPosition = new Vector3(0.179f, -0.122f, -0.281f);
+				kampilan.gameObject.transform.localRotation = Quaternion.Euler(-35.251f, -128.959f, 297.612f);
+
+
+				scabbard.gameObject.SetActive(true);
+				scabbardWithSword.gameObject.SetActive(false);
+
+				anim.SetBool("isJumpAttack", true);
+				isHeavyAttacking = true;
+				isHoldingSword = true;
+				isSwordRecentlyUsed = true;
+				lightAttackPossible = false;
+				heavyAttackPossible = false;
+				//Movement Delay after Jump Drop Down Attack
+				StartCoroutine("movementDelay");
+			}
+			else
+			{
+				anim.SetBool("isJumpAttack", false);
+			}
+		}
+	}
+
+	//Movement Delay after Jump Drop Down Attack
 	IEnumerator movementDelay()
     {
-		yield return new WaitForSeconds(1.2f);
+		yield return new WaitForSeconds(1.3f);
 		isHeavyAttacking = false;
 		lightAttackPossible = true;
 		heavyAttackPossible = true;
 	}
 
+	//Shake when Jump Drop Down Attack
 	public void DoShake()
 	{
 		StartCoroutine(Shake());
@@ -540,5 +551,6 @@ public class MainCharacterController : MonoBehaviour
 		cinemachineFreeLookCam.GetRig(0).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = frequency;
 		cinemachineFreeLookCam.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = frequency;
 	}
+	//End Jump Drop Down Attack
 
 }
