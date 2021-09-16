@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class PlayerHealthBar : MonoBehaviour
 {
     private Text healthText;
-    private Image healthBar;
+    private Image healthBar, staminaBar, healthBarMax;
 
-    float health, maxHealth = 100;
+    public float health, maxHealth = 100, stamina, maxStamina = 100;
+    float waitTime = 0f;
+
 
     float lerpSpeed;
 
@@ -16,16 +18,20 @@ public class PlayerHealthBar : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        stamina = maxStamina;
 
         healthText = GameObject.FindGameObjectWithTag("HealthBarText").GetComponent<Text>();
         healthBar = GameObject.FindGameObjectWithTag("HealthBarImage").GetComponent<Image>();
+        healthBarMax = GameObject.FindGameObjectWithTag("HealthBarImageMax").GetComponent<Image>();
 
+
+        staminaBar = GameObject.FindGameObjectWithTag("StaminaBarImage").GetComponent<Image>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthText.text = health + " / 100";
+        healthText.text = health + " / " + maxHealth;
 
         lerpSpeed = 3f * Time.deltaTime; // value to How Smooth transition of healthBar 
 
@@ -48,6 +54,9 @@ public class PlayerHealthBar : MonoBehaviour
 
         //Change the color of HealthBar
         ColorChanger();
+
+        //change the health of the player
+        StaminaBarFiller();
     }
 
     public void HealthBarFiller()
@@ -55,11 +64,61 @@ public class PlayerHealthBar : MonoBehaviour
         healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, health / maxHealth, lerpSpeed);
     }
 
+    public void StaminaBarFiller()
+    {
+        MainCharacterController player = GetComponent<MainCharacterController>();
+        
+
+        if (stamina > maxStamina)
+        {
+            stamina = maxStamina;
+        }
+
+        if(stamina <= 0)
+        {
+            stamina = 0;
+        }
+
+        if (player.isRunning)
+        {
+            stamina -= Time.deltaTime * 7f;
+            waitTime = 0f;
+        }
+        if(!player.isRunning)
+        {
+            waitTime += Time.deltaTime;
+            Debug.Log(waitTime);
+            if (waitTime >= 3f)
+            {
+                stamina += Time.deltaTime * 15f;
+            }
+        }
+
+
+        staminaBar.fillAmount = Mathf.Lerp(staminaBar.fillAmount, stamina / maxHealth, lerpSpeed);
+    }
+
     public void ColorChanger()
     {
+        if (health >= maxHealth)
+        {
+            healthBarMax.enabled = false;
+        }
+        else
+        {
+            healthBarMax.enabled = true;
+        }
+
+        Color32 darkGreen = new Color32(22, 120, 6, 255);
+        Color32 darkRed = new Color32(97, 10, 11, 255);
+
         Color healthColor = Color.Lerp(Color.red, Color.green, (health / maxHealth));
 
+        Color maxHealthColor = Color.Lerp(darkRed, darkGreen, (health / maxHealth));
+
         healthBar.color = healthColor;
+        healthBarMax.color = maxHealthColor;
+
     }
 
     public void Damage(float damagePoints)
@@ -77,5 +136,4 @@ public class PlayerHealthBar : MonoBehaviour
             health += healingPoints;
         }
     }
-
 }

@@ -17,6 +17,8 @@ public class MainCharacterController : MonoBehaviour
 
 	private Transform cam;
 
+	public bool isRunning;
+
 	//For Attacks
 
 	//for light attack
@@ -57,6 +59,8 @@ public class MainCharacterController : MonoBehaviour
 	private float shakeDuration = 0.1f;
 	NoiseSettings JumpAttackShake,DefaultCamShake;
 
+	PlayerHealthBar playerHealth;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -84,6 +88,7 @@ public class MainCharacterController : MonoBehaviour
 		JumpAttackShake = Resources.Load("JumpAttackShake") as NoiseSettings;
 		DefaultCamShake = Resources.Load("DefaultCamShake") as NoiseSettings;
 
+		playerHealth = GetComponent<PlayerHealthBar>();
 	}
 
 
@@ -148,7 +153,7 @@ public class MainCharacterController : MonoBehaviour
 				anim.SetBool("isJumping", true);
 				isJumping = true;
 
-				PlayerHealthBar playerHealth = GetComponent<PlayerHealthBar>();
+				//damage player
 				playerHealth.Damage(15);
 			}
 		}
@@ -201,8 +206,9 @@ public class MainCharacterController : MonoBehaviour
 			}
 
 			//RUNNING
-			if (Input.GetButton("Shift"))
+			if (Input.GetButton("Shift") && playerHealth.stamina > 0)
 			{
+				isRunning = true;
 				anim.SetBool("isRunning", true);
 				speed = 13f;
 				jumpHeight = 4f;
@@ -220,6 +226,7 @@ public class MainCharacterController : MonoBehaviour
 				anim.SetBool("isRunning", false);
 				speed = 4f;
 				jumpHeight = 2.6f;
+				isRunning = false;
 			}	
 		}
 		else
