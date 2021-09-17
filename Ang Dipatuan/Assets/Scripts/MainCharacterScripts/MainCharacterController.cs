@@ -59,7 +59,7 @@ public class MainCharacterController : MonoBehaviour
 	private float shakeDuration = 0.1f;
 	NoiseSettings JumpAttackShake,DefaultCamShake;
 
-	PlayerHealthBar playerHealth;
+	PlayerHealthBar playerBars;
 
 	// Start is called before the first frame update
 	void Start()
@@ -88,7 +88,7 @@ public class MainCharacterController : MonoBehaviour
 		JumpAttackShake = Resources.Load("JumpAttackShake") as NoiseSettings;
 		DefaultCamShake = Resources.Load("DefaultCamShake") as NoiseSettings;
 
-		playerHealth = GetComponent<PlayerHealthBar>();
+		playerBars = GetComponent<PlayerHealthBar>();
 	}
 
 
@@ -154,7 +154,7 @@ public class MainCharacterController : MonoBehaviour
 				isJumping = true;
 
 				//damage player
-				playerHealth.Damage(15);
+				playerBars.Damage(15);
 			}
 		}
 		else if (groundedPlayer)
@@ -206,7 +206,7 @@ public class MainCharacterController : MonoBehaviour
 			}
 
 			//RUNNING
-			if (Input.GetButton("Shift") && playerHealth.stamina > 0)
+			if (Input.GetButton("Shift") && playerBars.stamina > 0)
 			{
 				isRunning = true;
 				anim.SetBool("isRunning", true);
@@ -410,12 +410,19 @@ public class MainCharacterController : MonoBehaviour
 		isSwordRecentlyUsed = true;
 	}
 
+	public void DeductStamina(float deductPoints)
+    {
+		Debug.Log("Deduct");
+		//deduct to stamina
+		playerBars.DecreaseStamina(deductPoints);
+	}
+
 	//HEAVY ATTACK
 	public void HeavyAttackActionListener()
 	{
 
 		//For Heavy Attack
-		if (Input.GetKeyDown(KeyCode.Mouse1) && heavyAttackPossible == true && isBlocking == false && isCrouching == false && groundedPlayer)
+		if (Input.GetKeyDown(KeyCode.Mouse1) && playerBars.stamina >= 5f && heavyAttackPossible == true && isBlocking == false && isCrouching == false && groundedPlayer)
 		{
 			//if player is not holding the sword then withdraw the sword
 			if (!isHoldingSword)
@@ -477,6 +484,12 @@ public class MainCharacterController : MonoBehaviour
 		lightAttackPossible = true;
 
 		isSwordRecentlyUsed = true;
+	}
+
+	public void ChangeKampilanonHandPosition()
+    {
+		kampilan.gameObject.transform.localPosition = new Vector3(0.179f, -0.122f, -0.281f);
+		kampilan.gameObject.transform.localRotation = Quaternion.Euler(-35.251f, -128.959f, 297.612f);
 	}
 
 	IEnumerator SetWithdrawSwordAnimationToFalse()

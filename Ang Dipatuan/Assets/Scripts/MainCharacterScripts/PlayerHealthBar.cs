@@ -12,7 +12,7 @@ public class PlayerHealthBar : MonoBehaviour
     float waitTime = 0f;
 
 
-    float lerpSpeed;
+    float lerpSpeed, staminaLerpSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +35,10 @@ public class PlayerHealthBar : MonoBehaviour
 
         lerpSpeed = 3f * Time.deltaTime; // value to How Smooth transition of healthBar 
 
+        staminaLerpSpeed = 50f * Time.deltaTime; // value to How Smooth transition of staminaBar 
 
         //to Avoid health go higher than 100
-        if(health > maxHealth)
+        if (health > maxHealth)
         {
             health = maxHealth;
         }
@@ -79,24 +80,35 @@ public class PlayerHealthBar : MonoBehaviour
             stamina = 0;
         }
 
+
+        //when player is running decrease stamina
         if (player.isRunning)
         {
             stamina -= Time.deltaTime * 7f;
             waitTime = 0f;
         }
-        if(!player.isRunning)
+        //when player is not running decrease stamina
+        if (!player.isRunning)
         {
             waitTime += Time.deltaTime;
-            Debug.Log(waitTime);
             if (waitTime >= 3f)
             {
                 stamina += Time.deltaTime * 15f;
             }
         }
 
-
-        staminaBar.fillAmount = Mathf.Lerp(staminaBar.fillAmount, stamina / maxHealth, lerpSpeed);
+        staminaBar.fillAmount = Mathf.Lerp(staminaBar.fillAmount, stamina / maxHealth, staminaLerpSpeed);
     }
+
+    public void DecreaseStamina(float decreasePoints)
+    {
+        if (stamina > 0)
+        {
+            stamina -= decreasePoints;
+            waitTime = 0f;
+        }
+    }
+
 
     public void ColorChanger()
     {
