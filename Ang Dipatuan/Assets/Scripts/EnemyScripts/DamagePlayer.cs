@@ -1,0 +1,43 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DamagePlayer : MonoBehaviour
+{
+
+    Animator playerAnimator;
+    MainCharacterController playerControl;
+    PlayerBar playerHealth;
+    void Awake()
+    {
+        playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+           playerHealth = other.gameObject.GetComponent<PlayerBar>();
+           playerControl = other.gameObject.GetComponent<MainCharacterController>();
+
+            //Do Player Damage Animation
+            playerAnimator.SetTrigger("isDamage");
+
+            //damage player
+            playerHealth.Damage(25);
+
+            //Set boolean of taking damage to true so that player cant do anything when Taking damage
+            playerControl.isTakingDamage = true;
+
+            StartCoroutine("setTakingDamageFalse");
+        }
+    }
+
+    IEnumerator setTakingDamageFalse()
+    {
+        yield return new WaitForSeconds(1f);
+        playerControl.isTakingDamage = false;
+
+    }
+}

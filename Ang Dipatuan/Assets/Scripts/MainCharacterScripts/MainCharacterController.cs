@@ -59,7 +59,10 @@ public class MainCharacterController : MonoBehaviour
 	private float shakeDuration = 0.1f;
 	NoiseSettings JumpAttackShake,DefaultCamShake;
 
-	PlayerHealthBar playerBars;
+	PlayerBar playerBars;
+
+	//For Damage and Death
+	public bool isTakingDamage = false;
 
 	// Start is called before the first frame update
 	void Start()
@@ -88,7 +91,7 @@ public class MainCharacterController : MonoBehaviour
 		JumpAttackShake = Resources.Load("JumpAttackShake") as NoiseSettings;
 		DefaultCamShake = Resources.Load("DefaultCamShake") as NoiseSettings;
 
-		playerBars = GetComponent<PlayerHealthBar>();
+		playerBars = GetComponent<PlayerBar>();
 	}
 
 
@@ -96,21 +99,25 @@ public class MainCharacterController : MonoBehaviour
 	void Update()
 	{
 		
-		Jump();
+		if(!isTakingDamage)
+        {
+			Jump();
 
-		Movement();
+			Movement();
 
-		LightAttackActionListener();
+			LightAttackActionListener();
 
-		HeavyAttackActionListener();
+			HeavyAttackActionListener();
 
-		Block();
+			Block();
 
-		Crouch();
+			Crouch();
 
-		Sheathe();
+			Sheathe();
 
-		JumpDropDownAttack();
+			JumpDropDownAttack();
+		}
+		
 
 	}
 
@@ -153,8 +160,6 @@ public class MainCharacterController : MonoBehaviour
 				anim.SetBool("isJumping", true);
 				isJumping = true;
 
-				//damage player
-				playerBars.Damage(15);
 			}
 		}
 		else if (groundedPlayer)
@@ -412,7 +417,6 @@ public class MainCharacterController : MonoBehaviour
 
 	public void DeductStamina(float deductPoints)
     {
-		Debug.Log("Deduct");
 		//deduct to stamina
 		playerBars.DecreaseStamina(deductPoints);
 	}
