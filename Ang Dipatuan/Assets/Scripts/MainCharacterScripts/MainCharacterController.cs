@@ -171,6 +171,7 @@ public class MainCharacterController : MonoBehaviour
 		if (Input.GetButtonUp("Shift"))
 		{
 			jumpHeight = 2.6f;
+			isRunning = false;
 		}
 
 
@@ -238,6 +239,7 @@ public class MainCharacterController : MonoBehaviour
 		{
 			anim.SetBool("isRunning", false);
 			anim.SetBool("isWalking", false);
+			isRunning = false;
 		}
 
 		//End Movement
