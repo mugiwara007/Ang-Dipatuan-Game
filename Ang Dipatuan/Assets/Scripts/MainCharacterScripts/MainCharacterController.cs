@@ -272,10 +272,12 @@ public class MainCharacterController : MonoBehaviour
 		if (Input.GetButton("Crouch") && isJumping == false)
 		{
 			isCrouching = true;
+			//Adjust Crouch Layer in player Animator
 			var currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Crouch"));
 			anim.SetLayerWeight(anim.GetLayerIndex("Crouch"), Mathf.Lerp(currentWeight, 1.0f, 7f * Time.deltaTime));
 			speed = 2f;
 
+			//Makes Camera to go down a little bit when crouching
 			Vector3 NewPos = new Vector3(followCamera.transform.localPosition.x, followCamPosition - 0.5f, followCamera.transform.localPosition.z);
 			followCamera.transform.localPosition = Vector3.Lerp(followCamera.transform.localPosition, NewPos, 7f * Time.deltaTime);
 		}

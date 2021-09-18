@@ -10,6 +10,8 @@ public class Death : MonoBehaviour
 
     MainCharacterController charControl;
 
+    GameObject followCamera;
+
     void Awake()
     {
         playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
@@ -17,6 +19,8 @@ public class Death : MonoBehaviour
         playerBar = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
 
         charControl = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
+
+        followCamera = GameObject.FindGameObjectWithTag("followCamera");
     }
 
     // Update is called once per frame
@@ -30,9 +34,13 @@ public class Death : MonoBehaviour
     {
         if (playerBar.health <= 0)
         {
-            Debug.Log("Deeath");
             playerAnimator.SetBool("isAlive", false);
             charControl.enabled = false;
+
+            //Makes Camera to go down a little bit when Player Dies
+            Vector3 NewPos = new Vector3(followCamera.transform.localPosition.x, 0.35f, followCamera.transform.localPosition.z);
+            followCamera.transform.localPosition = Vector3.Lerp(followCamera.transform.localPosition, NewPos, 8f * Time.deltaTime);
+
             gameObject.GetComponent<Death>().enabled = false;
         }
         else
