@@ -44,7 +44,8 @@ public class MainCharacterController : MonoBehaviour
 	//For Crouching
 	private GameObject followCamera;
 	private float followCamPosition = 1.51f;
-	private bool isCrouching;
+	public bool isCrouching;
+	public bool canCrouch;
 
 	//For Sword
 	GameObject kampilan,scabbard,scabbardWithSword;
@@ -65,7 +66,7 @@ public class MainCharacterController : MonoBehaviour
 	public bool isTakingDamage = false;
 
 	// Start is called before the first frame update
-	void Start()
+	void Awake()
 	{
 		StartVariables();
 	}
@@ -92,6 +93,8 @@ public class MainCharacterController : MonoBehaviour
 		DefaultCamShake = Resources.Load("DefaultCamShake") as NoiseSettings;
 
 		playerBars = GetComponent<PlayerBar>();
+
+		canCrouch = true;
 	}
 
 
@@ -212,7 +215,7 @@ public class MainCharacterController : MonoBehaviour
 			}
 
 			//RUNNING
-			if (Input.GetButton("Shift") && playerBars.stamina > 0)
+			if (Input.GetButton("Shift") && playerBars.stamina > 0 && isCrouching == false && isBlocking == false)
 			{
 				isRunning = true;
 				anim.SetBool("isRunning", true);
@@ -271,13 +274,13 @@ public class MainCharacterController : MonoBehaviour
 	public void Crouch()
     {
 		//Crouch
-		if (Input.GetButton("Crouch") && isJumping == false)
+		if (Input.GetButton("Crouch") && isJumping == false && canCrouch)
 		{
 			isCrouching = true;
 			//Adjust Crouch Layer in player Animator
 			var currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Crouch"));
 			anim.SetLayerWeight(anim.GetLayerIndex("Crouch"), Mathf.Lerp(currentWeight, 1.0f, 7f * Time.deltaTime));
-			speed = 2f;
+			speed = 3f;
 
 			//Makes Camera to go down a little bit when crouching
 			Vector3 NewPos = new Vector3(followCamera.transform.localPosition.x, followCamPosition - 0.5f, followCamera.transform.localPosition.z);

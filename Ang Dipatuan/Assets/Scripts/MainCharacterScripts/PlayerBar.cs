@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerBar : MonoBehaviour
+public class PlayerBar : MonoBehaviour 
 {
     private Text healthText;
     private Image healthBar, staminaBar, healthBarMax;

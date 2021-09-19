@@ -3580,6 +3580,7 @@ GameObject:
   - component: {fileID: 5157883062600668564}
   - component: {fileID: 5157883062600668565}
   - component: {fileID: 5677095164982434154}
+  - component: {fileID: 7457668709900852837}
   m_Layer: 0
   m_Name: Dipatuan
   m_TagString: Player
@@ -3681,6 +3682,8 @@ MonoBehaviour:
   heavyAttackcomboPossible: 0
   isHeavyAttacking: 0
   groundedPlayer: 0
+  isCrouching: 0
+  canCrouch: 1
   isTakingDamage: 0
 --- !u!114 &5677095164982434154
 MonoBehaviour:
@@ -3698,6 +3701,18 @@ MonoBehaviour:
   maxHealth: 100
   stamina: 0
   maxStamina: 100
+--- !u!114 &7457668709900852837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5428265270087804671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a18edfe4e18721149b8204dbf93bea00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5478717096714712063
 GameObject:
   m_ObjectHideFlags: 0
