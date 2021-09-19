@@ -93,7 +93,7 @@ public class PlayerBar : MonoBehaviour
         if (!player.isRunning)
         {
             waitTime += Time.deltaTime;
-            if (waitTime >= 3f)
+            if (waitTime >= 2f)
             {
                 stamina += Time.deltaTime * 15f;
             }
