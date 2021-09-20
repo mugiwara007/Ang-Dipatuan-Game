@@ -63,6 +63,10 @@ public class StealthKill : MonoBehaviour
     {
         if (other.gameObject.CompareTag("StealthKillDetector"))
         {
+            //display "E Kill" Ui TEXT
+            other.transform.GetChild(1).gameObject.SetActive(true);
+
+
             stealthKillDetector = other.gameObject;
             canStealthKill = true;
 
@@ -108,6 +112,8 @@ public class StealthKill : MonoBehaviour
     {
         if (other.gameObject.CompareTag("StealthKillDetector"))
         {
+            other.transform.GetChild(1).gameObject.SetActive(false);
+
             canStealthKill = false;
         }
     }
