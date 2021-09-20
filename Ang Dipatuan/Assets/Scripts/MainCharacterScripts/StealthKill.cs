@@ -73,7 +73,7 @@ public class StealthKill : MonoBehaviour
 
     IEnumerator DisableKrisSword()
     {
-        yield return new WaitForSeconds(2.3f);
+        yield return new WaitForSeconds(2f);
         KrisDagger.gameObject.SetActive(false);
         gameObject.GetComponent<MainCharacterController>().enabled = true;
 
