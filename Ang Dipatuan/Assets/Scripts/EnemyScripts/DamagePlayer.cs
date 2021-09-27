@@ -21,8 +21,7 @@ public class DamagePlayer : MonoBehaviour
            playerHealth = other.gameObject.GetComponent<PlayerBar>();
            playerControl = other.gameObject.GetComponent<MainCharacterController>();
 
-            playerControl.ComboReset();
-            playerControl.HeavyComboReset();
+            playerControl.AttackReset();
 
             //Do Player Damage Animation
             playerAnimator.SetTrigger("isDamage");

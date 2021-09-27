@@ -497,6 +497,21 @@ public class MainCharacterController : MonoBehaviour
 		isSwordRecentlyUsed = true;
 	}
 
+	//This is called whenever player receives Damage
+	public void AttackReset()
+	{
+		comboPossible = false;
+		comboStep = 0;
+		isLightAttacking = false;
+		heavyAttackPossible = true;
+
+		heavyAttackcomboPossible = false;
+		heavyAttackcomboStep = 0;
+		isHeavyAttacking = false;
+		lightAttackPossible = true;
+
+	}
+
 	public void ChangeKampilanonHandPosition()
     {
 		kampilan.gameObject.transform.localPosition = new Vector3(0.179f, -0.122f, -0.281f);
