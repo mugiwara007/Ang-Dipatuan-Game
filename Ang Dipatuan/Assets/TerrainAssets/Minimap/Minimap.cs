@@ -5,7 +5,13 @@ using UnityEngine;
 public class Minimap : MonoBehaviour
 {
 
-    public Transform player;
+    private Transform player;
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+    }
 
     void LateUpdate()
     {
