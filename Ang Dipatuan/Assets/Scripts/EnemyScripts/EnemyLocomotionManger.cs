@@ -41,7 +41,6 @@ using UnityEngine.AI;
             if (characterStats != null)
             {
                 Vector3 targetDirection = characterStats.transform.position - transform.position;
-                distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
                 float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
                 if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
@@ -56,7 +55,7 @@ using UnityEngine.AI;
     {
         Vector3 targetDirection = currentTarget.transform.position - transform.position;
         distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
-        float viewableAngle = Vector3.Angle(targetDirection, transform.position);
+        float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
         if (enemyManager.isPerformingAction)
         {
