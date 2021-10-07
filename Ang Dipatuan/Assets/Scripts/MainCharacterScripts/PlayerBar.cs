@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerBar : MonoBehaviour 
+public class PlayerBar : CharacterStats
 {
     private Text healthText;
     private Image healthBar, staminaBar, healthBarMax;
 
-    public float health, maxHealth = 100, stamina, maxStamina = 100;
     float waitTime = 0f;
 
 
