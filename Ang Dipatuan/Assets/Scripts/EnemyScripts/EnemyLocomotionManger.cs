@@ -6,7 +6,6 @@ using UnityEngine.AI;
     public class EnemyLocomotionManger : MonoBehaviour
     {
         EnemyManager enemyManager;
-    EnemyAnimatorManager enemyAnimatorManager;
     NavMeshAgent navMeshAgent;
     public Rigidbody enemyRigidbody;
         public CharacterStats currentTarget;
@@ -14,13 +13,12 @@ using UnityEngine.AI;
     Animator anim;
 
     public float distanceFromTarget;
-    public float stoppingDistance = 2f;
+    public float stoppingDistance = 5f;
     public float rotationSpeed = 15f;
 
         private void Awake()
         {
             enemyManager = GetComponent<EnemyManager>();
-        enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         enemyRigidbody = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
@@ -56,13 +54,15 @@ using UnityEngine.AI;
 
     public void HandleMoveToTarget()
     {
+        if (enemyManager.isPerformingAction)
+            return;
+
         Vector3 targetDirection = currentTarget.transform.position - transform.position;
         distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
         float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
         if (enemyManager.isPerformingAction)
         {
-            //enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
             navMeshAgent.enabled = false;
         }
         else
@@ -70,11 +70,10 @@ using UnityEngine.AI;
             if (distanceFromTarget > stoppingDistance)
             {
                 anim.SetBool("Run", true);
-                //enemyAnimatorManager.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+                
             } else if (distanceFromTarget <= stoppingDistance)
             {
                 anim.SetBool("Run", false);
-                //enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
             }
             
         }
