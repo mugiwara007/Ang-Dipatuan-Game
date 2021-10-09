@@ -94,8 +94,10 @@ using UnityEngine.AI;
         navMeshAgent.transform.localRotation = Quaternion.identity;
     }
 
-    private void HandleRotateTowardsTarget()
+    public void HandleRotateTowardsTarget()
     {
+        Debug.Log("ROTATE");
+
         //Rotate Manually
         if (enemyManager.isPerformingAction)
         {

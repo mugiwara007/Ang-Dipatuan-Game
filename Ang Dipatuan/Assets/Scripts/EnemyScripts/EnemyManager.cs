@@ -51,9 +51,9 @@ public class EnemyManager : MonoBehaviour
         }
         else if (enemyLocomotionManger.distanceFromTarget <= enemyLocomotionManger.stoppingDistance)
         {
-            AttackTarget();
             enemyLocomotionManger.anim.SetBool("Run", false);
-            
+            enemyLocomotionManger.HandleRotateTowardsTarget();
+            AttackTarget();
         }
 
     }
