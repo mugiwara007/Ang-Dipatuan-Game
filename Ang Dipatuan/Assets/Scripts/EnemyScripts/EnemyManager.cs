@@ -18,11 +18,13 @@ public class EnemyManager : MonoBehaviour
 
     public float currentRecoveryTime = 0;
 
+    PlayerBar charStats;
 
    private void Awake()
    {
         enemyLocomotionManger = GetComponent<EnemyLocomotionManger>();
         enemyAnimatorManager = GetComponent<EnemyAnimatorManager>();
+        charStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
 
     }
 
@@ -38,26 +40,28 @@ public class EnemyManager : MonoBehaviour
 
     private void HandleCurrentAction()
    {
-        if (enemyLocomotionManger.currentTarget != null)
+        if(charStats.health > 0)
         {
-            enemyLocomotionManger.distanceFromTarget = Vector3.Distance(enemyLocomotionManger.currentTarget.transform.position, transform.position);
-        }
+            if (enemyLocomotionManger.currentTarget != null)
+            {
+                enemyLocomotionManger.distanceFromTarget = Vector3.Distance(enemyLocomotionManger.currentTarget.transform.position, transform.position);
+            }
         
-        if (enemyLocomotionManger.currentTarget == null)
-        {
-            enemyLocomotionManger.HandleDetection();
-        } 
-        else if (enemyLocomotionManger.distanceFromTarget > enemyLocomotionManger.stoppingDistance)
-        {
-            enemyLocomotionManger.HandleMoveToTarget();
+            if (enemyLocomotionManger.currentTarget == null)
+            {
+                enemyLocomotionManger.HandleDetection();
+            } 
+            else if (enemyLocomotionManger.distanceFromTarget > enemyLocomotionManger.stoppingDistance)
+            {
+                enemyLocomotionManger.HandleMoveToTarget();
+            }
+            else if (enemyLocomotionManger.distanceFromTarget <= enemyLocomotionManger.stoppingDistance)
+            {
+                enemyLocomotionManger.anim.SetBool("Run", false);
+                enemyLocomotionManger.HandleRotateTowardsTarget();
+                AttackTarget();
+            }
         }
-        else if (enemyLocomotionManger.distanceFromTarget <= enemyLocomotionManger.stoppingDistance)
-        {
-            enemyLocomotionManger.anim.SetBool("Run", false);
-            enemyLocomotionManger.HandleRotateTowardsTarget();
-            AttackTarget();
-        }
-
     }
 
     #region Attacks
