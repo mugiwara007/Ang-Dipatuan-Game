@@ -70,7 +70,6 @@ public class EnemyManager : MonoBehaviour
             GetNewAttack();
         } else
         {
-            Debug.Log("Attack");
             isPerformingAction = true;
             currentRecoveryTime = currentAttack.recoveryTime;
             enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
@@ -112,7 +111,6 @@ public class EnemyManager : MonoBehaviour
                 if (viewableAngle <= enemyAttackAction.maximumAttackAngle
                     && viewableAngle >= enemyAttackAction.minimumAttackAngle)
                 {
-                    Debug.Log(maxScore);
                     maxScore += enemyAttackAction.attackScore;
                 }
             }
@@ -141,7 +139,6 @@ public class EnemyManager : MonoBehaviour
 
                     if (temporaryScore > randomValue)
                     {
-                        Debug.Log(enemyAttackAction);
                         currentAttack = enemyAttackAction;
                     }
                 }
