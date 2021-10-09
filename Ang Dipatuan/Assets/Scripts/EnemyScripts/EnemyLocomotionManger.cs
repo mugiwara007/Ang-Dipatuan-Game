@@ -10,7 +10,7 @@ using UnityEngine.AI;
     public Rigidbody enemyRigidbody;
         public CharacterStats currentTarget;
         public LayerMask detectionLayer;
-    Animator anim;
+    public Animator anim;
 
     public float distanceFromTarget;
     public float stoppingDistance = 5f;
@@ -26,7 +26,7 @@ using UnityEngine.AI;
 
     private void Start()
     {
-        stoppingDistance = 8f;
+        stoppingDistance = 5f;
         navMeshAgent.enabled = false;
         enemyRigidbody.isKinematic = false;
     }
@@ -70,20 +70,25 @@ using UnityEngine.AI;
             if (distanceFromTarget > stoppingDistance)
             {
                 anim.SetBool("Run", true);
-                
-            } else if (distanceFromTarget <= stoppingDistance)
+            }
+            
+            else if (distanceFromTarget <= stoppingDistance)
             {
                 anim.SetBool("Run", false);
             }
-            
+
         }
+
+
         if (distanceFromTarget >= 50)
         {
             anim.SetBool("Run", false);
             currentTarget = null;
         }
 
-            HandleRotateTowardsTarget();
+        
+
+        HandleRotateTowardsTarget();
 
         navMeshAgent.transform.localPosition = Vector3.zero;
         navMeshAgent.transform.localRotation = Quaternion.identity;

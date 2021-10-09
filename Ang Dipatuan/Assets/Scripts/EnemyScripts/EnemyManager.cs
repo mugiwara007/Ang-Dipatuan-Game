@@ -44,13 +44,16 @@ public class EnemyManager : MonoBehaviour
         if (enemyLocomotionManger.currentTarget == null)
         {
             enemyLocomotionManger.HandleDetection();
-        } else if (enemyLocomotionManger.distanceFromTarget > enemyLocomotionManger.stoppingDistance)
+        } 
+        else if (enemyLocomotionManger.distanceFromTarget > enemyLocomotionManger.stoppingDistance)
         {
             enemyLocomotionManger.HandleMoveToTarget();
         }
         else if (enemyLocomotionManger.distanceFromTarget <= enemyLocomotionManger.stoppingDistance)
         {
             AttackTarget();
+            enemyLocomotionManger.anim.SetBool("Run", false);
+            
         }
 
     }
@@ -67,6 +70,7 @@ public class EnemyManager : MonoBehaviour
             GetNewAttack();
         } else
         {
+            Debug.Log("Attack");
             isPerformingAction = true;
             currentRecoveryTime = currentAttack.recoveryTime;
             enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
@@ -108,21 +112,25 @@ public class EnemyManager : MonoBehaviour
                 if (viewableAngle <= enemyAttackAction.maximumAttackAngle
                     && viewableAngle >= enemyAttackAction.minimumAttackAngle)
                 {
+                    Debug.Log(maxScore);
                     maxScore += enemyAttackAction.attackScore;
                 }
             }
         }
 
+        
         int randomValue = Random.Range(0, maxScore);
         int temporaryScore = 0;
 
+        
         for (int i = 0; i < enemyAttacks.Length; i++)
         {
             EnemyAttackAction enemyAttackAction = enemyAttacks[i];
-
+            
             if (enemyLocomotionManger.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
                 && enemyLocomotionManger.distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
             {
+               
                 if (viewableAngle <= enemyAttackAction.maximumAttackAngle
                     && viewableAngle >= enemyAttackAction.minimumAttackAngle)
                 {
@@ -133,6 +141,7 @@ public class EnemyManager : MonoBehaviour
 
                     if (temporaryScore > randomValue)
                     {
+                        Debug.Log(enemyAttackAction);
                         currentAttack = enemyAttackAction;
                     }
                 }
