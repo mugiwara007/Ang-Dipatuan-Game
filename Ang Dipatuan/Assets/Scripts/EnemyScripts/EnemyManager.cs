@@ -18,10 +18,12 @@ public class EnemyManager : MonoBehaviour
 
     public float currentRecoveryTime = 0;
 
+
    private void Awake()
    {
         enemyLocomotionManger = GetComponent<EnemyLocomotionManger>();
         enemyAnimatorManager = GetComponent<EnemyAnimatorManager>();
+
     }
 
     private void Update()
@@ -32,7 +34,7 @@ public class EnemyManager : MonoBehaviour
     private void FixedUpdate()
    {
         HandleCurrentAction();
-   }
+    }
 
     private void HandleCurrentAction()
    {
