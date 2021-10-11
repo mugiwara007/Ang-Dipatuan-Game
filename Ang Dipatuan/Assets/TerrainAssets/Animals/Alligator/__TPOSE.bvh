@@ -1,0 +1,155 @@
+HIERARCHY
+ROOT locator2
+{
+  OFFSET 53.6172 30.1899 0.816905
+  CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+  JOINT koshi
+  {
+    OFFSET 0 0 0
+    CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+    JOINT sippo01
+    {
+      OFFSET 0 42.8363 -0.548134
+      CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+      JOINT sippo02
+      {
+        OFFSET 0 44.0461 -3.28882
+        CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+        JOINT sippo03
+        {
+          OFFSET 0 34.1929 -2.46662
+          CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+          JOINT sippo04
+          {
+            OFFSET 0 30.0959 -1.75404
+            CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+            JOINT sippo05
+            {
+              OFFSET 0 28.3637 -1.75404
+              CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+              JOINT sippo06
+              {
+                OFFSET 0 31.6071 -3.2043
+                CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+                End Site
+                {
+                  OFFSET 0 0 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    JOINT R_momo
+    {
+      OFFSET -27.891 13.5892 3.92723
+      CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+      JOINT R_hiza
+      {
+        OFFSET 0 28.01 1.8232
+        CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+        JOINT R_ashi
+        {
+          OFFSET 0 24.3992 -2.49174
+          CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+          End Site
+          {
+            OFFSET 0 0 0
+          }
+        }
+      }
+    }
+    JOINT L_momo
+    {
+      OFFSET 27.891 13.5892 3.92714
+      CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+      JOINT L_hiza
+      {
+        OFFSET 0 28.0098 1.82319
+        CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+        JOINT L_ashi
+        {
+          OFFSET 0 24.3992 -2.49171
+          CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+          End Site
+          {
+            OFFSET 0 0 0
+          }
+        }
+      }
+    }
+  }
+  JOINT hara
+  {
+    OFFSET 0 2.15392 0
+    CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+    JOINT mune
+    {
+      OFFSET 0 62.0609 0.472494
+      CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+      JOINT R_kata
+      {
+        OFFSET 22.6695 9.65301 -5.3622
+        CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+        JOINT R_hiji
+        {
+          OFFSET 0 25.813 1.69098
+          CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+          JOINT R_te
+          {
+            OFFSET 0 28.5636 -0.966307
+            CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+            End Site
+            {
+              OFFSET 0 0 0
+            }
+          }
+        }
+      }
+      JOINT L_kata
+      {
+        OFFSET -22.6695 9.65298 -5.3622
+        CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+        JOINT L_hiji
+        {
+          OFFSET 0 25.813 1.69102
+          CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+          JOINT L_te
+          {
+            OFFSET 0 28.5636 -0.966295
+            CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+            End Site
+            {
+              OFFSET 0 0 0
+            }
+          }
+        }
+      }
+      JOINT kubi
+      {
+        OFFSET 0 23.1438 -0.944988
+        CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+        JOINT atama
+        {
+          OFFSET 0 20.8625 4.12737
+          CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+          JOINT ago
+          {
+            OFFSET 0 7.552 -7.58201
+            CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+            End Site
+            {
+              OFFSET 0 0 0
+            }
+          }
+        }
+      }
+    }
+  }
+}
+MOTION
+Frames:	2
+Frame Time:	0.0333333
+-2.15392 56.9976 -7.58969e-006 -90 -3.50835e-015 -90 -9.23706e-014 0 0 -180 2.03885e-012 -1.52588e-005 8.36345e-006 42.8363 -0.548134 1.51661e-021 -1.80794e-028 1.51661e-021 8.59965e-006 44.0461 -3.28882 1.51661e-021 -1.80794e-028 1.51661e-021 6.67589e-006 34.1929 -2.46661 1.51661e-021 -1.80794e-028 1.51661e-021 5.87599e-006 30.0959 -1.75404 1.51661e-021 -1.80794e-028 1.51661e-021 5.53779e-006 28.3637 -1.75404 1.51661e-021 -1.80794e-028 1.51661e-021 6.17105e-006 31.6072 -3.2043 1.51661e-021 -1.80794e-028 1.51661e-021 -27.891 13.5892 3.92724 63.435 -90 -116.565 1.90735e-006 28.01 1.8232 -1.23219e-012 1.00179e-005 1.43574e-012 1.90735e-006 24.3992 -2.49173 -116.565 90 116.565 27.891 13.5892 3.92714 63.435 -90 -116.565 1.90735e-006 28.0098 1.8232 -1.23219e-012 1.00179e-005 1.43574e-012 1.90735e-006 24.3992 -2.49172 -116.565 90 116.565 3.5092e-007 2.15392 0 1.51661e-021 -1.80794e-028 1.51661e-021 1.0111e-005 62.0609 0.472496 1.51661e-021 -1.80794e-028 1.51661e-021 22.6695 9.653 -5.3622 -90 3.50835e-015 90 7.10543e-015 25.813 1.69099 -1.00179e-005 1.00179e-005 1.75036e-012 -7.6294e-006 28.5636 -0.966316 2.50448e-006 1.53355e-022 -90 -22.6695 9.65298 -5.3622 90 3.50835e-015 -90 -3.8147e-006 25.813 1.69102 2.17108e-013 1.00179e-005 9.69827e-021 7.10543e-015 28.5636 -0.966293 -1.00179e-005 6.1342e-022 90 3.77061e-006 23.1438 -0.944992 1.51661e-021 -1.80794e-028 1.51661e-021 3.39893e-006 20.8625 4.12737 1.51661e-021 -1.80794e-028 1.51661e-021 1.23038e-006 7.55203 -7.58201 1.51661e-021 -1.80794e-028 1.51661e-021 
+-2.15392 56.9976 -7.58969e-006 -90 -3.50835e-015 -90 -9.23706e-014 0 0 -180 2.03885e-012 -1.52588e-005 8.36345e-006 42.8363 -0.548134 1.51661e-021 -1.80794e-028 1.51661e-021 8.59965e-006 44.0461 -3.28882 1.51661e-021 -1.80794e-028 1.51661e-021 6.67589e-006 34.1929 -2.46661 1.51661e-021 -1.80794e-028 1.51661e-021 5.87599e-006 30.0959 -1.75404 1.51661e-021 -1.80794e-028 1.51661e-021 5.53779e-006 28.3637 -1.75404 1.51661e-021 -1.80794e-028 1.51661e-021 6.17105e-006 31.6072 -3.2043 1.51661e-021 -1.80794e-028 1.51661e-021 -27.891 13.5892 3.92724 63.435 -90 -116.565 1.90735e-006 28.01 1.8232 -1.23219e-012 1.00179e-005 1.43574e-012 1.90735e-006 24.3992 -2.49173 -116.565 90 116.565 27.891 13.5892 3.92714 63.435 -90 -116.565 1.90735e-006 28.0098 1.8232 -1.23219e-012 1.00179e-005 1.43574e-012 1.90735e-006 24.3992 -2.49172 -116.565 90 116.565 3.5092e-007 2.15392 0 1.51661e-021 -1.80794e-028 1.51661e-021 1.0111e-005 62.0609 0.472496 1.51661e-021 -1.80794e-028 1.51661e-021 22.6695 9.653 -5.3622 -90 3.50835e-015 90 7.10543e-015 25.813 1.69099 -1.00179e-005 1.00179e-005 1.75036e-012 -7.6294e-006 28.5636 -0.966316 2.50448e-006 1.53355e-022 -90 -22.6695 9.65298 -5.3622 90 3.50835e-015 -90 -3.8147e-006 25.813 1.69102 2.17108e-013 1.00179e-005 9.69827e-021 7.10543e-015 28.5636 -0.966293 -1.00179e-005 6.1342e-022 90 3.77061e-006 23.1438 -0.944992 1.51661e-021 -1.80794e-028 1.51661e-021 3.39893e-006 20.8625 4.12737 1.51661e-021 -1.80794e-028 1.51661e-021 1.23038e-006 7.55203 -7.58201 1.51661e-021 -1.80794e-028 1.51661e-021 
