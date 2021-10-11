@@ -20,8 +20,7 @@ public class DamageEnemy : MonoBehaviour
             enemyStats = other.gameObject.GetComponent<EnemyStats>();
 
             enemyStats.Damage(dmgPts);
-
-            Destroy(other.gameObject);
+       
         }
     }
 

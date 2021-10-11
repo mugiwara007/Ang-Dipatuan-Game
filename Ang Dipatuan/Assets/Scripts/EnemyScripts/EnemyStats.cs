@@ -16,7 +16,7 @@ public class EnemyStats : MonoBehaviour
         emaxHealth = 100;
         ehealth = emaxHealth;
 
-        healthBar = this.gameObject.transform.GetChild(18).GetChild(0).gameObject.GetComponent<Image>();
+        healthBar = gameObject.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Image>();
     }
 
     public void Damage(float dmgPoint)
@@ -45,6 +45,17 @@ public class EnemyStats : MonoBehaviour
         }
 
         HealthBarFiller();
+
+        if (ehealth <= 0)
+        {
+            StartCoroutine("destroyEnemy");
+        }
+    }
+
+    IEnumerator destroyEnemy()
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(gameObject);
     }
 
     public void HealthBarFiller()
