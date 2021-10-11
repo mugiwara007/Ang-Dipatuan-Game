@@ -96,7 +96,6 @@ using UnityEngine.AI;
 
     public void HandleRotateTowardsTarget()
     {
-        Debug.Log("ROTATE");
 
         //Rotate Manually
         if (enemyManager.isPerformingAction)

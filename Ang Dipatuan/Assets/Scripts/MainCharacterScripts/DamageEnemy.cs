@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class DamageEnemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    EnemyStats enemyStats;
+    public float dmgPts;
 
-    // Update is called once per frame
-    void Update()
+    // Start is called before the first frame update
+    private void Awake()
     {
         
     }
@@ -20,7 +17,31 @@ public class DamageEnemy : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            Debug.Log("Damage Enemy!");
+            enemyStats = other.gameObject.GetComponent<EnemyStats>();
+
+            enemyStats.Damage(dmgPts);
+
+            Destroy(other.gameObject);
         }
+    }
+
+    public void LightAtkDmg()
+    {
+        dmgPts = 15f;
+    }
+
+    public void HeavyAtkDmg()
+    {
+        dmgPts = 25f;
+    }
+
+    public void JumpAtkDmg()
+    {
+        dmgPts = 20f;
+    }
+
+    public void StealthAtkDmg()
+    {
+        dmgPts = 100f;
     }
 }
