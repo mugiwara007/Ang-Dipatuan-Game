@@ -10,6 +10,7 @@ public class DmgChange : MonoBehaviour
     {
         kampilan = GameObject.FindGameObjectWithTag("KampilanArmed").GetComponent<DamageEnemy>();
         kampilan.LightAtkDmg();
+
     }
 
     public void HeavyAtkDmg()
