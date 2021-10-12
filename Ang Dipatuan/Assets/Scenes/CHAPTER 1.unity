@@ -10642,9 +10642,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPerformingAction: 0
-  detectionRadius: 30
+  detectionRadius: 50
   enemyAttacks:
-  - {fileID: 11400000, guid: 1245747b066152a4bb7f86b0da772832, type: 2}
+  - {fileID: 11400000, guid: b43a03e6893dd3749aa53931a70894a3, type: 2}
   currentAttack: {fileID: 0}
   maximumDetectionAngle: 30
   minimumDetectionAngle: -30
@@ -10668,8 +10668,8 @@ MonoBehaviour:
     m_Bits: 8
   anim: {fileID: 914157373895970000}
   distanceFromTarget: 0
-  stoppingDistance: 5
-  rotationSpeed: 15
+  stoppingDistance: 50
+  rotationSpeed: 30
 --- !u!4 &6756851760532404600
 Transform:
   m_ObjectHideFlags: 0
@@ -11187,15 +11187,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8123495694804575515, guid: 1dbfdc90c7100534da42c056efec6081, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.15742224
+      value: 0.15742226
       objectReference: {fileID: 0}
     - target: {fileID: 8123495694804575515, guid: 1dbfdc90c7100534da42c056efec6081, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000032904556
+      value: -4.7120587e-15
       objectReference: {fileID: 0}
     - target: {fileID: 8123495694804575515, guid: 1dbfdc90c7100534da42c056efec6081, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000005245311
+      value: 1.1119738e-15
       objectReference: {fileID: 0}
     - target: {fileID: 8123495694952261249, guid: 1dbfdc90c7100534da42c056efec6081, type: 3}
       propertyPath: m_LocalRotation.w

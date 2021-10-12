@@ -26,7 +26,7 @@ using UnityEngine.AI;
 
     private void Start()
     {
-        stoppingDistance = 5f;
+        //stoppingDistance = 5f;
         navMeshAgent.enabled = false;
         enemyRigidbody.isKinematic = false;
     }
@@ -80,7 +80,7 @@ using UnityEngine.AI;
         }
 
 
-        if (distanceFromTarget >= 50)
+        if (distanceFromTarget >= 60)
         {
             anim.SetBool("Run", false);
             currentTarget = null;
