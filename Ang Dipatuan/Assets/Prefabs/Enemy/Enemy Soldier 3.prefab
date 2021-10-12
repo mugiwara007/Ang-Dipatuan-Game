@@ -1419,7 +1419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2694461028051772070}
   m_LocalRotation: {x: 0, y: 0.024010548, z: -0, w: -0.99971175}
-  m_LocalPosition: {x: -0.030168103, y: 0.07413052, z: 5.76854}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0294989, y: 1.0295888, z: 1.0715185}
   m_Children: []
   m_Father: {fileID: 2516983850673061921}
@@ -1529,7 +1529,7 @@ GameObject:
   - component: {fileID: 2694461026498778235}
   - component: {fileID: 2694461026498778232}
   - component: {fileID: 2694461026498778233}
-  - component: {fileID: 1233130077655399241}
+  - component: {fileID: 7074752551392844829}
   m_Layer: 0
   m_Name: Enemy Soldier 3
   m_TagString: Enemy
@@ -1544,7 +1544,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3001033247400598171}
-  m_LocalRotation: {x: -0, y: 0.060901083, z: -0, w: -0.9981438}
+  m_LocalRotation: {x: 0, y: 0.060900204, z: -0, w: -0.9981439}
   m_LocalPosition: {x: -87.87286, y: 44.227745, z: -90.32892}
   m_LocalScale: {x: 2.4281538, y: 2.4281538, z: 2.52}
   m_Children:
@@ -1700,7 +1700,7 @@ MonoBehaviour:
   maximumDetectionAngle: 30
   minimumDetectionAngle: -30
   currentRecoveryTime: 0
---- !u!114 &1233130077655399241
+--- !u!114 &7074752551392844829
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1709,7 +1709,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3001033247400598171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35c34f0554764c6449ccece600783385, type: 3}
+  m_Script: {fileID: 11500000, guid: e1fb1500a19575e4bac5a08a0c4660a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3156356988569156340

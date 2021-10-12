@@ -29,7 +29,7 @@ public class EnemyStats : MonoBehaviour
 
     private void Update()
     {
-        lerpSpeed = 3f * Time.deltaTime; // value to How Smooth transition of healthBar 
+        lerpSpeed = 50f * Time.deltaTime; // value to How Smooth transition of healthBar 
 
         //to Avoid health go higher than 100
         if (ehealth > emaxHealth)

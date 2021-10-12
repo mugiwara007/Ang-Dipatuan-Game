@@ -2923,7 +2923,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5658847917193857985}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2885685776542858041}
@@ -3236,12 +3236,12 @@ GameObject:
   - component: {fileID: 846371904916917966}
   - component: {fileID: 6544996255172773563}
   - component: {fileID: 6544996255172773561}
-  - component: {fileID: 6544996255172773559}
   - component: {fileID: 6544996255172773556}
   - component: {fileID: 6544996255172773557}
   - component: {fileID: 6544996255172773566}
   - component: {fileID: 6544996255172773567}
   - component: {fileID: 6544996255172773564}
+  - component: {fileID: 491240011082214122}
   m_Layer: 0
   m_Name: Enemy Soldier 1
   m_TagString: Enemy
@@ -3331,18 +3331,6 @@ CapsuleCollider:
   m_Height: 2.33
   m_Direction: 1
   m_Center: {x: -0.03514187, y: 1.1295965, z: -5.521694e-12}
---- !u!114 &6544996255172773559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6202889056263343630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35c34f0554764c6449ccece600783385, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6544996255172773556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3425,6 +3413,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 846371904916917966}
+--- !u!114 &491240011082214122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6202889056263343630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1fb1500a19575e4bac5a08a0c4660a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6275300750228295417
 GameObject:
   m_ObjectHideFlags: 0
