@@ -7,6 +7,8 @@ public class DamageEnemy : MonoBehaviour
     EnemyStats enemyStats;
     public float dmgPts;
 
+    Animator enemyAnimator;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -18,6 +20,10 @@ public class DamageEnemy : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             enemyStats = other.gameObject.GetComponent<EnemyStats>();
+
+            enemyAnimator = other.gameObject.GetComponent<Animator>();
+
+            enemyAnimator.SetTrigger("hit");
 
             enemyStats.Damage(dmgPts);
        

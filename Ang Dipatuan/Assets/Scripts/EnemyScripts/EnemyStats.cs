@@ -10,13 +10,18 @@ public class EnemyStats : MonoBehaviour
     private Image healthBar;
     float lerpSpeed;
 
+    Animator anim;
 
-    void Start()
+    private void Awake()
     {
         emaxHealth = 100;
         ehealth = emaxHealth;
 
         healthBar = gameObject.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Image>();
+
+        anim = gameObject.GetComponent<Animator>();
+
+        anim.SetBool("isAlive", true);
     }
 
     public void Damage(float dmgPoint)
@@ -48,6 +53,12 @@ public class EnemyStats : MonoBehaviour
 
         if (ehealth <= 0)
         {
+            anim.SetBool("isAlive", false);
+
+            EnemyManager enemymanager = gameObject.GetComponent<EnemyManager>();
+
+            enemymanager.enabled = false;
+
             StartCoroutine("destroyEnemy");
         }
     }
