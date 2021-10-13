@@ -30,14 +30,24 @@ public class DamagePlayer : MonoBehaviour
             {
             playerControl.AttackReset();
 
-            //Do Player Damage Animation
-            playerAnimator.SetTrigger("isDamage");
+                //Check when player is blocking or not
+                if (!playerControl.isBlocking)
+                {
+                    //Do Player Damage Animation
+                    playerAnimator.SetTrigger("isDamage");
 
-            //damage player
-            playerHealth.Damage(12f);
+                    //damage player
+                    playerHealth.Damage(12f);
 
-            //Set boolean of taking damage to true so that player cant do anything when Taking damage
-            playerControl.isTakingDamage = true;
+                    //Set boolean of taking damage to true so that player cant do anything when Taking damage
+                    playerControl.isTakingDamage = true;
+                }
+                else
+                {
+                    //damage player
+                    playerHealth.Damage(4f);
+                }
+           
 
             StartCoroutine("setTakingDamageFalse");
             }

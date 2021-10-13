@@ -10,10 +10,17 @@ public class SlowMotionMode : MonoBehaviour
 
     private bool onCooldown;
 
+    Animator anim;
+
+    MainCharacterController charControl;
+
     private void Awake()
     {
         skillColorYellow = GameObject.FindGameObjectWithTag("SlowMoSkillYellowImage").GetComponent<Image>();
         onCooldown = false;
+
+        anim = gameObject.GetComponent<Animator>();
+        charControl = gameObject.GetComponent<MainCharacterController>();
     }
 
     // Update is called once per frame
@@ -30,6 +37,15 @@ public class SlowMotionMode : MonoBehaviour
 
                 enemyAnim.SetFloat("animationSpeed", 0.2f);
             }
+
+            //Activate animation for bravery mode
+            anim.SetTrigger("slowmotionMode");
+
+            //Stops ACtion of dipatuan when performing animation
+            charControl.enabled = false;
+
+            //Allow Dipatuan to move again
+            StartCoroutine("moveAgain");
 
             skillColorYellow.fillAmount = 0;
             onCooldown = true;
@@ -59,5 +75,12 @@ public class SlowMotionMode : MonoBehaviour
 
             enemyAnim.SetFloat("animationSpeed", 1f);
         }
+    }
+
+    IEnumerator moveAgain()
+    {
+        yield return new WaitForSeconds(1f);
+        charControl.enabled = true;
+
     }
 }

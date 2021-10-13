@@ -15,8 +15,16 @@ public class DipatuanMode : MonoBehaviour
 
     private bool fireTurnOff = true;
 
+    Animator anim;
+
+    MainCharacterController charControl;
+
+    GameObject kampilan;
+
     private void Awake()
     {
+        kampilan = GameObject.FindGameObjectWithTag("KampilanArmed");
+
         damageEnemyScript = GameObject.FindGameObjectWithTag("KampilanArmed").GetComponent<DamageEnemy>();
         skillColorYellow = GameObject.FindGameObjectWithTag("DipatuanSkillYellowImage").GetComponent<Image>();
 
@@ -24,6 +32,9 @@ public class DipatuanMode : MonoBehaviour
 
         fireOnSword2 = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(5).gameObject;
         onCooldown = false;
+
+        anim = gameObject.GetComponent<Animator>();
+        charControl = gameObject.GetComponent<MainCharacterController>();
     }
 
     // Update is called once per frame
@@ -50,6 +61,18 @@ public class DipatuanMode : MonoBehaviour
 
             skillColorYellow.fillAmount = 0;
             onCooldown = true;
+
+            //Display kampilan on hand
+            kampilan.SetActive(true);
+
+            //Activate animation for bravery mode
+            anim.SetTrigger("dipatuanMode");
+
+            //Stops ACtion of dipatuan when performing animation
+            charControl.enabled = false;
+
+            //Allow Dipatuan to move again
+            StartCoroutine("moveAgain");
 
             StartCoroutine("DipatuanModeOff");
         }
@@ -79,4 +102,9 @@ public class DipatuanMode : MonoBehaviour
         fireTurnOff = true;
     }
 
+    IEnumerator moveAgain()
+    {
+        yield return new WaitForSeconds(1.3f);
+        charControl.enabled = true;
+    }
 }

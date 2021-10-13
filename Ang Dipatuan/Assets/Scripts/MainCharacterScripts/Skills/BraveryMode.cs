@@ -11,8 +11,16 @@ public class BraveryMode : MonoBehaviour
 
     public bool isBraveryModeActivated;
 
+    Animator anim;
+
+    MainCharacterController charControl;
+
     private void Awake()
     {
+        anim = gameObject.GetComponent<Animator>();
+
+        charControl = gameObject.GetComponent<MainCharacterController>();
+
         isBraveryModeActivated = false;
         skillColorYellow = GameObject.FindGameObjectWithTag("BraverySkillYellowImage").GetComponent<Image>();
         onCooldown = false;
@@ -28,6 +36,16 @@ public class BraveryMode : MonoBehaviour
             skillColorYellow.fillAmount = 0;
             onCooldown = true;
 
+            //Activate animation for bravery mode
+            anim.SetTrigger("braveryMode");
+
+            //Stops ACtion of dipatuan when performing animation
+            charControl.enabled = false;
+
+            //Allow Dipatuan to move again
+            StartCoroutine("moveAgain");
+
+            //turn off bravery mode
             StartCoroutine("braveryModeTurnOff");
         }
 
@@ -48,6 +66,13 @@ public class BraveryMode : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         isBraveryModeActivated = false;
+
+    }
+
+    IEnumerator moveAgain()
+    {
+        yield return new WaitForSeconds(1f);
+        charControl.enabled = true;
 
     }
 }
