@@ -9,6 +9,8 @@ public class DamageEnemy : MonoBehaviour
 
     Animator enemyAnimator;
 
+    public bool isDipatuanModeActivated;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -32,21 +34,31 @@ public class DamageEnemy : MonoBehaviour
 
     public void LightAtkDmg()
     {
-        dmgPts = 15f;
+        if (!isDipatuanModeActivated)
+        {
+            dmgPts = 15f;
+        }
+       
     }
 
     public void HeavyAtkDmg()
     {
-        dmgPts = 25f;
+        if (!isDipatuanModeActivated)
+        {
+            dmgPts = 25f;
+        }
     }
 
     public void JumpAtkDmg()
     {
-        dmgPts = 20f;
+        if (!isDipatuanModeActivated)
+        {
+            dmgPts = 20f;
+        }
     }
 
     public void StealthAtkDmg()
     {
-        dmgPts = 100f;
+          dmgPts = 100f;
     }
 }

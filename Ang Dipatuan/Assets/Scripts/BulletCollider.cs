@@ -10,10 +10,13 @@ public class BulletCollider : MonoBehaviour
 
     MainCharacterController playerControl;
 
+    BraveryMode isBraveryModeActivated;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine("DestroyBullet");
+        isBraveryModeActivated = GameObject.FindGameObjectWithTag("Player").GetComponent<BraveryMode>();
     }
 
     // Update is called once per frame
@@ -32,6 +35,8 @@ public class BulletCollider : MonoBehaviour
 
             playerControl = other.gameObject.GetComponent<MainCharacterController>();
 
+            if (!isBraveryModeActivated.isBraveryModeActivated)
+            {
             //Trigger Damage Animation to Player
             playerAnim.SetTrigger("isDamage");
 
@@ -43,6 +48,7 @@ public class BulletCollider : MonoBehaviour
             playerControl.isTakingDamage = true;
 
             StartCoroutine("setTakingDamageFalse");
+            }
 
         }
         

@@ -8,8 +8,12 @@ public class DamagePlayer : MonoBehaviour
     Animator playerAnimator;
     MainCharacterController playerControl;
     PlayerBar playerHealth;
+
+    BraveryMode isBraveryModeActivated;
+
     void Awake()
     {
+        isBraveryModeActivated = GameObject.FindGameObjectWithTag("Player").GetComponent<BraveryMode>();
         playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
     }
 
@@ -21,6 +25,9 @@ public class DamagePlayer : MonoBehaviour
            playerHealth = other.gameObject.GetComponent<PlayerBar>();
            playerControl = other.gameObject.GetComponent<MainCharacterController>();
 
+
+            if (!isBraveryModeActivated.isBraveryModeActivated)
+            {
             playerControl.AttackReset();
 
             //Do Player Damage Animation
@@ -33,6 +40,7 @@ public class DamagePlayer : MonoBehaviour
             playerControl.isTakingDamage = true;
 
             StartCoroutine("setTakingDamageFalse");
+            }
         }
     }
 
