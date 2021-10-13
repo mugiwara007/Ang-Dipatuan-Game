@@ -2119,6 +2119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7155243330765042951}
+  delayToAttack: 0
 --- !u!114 &3613595884192766278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2132,6 +2133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7155243330765042951}
+  delayToAttack: 0
 --- !u!114 &3613595884192766279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2188,7 +2190,7 @@ MonoBehaviour:
   currentAttack: {fileID: 0}
   maximumDetectionAngle: 30
   minimumDetectionAngle: -30
-  currentRecoveryTime: 0
+  currentRecoveryTime: 0.2
 --- !u!114 &536482696363258315
 MonoBehaviour:
   m_ObjectHideFlags: 0
