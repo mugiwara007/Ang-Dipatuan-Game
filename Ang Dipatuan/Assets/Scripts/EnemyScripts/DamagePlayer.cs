@@ -33,6 +33,12 @@ public class DamagePlayer : MonoBehaviour
                 //Check when player is blocking or not
                 if (!playerControl.isBlocking)
                 {
+                    //When player is Crouching and get hit
+                    playerControl.canCrouch = false;
+
+                    var currentWeight = playerAnimator.GetLayerWeight(playerAnimator.GetLayerIndex("Crouch"));
+                    playerAnimator.SetLayerWeight(playerAnimator.GetLayerIndex("Crouch"), 0f);
+
                     //Do Player Damage Animation
                     playerAnimator.SetTrigger("isDamage");
 
@@ -58,6 +64,7 @@ public class DamagePlayer : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         playerControl.isTakingDamage = false;
+        playerControl.canCrouch = true;
 
     }
 }

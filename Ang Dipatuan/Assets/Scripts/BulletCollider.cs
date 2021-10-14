@@ -37,8 +37,16 @@ public class BulletCollider : MonoBehaviour
 
             if (!isBraveryModeActivated.isBraveryModeActivated)
             {
-            //Trigger Damage Animation to Player
-            playerAnim.SetTrigger("isDamage");
+
+                //When player is Crouching and get hit
+                playerControl.canCrouch = false;
+
+                var currentWeight = playerAnim.GetLayerWeight(playerAnim.GetLayerIndex("Crouch"));
+                playerAnim.SetLayerWeight(playerAnim.GetLayerIndex("Crouch"), 0f);
+
+
+                //Trigger Damage Animation to Player
+                playerAnim.SetTrigger("isDamage");
 
 
             //Deduct 13 hitpoints from PLayer Health
@@ -58,7 +66,7 @@ public class BulletCollider : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         playerControl.isTakingDamage = false;
-
+        playerControl.canCrouch = true;
         Destroy(gameObject);
     }
 
