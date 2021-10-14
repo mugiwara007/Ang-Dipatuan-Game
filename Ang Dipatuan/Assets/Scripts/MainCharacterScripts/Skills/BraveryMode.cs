@@ -13,6 +13,8 @@ public class BraveryMode : MonoBehaviour
 
     Animator anim;
 
+    GameObject forceField;
+
     MainCharacterController charControl;
 
     private void Awake()
@@ -23,6 +25,7 @@ public class BraveryMode : MonoBehaviour
 
         isBraveryModeActivated = false;
         skillColorYellow = GameObject.FindGameObjectWithTag("BraverySkillYellowImage").GetComponent<Image>();
+        forceField = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
         onCooldown = false;
     }
 
@@ -38,6 +41,9 @@ public class BraveryMode : MonoBehaviour
 
             //Activate animation for bravery mode
             anim.SetTrigger("braveryMode");
+
+            //Apply ForceField
+            forceField.SetActive(true);
 
             //Stops ACtion of dipatuan when performing animation
             charControl.enabled = false;
@@ -65,6 +71,7 @@ public class BraveryMode : MonoBehaviour
     IEnumerator braveryModeTurnOff()
     {
         yield return new WaitForSeconds(5f);
+        forceField.SetActive(false);
         isBraveryModeActivated = false;
 
     }

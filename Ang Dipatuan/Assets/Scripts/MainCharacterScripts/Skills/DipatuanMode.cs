@@ -11,7 +11,7 @@ public class DipatuanMode : MonoBehaviour
 
     DamageEnemy damageEnemyScript;
 
-    GameObject fireOnSword1, fireOnSword2;
+    GameObject fireOnSword1, fireOnSword2, ember;
 
     private bool fireTurnOff = true;
 
@@ -28,9 +28,12 @@ public class DipatuanMode : MonoBehaviour
         damageEnemyScript = GameObject.FindGameObjectWithTag("KampilanArmed").GetComponent<DamageEnemy>();
         skillColorYellow = GameObject.FindGameObjectWithTag("DipatuanSkillYellowImage").GetComponent<Image>();
 
-        fireOnSword1 = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(4).gameObject;
+        fireOnSword1 = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(2).gameObject;
 
-        fireOnSword2 = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(5).gameObject;
+        fireOnSword2 = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(3).gameObject;
+
+        ember = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(7).gameObject;
+
         onCooldown = false;
 
         anim = gameObject.GetComponent<Animator>();
@@ -44,16 +47,18 @@ public class DipatuanMode : MonoBehaviour
 
         if (fireTurnOff)
         {
-            fireOnSword1.SetActive(false);
+            fireOnSword1.SetActive(true);
             fireOnSword2.SetActive(false);
+            ember.SetActive(false);
         }
 
         if (Input.GetButtonDown("DipatuanMode") && onCooldown == false)
         {
             damageEnemyScript.isDipatuanModeActivated = true;
 
-            fireOnSword1.SetActive(true);
+            fireOnSword1.SetActive(false);
             fireOnSword2.SetActive(true);
+            ember.SetActive(true);
 
             fireTurnOff = false;
 
