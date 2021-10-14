@@ -11,10 +11,12 @@ public class DamageEnemy : MonoBehaviour
 
     public bool isDipatuanModeActivated;
 
+    EnemyBlocking blockingScript;
+
     // Start is called before the first frame update
     private void Awake()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,10 +27,15 @@ public class DamageEnemy : MonoBehaviour
 
             enemyAnimator = other.gameObject.GetComponent<Animator>();
 
-            enemyAnimator.SetTrigger("hit");
+            blockingScript = other.gameObject.GetComponent<EnemyBlocking>();
 
-            enemyStats.Damage(dmgPts);
-       
+            if(blockingScript.isEnemyBlocking == false)
+            {
+                enemyAnimator.SetTrigger("hit");
+                enemyStats.Damage(dmgPts);
+            }
+
+            
         }
     }
 
