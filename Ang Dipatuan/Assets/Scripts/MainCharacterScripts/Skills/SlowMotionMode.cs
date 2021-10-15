@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SlowMotionMode : MonoBehaviour
 {
     GameObject[] enemies;
+    GameObject bwPost;
     Image skillColorYellow;
 
     private bool onCooldown;
@@ -17,6 +18,7 @@ public class SlowMotionMode : MonoBehaviour
     private void Awake()
     {
         skillColorYellow = GameObject.FindGameObjectWithTag("SlowMoSkillYellowImage").GetComponent<Image>();
+        bwPost = GameObject.FindGameObjectWithTag("NormalPost").transform.GetChild(0).gameObject;
         onCooldown = false;
 
         anim = gameObject.GetComponent<Animator>();
@@ -37,6 +39,10 @@ public class SlowMotionMode : MonoBehaviour
 
                 enemyAnim.SetFloat("animationSpeed", 0.2f);
             }
+
+            //Activate Black & White Effect
+            bwPost.SetActive(true);
+            
 
             //Activate animation for bravery mode
             anim.SetTrigger("slowmotionMode");
@@ -68,6 +74,8 @@ public class SlowMotionMode : MonoBehaviour
     IEnumerator backToNormalSpeed()
     {
         yield return new WaitForSeconds(5f);
+
+        bwPost.SetActive(false);
 
         foreach (GameObject enemy in enemies)
         {
