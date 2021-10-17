@@ -21,8 +21,10 @@ public class DamageEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag == "Enemy")
         {
+            //Debug.Log("ENEMY");
             enemyStats = other.gameObject.GetComponent<EnemyStats>();
 
             enemyAnimator = other.gameObject.GetComponent<Animator>();
