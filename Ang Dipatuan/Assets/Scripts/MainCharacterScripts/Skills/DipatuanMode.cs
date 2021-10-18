@@ -64,6 +64,8 @@ public class DipatuanMode : MonoBehaviour
     {
         if (typingMode)
         {
+            gameObject.GetComponent<SlowMotionMode>().enabled = false;
+            gameObject.GetComponent<BraveryMode>().enabled = false;
             if (Input.anyKeyDown)
             {
                 string keyPressed = Input.inputString;
@@ -73,6 +75,12 @@ public class DipatuanMode : MonoBehaviour
                     EnterLetter(keyPressed);
             }
         }
+        else
+        {
+            gameObject.GetComponent<SlowMotionMode>().enabled = true;
+            gameObject.GetComponent<BraveryMode>().enabled = true;
+        }
+
 
         if (fireTurnOff)
         {
@@ -153,7 +161,7 @@ public class DipatuanMode : MonoBehaviour
 
     IEnumerator DelayedStop()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         correctedLetters = 0;
 
