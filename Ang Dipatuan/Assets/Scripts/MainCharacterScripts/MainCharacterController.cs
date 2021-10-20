@@ -543,7 +543,7 @@ public class MainCharacterController : MonoBehaviour
     {
 		if (isJumping)
 		{
-			if (Input.GetKeyDown(KeyCode.Mouse0))
+			if (Input.GetKeyDown(KeyCode.Mouse0) && playerBars.stamina >= 25f)
 			{
 				kampilan.gameObject.transform.localPosition = new Vector3(0.179f, -0.122f, -0.281f);
 				kampilan.gameObject.transform.localRotation = Quaternion.Euler(-35.251f, -128.959f, 297.612f);
