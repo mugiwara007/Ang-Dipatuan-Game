@@ -97,7 +97,7 @@ public class DipatuanMode : MonoBehaviour
         {
             if (Input.GetButtonDown("DipatuanMode") && onCooldown == false)
             {
-                manaStats.ReduceMana(5);
+                manaStats.ReduceMana(12);
                 setLetterColorToBlack();
                 StartCoroutine("StopTypingMode");
                 if (Time.timeScale == 1.0f)
