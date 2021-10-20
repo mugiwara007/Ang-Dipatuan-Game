@@ -20,11 +20,19 @@ public class EnemyManager : MonoBehaviour
 
     PlayerBar charStats;
 
+    private bool enemyPatrolling;
+
+    private float timeToTurnAround = 0f;
+
+    private bool turnAvail = false;
+
    private void Awake()
    {
         enemyLocomotionManger = GetComponent<EnemyLocomotionManger>();
         enemyAnimatorManager = GetComponent<EnemyAnimatorManager>();
         charStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
+
+        enemyPatrolling = true;
 
     }
 
@@ -33,23 +41,65 @@ public class EnemyManager : MonoBehaviour
         HandleRecoveryTimer();
     }
 
+    public void RotateCharacter()
+    {
+        if (turnAvail)
+        {
+            gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y, -gameObject.transform.localScale.z);
+            turnAvail = false;
+        }
+        
+    }
+    public void CanTurn()
+    {
+        turnAvail = true;
+    }
+
     private void FixedUpdate()
    {
         HandleCurrentAction();
+
+        if(enemyPatrolling)
+        {
+            enemyLocomotionManger.anim.SetBool("isWalking", true);
+
+            timeToTurnAround += Time.deltaTime;
+
+            if(timeToTurnAround >= 8f)
+            {
+                //Humarap sa Likod yung Nag papatrol every 8Seconds
+                //gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y, -gameObject.transform.localScale.z);
+
+                enemyLocomotionManger.anim.SetTrigger("turnAround");
+                timeToTurnAround = 0f;
+
+
+            }
+
+        }
+        else
+        {
+            enemyLocomotionManger.anim.SetBool("isWalking", false);
+        }
     }
 
     private void HandleCurrentAction()
    {
         if(charStats.health > 0)
         {
+            //pag merong hinahabol kalaban
             if (enemyLocomotionManger.currentTarget != null)
             {
+                gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y, Mathf.Abs(gameObject.transform.localScale.z));
                 enemyLocomotionManger.distanceFromTarget = Vector3.Distance(enemyLocomotionManger.currentTarget.transform.position, transform.position);
+                enemyPatrolling = false;
             }
         
+            //Pag walang hinahabol kalaban
             if (enemyLocomotionManger.currentTarget == null)
             {
                 enemyLocomotionManger.HandleDetection();
+                enemyPatrolling = true;
             } 
             else if (enemyLocomotionManger.distanceFromTarget > enemyLocomotionManger.stoppingDistance)
             {
