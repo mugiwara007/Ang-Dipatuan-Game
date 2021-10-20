@@ -26,6 +26,8 @@ public class SlowMotionMode : MonoBehaviour
     private string remainingWord = string.Empty;
     private string currentWord = "kahangtoran";
 
+    PlayerBar manaStats;
+
     private void Awake()
     {
         skillColorYellow = GameObject.FindGameObjectWithTag("SlowMoSkillYellowImage").GetComponent<Image>();
@@ -42,6 +44,8 @@ public class SlowMotionMode : MonoBehaviour
         SkillsTextToType2.SetActive(false);
 
         SetCurrentWord();
+
+        manaStats = gameObject.GetComponent<PlayerBar>();
     }
 
     // Update is called once per frame
@@ -69,21 +73,25 @@ public class SlowMotionMode : MonoBehaviour
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
 
-        if (Input.GetButtonDown("SlowMotionMode") && onCooldown == false)
+        if(manaStats.mana >= 25)
         {
-            setLetterColorToBlack();
-            StartCoroutine("StopTypingMode");
-            if (Time.timeScale == 1.0f)
+            if (Input.GetButtonDown("SlowMotionMode") && onCooldown == false)
             {
-                Time.timeScale = 0.2f;
+                manaStats.ReduceMana(25);
+                setLetterColorToBlack();
+                StartCoroutine("StopTypingMode");
+                if (Time.timeScale == 1.0f)
+                {
+                    Time.timeScale = 0.2f;
+                }
+                //Sets typing mode to true
+                typingMode = true;
+
+                //show text that will pop up to type 
+                SkillsTextToType2.SetActive(true);
+
+                StartCoroutine("StopTypingMode");
             }
-            //Sets typing mode to true
-            typingMode = true;
-
-            //show text that will pop up to type 
-            SkillsTextToType2.SetActive(true);
-
-            StartCoroutine("StopTypingMode");
         }
 
         if (onCooldown)

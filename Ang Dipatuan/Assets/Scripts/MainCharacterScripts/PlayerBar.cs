@@ -6,19 +6,27 @@ using UnityEngine.UI;
 public class PlayerBar : CharacterStats
 {
     private Text healthText;
-    private Image healthBar, staminaBar, healthBarMax;
+    private Image healthBar, staminaBar, healthBarMax, manaBar;
 
     float waitTime = 0f;
 
 
     float lerpSpeed, staminaLerpSpeed;
 
+    public float mana, maxMana = 100;
 
+    private void Awake()
+    {
+        maxMana = 100;
+        mana = maxMana;
+    }
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
         stamina = maxStamina;
+
+        
 
         healthText = GameObject.FindGameObjectWithTag("HealthBarText").GetComponent<Text>();
         healthBar = GameObject.FindGameObjectWithTag("HealthBarImage").GetComponent<Image>();
@@ -26,6 +34,8 @@ public class PlayerBar : CharacterStats
 
 
         staminaBar = GameObject.FindGameObjectWithTag("StaminaBarImage").GetComponent<Image>();
+
+        manaBar = GameObject.FindGameObjectWithTag("ManaBar").GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -50,6 +60,21 @@ public class PlayerBar : CharacterStats
             health = 0;
         }
 
+
+        //to Avoid Mana go higher than 100
+        if (mana > maxMana)
+        {
+            mana = maxMana;
+        }
+
+
+        //Avoid mana going lower than 0 or negative value
+        if (mana < 0)
+        {
+            mana = 0;
+        }
+
+
         //change the health of the player
         HealthBarFiller();
 
@@ -59,6 +84,29 @@ public class PlayerBar : CharacterStats
         //change the health of the player
         StaminaBarFiller();
 
+        //change the health of the player
+        ManaBarFiller();
+
+
+    }
+    public void ManaBarFiller()
+    {
+        manaBar.fillAmount = Mathf.Lerp(manaBar.fillAmount, mana / maxMana, 50f * Time.deltaTime);
+    }
+    public void ReduceMana(float reducePoints)
+    {
+        if (mana > 0)
+        {
+            mana -= reducePoints;
+        }
+    }
+
+    public void AddMana(float addPoints)
+    {
+        if (mana < maxHealth)
+        {
+            mana += addPoints;
+        }
     }
 
     public void HealthBarFiller()
@@ -98,7 +146,7 @@ public class PlayerBar : CharacterStats
             }
         }
 
-        staminaBar.fillAmount = Mathf.Lerp(staminaBar.fillAmount, stamina / maxHealth, staminaLerpSpeed);
+        staminaBar.fillAmount = Mathf.Lerp(staminaBar.fillAmount, stamina / maxStamina, staminaLerpSpeed);
     }
 
     public void DecreaseStamina(float decreasePoints)
@@ -109,7 +157,6 @@ public class PlayerBar : CharacterStats
             waitTime = 0f;
         }
     }
-
 
     public void ColorChanger()
     {

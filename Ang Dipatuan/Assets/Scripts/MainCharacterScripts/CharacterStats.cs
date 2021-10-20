@@ -7,10 +7,9 @@ public class CharacterStats : MonoBehaviour
 
     public float health, maxHealth = 100, stamina, maxStamina = 100;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+
     }
 
     // Update is called once per frame

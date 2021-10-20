@@ -28,6 +28,8 @@ public class BraveryMode : MonoBehaviour
     private string remainingWord = string.Empty;
     private string currentWord = "juramentado";
 
+    PlayerBar manaStats;
+
     private void Awake()
     {
         anim = gameObject.GetComponent<Animator>();
@@ -46,6 +48,8 @@ public class BraveryMode : MonoBehaviour
         SkillsTextToType3.SetActive(false);
 
         SetCurrentWord();
+
+        manaStats = gameObject.GetComponent<PlayerBar>();
     }
 
     // Update is called once per frame
@@ -70,21 +74,25 @@ public class BraveryMode : MonoBehaviour
             gameObject.GetComponent<SlowMotionMode>().enabled = true;
         }
 
-        if (Input.GetButtonDown("BraveryMode") && onCooldown == false)
+        if (manaStats.mana >= 15)
         {
-            setLetterColorToBlack();
-            StartCoroutine("StopTypingMode");
-            if (Time.timeScale == 1.0f)
+            if (Input.GetButtonDown("BraveryMode") && onCooldown == false)
             {
-                Time.timeScale = 0.2f;
+                manaStats.ReduceMana(15);
+                setLetterColorToBlack();
+                StartCoroutine("StopTypingMode");
+                if (Time.timeScale == 1.0f)
+                {
+                    Time.timeScale = 0.2f;
+                }
+                //Sets typing mode to true
+                typingMode = true;
+
+                //show text that will pop up to type 
+                SkillsTextToType3.SetActive(true);
+
+                StartCoroutine("StopTypingMode");
             }
-            //Sets typing mode to true
-            typingMode = true;
-
-            //show text that will pop up to type 
-            SkillsTextToType3.SetActive(true);
-
-            StartCoroutine("StopTypingMode");
         }
 
         if (onCooldown)

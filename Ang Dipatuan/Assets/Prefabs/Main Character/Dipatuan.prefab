@@ -3249,6 +3249,7 @@ GameObject:
   - component: {fileID: 1657024465560790591}
   - component: {fileID: 5157883062600668564}
   - component: {fileID: 5157883062600668565}
+  - component: {fileID: 2134718184}
   - component: {fileID: 5677095164982434154}
   - component: {fileID: 7457668709900852837}
   - component: {fileID: 405905095}
@@ -3363,6 +3364,22 @@ MonoBehaviour:
   isCrouching: 0
   canCrouch: 1
   isTakingDamage: 0
+--- !u!114 &2134718184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5428265270087804671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c26e7a57122ff64a8d9065d01ab7b61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 100
+  stamina: 0
+  maxStamina: 100
 --- !u!114 &5677095164982434154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3379,6 +3396,8 @@ MonoBehaviour:
   maxHealth: 100
   stamina: 0
   maxStamina: 100
+  mana: 0
+  maxMana: 100
 --- !u!114 &7457668709900852837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5526,14 +5545,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9d37a90bfebd584daf9f89ef0eaa82b, type: 3}
---- !u!4 &640908784073201730 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1271510388358248353, guid: a9d37a90bfebd584daf9f89ef0eaa82b, type: 3}
-  m_PrefabInstance: {fileID: 1819938939106209763}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &265474368688882424 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1940663701442899227, guid: a9d37a90bfebd584daf9f89ef0eaa82b, type: 3}
+  m_PrefabInstance: {fileID: 1819938939106209763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &640908784073201730 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1271510388358248353, guid: a9d37a90bfebd584daf9f89ef0eaa82b, type: 3}
   m_PrefabInstance: {fileID: 1819938939106209763}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5858147015394332504

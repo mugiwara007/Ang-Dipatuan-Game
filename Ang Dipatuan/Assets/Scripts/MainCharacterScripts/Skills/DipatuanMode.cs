@@ -32,6 +32,8 @@ public class DipatuanMode : MonoBehaviour
     private string remainingWord = string.Empty;
     private string currentWord = "dipatuan";
 
+    PlayerBar manaStats;
+
     private void Awake()
     {
         kampilan = GameObject.FindGameObjectWithTag("KampilanArmed");
@@ -57,6 +59,8 @@ public class DipatuanMode : MonoBehaviour
         charControl = gameObject.GetComponent<MainCharacterController>();
 
         SetCurrentWord();
+
+        manaStats = gameObject.GetComponent<PlayerBar>();
     }
 
     // Update is called once per frame
@@ -89,23 +93,27 @@ public class DipatuanMode : MonoBehaviour
             ember.SetActive(false);
         }
 
-        if (Input.GetButtonDown("DipatuanMode") && onCooldown == false)
+        if (manaStats.mana >= 5)
         {
-            setLetterColorToBlack();
-            StartCoroutine("StopTypingMode");
-            if (Time.timeScale == 1.0f)
+            if (Input.GetButtonDown("DipatuanMode") && onCooldown == false)
             {
-                Time.timeScale = 0.2f;
+                manaStats.ReduceMana(5);
+                setLetterColorToBlack();
+                StartCoroutine("StopTypingMode");
+                if (Time.timeScale == 1.0f)
+                {
+                    Time.timeScale = 0.2f;
+                }
+
+                //Sets typing mode to true
+                typingMode = true;
+
+                //show text that will pop up to type 
+                SkillsTextToType1.SetActive(true);
+
+                StartCoroutine("StopTypingMode");
+
             }
-
-            //Sets typing mode to true
-            typingMode = true;
-
-            //show text that will pop up to type 
-            SkillsTextToType1.SetActive(true);
-
-            StartCoroutine("StopTypingMode");
-
         }
 
         if (onCooldown)
