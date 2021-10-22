@@ -53,6 +53,15 @@ public class PickUpFruits : MonoBehaviour
             item = other.gameObject;
             canPickUp = true;
         }
+
+        if (other.CompareTag("Pineapple"))
+        {
+            other.transform.Find("Canvas").gameObject.SetActive(true);
+
+            item = other.gameObject;
+            canPickUp = true;
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)
@@ -74,6 +83,14 @@ public class PickUpFruits : MonoBehaviour
         }
 
         if (other.CompareTag("FruitBasket"))
+        {
+            other.transform.Find("Canvas").gameObject.SetActive(false);
+
+            item = other.gameObject;
+            canPickUp = false;
+        }
+
+        if (other.CompareTag("Pineapple"))
         {
             other.transform.Find("Canvas").gameObject.SetActive(false);
 
