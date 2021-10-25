@@ -3264,6 +3264,7 @@ GameObject:
   - component: {fileID: 6236008444673146250}
   - component: {fileID: 1428641821184917309}
   - component: {fileID: 8575059794330493106}
+  - component: {fileID: 5808670611092407945}
   m_Layer: 3
   m_Name: Dipatuan
   m_TagString: Player
@@ -3563,6 +3564,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5717976885126af4189d017c5ec4815a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  total_gold: 0
+--- !u!114 &5808670611092407945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5428265270087804671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a86561b16d13d4c8b7d1a9badfa802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5478717096714712063
@@ -5615,14 +5629,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9d37a90bfebd584daf9f89ef0eaa82b, type: 3}
---- !u!4 &640908784073201730 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1271510388358248353, guid: a9d37a90bfebd584daf9f89ef0eaa82b, type: 3}
-  m_PrefabInstance: {fileID: 1819938939106209763}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &265474368688882424 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1940663701442899227, guid: a9d37a90bfebd584daf9f89ef0eaa82b, type: 3}
+  m_PrefabInstance: {fileID: 1819938939106209763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &640908784073201730 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1271510388358248353, guid: a9d37a90bfebd584daf9f89ef0eaa82b, type: 3}
   m_PrefabInstance: {fileID: 1819938939106209763}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5858147015394332504

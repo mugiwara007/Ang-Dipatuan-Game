@@ -25,6 +25,7 @@ public class OpenInventory : MonoBehaviour
             Cursor.lockState = CursorLockMode.Confined;
         }
 
+        /*
         if(inventoryOpen == false)
         {
             Cursor.visible = false;
@@ -32,5 +33,6 @@ public class OpenInventory : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
 
+        */
     }
 }
