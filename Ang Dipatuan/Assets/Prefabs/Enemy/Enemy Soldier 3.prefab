@@ -1532,6 +1532,7 @@ GameObject:
   - component: {fileID: 2694461026498778233}
   - component: {fileID: 7074752551392844829}
   - component: {fileID: 1690044918189443549}
+  - component: {fileID: 1503259265072779866}
   m_Layer: 6
   m_Name: Enemy Soldier 3
   m_TagString: Enemy
@@ -1744,6 +1745,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemyBlocking: 0
+--- !u!114 &1503259265072779866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3001033247400598171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b41303c5ca89e50418706dc131911908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldGameObject: {fileID: 3550448584073110692, guid: e1ca8503930827646b898273bbfbb334, type: 3}
 --- !u!1 &3156356988569156340
 GameObject:
   m_ObjectHideFlags: 0
