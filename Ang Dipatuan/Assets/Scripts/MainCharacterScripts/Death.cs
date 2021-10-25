@@ -37,6 +37,11 @@ public class Death : MonoBehaviour
             playerAnimator.SetBool("isAlive", false);
             charControl.enabled = false;
 
+            gameObject.GetComponent<UseFruits>().enabled = false;
+            gameObject.GetComponent<DipatuanMode>().enabled = false;
+            gameObject.GetComponent<BraveryMode>().enabled = false;
+            gameObject.GetComponent<SlowMotionMode>().enabled = false;
+
             //Makes Camera to go down a little bit when Player Dies
             Vector3 NewPos = new Vector3(followCamera.transform.localPosition.x, 0.35f, followCamera.transform.localPosition.z);
             followCamera.transform.localPosition = Vector3.Lerp(followCamera.transform.localPosition, NewPos, 8f * Time.deltaTime);

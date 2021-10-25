@@ -220,7 +220,7 @@ public class MainCharacterController : MonoBehaviour
 				isRunning = true;
 				anim.SetBool("isRunning", true);
 				speed = 13f;
-				jumpHeight = 4f;
+				jumpHeight = 3f;
 				
 				//JUMP WHEN RUNNING
 				if (isJumping)

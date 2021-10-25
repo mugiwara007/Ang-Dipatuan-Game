@@ -15,10 +15,14 @@ public class PlayerBar : CharacterStats
 
     public float mana, maxMana = 100;
 
+    public bool pineappleEaten = false;
+
     private void Awake()
     {
         maxMana = 100;
         mana = maxMana;
+
+        pineappleEaten = false;
     }
     // Start is called before the first frame update
     void Start()
@@ -86,6 +90,11 @@ public class PlayerBar : CharacterStats
 
         //change the health of the player
         ManaBarFiller();
+
+        if(pineappleEaten == true)
+        {
+            stamina = maxStamina;
+        }
 
 
     }
@@ -195,5 +204,22 @@ public class PlayerBar : CharacterStats
         {
             health += healingPoints;
         }
+    }
+
+    public void MaxManaHealth()
+    {
+            health = maxHealth;
+
+            mana = maxMana;
+    }
+
+    public void enableMaxStamina()
+    {
+        pineappleEaten = true;
+    }
+
+    public void disableMaxStamina()
+    {
+        pineappleEaten = false;
     }
 }
