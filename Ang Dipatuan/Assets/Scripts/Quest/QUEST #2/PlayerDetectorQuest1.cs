@@ -7,26 +7,24 @@ public class PlayerDetectorQuest1 : MonoBehaviour
     GameObject canvas;
     private bool canShop;
 
-    GameObject questUI;
+    QuestGiver1 questGiver;
 
     private void Awake()
     {
         canvas = gameObject.transform.parent.Find("Canvas").gameObject;
-
-        questUI = GameObject.FindGameObjectWithTag("QuestUI");
+        questGiver = GameObject.FindGameObjectWithTag("Q1").GetComponent<QuestGiver1>();
     }
 
     private void Update()
     {
-        if (canShop)
-        {
+
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.Confined;
-
+                questGiver.Quest1();
             }
-        }
+        
     }
 
 

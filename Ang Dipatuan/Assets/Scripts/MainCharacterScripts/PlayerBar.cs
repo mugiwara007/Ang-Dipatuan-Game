@@ -17,6 +17,8 @@ public class PlayerBar : CharacterStats
 
     public bool pineappleEaten = false;
 
+    public QuestUI quest;
+
     private void Awake()
     {
         maxMana = 100;
@@ -222,4 +224,5 @@ public class PlayerBar : CharacterStats
     {
         pineappleEaten = false;
     }
+
 }

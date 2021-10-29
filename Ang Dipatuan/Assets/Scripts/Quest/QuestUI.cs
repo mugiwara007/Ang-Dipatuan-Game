@@ -8,6 +8,9 @@ public class QuestUI
 {
     public bool isActive;
 
+    public string title;
     public string desc;
     public int goldReward;
+
+    public QuestGoal goal;
 }

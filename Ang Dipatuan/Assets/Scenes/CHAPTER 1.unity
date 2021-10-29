@@ -1499,7 +1499,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14, y: -121}
+  m_AnchoredPosition: {x: 19, y: -100}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &114583287
@@ -1524,10 +1524,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 18
+    m_FontSize: 13
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -1535,7 +1535,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: asdsa
 --- !u!222 &114583288
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2970,11 +2970,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quest:
     isActive: 0
+    title: QUEST # 2
     desc: Go to the Training Area.
     goldReward: 100
   player: {fileID: 653802790}
-  txtdesc: {fileID: 0}
-  txtgold: {fileID: 0}
+  questDesc: {fileID: 0}
+  questWindow: {fileID: 200460903}
+  titleText: {fileID: 1657920174}
+  descriptionText: {fileID: 642969712}
+  goldText: {fileID: 114583287}
 --- !u!114 &191636516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3276,7 +3280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &200460904
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5815,6 +5819,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fc6b0b01719ec0842ad60ddb68957545, type: 3}
       propertyPath: m_Name
       value: Wife
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fc6b0b01719ec0842ad60ddb68957545, type: 3}
+      propertyPath: m_TagString
+      value: Q1
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: fc6b0b01719ec0842ad60ddb68957545, type: 3}
       propertyPath: m_Controller
@@ -9503,8 +9511,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -27}
-  m_SizeDelta: {x: 230.145, y: 107.4847}
+  m_AnchoredPosition: {x: 0, y: -16.3133}
+  m_SizeDelta: {x: 230.145, y: 82.1107}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &642969712
 MonoBehaviour:
@@ -9528,7 +9536,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 18
+    m_FontSize: 13
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -12809,7 +12817,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -99, y: -121}
+  m_AnchoredPosition: {x: -44, y: -100}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &925973746
@@ -12834,10 +12842,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 18
-    m_FontStyle: 0
+    m_FontSize: 13
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -22593,7 +22601,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -74.17311, y: 43}
+  m_AnchoredPosition: {x: -57, y: 23}
   m_SizeDelta: {x: 132.6968, y: 58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1657920174
@@ -22618,7 +22626,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 07aec66a7b7cfc64db2cd46e019e0347, type: 3}
-    m_FontSize: 25
+    m_FontSize: 18
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -23860,7 +23868,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1729734140}
-  m_LocalRotation: {x: 0.13943355, y: 0.00000000851915, z: -0.0000000011995733, w: 0.99023145}
+  m_LocalRotation: {x: 0.13943355, y: -0.00000000851915, z: 0.0000000011995733, w: 0.99023145}
   m_LocalPosition: {x: 1053.3429, y: 78.250496, z: -962.5011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -28156,7 +28164,7 @@ RectTransform:
   m_GameObject: {fileID: 1974910157}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 1644778205}
   m_Father: {fileID: 200460904}
@@ -28164,7 +28172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 132, y: -117}
+  m_AnchoredPosition: {x: 90, y: -93}
   m_SizeDelta: {x: 105.4428, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1974910159
@@ -28210,7 +28218,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1974910160}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 191636515}
+        m_TargetAssemblyTypeName: QuestGiver1, Assembly-CSharp
+        m_MethodName: AcceptQuest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1974910160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28412,7 +28432,7 @@ RectTransform:
   m_GameObject: {fileID: 1986594619}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.6071, y: 5.6071, z: 5.6071}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 200460904}
   m_RootOrder: 0
@@ -30814,11 +30834,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8123495694804575515, guid: 1dbfdc90c7100534da42c056efec6081, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000018997456
+      value: -0.000000018997453
       objectReference: {fileID: 0}
     - target: {fileID: 8123495694804575515, guid: 1dbfdc90c7100534da42c056efec6081, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000030283824
+      value: 0.0000000030283815
       objectReference: {fileID: 0}
     - target: {fileID: 8123495694952261249, guid: 1dbfdc90c7100534da42c056efec6081, type: 3}
       propertyPath: m_LocalRotation.w
@@ -30846,11 +30866,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8123495695052875844, guid: 1dbfdc90c7100534da42c056efec6081, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000000851915
+      value: -0.00000000851915
       objectReference: {fileID: 0}
     - target: {fileID: 8123495695052875844, guid: 1dbfdc90c7100534da42c056efec6081, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000011995732
+      value: 0.0000000011995732
       objectReference: {fileID: 0}
     - target: {fileID: 8123495695152072196, guid: 1dbfdc90c7100534da42c056efec6081, type: 3}
       propertyPath: m_Name
