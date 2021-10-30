@@ -7,12 +7,14 @@ public class QuestGiver1 : MonoBehaviour
 {
     public QuestUI quest;
 
-    public PlayerBar player;
+    //public PlayerBar player;
+
+    QuestGoldGiver questGoldGiver;
 
     public Text questDesc;
 
-
     public GameObject questWindow;
+    public GameObject waypoint;
     public Text titleText;
     public Text descriptionText;
     public Text goldText;
@@ -20,11 +22,11 @@ public class QuestGiver1 : MonoBehaviour
     private void Awake()
     {
         questDesc = GameObject.FindGameObjectWithTag("QuestUI").GetComponent<Text>();
+        questGoldGiver = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestGoldGiver>();
     }
 
     public void Quest1()
     {
-        Debug.Log("IT WORKED");
         questWindow.SetActive(true);
         titleText.text = quest.title;
         descriptionText.text = quest.desc;
@@ -36,9 +38,20 @@ public class QuestGiver1 : MonoBehaviour
     {
         questWindow.SetActive(false);
         quest.isActive = true;
-        player.quest = quest;
+        //player.quest = quest;
         questDesc.text = quest.desc;
+        waypoint.SetActive(true);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Update()
+    {
+        if (quest.goal.IsReached())
+        {
+            questGoldGiver.QuestComplete(quest.goldReward);
+            Debug.Log(quest.goldReward);
+            quest.goal.currentAmount = 0;
+        }
     }
 }

@@ -3265,6 +3265,7 @@ GameObject:
   - component: {fileID: 1428641821184917309}
   - component: {fileID: 8575059794330493106}
   - component: {fileID: 5808670611092407945}
+  - component: {fileID: 2668250819691939440}
   m_Layer: 3
   m_Name: Dipatuan
   m_TagString: Player
@@ -3405,6 +3406,15 @@ MonoBehaviour:
   mana: 0
   maxMana: 100
   pineappleEaten: 0
+  quest:
+    isActive: 0
+    title: 
+    desc: 
+    goldReward: 0
+    goal:
+      goalType: 0
+      requiredAmount: 0
+      currentAmount: 0
 --- !u!114 &7457668709900852837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3582,6 +3592,18 @@ MonoBehaviour:
   boughtCloth1: 0
   boughtCloth2: 0
   boughtCloth3: 0
+--- !u!114 &2668250819691939440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5428265270087804671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d68d490363e2046afdd52f24893a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5478717096714712063
 GameObject:
   m_ObjectHideFlags: 0

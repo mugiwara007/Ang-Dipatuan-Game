@@ -10,14 +10,11 @@ public class PlayerBar : CharacterStats
 
     float waitTime = 0f;
 
-
     float lerpSpeed, staminaLerpSpeed;
 
     public float mana, maxMana = 100;
 
     public bool pineappleEaten = false;
-
-    public QuestUI quest;
 
     private void Awake()
     {
@@ -31,8 +28,6 @@ public class PlayerBar : CharacterStats
     {
         health = maxHealth;
         stamina = maxStamina;
-
-        
 
         healthText = GameObject.FindGameObjectWithTag("HealthBarText").GetComponent<Text>();
         healthBar = GameObject.FindGameObjectWithTag("HealthBarImage").GetComponent<Image>();
@@ -97,8 +92,6 @@ public class PlayerBar : CharacterStats
         {
             stamina = maxStamina;
         }
-
-
     }
     public void ManaBarFiller()
     {
@@ -225,4 +218,5 @@ public class PlayerBar : CharacterStats
         pineappleEaten = false;
     }
 
+    
 }

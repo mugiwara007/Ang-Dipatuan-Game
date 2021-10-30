@@ -5,26 +5,29 @@ using UnityEngine;
 public class PlayerDetectorQuest1 : MonoBehaviour
 {
     GameObject canvas;
-    private bool canShop;
 
     QuestGiver1 questGiver;
+
+    bool canAcceptQuest;
 
     private void Awake()
     {
         canvas = gameObject.transform.parent.Find("Canvas").gameObject;
         questGiver = GameObject.FindGameObjectWithTag("Q1").GetComponent<QuestGiver1>();
+        canAcceptQuest = false;
     }
 
     private void Update()
     {
-
+        if (canAcceptQuest == true)
+        {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.Confined;
                 questGiver.Quest1();
             }
-        
+        }
     }
 
 
@@ -34,6 +37,7 @@ public class PlayerDetectorQuest1 : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             canvas.SetActive(true);
+            canAcceptQuest = true;
         }
     }
 
@@ -42,6 +46,7 @@ public class PlayerDetectorQuest1 : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             canvas.SetActive(false);
+            canAcceptQuest = false;
         }
     }
 }
