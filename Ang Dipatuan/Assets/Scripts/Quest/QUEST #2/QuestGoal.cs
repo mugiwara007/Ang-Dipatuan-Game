@@ -23,6 +23,14 @@ public class QuestGoal
         }
     }
 
+    public void ItemGathered()
+    {
+        if (goalType == GoalType.Gathering)
+        {
+            currentAmount++;
+        }
+    }
+
     public void Waypoint()
     {
         if (goalType == GoalType.Waypoint)
@@ -30,6 +38,8 @@ public class QuestGoal
             currentAmount++;
         } 
     }
+
+
 
 }
 

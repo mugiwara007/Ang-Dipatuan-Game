@@ -15,7 +15,8 @@ public class QuestGiver1 : MonoBehaviour
 
     public GameObject questWindow;
     //public GameObject waypoint;
-    public GameObject kill;
+    public GameObject gather;
+    //public GameObject kill;
     public Text titleText;
     public Text descriptionText;
     public Text goldText;
@@ -42,7 +43,8 @@ public class QuestGiver1 : MonoBehaviour
         //player.quest = quest;
         questDesc.text = quest.desc;
         //waypoint.SetActive(true);
-        kill.SetActive(true);
+        //kill.SetActive(true);
+        gather.SetActive(true);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
