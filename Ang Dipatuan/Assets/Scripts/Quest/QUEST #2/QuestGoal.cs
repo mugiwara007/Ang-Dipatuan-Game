@@ -17,7 +17,10 @@ public class QuestGoal
 
     public void EnemyKilled()
     {
-
+        if (goalType == GoalType.Kill)
+        {
+            currentAmount++;
+        }
     }
 
     public void Waypoint()

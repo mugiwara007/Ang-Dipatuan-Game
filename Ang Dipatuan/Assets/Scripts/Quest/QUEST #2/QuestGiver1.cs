@@ -14,7 +14,8 @@ public class QuestGiver1 : MonoBehaviour
     public Text questDesc;
 
     public GameObject questWindow;
-    public GameObject waypoint;
+    //public GameObject waypoint;
+    public GameObject kill;
     public Text titleText;
     public Text descriptionText;
     public Text goldText;
@@ -40,7 +41,8 @@ public class QuestGiver1 : MonoBehaviour
         quest.isActive = true;
         //player.quest = quest;
         questDesc.text = quest.desc;
-        waypoint.SetActive(true);
+        //waypoint.SetActive(true);
+        kill.SetActive(true);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -50,7 +52,6 @@ public class QuestGiver1 : MonoBehaviour
         if (quest.goal.IsReached())
         {
             questGoldGiver.QuestComplete(quest.goldReward);
-            Debug.Log(quest.goldReward);
             quest.goal.currentAmount = 0;
         }
     }
