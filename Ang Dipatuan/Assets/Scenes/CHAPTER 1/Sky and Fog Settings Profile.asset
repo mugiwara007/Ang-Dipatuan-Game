@@ -266,7 +266,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   rayTracing:
     m_OverrideState: 0
     m_Value: 0
@@ -310,15 +310,15 @@ MonoBehaviour:
       m_Bits: 4294967295
   m_StepCount:
     m_OverrideState: 1
-    m_Value: 6
+    m_Value: 16
     min: 2
     max: 32
   m_FullResolution:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   m_MaximumRadiusInPixels:
     m_OverrideState: 1
-    m_Value: 40
+    m_Value: 80
     min: 16
     max: 256
   m_BilateralUpsample:
@@ -326,16 +326,16 @@ MonoBehaviour:
     m_Value: 1
   m_DirectionCount:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 4
     min: 1
     max: 6
   m_RayLength:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 20
     min: 0.01
   m_SampleCount:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 8
     min: 1
     max: 64
   m_Denoise:
@@ -343,7 +343,7 @@ MonoBehaviour:
     m_Value: 1
   m_DenoiserRadius:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.65
     min: 0.001
     max: 1
 --- !u!114 &-3345292703492857176
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8bcdf71d7fafa419fca1ed162f5fc9, type: 3}
   m_Name: ColorAdjustments
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   postExposure:
     m_OverrideState: 0
@@ -459,10 +459,10 @@ MonoBehaviour:
     min: 0
   baseHeight:
     m_OverrideState: 1
-    m_Value: 30
+    m_Value: 50
   maximumHeight:
     m_OverrideState: 1
-    m_Value: 800
+    m_Value: 1000
   meanFreePath:
     m_OverrideState: 1
     m_Value: 500
