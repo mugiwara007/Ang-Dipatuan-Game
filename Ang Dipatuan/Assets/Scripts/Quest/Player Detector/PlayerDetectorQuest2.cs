@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDetectorQuest1 : MonoBehaviour
+public class PlayerDetectorQuest2 : MonoBehaviour
 {
     GameObject canvas;
 
@@ -13,7 +13,7 @@ public class PlayerDetectorQuest1 : MonoBehaviour
     private void Awake()
     {
         canvas = gameObject.transform.parent.Find("Canvas").gameObject;
-        questGiver = GameObject.FindGameObjectWithTag("Q1").GetComponent<QuestGiver1>();
+        questGiver = GameObject.FindGameObjectWithTag("Q2").GetComponent<QuestGiver1>();
         canAcceptQuest = false;
     }
 
