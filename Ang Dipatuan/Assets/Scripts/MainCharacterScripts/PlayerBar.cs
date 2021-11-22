@@ -42,56 +42,57 @@ public class PlayerBar : CharacterStats
     // Update is called once per frame
     void Update()
     {
-        healthText.text = health + " / " + maxHealth;
+            healthText.text = health + " / " + maxHealth;
 
-        lerpSpeed = 3f * Time.deltaTime; // value to How Smooth transition of healthBar 
+            lerpSpeed = 3f * Time.deltaTime; // value to How Smooth transition of healthBar 
 
-        staminaLerpSpeed = 50f * Time.deltaTime; // value to How Smooth transition of staminaBar 
+            staminaLerpSpeed = 50f * Time.deltaTime; // value to How Smooth transition of staminaBar 
 
-        //to Avoid health go higher than 100
-        if (health > maxHealth)
-        {
-            health = maxHealth;
-        }
-
-
-        //Avoid health going lower than 0 or negative value
-        if (health < 0)
-        {
-            health = 0;
-        }
+            //to Avoid health go higher than 100
+            if (health > maxHealth)
+            {
+                health = maxHealth;
+            }
 
 
-        //to Avoid Mana go higher than 100
-        if (mana > maxMana)
-        {
-            mana = maxMana;
-        }
+            //Avoid health going lower than 0 or negative value
+            if (health < 0)
+            {
+                health = 0;
+            }
 
 
-        //Avoid mana going lower than 0 or negative value
-        if (mana < 0)
-        {
-            mana = 0;
-        }
+            //to Avoid Mana go higher than 100
+            if (mana > maxMana)
+            {
+                mana = maxMana;
+            }
 
 
-        //change the health of the player
-        HealthBarFiller();
+            //Avoid mana going lower than 0 or negative value
+            if (mana < 0)
+            {
+                mana = 0;
+            }
 
-        //Change the color of HealthBar
-        ColorChanger();
 
-        //change the health of the player
-        StaminaBarFiller();
+            //change the health of the player
+            HealthBarFiller();
 
-        //change the health of the player
-        ManaBarFiller();
+            //Change the color of HealthBar
+            ColorChanger();
 
-        if(pineappleEaten == true)
-        {
-            stamina = maxStamina;
-        }
+            //change the health of the player
+            StaminaBarFiller();
+
+            //change the health of the player
+            ManaBarFiller();
+
+            if (pineappleEaten == true)
+            {
+                stamina = maxStamina;
+            }
+        
     }
     public void ManaBarFiller()
     {
