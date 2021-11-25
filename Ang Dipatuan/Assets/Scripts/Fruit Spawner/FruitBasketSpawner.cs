@@ -21,7 +21,7 @@ public class FruitBasketSpawner : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            if (timer >= 100f)
+            if (timer >= 200f)
             {
                 var fruitbasket = Instantiate(fruitBasketSpawner, gameObject.transform.position, gameObject.transform.rotation);
                 fruitbasket.transform.parent = gameObject.transform;

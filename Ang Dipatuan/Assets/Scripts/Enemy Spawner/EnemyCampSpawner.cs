@@ -55,7 +55,7 @@ public class EnemyCampSpawner : MonoBehaviour
             timer += Time.deltaTime;
 
             //After 150 Seconds Enemies in This Camp will be Respawned
-            if(timer >= 150f)
+            if(timer >= 200f)
             {
                 InstantiateEnemies();
                 timer = 0f;
