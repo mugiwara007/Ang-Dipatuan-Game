@@ -65,13 +65,13 @@ public class EnemyManager : MonoBehaviour
 
             timeToTurnAround += Time.deltaTime;
 
-            if(timeToTurnAround >= 8f)
+            if(timeToTurnAround >= 7.2f)
             {
-                //Humarap sa Likod yung Nag papatrol every 8Seconds
+                //Humarap sa Likod yung Nag papatrol
                 //gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y, -gameObject.transform.localScale.z);
 
                 enemyLocomotionManger.anim.SetTrigger("turnAround");
-                timeToTurnAround = 0f;
+                timeToTurnAround = -7.8f;
 
 
             }
