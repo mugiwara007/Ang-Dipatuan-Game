@@ -8,8 +8,6 @@ public class QuestChecker : MonoBehaviour
     public QuestUI quest;
     public int questNum;
     public int quest2;
-    public Transform player;
-    public Transform target;
 
     TutorialScript tutorialScript;
 
@@ -55,6 +53,7 @@ public class QuestChecker : MonoBehaviour
 
     void Update()
     {
+        gameObject.transform.position = new Vector3(-349.6746f, 43.36164f, -71.64716f);
         if (quest.currentQuest == 0)
         {
             activator.SetActive(true);
@@ -66,9 +65,10 @@ public class QuestChecker : MonoBehaviour
         {
             war.SetActive(true);
             waypoint.SetActive(false);
-            player.transform.position = target.position;
+            
             tutorialScript.enabled = false;
             enemyCamp2.SetActive(true);
+
         }
         else if (quest.currentQuest == 2)
         {
@@ -77,5 +77,6 @@ public class QuestChecker : MonoBehaviour
             enemyCampSpawn3.SetActive(true);
             playerDetectorQuest1.SetActive(true);
         }
+        Debug.Log("Transform: "+transform.position);
     }
 }
