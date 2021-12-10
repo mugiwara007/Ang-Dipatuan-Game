@@ -20,6 +20,8 @@ public class QuestChecker : MonoBehaviour
     GameObject enemyCamp2;
     public GameObject war;
 
+    private bool canTeleport = true;
+
     GameSceneScript gameSceneScript;
 
     private void Awake()
@@ -53,7 +55,7 @@ public class QuestChecker : MonoBehaviour
 
     void Update()
     {
-        gameObject.transform.position = new Vector3(-349.6746f, 43.36164f, -71.64716f);
+        
         if (quest.currentQuest == 0)
         {
             activator.SetActive(true);
@@ -65,7 +67,14 @@ public class QuestChecker : MonoBehaviour
         {
             war.SetActive(true);
             waypoint.SetActive(false);
-            
+
+            //So that the Coroutine will only be called once and in the next frame canTeleport will be false and will not go in this statement
+            if (canTeleport)
+            {
+                StartCoroutine("activateCharController");
+                canTeleport = false;
+            }  
+
             tutorialScript.enabled = false;
             enemyCamp2.SetActive(true);
 
@@ -77,6 +86,19 @@ public class QuestChecker : MonoBehaviour
             enemyCampSpawn3.SetActive(true);
             playerDetectorQuest1.SetActive(true);
         }
-        Debug.Log("Transform: "+transform.position);
+
+    }
+
+    IEnumerator activateCharController()
+    {
+        //set this to false so that you can teleport the position of character
+        gameObject.GetComponent<CharacterController>().enabled = false;
+        transform.position = new Vector3(665.36f, 82.30f, 766.32f);
+
+        //after 0.7 seconds Enable char controller again
+        yield return new WaitForSeconds(0.4f);
+
+        gameObject.GetComponent<CharacterController>().enabled = true;
+
     }
 }
