@@ -15,6 +15,8 @@ public class MainCharacterController : MonoBehaviour
 	public float turnSmoothTime = 0.1f;
 	float turnSmoothVelocity;
 
+	public bool stun;
+
 	private Transform cam;
 
 	public bool isRunning;
@@ -69,6 +71,7 @@ public class MainCharacterController : MonoBehaviour
 	void Awake()
 	{
 		StartVariables();
+		stun = false;
 	}
 
 	public void StartVariables()
@@ -101,26 +104,33 @@ public class MainCharacterController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		
-		if(!isTakingDamage)
+		if (stun == false)
         {
-			Jump();
+			if(!isTakingDamage)
+			{
+				Jump();
 
-			Movement();
+				Movement();
 
-			LightAttackActionListener();
+				LightAttackActionListener();
 
-			HeavyAttackActionListener();
+				HeavyAttackActionListener();
 
-			Block();
+				Block();
 
-			Crouch();
+				Crouch();
 
-			Sheathe();
+				Sheathe();
 
-			JumpDropDownAttack();
+				JumpDropDownAttack();
+			}
+        }
+		else
+        {
+			anim.SetBool("isRunning", false);
+			anim.SetBool("isWalking", false);
+			isRunning = false;
 		}
-		
 
 	}
 
