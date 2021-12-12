@@ -10,6 +10,7 @@ using UnityEngine.AI;
     public Rigidbody enemyRigidbody;
         public CharacterStats currentTarget;
         public LayerMask detectionLayer;
+    public LayerMask obstacleMask;
     public Animator anim;
 
     public float distanceFromTarget;
@@ -35,19 +36,34 @@ using UnityEngine.AI;
     {
         Collider[] collider = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
 
+
+
         for (int i = 0; i < collider.Length; i++)
         {
             CharacterStats characterStats = collider[i].transform.GetComponent<CharacterStats>();
-            if (characterStats != null)
-            {
-                Vector3 targetDirection = characterStats.transform.position - transform.position;
-                float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
-                if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
+
+            Vector3 targetDirection = characterStats.transform.position - transform.position;
+            float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+
+            float distanctToTarget = Vector3.Distance(transform.position, targetDirection);
+            if (!Physics.Raycast(transform.position, targetDirection.normalized, distanctToTarget, obstacleMask))
+            {
+                Debug.Log("OBSTACLE!!!");
+
+                if (characterStats != null)
                 {
-                    currentTarget = characterStats;
+
+                    Debug.Log("I SAW HIM!!!");
+                    if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
+                    {
+                        currentTarget = characterStats;
+                    }
                 }
+
+
             }
+
         }
     }
 

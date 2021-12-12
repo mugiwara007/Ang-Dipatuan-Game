@@ -1798,7 +1798,7 @@ GameObject:
   - component: {fileID: 3190979812989984376}
   - component: {fileID: 491575341546656349}
   m_Layer: 6
-  m_Name: Enemy Rifle Man 1
+  m_Name: Enemy Rifle Man 2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1938,6 +1938,9 @@ MonoBehaviour:
   detectionLayer:
     serializedVersion: 2
     m_Bits: 8
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 1024
   anim: {fileID: 8206507690075643577}
   distanceFromTarget: 0
   stoppingDistance: 30
