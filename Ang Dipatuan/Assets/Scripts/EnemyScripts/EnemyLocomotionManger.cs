@@ -16,9 +16,9 @@ using UnityEngine.AI;
     public float stoppingDistance = 5f;
     public float rotationSpeed = 15f;
 
-        private void Awake()
-        {
-            enemyManager = GetComponent<EnemyManager>();
+    private void Awake()
+    {
+        enemyManager = GetComponent<EnemyManager>();
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         enemyRigidbody = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
@@ -32,13 +32,12 @@ using UnityEngine.AI;
     }
 
     public void HandleDetection()
-        {
-            Collider[] collider = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
+    {
+        Collider[] collider = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
 
         for (int i = 0; i < collider.Length; i++)
         {
             CharacterStats characterStats = collider[i].transform.GetComponent<CharacterStats>();
-
             if (characterStats != null)
             {
                 Vector3 targetDirection = characterStats.transform.position - transform.position;
@@ -85,9 +84,7 @@ using UnityEngine.AI;
             anim.SetBool("Run", false);
             currentTarget = null;
         }
-
         
-
         HandleRotateTowardsTarget();
 
         navMeshAgent.transform.localPosition = Vector3.zero;

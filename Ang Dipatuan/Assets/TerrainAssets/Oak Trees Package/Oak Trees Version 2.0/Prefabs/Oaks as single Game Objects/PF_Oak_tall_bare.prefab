@@ -82,6 +82,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4932833476416474}
   - component: {fileID: 205892951646381246}
+  - component: {fileID: -6542556524670622713}
   m_Layer: 0
   m_Name: PF_Oak_tall_bare
   m_TagString: Untagged
@@ -98,7 +99,7 @@ Transform:
   m_GameObject: {fileID: 1123297502347768}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 3, z: 4}
+  m_LocalScale: {x: 5, y: 4, z: 5}
   m_Children:
   - {fileID: 4904963992173530}
   - {fileID: 4287260371233076}
@@ -133,6 +134,20 @@ LODGroup:
     renderers:
     - renderer: {fileID: 227021336509502398, guid: eab93ea38df0245c79a911f0b8a9b159, type: 3}
   m_Enabled: 1
+--- !u!136 &-6542556524670622713
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123297502347768}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.6
+  m_Height: 8
+  m_Direction: 1
+  m_Center: {x: 0.15, y: 3.5, z: -0.1}
 --- !u!1 &1506041088912556
 GameObject:
   m_ObjectHideFlags: 0
