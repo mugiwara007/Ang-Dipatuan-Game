@@ -44,7 +44,7 @@ public class Activator : MonoBehaviour
         training.SetActive(false);
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
