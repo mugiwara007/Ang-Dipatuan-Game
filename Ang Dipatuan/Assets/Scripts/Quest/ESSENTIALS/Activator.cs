@@ -63,7 +63,7 @@ public class Activator : MonoBehaviour
 
     public void AcceptQuest1()
     {
-        if (quest.currentQuest == 1)
+        if (quest.currentQuest == 0)
         {
             box.enabled = false;
             questWindow.SetActive(false);

@@ -13,8 +13,6 @@ public class QuestChecker : MonoBehaviour
 
     public GameObject waypoint;
     public GameObject activator;
-    GameObject playerDetectorQuest1;
-    GameObject playerDetectorQuest2;
     GameObject enemyCampSpawn2;
     GameObject enemyCampSpawn3;
     GameObject enemyEscape;
@@ -26,6 +24,7 @@ public class QuestChecker : MonoBehaviour
     GameObject escapeObj;
     GameObject escapeCollider;
     MainCharacterController movement;
+    GameObject warCollider;
     float time;
 
     private bool canTeleport1 = true;
@@ -35,8 +34,6 @@ public class QuestChecker : MonoBehaviour
 
     private void Awake()
     {
-        playerDetectorQuest1 = GameObject.FindGameObjectWithTag("P1");
-        playerDetectorQuest2 = GameObject.FindGameObjectWithTag("P2");
         enemyCampSpawn2 = GameObject.FindGameObjectWithTag("E2");
         enemyCampSpawn3 = GameObject.FindGameObjectWithTag("E3");
         enemyEscape = GameObject.FindGameObjectWithTag("E4");
@@ -49,7 +46,9 @@ public class QuestChecker : MonoBehaviour
         escapeObj = GameObject.FindGameObjectWithTag("EscapeObj");
         escapeCollider = GameObject.FindGameObjectWithTag("EscapeCollider");
         actBox = GameObject.FindGameObjectWithTag("Activator").GetComponent<BoxCollider>();
-
+        warCollider = GameObject.FindGameObjectWithTag("TELEPORT");
+        war.SetActive(false);
+        warCollider.SetActive(false);
         actBox.enabled = true;
         escapeCollider.SetActive(false);
         escapeObj.SetActive(false);
@@ -90,13 +89,20 @@ public class QuestChecker : MonoBehaviour
             war.SetActive(true);
             warSpawner1.SetActive(true);
             waypoint.SetActive(false);
+            movement.stun = true;
+            time += Time.deltaTime;
 
             //So that the Coroutine will only be called once and in the next frame canTeleport will be false and will not go in this statement
             if (canTeleport1)
             {
                 StartCoroutine("activateCharController1");
                 canTeleport1 = false;
-            }  
+            }
+            if (time >= 3)
+            {
+                movement.stun = false;
+                warCollider.SetActive(true);
+            }
 
             tutorialScript.enabled = false;
             enemyCamp2.SetActive(true);

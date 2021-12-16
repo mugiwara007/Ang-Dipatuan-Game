@@ -61,9 +61,9 @@ public class EscapeQuest : MonoBehaviour
         }
     }
 
-    public void AcceptQuest2()
+    public void AcceptQuest3()
     {
-        if (quest.currentQuest == 0)
+        if (quest.currentQuest == 2)
         {
             box.enabled = false;
             questWindow.SetActive(false);
@@ -76,7 +76,6 @@ public class EscapeQuest : MonoBehaviour
             waypointScript.enabled = true;
             movement.stun = false;
             cinemachineBrain.enabled = true;
-            Debug.Log("HEEYYY");
         }
         
     }
