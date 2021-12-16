@@ -61,20 +61,24 @@ public class Activator : MonoBehaviour
         }
     }
 
-    public void AcceptQuest()
+    public void AcceptQuest1()
     {
-        box.enabled = false;
-        questWindow.SetActive(false);
-        quest.isActive = true;
-        questDesc.text = quest.desc;
-        waypointScript.target = waypoint.transform;
-        waypoint.SetActive(true);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        waypointScript.enabled = true;
-        training.SetActive(true);
-        movement.stun = false;
-        cinemachineBrain.enabled = true;
+        if (quest.currentQuest == 1)
+        {
+            box.enabled = false;
+            questWindow.SetActive(false);
+            quest.isActive = true;
+            questDesc.text = quest.desc;
+            waypointScript.target = waypoint.transform;
+            waypoint.SetActive(true);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            waypointScript.enabled = true;
+            training.SetActive(true);
+            movement.stun = false;
+            cinemachineBrain.enabled = true;
+        }
+        
     }
 
     private void Update()

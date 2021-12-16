@@ -17,10 +17,16 @@ public class QuestChecker : MonoBehaviour
     GameObject playerDetectorQuest2;
     GameObject enemyCampSpawn2;
     GameObject enemyCampSpawn3;
+    GameObject enemyEscape;
     GameObject enemyCamp2;
     public GameObject war;
     GameObject warSpawner1;
     GameObject storm;
+    BoxCollider actBox;
+    GameObject escapeObj;
+    GameObject escapeCollider;
+    MainCharacterController movement;
+    float time;
 
     private bool canTeleport1 = true;
     private bool canTeleport2 = true;
@@ -33,26 +39,36 @@ public class QuestChecker : MonoBehaviour
         playerDetectorQuest2 = GameObject.FindGameObjectWithTag("P2");
         enemyCampSpawn2 = GameObject.FindGameObjectWithTag("E2");
         enemyCampSpawn3 = GameObject.FindGameObjectWithTag("E3");
+        enemyEscape = GameObject.FindGameObjectWithTag("E4");
         enemyCamp2 = GameObject.FindGameObjectWithTag("EC2");
         tutorialScript = GameObject.FindGameObjectWithTag("Player").GetComponent<TutorialScript>();
         gameSceneScript = GameObject.FindGameObjectWithTag("G1").GetComponent<GameSceneScript>();
         warSpawner1 = GameObject.FindGameObjectWithTag("WarSpawner");
         storm = GameObject.FindGameObjectWithTag("Storm");
+        movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
+        escapeObj = GameObject.FindGameObjectWithTag("EscapeObj");
+        escapeCollider = GameObject.FindGameObjectWithTag("EscapeCollider");
+        actBox = GameObject.FindGameObjectWithTag("Activator").GetComponent<BoxCollider>();
+
+        actBox.enabled = true;
+        escapeCollider.SetActive(false);
+        escapeObj.SetActive(false);
+        activator.SetActive(false);
         warSpawner1.SetActive(false);
         storm.SetActive(false);
         enemyCampSpawn2.SetActive(false);
         enemyCampSpawn3.SetActive(false);
+        enemyCamp2.SetActive(false);
+        enemyEscape.SetActive(false);
     }
 
     public void SaveStatQuest()
     {
-        Debug.Log("Waasuup "+questNum);
         SaveQuestScript.Instance.CurrQuest = questNum;
     }
 
     public void SavePos()
     {
-        Debug.Log("Dayum " + quest2);
         SaveQuestScript.Instance.questPos = quest2;
     }
 
@@ -68,9 +84,6 @@ public class QuestChecker : MonoBehaviour
         if (quest.currentQuest == 0)
         {
             activator.SetActive(true);
-            enemyCampSpawn2.SetActive(false);
-            enemyCampSpawn3.SetActive(false);
-            enemyCamp2.SetActive(false);
         }
         else if (quest.currentQuest == 1 && gameSceneScript.qctr >= 1)
         {
@@ -92,14 +105,23 @@ public class QuestChecker : MonoBehaviour
         else if (quest.currentQuest == 2)
         {
             tutorialScript.enabled = false;
-            playerDetectorQuest1.SetActive(true);
-            waypoint.SetActive(true);
+            escapeObj.SetActive(true);
+            movement.stun = true;
+            time += Time.deltaTime;
 
             if (canTeleport2)
             {
                 StartCoroutine("activateCharController2");
                 canTeleport2 = false;
             }
+            if (time >= 3)
+            {
+                movement.stun = false;
+                enemyEscape.SetActive(true);
+                escapeCollider.SetActive(true);
+            }
+
+            waypoint.SetActive(true);
 
             enemyCampSpawn2.SetActive(true);
             enemyCampSpawn3.SetActive(true);
@@ -111,7 +133,7 @@ public class QuestChecker : MonoBehaviour
     {
         //set this to false so that you can teleport the position of character
         gameObject.GetComponent<CharacterController>().enabled = false;
-        transform.position = new Vector3(665.36f, 82.30f, 766.32f);
+        transform.position = new Vector3(662.59f, 82.83f, 755.55f);
 
         //after 0.7 seconds Enable char controller again
         yield return new WaitForSeconds(0.4f);
@@ -124,7 +146,8 @@ public class QuestChecker : MonoBehaviour
     {
         //set this to false so that you can teleport the position of character
         gameObject.GetComponent<CharacterController>().enabled = false;
-        transform.position = new Vector3(708.66f, 83.60f, 610.01f);
+        transform.position = new Vector3(713.16f, 84.58f, 597.21f);
+        transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
 
         //after 0.7 seconds Enable char controller again
         yield return new WaitForSeconds(0.4f);
