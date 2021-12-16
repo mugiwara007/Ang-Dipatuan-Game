@@ -29,6 +29,7 @@ public class EscapeQuest : MonoBehaviour
     CinemachineBrain cinemachineBrain;
     QuestChecker questChecker;
     EnemyLocomotionManger locomotionManager;
+    SaveQuestScript saveQuestScript;
 
     private void Awake()
     {
@@ -40,6 +41,7 @@ public class EscapeQuest : MonoBehaviour
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
         gameSceneScript = GameObject.FindGameObjectWithTag("G1").GetComponent<GameSceneScript>();
         questChecker = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker>();
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         enemyLocomotionManger = GameObject.FindGameObjectsWithTag("Enemy");
 
     }
@@ -48,23 +50,28 @@ public class EscapeQuest : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            waypointScript.enabled = false;
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            questWindow.SetActive(true);
-            titleText.text = quest.title;
-            descriptionText.text = quest.desc;
-            goldText.text = quest.goldReward.ToString();
-            goldText.text += " Gold";
-            movement.stun = true;
-            cinemachineBrain.enabled = false;
+            if (questChecker.questNum == 2)
+            {
+                Debug.Log("Savescript: " + saveQuestScript.CurrQuest);
+                waypointScript.enabled = false;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                questWindow.SetActive(true);
+                titleText.text = quest.title;
+                descriptionText.text = quest.desc;
+                goldText.text = quest.goldReward.ToString();
+                goldText.text += " Gold";
+                movement.stun = true;
+                cinemachineBrain.enabled = false;
+            }
         }
     }
 
     public void AcceptQuest3()
     {
-        if (quest.currentQuest == 2)
+        if (questChecker.questNum == 2)
         {
+            Debug.Log("Savescript: " + saveQuestScript.CurrQuest);
             box.enabled = false;
             questWindow.SetActive(false);
             quest.isActive = true;
@@ -82,19 +89,22 @@ public class EscapeQuest : MonoBehaviour
 
     private void Update()
     {
-        enemyLocomotionManger = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (var enemy in enemyLocomotionManger)
+        if (questChecker.questNum == 2)
         {
-            locomotionManager = enemy.GetComponent<EnemyLocomotionManger>();
-            if (locomotionManager.currentTarget != null)
+            enemyLocomotionManger = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (var enemy in enemyLocomotionManger)
             {
-                questFailed.SetActive(true);
-                timer += Time.deltaTime;
-                if (timer > 3f)
+                locomotionManager = enemy.GetComponent<EnemyLocomotionManger>();
+                if (locomotionManager.currentTarget != null)
                 {
-                    questFailed.SetActive(false);
-                    timer = 0f;
-                    gameSceneScript.FadeToScene(1);
+                    questFailed.SetActive(true);
+                    timer += Time.deltaTime;
+                    if (timer > 3f)
+                    {
+                        questFailed.SetActive(false);
+                        timer = 0f;
+                        gameSceneScript.FadeToScene(1);
+                    }
                 }
             }
         }

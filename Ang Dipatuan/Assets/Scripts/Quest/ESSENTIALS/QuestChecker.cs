@@ -18,7 +18,6 @@ public class QuestChecker : MonoBehaviour
     GameObject enemyEscape;
     GameObject enemyCamp2;
     public GameObject war;
-    GameObject warSpawner1;
     GameObject storm;
     BoxCollider actBox;
     GameObject escapeObj;
@@ -40,7 +39,6 @@ public class QuestChecker : MonoBehaviour
         enemyCamp2 = GameObject.FindGameObjectWithTag("EC2");
         tutorialScript = GameObject.FindGameObjectWithTag("Player").GetComponent<TutorialScript>();
         gameSceneScript = GameObject.FindGameObjectWithTag("G1").GetComponent<GameSceneScript>();
-        warSpawner1 = GameObject.FindGameObjectWithTag("WarSpawner");
         storm = GameObject.FindGameObjectWithTag("Storm");
         movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
         escapeObj = GameObject.FindGameObjectWithTag("EscapeObj");
@@ -48,12 +46,8 @@ public class QuestChecker : MonoBehaviour
         actBox = GameObject.FindGameObjectWithTag("Activator").GetComponent<BoxCollider>();
         warCollider = GameObject.FindGameObjectWithTag("TELEPORT");
         war.SetActive(false);
-        warCollider.SetActive(false);
         actBox.enabled = true;
-        escapeCollider.SetActive(false);
         escapeObj.SetActive(false);
-        activator.SetActive(false);
-        warSpawner1.SetActive(false);
         storm.SetActive(false);
         enemyCampSpawn2.SetActive(false);
         enemyCampSpawn3.SetActive(false);
@@ -74,6 +68,8 @@ public class QuestChecker : MonoBehaviour
     void Start()
     {
         quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        Debug.Log("CurrQuest: "+SaveQuestScript.Instance.CurrQuest);
+        Debug.Log("Quest :"+quest.currentQuest);
         gameSceneScript.qctr = SaveQuestScript.Instance.questPos;
     }
 
@@ -86,8 +82,8 @@ public class QuestChecker : MonoBehaviour
         }
         else if (quest.currentQuest == 1 && gameSceneScript.qctr >= 1)
         {
+            warCollider.SetActive(false);
             war.SetActive(true);
-            warSpawner1.SetActive(true);
             waypoint.SetActive(false);
             movement.stun = true;
             time += Time.deltaTime;

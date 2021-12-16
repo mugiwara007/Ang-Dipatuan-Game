@@ -48,23 +48,28 @@ public class Activator : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            waypointScript.enabled = false;
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            questWindow.SetActive(true);
-            titleText.text = quest.title;
-            descriptionText.text = quest.desc;
-            goldText.text = quest.goldReward.ToString();
-            goldText.text += " Gold";
-            movement.stun = true;
-            cinemachineBrain.enabled = false;
+            if (saveQuestScript.CurrQuest == 0)
+            {
+                Debug.Log("Savescript: " + saveQuestScript.CurrQuest);
+                waypointScript.enabled = false;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                questWindow.SetActive(true);
+                titleText.text = quest.title;
+                descriptionText.text = quest.desc;
+                goldText.text = quest.goldReward.ToString();
+                goldText.text += " Gold";
+                movement.stun = true;
+                cinemachineBrain.enabled = false;
+            }
         }
     }
 
     public void AcceptQuest1()
     {
-        if (quest.currentQuest == 0)
+        if (saveQuestScript.CurrQuest == 0)
         {
+            Debug.Log("Savescript: "+saveQuestScript.CurrQuest);
             box.enabled = false;
             questWindow.SetActive(false);
             quest.isActive = true;
@@ -103,7 +108,6 @@ public class Activator : MonoBehaviour
                 questComplete.SetActive(false);
                 timer = 0f;
                 ctr = 0;
-                Debug.Log(saveQuestScript.CurrQuest);
                 training.SetActive(false);
             }
         }

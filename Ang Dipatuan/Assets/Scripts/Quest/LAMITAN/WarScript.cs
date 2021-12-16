@@ -9,7 +9,6 @@ public class WarScript : MonoBehaviour
     public QuestUI quest;
 
     QuestGoldGiver questGoldGiver;
-    GameObject[] enemyLocomotionManger;
     GameSceneScript gameSceneScript;
 
     public Text questDesc;
@@ -28,6 +27,7 @@ public class WarScript : MonoBehaviour
     CinemachineBrain cinemachineBrain;
     QuestChecker questChecker;
     GameObject warSpawner;
+    SaveQuestScript saveQuestScript;
 
     private void Awake()
     {
@@ -38,30 +38,66 @@ public class WarScript : MonoBehaviour
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
         gameSceneScript = GameObject.FindGameObjectWithTag("G1").GetComponent<GameSceneScript>();
         questChecker = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker>();
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         warSpawner = GameObject.FindGameObjectWithTag("WarSpawner");
         warSpawner.SetActive(false);
+    }
+
+    private void FixedUpdate()
+    {
+        Debug.Log("OUT :" + quest.goal.IsReached());
+        if (quest.goal.IsReached())
+        {
+            Debug.Log("Warscript :" + quest.goal.IsReached());
+            questGoldGiver.QuestComplete(quest.goldReward);
+            quest.goal.currentAmount = 0;
+            quest.currentQuest += 1;
+            questComplete.SetActive(true);
+            questChecker.questNum = quest.currentQuest;
+            warSpawner.SetActive(false);
+            questChecker.SaveStatQuest();
+            ctr = 1;
+            gameSceneScript.FadeToScene(3);
+        }
+        if (ctr == 1)
+        {
+            timer += Time.deltaTime;
+            if (timer > 3f)
+            {
+
+                questComplete.SetActive(false);
+                timer = 0f;
+                ctr = 0;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            questWindow.SetActive(true);
-            titleText.text = quest.title;
-            descriptionText.text = quest.desc;
-            goldText.text = quest.goldReward.ToString();
-            goldText.text += " Gold";
-            movement.stun = true;
-            cinemachineBrain.enabled = false;
+            Debug.Log(questChecker.questNum);
+            if (saveQuestScript.CurrQuest == 1)
+            {
+                Debug.Log("Savescript: " + saveQuestScript.CurrQuest);
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                questWindow.SetActive(true);
+                titleText.text = quest.title;
+                descriptionText.text = quest.desc;
+                goldText.text = quest.goldReward.ToString();
+                goldText.text += " Gold";
+                movement.stun = true;
+                cinemachineBrain.enabled = false;
+            }
         }
     }
 
     public void AcceptQuest2()
     {
-        if (quest.currentQuest == 1)
+        if (saveQuestScript.CurrQuest == 1)
         {
+            Debug.Log("Savescript: "+saveQuestScript.CurrQuest);
             box.enabled = false;
             questWindow.SetActive(false);
             quest.isActive = true;
@@ -76,30 +112,4 @@ public class WarScript : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if (quest.goal.IsReached())
-        {
-            timer += Time.deltaTime;
-            questGoldGiver.QuestComplete(quest.goldReward);
-            quest.goal.currentAmount = 0;
-            quest.currentQuest += 1;
-            questComplete.SetActive(true);
-            questChecker.questNum = quest.currentQuest;
-            warSpawner.SetActive(false);
-            questChecker.SaveStatQuest();
-            ctr += 1;
-            gameSceneScript.FadeToScene(3);
-        }
-        if (ctr == 1)
-        {
-            timer += Time.deltaTime;
-            if (timer > 3f)
-            {
-                questComplete.SetActive(false);
-                timer = 0f;
-                ctr = 0;
-            }
-        }
-    }
 }
