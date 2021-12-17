@@ -65,7 +65,6 @@ public class WarSpawnerScript1 : MonoBehaviour
 
         if (IsComplete() == true && isThirdWave == true)
         {
-            Debug.Log("IS COMPLETE");
             warScript.quest.goal.EnemyKilled();
         }
     }

@@ -10,6 +10,8 @@ public class HighAlert : MonoBehaviour
 
     EnemyManager enemyScript;
 
+    Animator playerAnim;
+
     private void Awake()
     {
         PlayerDetected = false;
@@ -21,7 +23,8 @@ public class HighAlert : MonoBehaviour
     {
         if (PlayerDetected)
         {
-            if (playerScript.isCrouching == false)
+            playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+            if (playerScript.isCrouching == false && playerAnim.GetBool("isWalking"))
             {
 
 

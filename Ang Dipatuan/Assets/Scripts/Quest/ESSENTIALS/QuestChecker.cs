@@ -68,8 +68,7 @@ public class QuestChecker : MonoBehaviour
     void Start()
     {
         quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
-        Debug.Log("CurrQuest: "+SaveQuestScript.Instance.CurrQuest);
-        Debug.Log("Quest :"+quest.currentQuest);
+        Debug.Log("Savescript: "+SaveQuestScript.Instance.CurrQuest);
         gameSceneScript.qctr = SaveQuestScript.Instance.questPos;
     }
 

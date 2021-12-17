@@ -50,9 +50,8 @@ public class EscapeQuest : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (questChecker.questNum == 2)
+            if (saveQuestScript.CurrQuest == 2)
             {
-                Debug.Log("Savescript: " + saveQuestScript.CurrQuest);
                 waypointScript.enabled = false;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
@@ -69,9 +68,8 @@ public class EscapeQuest : MonoBehaviour
 
     public void AcceptQuest3()
     {
-        if (questChecker.questNum == 2)
+        if (saveQuestScript.CurrQuest == 2)
         {
-            Debug.Log("Savescript: " + saveQuestScript.CurrQuest);
             box.enabled = false;
             questWindow.SetActive(false);
             quest.isActive = true;
@@ -89,7 +87,7 @@ public class EscapeQuest : MonoBehaviour
 
     private void Update()
     {
-        if (questChecker.questNum == 2)
+        if (saveQuestScript.CurrQuest == 2)
         {
             enemyLocomotionManger = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (var enemy in enemyLocomotionManger)
@@ -114,7 +112,7 @@ public class EscapeQuest : MonoBehaviour
             timer += Time.deltaTime;
             questGoldGiver.QuestComplete(quest.goldReward);
             quest.goal.currentAmount = 0;
-            quest.currentQuest += 1;
+            quest.currentQuest = 3;
             questComplete.SetActive(true);
             questChecker.questNum = quest.currentQuest;
             questChecker.SaveStatQuest();

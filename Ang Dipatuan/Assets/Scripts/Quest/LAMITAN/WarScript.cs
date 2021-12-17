@@ -28,6 +28,7 @@ public class WarScript : MonoBehaviour
     QuestChecker questChecker;
     GameObject warSpawner;
     SaveQuestScript saveQuestScript;
+    PlayerBar player;
 
     private void Awake()
     {
@@ -39,19 +40,18 @@ public class WarScript : MonoBehaviour
         gameSceneScript = GameObject.FindGameObjectWithTag("G1").GetComponent<GameSceneScript>();
         questChecker = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker>();
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
         warSpawner = GameObject.FindGameObjectWithTag("WarSpawner");
         warSpawner.SetActive(false);
     }
 
     private void FixedUpdate()
     {
-        Debug.Log("OUT :" + quest.goal.IsReached());
         if (quest.goal.IsReached())
         {
-            Debug.Log("Warscript :" + quest.goal.IsReached());
             questGoldGiver.QuestComplete(quest.goldReward);
             quest.goal.currentAmount = 0;
-            quest.currentQuest += 1;
+            quest.currentQuest =2;
             questComplete.SetActive(true);
             questChecker.questNum = quest.currentQuest;
             warSpawner.SetActive(false);
@@ -64,10 +64,20 @@ public class WarScript : MonoBehaviour
             timer += Time.deltaTime;
             if (timer > 3f)
             {
-
                 questComplete.SetActive(false);
                 timer = 0f;
                 ctr = 0;
+            }
+        }
+        if(player.health == 0)
+        {
+            timer += Time.deltaTime;
+            questFailed.SetActive(true);
+            if (timer > 3f)
+            {
+                questFailed.SetActive(false);
+                timer = 0f;
+                gameSceneScript.FadeToScene(1);
             }
         }
     }
@@ -79,7 +89,6 @@ public class WarScript : MonoBehaviour
             Debug.Log(questChecker.questNum);
             if (saveQuestScript.CurrQuest == 1)
             {
-                Debug.Log("Savescript: " + saveQuestScript.CurrQuest);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 questWindow.SetActive(true);
@@ -97,7 +106,6 @@ public class WarScript : MonoBehaviour
     {
         if (saveQuestScript.CurrQuest == 1)
         {
-            Debug.Log("Savescript: "+saveQuestScript.CurrQuest);
             box.enabled = false;
             questWindow.SetActive(false);
             quest.isActive = true;

@@ -7,6 +7,7 @@ public class HighAlertForRifle : MonoBehaviour
     private bool PlayerDetected = false;
 
     MainCharacterController playerScript;
+    Animator playerAnim;
 
     EnemyManager enemyScript;
 
@@ -19,9 +20,10 @@ public class HighAlertForRifle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         if (PlayerDetected)
         {
-            if (playerScript.isCrouching == false)
+            if (playerScript.isCrouching == false && playerAnim.GetBool("isWalking"))
             {
 
 

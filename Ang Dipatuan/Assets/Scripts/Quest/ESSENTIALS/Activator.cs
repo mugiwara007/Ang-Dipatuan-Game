@@ -50,7 +50,6 @@ public class Activator : MonoBehaviour
         {
             if (saveQuestScript.CurrQuest == 0)
             {
-                Debug.Log("Savescript: " + saveQuestScript.CurrQuest);
                 waypointScript.enabled = false;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
@@ -69,7 +68,6 @@ public class Activator : MonoBehaviour
     {
         if (saveQuestScript.CurrQuest == 0)
         {
-            Debug.Log("Savescript: "+saveQuestScript.CurrQuest);
             box.enabled = false;
             questWindow.SetActive(false);
             quest.isActive = true;
