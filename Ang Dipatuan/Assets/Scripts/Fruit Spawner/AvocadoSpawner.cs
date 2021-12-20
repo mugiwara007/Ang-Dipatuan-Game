@@ -11,6 +11,8 @@ public class AvocadoSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var avocado = Instantiate(avocadoGameObject, gameObject.transform.position, gameObject.transform.rotation);
+        avocado.transform.parent = gameObject.transform;
         timer = 0f;
     }
 

@@ -13,6 +13,8 @@ public class CoconutSpawner : MonoBehaviour
     void Start()
     {
         timer = 0f;
+        var coconut = Instantiate(coconutGameObject, gameObject.transform.position, gameObject.transform.rotation);
+        coconut.transform.parent = gameObject.transform;
     }
 
     // Update is called once per frame

@@ -12,12 +12,12 @@ public class QuestChecker : MonoBehaviour
     TutorialScript tutorialScript;
 
     public GameObject waypoint;
-    public GameObject activator;
+    GameObject activator;
     GameObject enemyCampSpawn2;
     GameObject enemyCampSpawn3;
     GameObject enemyEscape;
     GameObject enemyCamp2;
-    public GameObject war;
+    GameObject war;
     GameObject storm;
     BoxCollider actBox;
     GameObject escapeObj;
@@ -45,6 +45,8 @@ public class QuestChecker : MonoBehaviour
         escapeCollider = GameObject.FindGameObjectWithTag("EscapeCollider");
         actBox = GameObject.FindGameObjectWithTag("Activator").GetComponent<BoxCollider>();
         warCollider = GameObject.FindGameObjectWithTag("TELEPORT");
+        war = GameObject.FindGameObjectWithTag("WAR");
+        activator = GameObject.FindGameObjectWithTag("Activator");
         war.SetActive(false);
         actBox.enabled = true;
         escapeObj.SetActive(false);
@@ -68,7 +70,6 @@ public class QuestChecker : MonoBehaviour
     void Start()
     {
         quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
-        Debug.Log("Savescript: "+SaveQuestScript.Instance.CurrQuest);
         gameSceneScript.qctr = SaveQuestScript.Instance.questPos;
     }
 
@@ -127,7 +128,6 @@ public class QuestChecker : MonoBehaviour
             enemyCampSpawn2.SetActive(true);
             enemyCampSpawn3.SetActive(true);
         }
-
     }
 
     IEnumerator activateCharController1()

@@ -11,6 +11,8 @@ public class FruitBasketSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var fruitbasket = Instantiate(fruitBasketSpawner, gameObject.transform.position, gameObject.transform.rotation);
+        fruitbasket.transform.parent = gameObject.transform;
         timer = 0f;
     }
 
