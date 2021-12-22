@@ -14,15 +14,17 @@ public class PickUpFruits : MonoBehaviour
 
     Text InventoryFullText;
 
+    Quest6Script quest6Script;
+
     private void Awake()
     {
         canPickUp = false;
-
     }
 
     private void Start()
     {
         InventoryFullText = GameObject.FindGameObjectWithTag("InventoryFullText").GetComponent<Text>();
+        quest6Script = GameObject.FindGameObjectWithTag("Quest6NPC").GetComponent<Quest6Script>();
         InventoryFullText.enabled = false;
     }
 
@@ -129,6 +131,11 @@ public class PickUpFruits : MonoBehaviour
 
         if (fruit_picked_up == "avocado")
         {
+            if (quest6Script.quest.currentQuest == 5)
+            {
+                quest6Script.avocadoCtr++;
+            }
+
             if (gameObject.GetComponent<Inventory>().avocado < 5)
             {
                 gameObject.GetComponent<Inventory>().avocado += 1;
