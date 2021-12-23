@@ -15,6 +15,12 @@ public class EnemyStats : MonoBehaviour
     private void Awake()
     {
         emaxHealth = 100;
+
+        if (transform.name == "boss1")
+        {
+            emaxHealth = 1000;
+        }
+
         ehealth = emaxHealth;
 
         healthBar = gameObject.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Image>();
