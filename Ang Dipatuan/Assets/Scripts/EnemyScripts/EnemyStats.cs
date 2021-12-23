@@ -20,6 +20,14 @@ public class EnemyStats : MonoBehaviour
         {
             emaxHealth = 1000;
         }
+        if (transform.name == "boss2")
+        {
+            emaxHealth = 2000;
+        }
+        if (transform.name == "boss3")
+        {
+            emaxHealth = 3000;
+        }
 
         ehealth = emaxHealth;
 
