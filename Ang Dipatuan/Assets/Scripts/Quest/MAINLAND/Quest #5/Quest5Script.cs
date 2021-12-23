@@ -26,19 +26,21 @@ public class Quest5Script : MonoBehaviour
     BoxCollider box;
     MainCharacterController movement;
     CinemachineBrain cinemachineBrain;
-    QuestChecker questChecker;
+    QuestChecker2 questChecker2;
     SaveQuestScript saveQuestScript;
+    GameObject waypointMarker;
 
     private void Awake()
     {
         questDesc = GameObject.FindGameObjectWithTag("QuestUI").GetComponent<Text>();
         questGoldGiver = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestGoldGiver>();
         waypointScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<WaypointScript>();
-        box = GameObject.FindGameObjectWithTag("Quest4Collider").GetComponent<BoxCollider>();
+        box = GameObject.FindGameObjectWithTag("Quest5Collider").GetComponent<BoxCollider>();
         movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
-        questChecker = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker>();
+        questChecker2 = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker2>();
+        waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -47,7 +49,7 @@ public class Quest5Script : MonoBehaviour
         {
             if (saveQuestScript.CurrQuest == 4)
             {
-                waypointScript.enabled = false;
+                waypointMarker.SetActive(false);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 questWindow.SetActive(true);
@@ -65,6 +67,7 @@ public class Quest5Script : MonoBehaviour
     {
         if (saveQuestScript.CurrQuest == 4)
         {
+            waypointMarker.SetActive(true);
             box.enabled = false;
             questWindow.SetActive(false);
             quest.isActive = true;
@@ -73,7 +76,6 @@ public class Quest5Script : MonoBehaviour
             waypoint.SetActive(true);
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            waypointScript.enabled = true;
             movement.stun = false;
             cinemachineBrain.enabled = true;
         }
@@ -82,27 +84,34 @@ public class Quest5Script : MonoBehaviour
 
     private void Update()
     {
+
         if (quest.goal.IsReached())
         {
-            timer += Time.deltaTime;
-            questGoldGiver.QuestComplete(quest.goldReward);
-            quest.goal.currentAmount = 0;
-            quest.currentQuest += 1;
-            questComplete.SetActive(true);
-            questChecker.questNum = quest.currentQuest;
-            questChecker.SaveStatQuest();
-            ctr += 1;
-            waypointScript.target = newWaypoint.transform;
-        }
-        if (ctr == 1)
-        {
-            timer += Time.deltaTime;
-            if (timer > 3f)
+            if (saveQuestScript.CurrQuest == 4)
             {
-                questComplete.SetActive(false);
-                timer = 0f;
-                ctr = 0;
+                timer += Time.deltaTime;
+                questGoldGiver.QuestComplete(quest.goldReward);
+                quest.goal.currentAmount = 0;
+                quest.currentQuest += 1;
+                questComplete.SetActive(true);
+                questChecker2.questNum = quest.currentQuest;
+                questChecker2.SaveStatQuest();
+                Debug.Log("Current Quest: " + quest.currentQuest);
+                Debug.Log("Quest Num: " + questChecker2.questNum);
+                ctr += 1;
+                waypointScript.enabled = true;
+                waypointScript.target = newWaypoint.transform;
             }
         }
+            if (ctr == 1)
+            {
+                timer += Time.deltaTime;
+                if (timer > 3f)
+                {
+                    questComplete.SetActive(false);
+                    timer = 0f;
+                    ctr = 0;
+                }
+            }
     }
 }

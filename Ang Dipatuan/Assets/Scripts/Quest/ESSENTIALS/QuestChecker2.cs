@@ -21,6 +21,9 @@ public class QuestChecker2 : MonoBehaviour
     float time;
     public bool avocadoController = false;
     GameObject avocadoSpawner;
+    GameObject waypointMarker;
+    Quest5Script quest5Script;
+    Quest6Script quest6Script;
 
 
     GameSceneScript gameSceneScript;
@@ -37,6 +40,9 @@ public class QuestChecker2 : MonoBehaviour
         quest6Waypoint1 = GameObject.FindGameObjectWithTag("Waypoint3");
         quest6Waypoint2 = GameObject.FindGameObjectWithTag("Waypoint4");
         avocadoSpawner = GameObject.FindGameObjectWithTag("AvocadoSpawner");
+        waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
+        quest5Script = GameObject.FindGameObjectWithTag("Quest5Collider").GetComponent<Quest5Script>();
+        quest6Script = GameObject.FindGameObjectWithTag("Quest6NPC").GetComponent<Quest6Script>();
         quest4Waypoint.SetActive(false);
         quest4Collider.SetActive(false);
         quest5Waypoint.SetActive(false);
@@ -65,6 +71,8 @@ public class QuestChecker2 : MonoBehaviour
     void Start()
     {
         quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        quest5Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        quest6Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
         gameSceneScript.qctr = SaveQuestScript.Instance.questPos;
     }
 

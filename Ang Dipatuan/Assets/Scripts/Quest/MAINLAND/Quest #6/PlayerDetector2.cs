@@ -7,12 +7,12 @@ public class PlayerDetector2 : MonoBehaviour
     GameObject canvas;
     private bool canAccept2;
     Quest6Script quest6;
-    GameObject shopUI;
 
     private void Awake()
     {
-        canvas = gameObject.transform.parent.Find("Canvas").gameObject;
+        canvas = GameObject.FindGameObjectWithTag("Quest6E");
         canAccept2 = false;
+        quest6 = GameObject.FindGameObjectWithTag("Quest6NPC").GetComponent<Quest6Script>();
     }
 
     private void Update()

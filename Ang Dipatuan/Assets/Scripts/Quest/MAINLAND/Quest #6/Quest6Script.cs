@@ -28,6 +28,7 @@ public class Quest6Script : MonoBehaviour
     SaveQuestScript saveQuestScript;
     GameObject waypoint4;
     public int avocadoCtr;
+    GameObject waypointMarker;
 
     private void Awake()
     {
@@ -40,12 +41,13 @@ public class Quest6Script : MonoBehaviour
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         questChecker2 = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker2>();
         waypoint4 = GameObject.FindGameObjectWithTag("Waypoint4");
+        waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
     }
 
     public void Quest6() { 
             if (saveQuestScript.CurrQuest == 5)
             {
-                waypointScript.enabled = false;
+                waypointMarker.SetActive(false);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 questWindow.SetActive(true);
@@ -62,6 +64,7 @@ public class Quest6Script : MonoBehaviour
     {
         if (saveQuestScript.CurrQuest == 5)
         {
+            waypointMarker.SetActive(true);
             box.enabled = false;
             questWindow.SetActive(false);
             quest.isActive = true;
@@ -70,7 +73,6 @@ public class Quest6Script : MonoBehaviour
             waypoint.SetActive(true);
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            waypointScript.enabled = true;
             movement.stun = false;
             cinemachineBrain.enabled = true;
         }

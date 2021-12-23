@@ -7,12 +7,11 @@ public class Waypoint3 : MonoBehaviour
     Quest6Script quest6Script;
     GameObject waypoint;
     public GameObject box;
-    public Transform target;
 
 
     private void Awake()
     {
-        waypoint = GameObject.FindGameObjectWithTag("Waypoint");
+        waypoint = GameObject.FindGameObjectWithTag("Waypont");
         quest6Script = GameObject.FindGameObjectWithTag("Quest5Collider").GetComponent<Quest6Script>();
     }
 
