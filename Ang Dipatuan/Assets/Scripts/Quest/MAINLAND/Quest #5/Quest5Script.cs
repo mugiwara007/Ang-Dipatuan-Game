@@ -96,8 +96,6 @@ public class Quest5Script : MonoBehaviour
                 questComplete.SetActive(true);
                 questChecker2.questNum = quest.currentQuest;
                 questChecker2.SaveStatQuest();
-                Debug.Log("Current Quest: " + quest.currentQuest);
-                Debug.Log("Quest Num: " + questChecker2.questNum);
                 ctr += 1;
                 waypointScript.enabled = true;
                 waypointScript.target = newWaypoint.transform;

@@ -8,11 +8,15 @@ public class EnemyCampSpawner4 : MonoBehaviour
     public GameObject EnemySoldier3;
     public GameObject SpanishSoldier;
     public GameObject EnemyRifleMan;
+    SaveQuestScript saveQuestScript;
+    Quest7Script quest7Script;
 
     private float timer;
 
     private void Awake()
     {
+        quest7Script = GameObject.FindGameObjectWithTag("Quest7Collider").GetComponent<Quest7Script>();
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         InstantiateEnemies();
     }
 
@@ -44,6 +48,11 @@ public class EnemyCampSpawner4 : MonoBehaviour
         if (IsEnemiesinCampKilled())
         {
             timer += Time.deltaTime;
+
+            if (saveQuestScript.CurrQuest == 6)
+            {
+                quest7Script.quest.goal.EnemyKilled();
+            }
 
             //After 150 Seconds Enemies in This Camp will be Respawned
             if (timer >= 200f)

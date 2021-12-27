@@ -19,9 +19,10 @@ public class Quest6Script : MonoBehaviour
     public Text goldText;
     WaypointScript waypointScript;
     public GameObject questComplete;
+    public GameObject questFailed;
     private float timer = 0f;
     private int ctr = 0;
-    BoxCollider box;
+    GameObject playerDetector;
     MainCharacterController movement;
     CinemachineBrain cinemachineBrain;
     QuestChecker2 questChecker2;
@@ -29,17 +30,21 @@ public class Quest6Script : MonoBehaviour
     GameObject waypoint4;
     public int avocadoCtr;
     GameObject waypointMarker;
+    GameSceneScript gameSceneScript;
+    PlayerBar player;
 
     private void Awake()
     {
         questDesc = GameObject.FindGameObjectWithTag("QuestUI").GetComponent<Text>();
         questGoldGiver = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestGoldGiver>();
         waypointScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<WaypointScript>();
-        box = GameObject.FindGameObjectWithTag("Quest4Collider").GetComponent<BoxCollider>();
+        playerDetector = GameObject.FindGameObjectWithTag("PlayerDetector1");
         movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         questChecker2 = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker2>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
+        gameSceneScript = GameObject.FindGameObjectWithTag("G1").GetComponent<GameSceneScript>();
         waypoint4 = GameObject.FindGameObjectWithTag("Waypoint4");
         waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
     }
@@ -65,7 +70,7 @@ public class Quest6Script : MonoBehaviour
         if (saveQuestScript.CurrQuest == 5)
         {
             waypointMarker.SetActive(true);
-            box.enabled = false;
+            playerDetector.SetActive(false);
             questWindow.SetActive(false);
             quest.isActive = true;
             questDesc.text = quest.desc;
@@ -81,6 +86,21 @@ public class Quest6Script : MonoBehaviour
 
     private void Update()
     {
+        if (saveQuestScript.CurrQuest == 5)
+        {
+            if (player.health == 0)
+            {
+                timer += Time.deltaTime;
+                questFailed.SetActive(true);
+                if (timer > 3f)
+                {
+                    questFailed.SetActive(false);
+                    timer = 0f;
+                    gameSceneScript.FadeToScene(5);
+                }
+            }
+        }
+
         if (saveQuestScript.CurrQuest == 5)
         {
             if (avocadoCtr >= 3)
@@ -108,6 +128,7 @@ public class Quest6Script : MonoBehaviour
             if (timer > 3f)
             {
                 questComplete.SetActive(false);
+                gameSceneScript.FadeToScene(6);
                 timer = 0f;
                 ctr = 0;
             }

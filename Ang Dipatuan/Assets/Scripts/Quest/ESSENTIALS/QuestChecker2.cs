@@ -13,17 +13,27 @@ public class QuestChecker2 : MonoBehaviour
     GameObject quest4Waypoint;
     GameObject quest5Collider;
     GameObject quest5Waypoint;
+    GameObject quest6Object;
+    GameObject quest6Detector;
     GameObject quest6Waypoint1;
     GameObject quest6Waypoint2;
     MainCharacterController movement;
     GameObject storm;
     private bool canTeleport1 = true;
-    float time;
+    private bool canTeleport2 = true;
+    private bool canTeleport3 = true;
+    float timer = 0f;
     public bool avocadoController = false;
     GameObject avocadoSpawner;
     GameObject waypointMarker;
     Quest5Script quest5Script;
     Quest6Script quest6Script;
+    GameObject noEntryCollider1;
+    GameObject noEntryCollider2;
+    GameObject noEntryDetector1;
+    GameObject noEntryDetector2;
+    Quest7Script quest7Script;
+    GameObject quest7Collider;
 
 
     GameSceneScript gameSceneScript;
@@ -43,18 +53,37 @@ public class QuestChecker2 : MonoBehaviour
         waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
         quest5Script = GameObject.FindGameObjectWithTag("Quest5Collider").GetComponent<Quest5Script>();
         quest6Script = GameObject.FindGameObjectWithTag("Quest6NPC").GetComponent<Quest6Script>();
+        quest7Script = GameObject.FindGameObjectWithTag("Quest7Collider").GetComponent<Quest7Script>();
+        quest7Collider = GameObject.FindGameObjectWithTag("Quest7Collider");
+        quest6Object = GameObject.FindGameObjectWithTag("Quest6NPC");
+        
+        noEntryCollider1 = GameObject.FindGameObjectWithTag("NoEntryCollider1");
+        noEntryCollider2 = GameObject.FindGameObjectWithTag("NoEntryCollider2");
+        noEntryDetector1 = GameObject.FindGameObjectWithTag("NoEntryDetector1");
+        noEntryDetector2 = GameObject.FindGameObjectWithTag("NoEntryDetector2");
+        quest6Detector = quest6Object.transform.Find("Player Detector").gameObject;
         quest4Waypoint.SetActive(false);
         quest4Collider.SetActive(false);
         quest5Waypoint.SetActive(false);
         quest5Collider.SetActive(false);
         quest6Waypoint1.SetActive(false);
         quest6Waypoint2.SetActive(false);
+        quest6Detector.SetActive(false);
+        quest7Collider.SetActive(false);
         storm.SetActive(false);
         avocadoSpawner.SetActive(false);
 
         if (avocadoController == true)
         {
             avocadoSpawner.SetActive(true);
+        }
+
+        if (quest.currentQuest >= 6)
+        {
+            noEntryCollider1.SetActive(false);
+            noEntryCollider2.SetActive(false);
+            noEntryDetector1.SetActive(false);
+            noEntryDetector2.SetActive(false);
         }
     }
 
@@ -97,11 +126,34 @@ public class QuestChecker2 : MonoBehaviour
         }
         else if (quest.currentQuest == 5)
         {
-            
+            quest6Detector.SetActive(true);
+            if (canTeleport2)
+            {
+                StartCoroutine("activateCharController2");
+                canTeleport2 = false;
+            }
         }
         else if (quest.currentQuest == 6)
         {
+            quest6Detector.SetActive(false);
+            quest6Waypoint1.SetActive(false);
+            quest6Waypoint2.SetActive(false);
+            movement.stun = true;
             avocadoSpawner.SetActive(true);
+            timer += Time.deltaTime;
+            if (canTeleport3)
+            {
+                StartCoroutine("activateCharController3");
+                canTeleport3 = false;
+            }
+
+            if (timer >= 3)
+            {
+                movement.stun = false;
+                quest7Collider.SetActive(true);
+                timer = 0f;
+            }
+            
         }
 
     }
@@ -112,6 +164,34 @@ public class QuestChecker2 : MonoBehaviour
         gameObject.GetComponent<CharacterController>().enabled = false;
         transform.position = new Vector3(1780.47f, 89.91f, 3106.57f);
         transform.Rotate(0.0f, -0.8f, 0.0f, Space.Self);
+
+        //after 0.7 seconds Enable char controller again
+        yield return new WaitForSeconds(0.4f);
+
+        gameObject.GetComponent<CharacterController>().enabled = true;
+
+    }
+
+    IEnumerator activateCharController2()
+    {
+        //set this to false so that you can teleport the position of character
+        gameObject.GetComponent<CharacterController>().enabled = false;
+        transform.position = new Vector3(621.37f, 104.26f, 4169.60f);
+        transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
+
+        //after 0.7 seconds Enable char controller again
+        yield return new WaitForSeconds(0.4f);
+
+        gameObject.GetComponent<CharacterController>().enabled = true;
+
+    }
+
+    IEnumerator activateCharController3()
+    {
+        //set this to false so that you can teleport the position of character
+        gameObject.GetComponent<CharacterController>().enabled = false;
+        transform.position = new Vector3(621.37f, 104.26f, 4169.60f);
+        transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
 
         //after 0.7 seconds Enable char controller again
         yield return new WaitForSeconds(0.4f);
