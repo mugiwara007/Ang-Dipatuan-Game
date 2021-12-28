@@ -29,37 +29,40 @@ public class Quest7Script : MonoBehaviour
     SaveQuestScript saveQuestScript;
     GameObject waypointMarker;
     PlayerBar player;
-    GameSceneScript gameSceneScript;
+    GameSceneScript2 gameSceneScript2;
 
     private void Awake()
     {
         questDesc = GameObject.FindGameObjectWithTag("QuestUI").GetComponent<Text>();
         questGoldGiver = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestGoldGiver>();
         waypointScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<WaypointScript>();
-        box = GameObject.FindGameObjectWithTag("PlayerDetector1").GetComponent<BoxCollider>();
+        box = GameObject.FindGameObjectWithTag("Quest7Collider").GetComponent<BoxCollider>();
         movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         questChecker2 = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker2>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
-        gameSceneScript = GameObject.FindGameObjectWithTag("G1").GetComponent<GameSceneScript>();
+        gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
         waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
     }
 
-    public void Quest6()
+    private void OnTriggerEnter(Collider other)
     {
-        if (saveQuestScript.CurrQuest == 6)
+        if (other.gameObject.CompareTag("Player"))
         {
-            waypointMarker.SetActive(false);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            questWindow.SetActive(true);
-            titleText.text = quest.title;
-            descriptionText.text = quest.desc;
-            goldText.text = quest.goldReward.ToString();
-            goldText.text += " Gold";
-            movement.stun = true;
-            cinemachineBrain.enabled = false;
+            if (saveQuestScript.CurrQuest == 6)
+            {
+                waypointMarker.SetActive(false);
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                questWindow.SetActive(true);
+                titleText.text = quest.title;
+                descriptionText.text = quest.desc;
+                goldText.text = quest.goldReward.ToString();
+                goldText.text += " Gold";
+                movement.stun = true;
+                cinemachineBrain.enabled = false;
+            }
         }
     }
 
@@ -94,7 +97,7 @@ public class Quest7Script : MonoBehaviour
                 {
                     questFailed.SetActive(false);
                     timer = 0f;
-                    gameSceneScript.FadeToScene(7);
+                    gameSceneScript2.FadeToScene(5);
                 }
             }
         }
@@ -106,7 +109,6 @@ public class Quest7Script : MonoBehaviour
             quest.goal.currentAmount = 0;
             quest.currentQuest += 1;
             questComplete.SetActive(true);
-            Debug.Log("HELLO");
             questChecker2.questNum = quest.currentQuest;
             questChecker2.SaveStatQuest();
             ctr += 1;
@@ -117,6 +119,7 @@ public class Quest7Script : MonoBehaviour
             if (timer > 3f)
             {
                 questComplete.SetActive(false);
+                gameSceneScript2.FadeToScene(7);
                 timer = 0f;
                 ctr = 0;
             }

@@ -36,11 +36,11 @@ public class QuestChecker2 : MonoBehaviour
     GameObject quest7Collider;
 
 
-    GameSceneScript gameSceneScript;
+    GameSceneScript2 gameSceneScript2;
 
     private void Awake()
     {
-        gameSceneScript = GameObject.FindGameObjectWithTag("G1").GetComponent<GameSceneScript>();
+        gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
         storm = GameObject.FindGameObjectWithTag("Storm");
         movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
         quest4Collider = GameObject.FindGameObjectWithTag("Quest4Collider");
@@ -56,7 +56,6 @@ public class QuestChecker2 : MonoBehaviour
         quest7Script = GameObject.FindGameObjectWithTag("Quest7Collider").GetComponent<Quest7Script>();
         quest7Collider = GameObject.FindGameObjectWithTag("Quest7Collider");
         quest6Object = GameObject.FindGameObjectWithTag("Quest6NPC");
-        
         noEntryCollider1 = GameObject.FindGameObjectWithTag("NoEntryCollider1");
         noEntryCollider2 = GameObject.FindGameObjectWithTag("NoEntryCollider2");
         noEntryDetector1 = GameObject.FindGameObjectWithTag("NoEntryDetector1");
@@ -78,7 +77,7 @@ public class QuestChecker2 : MonoBehaviour
             avocadoSpawner.SetActive(true);
         }
 
-        if (quest.currentQuest >= 6)
+        if (quest.currentQuest >= 7)
         {
             noEntryCollider1.SetActive(false);
             noEntryCollider2.SetActive(false);
@@ -102,7 +101,8 @@ public class QuestChecker2 : MonoBehaviour
         quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
         quest5Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
         quest6Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
-        gameSceneScript.qctr = SaveQuestScript.Instance.questPos;
+        quest7Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        gameSceneScript2.qctr = SaveQuestScript.Instance.questPos;
     }
 
     void Update()
@@ -138,7 +138,6 @@ public class QuestChecker2 : MonoBehaviour
             quest6Detector.SetActive(false);
             quest6Waypoint1.SetActive(false);
             quest6Waypoint2.SetActive(false);
-            movement.stun = true;
             avocadoSpawner.SetActive(true);
             timer += Time.deltaTime;
             if (canTeleport3)
@@ -147,13 +146,20 @@ public class QuestChecker2 : MonoBehaviour
                 canTeleport3 = false;
             }
 
-            if (timer >= 3)
+            if (timer >= 2)
             {
-                movement.stun = false;
                 quest7Collider.SetActive(true);
                 timer = 0f;
             }
-            
+        }
+        else if (quest.currentQuest == 7)
+        {
+            quest7Collider.SetActive(false);
+            noEntryCollider1.SetActive(false);
+            noEntryCollider2.SetActive(false);
+            noEntryDetector1.SetActive(false);
+            noEntryDetector2.SetActive(false);
+
         }
 
     }

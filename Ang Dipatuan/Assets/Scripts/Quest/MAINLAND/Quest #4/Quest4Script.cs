@@ -10,7 +10,7 @@ public class Quest4Script : MonoBehaviour
 
     QuestGoldGiver questGoldGiver;
 
-    GameSceneScript gameSceneScript;
+    GameSceneScript2 gameSceneScript2;
 
     public Text questDesc;
 
@@ -40,7 +40,7 @@ public class Quest4Script : MonoBehaviour
         box = GameObject.FindGameObjectWithTag("Quest4Collider").GetComponent<BoxCollider>();
         movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
-        gameSceneScript = GameObject.FindGameObjectWithTag("G1").GetComponent<GameSceneScript>();
+        gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         questChecker = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker>();
         quest4EnemySpawner = GameObject.FindGameObjectWithTag("Quest4EnemySpawner");
@@ -103,7 +103,7 @@ public class Quest4Script : MonoBehaviour
             quest4EnemySpawner.SetActive(false);
             questChecker.SaveStatQuest();
             ctr += 1;
-            gameSceneScript.FadeToScene(2);
+            gameSceneScript2.FadeToScene(2);
         }
         if (ctr == 1)
         {

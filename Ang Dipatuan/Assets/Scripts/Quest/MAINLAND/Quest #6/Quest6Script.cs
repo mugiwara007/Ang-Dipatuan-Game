@@ -30,7 +30,7 @@ public class Quest6Script : MonoBehaviour
     GameObject waypoint4;
     public int avocadoCtr;
     GameObject waypointMarker;
-    GameSceneScript gameSceneScript;
+    GameSceneScript2 gameSceneScript2;
     PlayerBar player;
 
     private void Awake()
@@ -44,7 +44,7 @@ public class Quest6Script : MonoBehaviour
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         questChecker2 = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker2>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
-        gameSceneScript = GameObject.FindGameObjectWithTag("G1").GetComponent<GameSceneScript>();
+        gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
         waypoint4 = GameObject.FindGameObjectWithTag("Waypoint4");
         waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
     }
@@ -96,7 +96,7 @@ public class Quest6Script : MonoBehaviour
                 {
                     questFailed.SetActive(false);
                     timer = 0f;
-                    gameSceneScript.FadeToScene(5);
+                    gameSceneScript2.FadeToScene(5);
                 }
             }
         }
@@ -128,7 +128,7 @@ public class Quest6Script : MonoBehaviour
             if (timer > 3f)
             {
                 questComplete.SetActive(false);
-                gameSceneScript.FadeToScene(6);
+                gameSceneScript2.FadeToScene(6);
                 timer = 0f;
                 ctr = 0;
             }
