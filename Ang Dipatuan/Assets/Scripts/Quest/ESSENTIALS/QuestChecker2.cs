@@ -26,6 +26,7 @@ public class QuestChecker2 : MonoBehaviour
     public bool avocadoController = false;
     GameObject avocadoSpawner;
     GameObject waypointMarker;
+    WaypointScript waypointScript;
     Quest5Script quest5Script;
     Quest6Script quest6Script;
     GameObject noEntryCollider1;
@@ -34,7 +35,7 @@ public class QuestChecker2 : MonoBehaviour
     GameObject noEntryDetector2;
     Quest7Script quest7Script;
     GameObject quest7Collider;
-
+    GameObject quest8ColliderObj;
 
     GameSceneScript2 gameSceneScript2;
 
@@ -61,6 +62,8 @@ public class QuestChecker2 : MonoBehaviour
         noEntryDetector1 = GameObject.FindGameObjectWithTag("NoEntryDetector1");
         noEntryDetector2 = GameObject.FindGameObjectWithTag("NoEntryDetector2");
         quest6Detector = quest6Object.transform.Find("Player Detector").gameObject;
+        waypointScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<WaypointScript>();
+        quest8ColliderObj = GameObject.FindGameObjectWithTag("Quest8Collider");
         quest4Waypoint.SetActive(false);
         quest4Collider.SetActive(false);
         quest5Waypoint.SetActive(false);
@@ -159,6 +162,8 @@ public class QuestChecker2 : MonoBehaviour
             noEntryCollider2.SetActive(false);
             noEntryDetector1.SetActive(false);
             noEntryDetector2.SetActive(false);
+            waypointScript.target = quest8ColliderObj.transform;
+
 
         }
 
