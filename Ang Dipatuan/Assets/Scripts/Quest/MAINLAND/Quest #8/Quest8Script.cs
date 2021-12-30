@@ -31,6 +31,7 @@ public class Quest8Script : MonoBehaviour
     GameObject waypointMarker;
     PlayerBar player;
     GameSceneScript2 gameSceneScript2;
+    private bool qfailed = true;
 
 
     private void Awake()
@@ -38,7 +39,7 @@ public class Quest8Script : MonoBehaviour
         questDesc = GameObject.FindGameObjectWithTag("QuestUI").GetComponent<Text>();
         questGoldGiver = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestGoldGiver>();
         waypointScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<WaypointScript>();
-        box = GameObject.FindGameObjectWithTag("Quest7Collider").GetComponent<BoxCollider>();
+        box = GameObject.FindGameObjectWithTag("Quest8Collider").GetComponent<BoxCollider>();
         movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
@@ -96,10 +97,11 @@ public class Quest8Script : MonoBehaviour
             {
                 timer += Time.deltaTime;
                 questFailed.SetActive(true);
-                if (timer > 3f)
+                if (timer > 3f && qfailed == true)
                 {
                     questFailed.SetActive(false);
                     timer = 0f;
+                    qfailed = false;
                     gameSceneScript2.FadeToScene(5);
                 }
             }

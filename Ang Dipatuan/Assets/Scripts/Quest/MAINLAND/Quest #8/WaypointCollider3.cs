@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class WaypointCollider3 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Quest8EnemySpawner quest8EnemySpawner;
+    public GameObject box;
+    public GameObject wall1;
+    public GameObject wall2;
 
-    // Update is called once per frame
-    void Update()
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Player"))
+        {
+            box.SetActive(false);
+            wall1.SetActive(true);
+            wall2.SetActive(true);
+            quest8EnemySpawner.wallActive3 = true;
+        }
     }
 }

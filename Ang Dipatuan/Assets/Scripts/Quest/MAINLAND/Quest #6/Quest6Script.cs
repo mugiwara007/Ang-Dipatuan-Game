@@ -33,6 +33,8 @@ public class Quest6Script : MonoBehaviour
     GameSceneScript2 gameSceneScript2;
     PlayerBar player;
 
+    private bool qfailed = true;
+
     private void Awake()
     {
         questDesc = GameObject.FindGameObjectWithTag("QuestUI").GetComponent<Text>();
@@ -92,10 +94,11 @@ public class Quest6Script : MonoBehaviour
             {
                 timer += Time.deltaTime;
                 questFailed.SetActive(true);
-                if (timer > 3f)
+                if (timer > 3f && qfailed == true)
                 {
                     questFailed.SetActive(false);
                     timer = 0f;
+                    qfailed = false;
                     gameSceneScript2.FadeToScene(5);
                 }
             }

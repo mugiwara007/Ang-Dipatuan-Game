@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaypointCollider2 : MonoBehaviour
+public class WaypointCollider4 : MonoBehaviour
 {
     public Quest8EnemySpawner quest8EnemySpawner;
     public GameObject box;
@@ -17,7 +17,7 @@ public class WaypointCollider2 : MonoBehaviour
             box.SetActive(false);
             wall1.SetActive(true);
             wall2.SetActive(true);
-            quest8EnemySpawner.wallActive2 = true;
+            quest8EnemySpawner.wallActive4 = true;
         }
     }
 }

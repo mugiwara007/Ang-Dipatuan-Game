@@ -30,6 +30,7 @@ public class Quest7Script : MonoBehaviour
     GameObject waypointMarker;
     PlayerBar player;
     GameSceneScript2 gameSceneScript2;
+    private bool qfailed = true;
 
     private void Awake()
     {
@@ -93,10 +94,11 @@ public class Quest7Script : MonoBehaviour
             {
                 timer += Time.deltaTime;
                 questFailed.SetActive(true);
-                if (timer > 3f)
+                if (timer > 3f && qfailed == true)
                 {
                     questFailed.SetActive(false);
                     timer = 0f;
+                    qfailed = false;
                     gameSceneScript2.FadeToScene(5);
                 }
             }

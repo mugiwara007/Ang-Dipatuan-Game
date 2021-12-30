@@ -14,6 +14,7 @@ public class Quest8EnemySpawner : MonoBehaviour
     Quest8Script quest8Script;
 
     GameObject waypointMarker;
+    WaypointScript waypointScript;
 
     public GameObject wall4;
     public GameObject wall5;
@@ -22,13 +23,13 @@ public class Quest8EnemySpawner : MonoBehaviour
     public GameObject SecondStageWallEnd;
     public GameObject ThirdStageWall;
 
-    private bool ctr1 = true, ctr2 = true, ctr3 = true;
+    private bool ctr1 = true, ctr2 = true, ctr3 = true, ctr4 = true, ctr5 = true;
 
     private bool isThirdWave = false;
 
     private bool canSpawn1 = true, canSpawn2 = true, canSpawn3 = true, canSpawn4 = true, canSpawn5 = true;
 
-    public bool wallActive1 = false, wallActive2 = false, wallActive3 = false;
+    public bool wallActive1 = false, wallActive2 = false, wallActive3 = false, wallActive4 = false, wallActive5 = false;
 
     private void Awake()
     {
@@ -65,6 +66,7 @@ public class Quest8EnemySpawner : MonoBehaviour
             {
                 wall4.SetActive(false);
                 ctr1 = false;
+                SecondStageWallStart.SetActive(true);
             }
 
             if (IsFirstWaveKilled() == true && wallActive1 == true)
@@ -87,21 +89,21 @@ public class Quest8EnemySpawner : MonoBehaviour
                 enemySoldier8.transform.parent = gameObject.transform.GetChild(7);
 
                 canSpawn1 = false;
+                wallActive1 = false;
             }
         }
 
+
         if (canSpawn2 == true)
         {
-            if (IsFirstWaveKilled() == true && ctr2 == true)
+            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true &&  ctr2 == true)
             {
                 SecondStageWallStart.SetActive(false);
                 ctr2 = false;
             }
 
-            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true)
+            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && wallActive2 == true)
             {
-                SecondStageWallStart.SetActive(true);
-
                 var enemySoldier9 = Instantiate(EnemySoldier3, gameObject.transform.GetChild(8).position, gameObject.transform.GetChild(8).rotation);
                 enemySoldier9.transform.parent = gameObject.transform.GetChild(8);
 
@@ -112,12 +114,19 @@ public class Quest8EnemySpawner : MonoBehaviour
                 enemySoldier11.transform.parent = gameObject.transform.GetChild(10);
 
                 canSpawn2 = false;
+                wallActive2 = false;
             }
         }
 
         if (canSpawn3 == true)
         {
-            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && wallActive2 == true)
+            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && ctr3 == true)
+            {
+                SecondStageWallMid.SetActive(false);
+                ctr3 = false;
+            }
+
+            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && wallActive3 == true)
             {
                 var enemySoldier12 = Instantiate(EnemySoldier1, gameObject.transform.GetChild(11).position, gameObject.transform.GetChild(11).rotation);
                 enemySoldier12.transform.parent = gameObject.transform.GetChild(11);
@@ -135,12 +144,19 @@ public class Quest8EnemySpawner : MonoBehaviour
                 enemySoldier16.transform.parent = gameObject.transform.GetChild(15);
 
                 canSpawn3 = false;
+                wallActive3 = false;
             }
         }
 
         if (canSpawn4 == true)
         {
-            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true)
+            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true && ctr4 == true)
+            {
+                SecondStageWallEnd.SetActive(false);
+                ctr4 = false;
+            }
+
+            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true && wallActive4 == true)
             {
                 var enemySoldier17 = Instantiate(EnemySoldier3, gameObject.transform.GetChild(16).position, gameObject.transform.GetChild(16).rotation);
                 enemySoldier17.transform.parent = gameObject.transform.GetChild(16);
@@ -152,13 +168,21 @@ public class Quest8EnemySpawner : MonoBehaviour
                 enemySoldier19.transform.parent = gameObject.transform.GetChild(18);
 
                 canSpawn4 = false;
+                wallActive4 = false;
             }
         }
 
         if (canSpawn5 == true)
         {
-            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true && IsThirdWaveKilled() == true && wallActive3 == true)
+            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true && IsThirdWaveKilled() == true && ctr5 == true)
             {
+                ThirdStageWall.SetActive(false);
+                ctr5 = false;
+            }
+
+            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true && IsThirdWaveKilled() == true && wallActive5 == true)
+            {
+
                 var enemySoldier20 = Instantiate(EnemySoldier3, gameObject.transform.GetChild(19).position, gameObject.transform.GetChild(19).rotation);
                 enemySoldier20.transform.parent = gameObject.transform.GetChild(19);
 
@@ -177,6 +201,7 @@ public class Quest8EnemySpawner : MonoBehaviour
                 isThirdWave = true;
 
                 canSpawn5 = false;
+                wallActive5 = false;
             }
         }
 

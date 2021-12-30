@@ -31,6 +31,9 @@ public class Quest4Script : MonoBehaviour
     SaveQuestScript saveQuestScript;
     GameObject quest4EnemySpawner;
     public GameObject wall;
+    PlayerBar player;
+
+    private bool qfailed = true;
 
     private void Awake()
     {
@@ -38,6 +41,7 @@ public class Quest4Script : MonoBehaviour
         questGoldGiver = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestGoldGiver>();
         waypointScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<WaypointScript>();
         box = GameObject.FindGameObjectWithTag("Quest4Collider").GetComponent<BoxCollider>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
         movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
         gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
@@ -91,6 +95,22 @@ public class Quest4Script : MonoBehaviour
 
     private void Update()
     {
+        if (saveQuestScript.CurrQuest == 3)
+        {
+            if (player.health == 0)
+            {
+                timer += Time.deltaTime;
+                questFailed.SetActive(true);
+                if (timer > 3f && qfailed == true)
+                {
+                    questFailed.SetActive(false);
+                    timer = 0f;
+                    qfailed = false;
+                    gameSceneScript2.FadeToScene(5);
+                }
+            }
+        }
+
         if (quest.goal.IsReached())
         {
             timer += Time.deltaTime;
