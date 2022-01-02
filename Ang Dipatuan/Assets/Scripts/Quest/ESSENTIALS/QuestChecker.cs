@@ -25,6 +25,14 @@ public class QuestChecker : MonoBehaviour
     MainCharacterController movement;
     GameObject warCollider;
     float time;
+    float timer;
+    bool ifDone = true;
+
+    GameObject activeSkill1;
+    GameObject unlockSkill1;
+    GameObject unlock1stSkillUi;
+
+    SlowMotionMode slowMotion;
 
     private bool canTeleport1 = true;
     private bool canTeleport2 = true;
@@ -47,6 +55,13 @@ public class QuestChecker : MonoBehaviour
         warCollider = GameObject.FindGameObjectWithTag("TELEPORT");
         war = GameObject.FindGameObjectWithTag("WAR");
         activator = GameObject.FindGameObjectWithTag("Activator");
+        slowMotion = GameObject.FindGameObjectWithTag("Player").GetComponent<SlowMotionMode>();
+        escapeCollider.SetActive(false);
+        unlockSkill1 = GameObject.FindGameObjectWithTag("UnlockSkill1");
+        unlock1stSkillUi = GameObject.FindGameObjectWithTag("Unlock1stSkillUI");
+        unlock1stSkillUi.SetActive(false);
+        unlockSkill1.SetActive(true);
+        
         war.SetActive(false);
         actBox.enabled = true;
         escapeObj.SetActive(false);
@@ -69,6 +84,8 @@ public class QuestChecker : MonoBehaviour
 
     void Start()
     {
+        activeSkill1 = GameObject.FindGameObjectWithTag("SlowMoSkillYellowImage");
+        activeSkill1.SetActive(false);
         quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
         gameSceneScript.qctr = SaveQuestScript.Instance.questPos;
     }
@@ -106,6 +123,21 @@ public class QuestChecker : MonoBehaviour
         }
         else if (quest.currentQuest == 2)
         {
+            if (ifDone == true)
+            {
+                unlock1stSkillUi.SetActive(true);
+            }
+            
+            timer += Time.deltaTime;
+            if (timer > 4f && ifDone == true)
+            {
+                unlock1stSkillUi.SetActive(false);
+                timer = 0f;
+                ifDone = false;
+            }
+            activeSkill1.SetActive(true);
+            unlockSkill1.SetActive(false);
+            slowMotion.enabled = true;
             tutorialScript.enabled = false;
             escapeObj.SetActive(true);
             movement.stun = true;
@@ -116,10 +148,9 @@ public class QuestChecker : MonoBehaviour
                 StartCoroutine("activateCharController2");
                 canTeleport2 = false;
             }
-            if (time >= 3)
+            if (time >= 4)
             {
                 movement.stun = false;
-                enemyEscape.SetActive(true);
                 escapeCollider.SetActive(true);
             }
 

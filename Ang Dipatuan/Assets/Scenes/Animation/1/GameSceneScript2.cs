@@ -19,7 +19,7 @@ public class GameSceneScript2 : MonoBehaviour
     {
         qctr += 1;
         questChecker2.quest2 = qctr;
-        questChecker2.SavePos();
+        questChecker2.SavePos2();
         sceneToLoad = sceneIndex;
         animator.SetTrigger("FadeOut");
     }

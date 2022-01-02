@@ -18,6 +18,7 @@ public class EscapeQuest : MonoBehaviour
     public GameObject waypoint;
     public Text titleText;
     public Text descriptionText;
+    public GameObject enemyEscape;
     public Text goldText;
     WaypointScript waypointScript;
     public GameObject questComplete;
@@ -43,7 +44,6 @@ public class EscapeQuest : MonoBehaviour
         questChecker = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker>();
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         enemyLocomotionManger = GameObject.FindGameObjectsWithTag("Enemy");
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -81,6 +81,7 @@ public class EscapeQuest : MonoBehaviour
             waypointScript.enabled = true;
             movement.stun = false;
             cinemachineBrain.enabled = true;
+            enemyEscape.SetActive(true);
         }
         
     }

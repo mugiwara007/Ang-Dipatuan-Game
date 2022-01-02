@@ -27,8 +27,8 @@ public class Quest4Script : MonoBehaviour
     BoxCollider box;
     MainCharacterController movement;
     CinemachineBrain cinemachineBrain;
-    QuestChecker questChecker;
-    SaveQuestScript saveQuestScript;
+    QuestChecker2 questChecker2;
+    SaveQuestScript2 saveQuestScript2;
     GameObject quest4EnemySpawner;
     public GameObject wall;
     PlayerBar player;
@@ -45,8 +45,8 @@ public class Quest4Script : MonoBehaviour
         movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
         gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
-        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
-        questChecker = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker>();
+        saveQuestScript2 = GameObject.FindGameObjectWithTag("Updater2").GetComponent<SaveQuestScript2>();
+        questChecker2 = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker2>();
         quest4EnemySpawner = GameObject.FindGameObjectWithTag("Quest4EnemySpawner");
         quest4EnemySpawner.SetActive(false);
         wall.SetActive(false);
@@ -56,7 +56,7 @@ public class Quest4Script : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (saveQuestScript.CurrQuest == 3)
+            if (saveQuestScript2.CurrQuest2 == 3)
             {
                 waypointScript.enabled = false;
                 Cursor.visible = true;
@@ -74,7 +74,7 @@ public class Quest4Script : MonoBehaviour
 
     public void AcceptQuest4()
     {
-        if (saveQuestScript.CurrQuest == 3)
+        if (saveQuestScript2.CurrQuest2 == 3)
         {
             box.enabled = false;
             wall.SetActive(true);
@@ -95,7 +95,7 @@ public class Quest4Script : MonoBehaviour
 
     private void Update()
     {
-        if (saveQuestScript.CurrQuest == 3)
+        if (saveQuestScript2.CurrQuest2 == 3)
         {
             if (player.health == 0)
             {
@@ -118,12 +118,12 @@ public class Quest4Script : MonoBehaviour
             quest.goal.currentAmount = 0;
             quest.currentQuest += 1;
             questComplete.SetActive(true);
-            questChecker.questNum = quest.currentQuest;
+            questChecker2.questNum = quest.currentQuest;
             wall.SetActive(false);
             quest4EnemySpawner.SetActive(false);
-            questChecker.SaveStatQuest();
+            questChecker2.SaveStatQuest2();
             ctr += 1;
-            gameSceneScript2.FadeToScene(2);
+            gameSceneScript2.FadeToScene(11);
         }
         if (ctr == 1)
         {

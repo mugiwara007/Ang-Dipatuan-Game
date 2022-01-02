@@ -53,8 +53,6 @@ public class SlowMotionMode : MonoBehaviour
     {
         if (typingMode)
         {
-            gameObject.GetComponent<DipatuanMode>().enabled = false;
-            gameObject.GetComponent<BraveryMode>().enabled = false;
             if (Input.anyKeyDown)
             {
                 string keyPressed = Input.inputString;
@@ -63,11 +61,6 @@ public class SlowMotionMode : MonoBehaviour
                 if (keyPressed.Length == 1)
                     EnterLetter(keyPressed);
             }
-        }
-        else
-        {
-            gameObject.GetComponent<DipatuanMode>().enabled = true;
-            gameObject.GetComponent<BraveryMode>().enabled = true;
         }
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");

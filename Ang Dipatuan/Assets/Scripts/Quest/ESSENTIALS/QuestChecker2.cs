@@ -23,6 +23,9 @@ public class QuestChecker2 : MonoBehaviour
     private bool canTeleport2 = true;
     private bool canTeleport3 = true;
     float timer = 0f;
+    float time = 0f;
+    bool ifDone1 = true;
+    bool ifDone2 = true;
     public bool avocadoController = false;
     GameObject avocadoSpawner;
     GameObject waypointMarker;
@@ -36,6 +39,17 @@ public class QuestChecker2 : MonoBehaviour
     Quest7Script quest7Script;
     GameObject quest7Collider;
     GameObject quest8ColliderObj;
+
+    GameObject activeSkill2;
+    GameObject activeSkill3;
+
+    GameObject unlockSkill2;
+    GameObject unlockSkill2UI;
+    GameObject unlockSkill3;
+    GameObject unlockSkill3UI;
+
+    BraveryMode braveryMode;
+    DipatuanMode dipatuanMode;
 
     GameSceneScript2 gameSceneScript2;
 
@@ -64,6 +78,15 @@ public class QuestChecker2 : MonoBehaviour
         quest6Detector = quest6Object.transform.Find("Player Detector").gameObject;
         waypointScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<WaypointScript>();
         quest8ColliderObj = GameObject.FindGameObjectWithTag("Quest8Collider");
+        activeSkill2 = GameObject.FindGameObjectWithTag("BraverySkillYellowImage");
+        activeSkill3 = GameObject.FindGameObjectWithTag("DipatuanSkillYellowImage");
+        unlockSkill2 = GameObject.FindGameObjectWithTag("UnlockSkill2");
+        unlockSkill3 = GameObject.FindGameObjectWithTag("UnlockSkill3");
+        unlockSkill2UI = GameObject.FindGameObjectWithTag("Unlock2ndSkillUI");
+        unlockSkill3UI = GameObject.FindGameObjectWithTag("Unlock3rdSkillUI");
+        braveryMode = GameObject.FindGameObjectWithTag("Player").GetComponent<BraveryMode>();
+        dipatuanMode = GameObject.FindGameObjectWithTag("Player").GetComponent<DipatuanMode>();
+
         quest4Waypoint.SetActive(false);
         quest4Collider.SetActive(false);
         quest5Waypoint.SetActive(false);
@@ -74,6 +97,16 @@ public class QuestChecker2 : MonoBehaviour
         quest7Collider.SetActive(false);
         storm.SetActive(false);
         avocadoSpawner.SetActive(false);
+
+        activeSkill2.SetActive(false);
+        activeSkill3.SetActive(false);
+        unlockSkill2.SetActive(false);
+        unlockSkill2UI.SetActive(false);
+        unlockSkill3.SetActive(false);
+        unlockSkill3UI.SetActive(false);
+
+        braveryMode.enabled = false;
+        dipatuanMode.enabled = false;
 
         if (avocadoController == true)
         {
@@ -87,44 +120,78 @@ public class QuestChecker2 : MonoBehaviour
             noEntryDetector1.SetActive(false);
             noEntryDetector2.SetActive(false);
         }
+        
+        if (quest.currentQuest >= 4)
+        {
+            braveryMode.enabled = true;
+            activeSkill2.SetActive(true);
+        }
+
     }
 
-    public void SaveStatQuest()
+    public void SaveStatQuest2()
     {
-        SaveQuestScript.Instance.CurrQuest = questNum;
+        SaveQuestScript2.Instance.CurrQuest2 = questNum;
     }
 
-    public void SavePos()
+    public void SavePos2()
     {
-        SaveQuestScript.Instance.questPos = quest2;
+        SaveQuestScript2.Instance.questPos2 = quest2;
     }
 
     void Start()
     {
-        quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
-        quest5Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
-        quest6Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
-        quest7Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
-        gameSceneScript2.qctr = SaveQuestScript.Instance.questPos;
+        quest.currentQuest = SaveQuestScript2.Instance.CurrQuest2;
+        quest5Script.quest.currentQuest = SaveQuestScript2.Instance.CurrQuest2;
+        quest6Script.quest.currentQuest = SaveQuestScript2.Instance.CurrQuest2;
+        quest7Script.quest.currentQuest = SaveQuestScript2.Instance.CurrQuest2;
+        gameSceneScript2.qctr = SaveQuestScript2.Instance.questPos2;
     }
 
     void Update()
     {
         if (quest.currentQuest == 3)
         {
+            unlockSkill2.SetActive(true);
+            unlockSkill3.SetActive(true);
             quest4Collider.SetActive(true);
             quest4Waypoint.SetActive(true);
         }
         else if (quest.currentQuest == 4)
         {
+            braveryMode.enabled = true;
+            activeSkill2.SetActive(true);
+            unlockSkill3.SetActive(true);
+
+            if (ifDone1 == true)
+            {
+                waypointMarker.SetActive(false);
+                unlockSkill2UI.SetActive(true);
+            }
+
+            time += Time.deltaTime;
+            if (time > 4f && ifDone1 == true)
+            {
+                unlockSkill2UI.SetActive(false);
+                timer = 0f;
+                ifDone1 = false;
+            }
+
+            movement.stun = true;
             quest4Waypoint.SetActive(false);
             quest4Collider.SetActive(false);
-            quest5Collider.SetActive(true);
-            quest5Waypoint.SetActive(true);
+            timer += Time.deltaTime;
             if (canTeleport1)
             {
                 StartCoroutine("activateCharController1");
                 canTeleport1 = false;
+            }
+
+            if (time >= 4)
+            {
+                movement.stun = false;
+                quest5Collider.SetActive(true);
+                quest5Waypoint.SetActive(true);
             }
         }
         else if (quest.currentQuest == 5)

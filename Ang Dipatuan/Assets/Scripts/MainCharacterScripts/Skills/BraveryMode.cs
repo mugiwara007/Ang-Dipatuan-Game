@@ -24,7 +24,6 @@ public class BraveryMode : MonoBehaviour
 
     private bool typingMode = false;
 
-
     private string remainingWord = string.Empty;
     private string currentWord = "juramentado";
 
@@ -55,57 +54,56 @@ public class BraveryMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (typingMode)
-        {
-            gameObject.GetComponent<DipatuanMode>().enabled = false;
-            gameObject.GetComponent<SlowMotionMode>().enabled = false;
-            if (Input.anyKeyDown)
+            if (typingMode)
             {
-                string keyPressed = Input.inputString;
-
-
-                if (keyPressed.Length == 1)
-                    EnterLetter(keyPressed);
-            }
-        }
-        else
-        {
-            gameObject.GetComponent<DipatuanMode>().enabled = true;
-            gameObject.GetComponent<SlowMotionMode>().enabled = true;
-        }
-
-        if (manaStats.mana >= 15)
-        {
-            if (Input.GetButtonDown("BraveryMode") && onCooldown == false)
-            {
-                manaStats.ReduceMana(15);
-                setLetterColorToBlack();
-                StartCoroutine("StopTypingMode");
-                if (Time.timeScale == 1.0f)
+                gameObject.GetComponent<DipatuanMode>().enabled = false;
+                gameObject.GetComponent<SlowMotionMode>().enabled = false;
+                if (Input.anyKeyDown)
                 {
-                    Time.timeScale = 0.2f;
+                    string keyPressed = Input.inputString;
+
+
+                    if (keyPressed.Length == 1)
+                        EnterLetter(keyPressed);
                 }
-                //Sets typing mode to true
-                typingMode = true;
-
-                //show text that will pop up to type 
-                SkillsTextToType3.SetActive(true);
-
-                StartCoroutine("StopTypingMode");
             }
-        }
-
-        if (onCooldown)
-        {
-            skillColorYellow.fillAmount = skillColorYellow.fillAmount += 0.02f * Time.deltaTime;
-
-            if (skillColorYellow.fillAmount >= 1f)
+            else
             {
-                onCooldown = false;
+                gameObject.GetComponent<DipatuanMode>().enabled = true;
+                gameObject.GetComponent<SlowMotionMode>().enabled = true;
             }
-        }
 
+            if (manaStats.mana >= 15)
+            {
+                if (Input.GetButtonDown("BraveryMode") && onCooldown == false)
+                {
+                    manaStats.ReduceMana(15);
+                    setLetterColorToBlack();
+                    StartCoroutine("StopTypingMode");
+                    if (Time.timeScale == 1.0f)
+                    {
+                        Time.timeScale = 0.2f;
+                    }
+                    //Sets typing mode to true
+                    typingMode = true;
 
+                    //show text that will pop up to type 
+                    SkillsTextToType3.SetActive(true);
+
+                    StartCoroutine("StopTypingMode");
+                }
+            }
+
+            if (onCooldown)
+            {
+                skillColorYellow.fillAmount = skillColorYellow.fillAmount += 0.02f * Time.deltaTime;
+
+                if (skillColorYellow.fillAmount >= 1f)
+                {
+                    onCooldown = false;
+                }
+            }
+        
     }
 
     IEnumerator braveryModeTurnOff()

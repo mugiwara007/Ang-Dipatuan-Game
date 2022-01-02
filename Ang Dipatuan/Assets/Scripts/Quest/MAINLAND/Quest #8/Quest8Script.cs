@@ -27,7 +27,7 @@ public class Quest8Script : MonoBehaviour
     MainCharacterController movement;
     CinemachineBrain cinemachineBrain;
     QuestChecker2 questChecker2;
-    SaveQuestScript saveQuestScript;
+    SaveQuestScript2 saveQuestScript2;
     GameObject waypointMarker;
     PlayerBar player;
     GameSceneScript2 gameSceneScript2;
@@ -42,7 +42,7 @@ public class Quest8Script : MonoBehaviour
         box = GameObject.FindGameObjectWithTag("Quest8Collider").GetComponent<BoxCollider>();
         movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
-        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
+        saveQuestScript2 = GameObject.FindGameObjectWithTag("Updater2").GetComponent<SaveQuestScript2>();
         questChecker2 = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker2>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
         gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
@@ -54,7 +54,7 @@ public class Quest8Script : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (saveQuestScript.CurrQuest == 7)
+            if (saveQuestScript2.CurrQuest2 == 7)
             {
                 waypointMarker.SetActive(false);
                 Cursor.visible = true;
@@ -72,7 +72,7 @@ public class Quest8Script : MonoBehaviour
 
     public void AcceptQuest8()
     {
-        if (saveQuestScript.CurrQuest == 7)
+        if (saveQuestScript2.CurrQuest2 == 7)
         {
             wall1.SetActive(true);
             waypointMarker.SetActive(true);
@@ -91,7 +91,7 @@ public class Quest8Script : MonoBehaviour
 
     private void Update()
     {
-        if (saveQuestScript.CurrQuest == 7)
+        if (saveQuestScript2.CurrQuest2 == 7)
         {
             if (player.health == 0)
             {
@@ -115,7 +115,7 @@ public class Quest8Script : MonoBehaviour
             quest.currentQuest += 1;
             questComplete.SetActive(true);
             questChecker2.questNum = quest.currentQuest;
-            questChecker2.SaveStatQuest();
+            questChecker2.SaveStatQuest2();
             ctr += 1;
         }
         if (ctr == 1)
