@@ -39,6 +39,8 @@ public class QuestChecker2 : MonoBehaviour
     Quest7Script quest7Script;
     GameObject quest7Collider;
     GameObject quest8ColliderObj;
+    GameObject finalWarObject;
+
 
     GameObject activeSkill2;
     GameObject activeSkill3;
@@ -52,6 +54,7 @@ public class QuestChecker2 : MonoBehaviour
     DipatuanMode dipatuanMode;
 
     GameSceneScript2 gameSceneScript2;
+    SaveQuestScript2 saveQuestScript2;
 
     private void Awake()
     {
@@ -86,6 +89,8 @@ public class QuestChecker2 : MonoBehaviour
         unlockSkill3UI = GameObject.FindGameObjectWithTag("Unlock3rdSkillUI");
         braveryMode = GameObject.FindGameObjectWithTag("Player").GetComponent<BraveryMode>();
         dipatuanMode = GameObject.FindGameObjectWithTag("Player").GetComponent<DipatuanMode>();
+        saveQuestScript2 = GameObject.FindGameObjectWithTag("Updater2").GetComponent<SaveQuestScript2>();
+        finalWarObject = GameObject.FindGameObjectWithTag("WAR");
 
         quest4Waypoint.SetActive(false);
         quest4Collider.SetActive(false);
@@ -97,6 +102,7 @@ public class QuestChecker2 : MonoBehaviour
         quest7Collider.SetActive(false);
         storm.SetActive(false);
         avocadoSpawner.SetActive(false);
+        finalWarObject.SetActive(false);
 
         activeSkill2.SetActive(false);
         activeSkill3.SetActive(false);
@@ -105,15 +111,12 @@ public class QuestChecker2 : MonoBehaviour
         unlockSkill3.SetActive(false);
         unlockSkill3UI.SetActive(false);
 
-        braveryMode.enabled = false;
-        dipatuanMode.enabled = false;
-
         if (avocadoController == true)
         {
             avocadoSpawner.SetActive(true);
         }
 
-        if (quest.currentQuest >= 7)
+        if (saveQuestScript2.CurrQuest2 >= 7)
         {
             noEntryCollider1.SetActive(false);
             noEntryCollider2.SetActive(false);
@@ -121,10 +124,16 @@ public class QuestChecker2 : MonoBehaviour
             noEntryDetector2.SetActive(false);
         }
         
-        if (quest.currentQuest >= 4)
+        if (saveQuestScript2.CurrQuest2 >= 4)
         {
             braveryMode.enabled = true;
             activeSkill2.SetActive(true);
+        }
+
+        if (saveQuestScript2.CurrQuest2 >= 6)
+        {
+            dipatuanMode.enabled = true;
+            activeSkill3.SetActive(true);
         }
 
     }
@@ -152,6 +161,8 @@ public class QuestChecker2 : MonoBehaviour
     {
         if (quest.currentQuest == 3)
         {
+            braveryMode.enabled = false;
+            dipatuanMode.enabled = false;
             unlockSkill2.SetActive(true);
             unlockSkill3.SetActive(true);
             quest4Collider.SetActive(true);
@@ -160,6 +171,7 @@ public class QuestChecker2 : MonoBehaviour
         else if (quest.currentQuest == 4)
         {
             braveryMode.enabled = true;
+            dipatuanMode.enabled = false;
             activeSkill2.SetActive(true);
             unlockSkill3.SetActive(true);
 
@@ -196,7 +208,12 @@ public class QuestChecker2 : MonoBehaviour
         }
         else if (quest.currentQuest == 5)
         {
+            braveryMode.enabled = true;
+            dipatuanMode.enabled = false;
+            activeSkill2.SetActive(true);
+            unlockSkill3.SetActive(true);
             quest6Detector.SetActive(true);
+
             if (canTeleport2)
             {
                 StartCoroutine("activateCharController2");
@@ -205,10 +222,30 @@ public class QuestChecker2 : MonoBehaviour
         }
         else if (quest.currentQuest == 6)
         {
+            braveryMode.enabled = true;
+            dipatuanMode.enabled = true;
+            activeSkill2.SetActive(true);
+            activeSkill3.SetActive(true);
             quest6Detector.SetActive(false);
             quest6Waypoint1.SetActive(false);
             quest6Waypoint2.SetActive(false);
             avocadoSpawner.SetActive(true);
+            movement.stun = true;
+
+            if (ifDone2 == true)
+            {
+                waypointMarker.SetActive(false);
+                unlockSkill3UI.SetActive(true);
+            }
+
+            time += Time.deltaTime;
+            if (time > 4f && ifDone2 == true)
+            {
+                unlockSkill3UI.SetActive(false);
+                timer = 0f;
+                ifDone2 = false;
+            }
+
             timer += Time.deltaTime;
             if (canTeleport3)
             {
@@ -216,22 +253,33 @@ public class QuestChecker2 : MonoBehaviour
                 canTeleport3 = false;
             }
 
-            if (timer >= 2)
+            if (timer >= 4)
             {
+                movement.stun = false;
                 quest7Collider.SetActive(true);
                 timer = 0f;
             }
         }
         else if (quest.currentQuest == 7)
         {
+            braveryMode.enabled = true;
+            dipatuanMode.enabled = true;
+            activeSkill2.SetActive(true);
+            activeSkill3.SetActive(true);
             quest7Collider.SetActive(false);
             noEntryCollider1.SetActive(false);
             noEntryCollider2.SetActive(false);
             noEntryDetector1.SetActive(false);
             noEntryDetector2.SetActive(false);
             waypointScript.target = quest8ColliderObj.transform;
-
-
+        }
+        else if (quest.currentQuest == 8)
+        {
+            braveryMode.enabled = true;
+            dipatuanMode.enabled = true;
+            activeSkill2.SetActive(true);
+            activeSkill3.SetActive(true);
+            finalWarObject.SetActive(true);
         }
 
     }
@@ -269,6 +317,20 @@ public class QuestChecker2 : MonoBehaviour
         //set this to false so that you can teleport the position of character
         gameObject.GetComponent<CharacterController>().enabled = false;
         transform.position = new Vector3(621.37f, 104.26f, 4169.60f);
+        transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
+
+        //after 0.7 seconds Enable char controller again
+        yield return new WaitForSeconds(0.4f);
+
+        gameObject.GetComponent<CharacterController>().enabled = true;
+
+    }
+
+    IEnumerator activateCharController4()
+    {
+        //set this to false so that you can teleport the position of character
+        gameObject.GetComponent<CharacterController>().enabled = false;
+        transform.position = new Vector3(464.89f, 85.16f, 1198.21f);
         transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
 
         //after 0.7 seconds Enable char controller again
