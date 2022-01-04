@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneChanger7 : MonoBehaviour
+public class SceneChanger8 : MonoBehaviour
 {
     public Animator animator;
     private int sceneToLoad;
@@ -12,10 +12,10 @@ public class SceneChanger7 : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if (time >= 4f)
+        if (time >= 13f)
         {
             time = 0f;
-            FadeToScene(12);
+            FadeToScene(5);
         }
     }
 

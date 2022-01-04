@@ -22,6 +22,8 @@ public class QuestChecker2 : MonoBehaviour
     private bool canTeleport1 = true;
     private bool canTeleport2 = true;
     private bool canTeleport3 = true;
+    private bool canTeleport4 = true;
+    private bool canTeleport5 = true;
     float timer = 0f;
     float time = 0f;
     bool ifDone1 = true;
@@ -102,7 +104,7 @@ public class QuestChecker2 : MonoBehaviour
         quest7Collider.SetActive(false);
         storm.SetActive(false);
         avocadoSpawner.SetActive(false);
-        finalWarObject.SetActive(false);
+        //finalWarObject.SetActive(false);
 
         activeSkill2.SetActive(false);
         activeSkill3.SetActive(false);
@@ -262,6 +264,11 @@ public class QuestChecker2 : MonoBehaviour
         }
         else if (quest.currentQuest == 7)
         {
+            if (canTeleport5)
+            {
+                StartCoroutine("activateCharController5");
+                canTeleport5 = false;
+            }
             braveryMode.enabled = true;
             dipatuanMode.enabled = true;
             activeSkill2.SetActive(true);
@@ -279,7 +286,7 @@ public class QuestChecker2 : MonoBehaviour
             dipatuanMode.enabled = true;
             activeSkill2.SetActive(true);
             activeSkill3.SetActive(true);
-            finalWarObject.SetActive(true);
+            //finalWarObject.SetActive(true);
         }
 
     }
@@ -332,6 +339,20 @@ public class QuestChecker2 : MonoBehaviour
         gameObject.GetComponent<CharacterController>().enabled = false;
         transform.position = new Vector3(464.89f, 85.16f, 1198.21f);
         transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
+
+        //after 0.7 seconds Enable char controller again
+        yield return new WaitForSeconds(0.4f);
+
+        gameObject.GetComponent<CharacterController>().enabled = true;
+
+    }
+
+    IEnumerator activateCharController5()
+    {
+        //set this to false so that you can teleport the position of character
+        gameObject.GetComponent<CharacterController>().enabled = false;
+        transform.position = new Vector3(636.93f, 101.81f, 4179.14f);
+        transform.Rotate(0.0f, 90.0f, 0.0f, Space.Self);
 
         //after 0.7 seconds Enable char controller again
         yield return new WaitForSeconds(0.4f);

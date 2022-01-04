@@ -11,6 +11,10 @@ public class Quest8EnemySpawner : MonoBehaviour
     public GameObject Boss1;
     public GameObject Boss2;
     public GameObject Boss3;
+    public GameObject basket;
+    public GameObject coconut;
+    public GameObject avocado;
+    public GameObject pineapple;
     Quest8Script quest8Script;
 
     GameObject waypointMarker;
@@ -99,6 +103,22 @@ public class Quest8EnemySpawner : MonoBehaviour
             if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true &&  ctr2 == true)
             {
                 SecondStageWallStart.SetActive(false);
+
+                var fruit1 = Instantiate(coconut, gameObject.transform.GetChild(24).position, gameObject.transform.GetChild(24).rotation);
+                fruit1.transform.parent = gameObject.transform.GetChild(24);
+
+                var fruit2 = Instantiate(coconut, gameObject.transform.GetChild(25).position, gameObject.transform.GetChild(25).rotation);
+                fruit2.transform.parent = gameObject.transform.GetChild(25);
+
+                var fruit3 = Instantiate(pineapple, gameObject.transform.GetChild(26).position, gameObject.transform.GetChild(26).rotation);
+                fruit3.transform.parent = gameObject.transform.GetChild(26);
+
+                var fruit4 = Instantiate(avocado, gameObject.transform.GetChild(27).position, gameObject.transform.GetChild(27).rotation);
+                fruit4.transform.parent = gameObject.transform.GetChild(27);
+
+                var fruit5 = Instantiate(basket, gameObject.transform.GetChild(28).position, gameObject.transform.GetChild(28).rotation);
+                fruit5.transform.parent = gameObject.transform.GetChild(28);
+
                 ctr2 = false;
             }
 
@@ -153,6 +173,22 @@ public class Quest8EnemySpawner : MonoBehaviour
             if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true && ctr4 == true)
             {
                 SecondStageWallEnd.SetActive(false);
+
+                var fruit6 = Instantiate(coconut, gameObject.transform.GetChild(29).position, gameObject.transform.GetChild(29).rotation);
+                fruit6.transform.parent = gameObject.transform.GetChild(29);
+
+                var fruit7 = Instantiate(coconut, gameObject.transform.GetChild(30).position, gameObject.transform.GetChild(30).rotation);
+                fruit7.transform.parent = gameObject.transform.GetChild(30);
+
+                var fruit8 = Instantiate(pineapple, gameObject.transform.GetChild(31).position, gameObject.transform.GetChild(31).rotation);
+                fruit8.transform.parent = gameObject.transform.GetChild(31);
+
+                var fruit9 = Instantiate(avocado, gameObject.transform.GetChild(32).position, gameObject.transform.GetChild(32).rotation);
+                fruit9.transform.parent = gameObject.transform.GetChild(32);
+
+                var fruit10 = Instantiate(basket, gameObject.transform.GetChild(33).position, gameObject.transform.GetChild(33).rotation);
+                fruit10.transform.parent = gameObject.transform.GetChild(33);
+
                 ctr4 = false;
             }
 
@@ -177,6 +213,22 @@ public class Quest8EnemySpawner : MonoBehaviour
             if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true && IsThirdWaveKilled() == true && ctr5 == true)
             {
                 ThirdStageWall.SetActive(false);
+
+                var fruit11 = Instantiate(coconut, gameObject.transform.GetChild(34).position, gameObject.transform.GetChild(34).rotation);
+                fruit11.transform.parent = gameObject.transform.GetChild(34);
+
+                var fruit12 = Instantiate(coconut, gameObject.transform.GetChild(35).position, gameObject.transform.GetChild(35).rotation);
+                fruit12.transform.parent = gameObject.transform.GetChild(35);
+
+                var fruit13 = Instantiate(pineapple, gameObject.transform.GetChild(36).position, gameObject.transform.GetChild(36).rotation);
+                fruit13.transform.parent = gameObject.transform.GetChild(36);
+
+                var fruit14 = Instantiate(avocado, gameObject.transform.GetChild(37).position, gameObject.transform.GetChild(37).rotation);
+                fruit14.transform.parent = gameObject.transform.GetChild(37);
+
+                var fruit15 = Instantiate(basket, gameObject.transform.GetChild(38).position, gameObject.transform.GetChild(38).rotation);
+                fruit15.transform.parent = gameObject.transform.GetChild(38);
+
                 ctr5 = false;
             }
 

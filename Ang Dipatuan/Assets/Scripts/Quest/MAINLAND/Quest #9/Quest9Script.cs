@@ -40,8 +40,8 @@ public class Quest9Script : MonoBehaviour
         questChecker2 = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker2>();
         saveQuestScript2 = GameObject.FindGameObjectWithTag("Updater2").GetComponent<SaveQuestScript2>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
-        warSpawner = GameObject.FindGameObjectWithTag("WarSpawner");
-        warSpawner.SetActive(false);
+        //warSpawner = GameObject.FindGameObjectWithTag("WarSpawner");
+        //warSpawner.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -112,7 +112,7 @@ public class Quest9Script : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             movement.stun = false;
             cinemachineBrain.enabled = true;
-            warSpawner.SetActive(true);
+            //warSpawner.SetActive(true);
         }
 
     }
