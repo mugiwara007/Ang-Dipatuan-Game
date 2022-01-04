@@ -10,6 +10,9 @@ public class MainCharacterController : MonoBehaviour
 	CharacterController controller;
 	Animator anim;
 
+	public AudioSource Run;
+	public AudioSource Walk;
+
 	private float speed = 6f;
 
 	public float turnSmoothTime = 0.1f;
@@ -72,9 +75,12 @@ public class MainCharacterController : MonoBehaviour
 	{
 		StartVariables();
 		stun = false;
+
+		Run.playOnAwake = false;
+		Walk.playOnAwake = false;
 	}
 
-	public void StartVariables()
+    public void StartVariables()
     {
 		controller = GetComponent<CharacterController>();
 		anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
@@ -217,6 +223,11 @@ public class MainCharacterController : MonoBehaviour
 			}
 
 			anim.SetBool("isWalking", true);
+			
+			if(!Walk.isPlaying)
+            {
+				Walk.Play();
+			}
 
 			//JUMP WHEN WALKING
 			if (isJumping)
@@ -231,7 +242,12 @@ public class MainCharacterController : MonoBehaviour
 				anim.SetBool("isRunning", true);
 				speed = 13f;
 				jumpHeight = 3f;
-				
+
+				if(!Run.isPlaying)
+                {
+					Run.Play();
+				}
+
 				//JUMP WHEN RUNNING
 				if (isJumping)
 				{
@@ -247,6 +263,7 @@ public class MainCharacterController : MonoBehaviour
 				speed = 4f;
 				jumpHeight = 2.6f;
 				isRunning = false;
+				Run.Stop();
 			}	
 		}
 		else
@@ -254,6 +271,7 @@ public class MainCharacterController : MonoBehaviour
 			anim.SetBool("isRunning", false);
 			anim.SetBool("isWalking", false);
 			isRunning = false;
+			Walk.Stop();
 		}
 
 		//End Movement
