@@ -10,8 +10,13 @@ public class MainCharacterController : MonoBehaviour
 	CharacterController controller;
 	Animator anim;
 
+	//Sound FX
 	public AudioSource Run;
 	public AudioSource Walk;
+	public AudioSource Jmp;
+	public AudioSource SSword;
+	public AudioSource USword;
+	public AudioSource Crch;
 
 	private float speed = 6f;
 
@@ -78,9 +83,13 @@ public class MainCharacterController : MonoBehaviour
 
 		Run.playOnAwake = false;
 		Walk.playOnAwake = false;
+		Jmp.playOnAwake = false;
+		SSword.playOnAwake = false;
+		USword.playOnAwake = false;
+		Crch.playOnAwake = false;
 	}
 
-    public void StartVariables()
+	public void StartVariables()
     {
 		controller = GetComponent<CharacterController>();
 		anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
@@ -88,7 +97,6 @@ public class MainCharacterController : MonoBehaviour
 		cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
 
 		followCamera = GameObject.FindGameObjectWithTag("followCamera");
-
 
 		kampilan = GameObject.FindGameObjectWithTag("KampilanArmed");
 		scabbardWithSword = GameObject.FindGameObjectWithTag("KampilanUnarmed");
@@ -137,7 +145,6 @@ public class MainCharacterController : MonoBehaviour
 			anim.SetBool("isWalking", false);
 			isRunning = false;
 		}
-
 	}
 
 
@@ -178,13 +185,14 @@ public class MainCharacterController : MonoBehaviour
 
 				anim.SetBool("isJumping", true);
 				isJumping = true;
-
+				Jmp.Play();
 			}
 		}
 		else if (groundedPlayer)
 		{
 			anim.SetBool("isJumping", false);
 			isJumping = false;
+			Jmp.Stop();
 		}
 
 		if (Input.GetButtonUp("Shift"))
@@ -253,6 +261,8 @@ public class MainCharacterController : MonoBehaviour
 				{
 					anim.SetBool("isJumping", true);
 					speed = 4f;
+					Run.Stop();
+					Walk.Stop();
 				}
 
 				
@@ -272,6 +282,7 @@ public class MainCharacterController : MonoBehaviour
 			anim.SetBool("isWalking", false);
 			isRunning = false;
 			Walk.Stop();
+			Run.Stop();
 		}
 
 		//End Movement
@@ -305,6 +316,7 @@ public class MainCharacterController : MonoBehaviour
 		//Crouch
 		if (Input.GetButton("Crouch") && isJumping == false && canCrouch)
 		{
+			Walk.Stop();
 			isCrouching = true;
 			//Adjust Crouch Layer in player Animator
 			var currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Crouch"));
@@ -320,7 +332,6 @@ public class MainCharacterController : MonoBehaviour
 			isCrouching = false;
 			var currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Crouch"));
 			anim.SetLayerWeight(anim.GetLayerIndex("Crouch"), Mathf.Lerp(currentWeight, 0f, 7f * Time.deltaTime));
-
 			Vector3 NewPos = new Vector3(followCamera.transform.localPosition.x, followCamPosition, followCamera.transform.localPosition.z);
 			followCamera.transform.localPosition = Vector3.Lerp(followCamera.transform.localPosition, NewPos, 7f * Time.deltaTime);
 		}
@@ -329,18 +340,15 @@ public class MainCharacterController : MonoBehaviour
 
 	public void Sheathe()
     {
-
+		
 		//Show Kampilan on Hand when Attacking
 		if (isLightAttacking || isHeavyAttacking || isBlocking )
 		{
 			kampilan.gameObject.SetActive(true);
 			timeToSheathe = 0f;
-			
 		}
 		else
 		{
-
-
 			if (isSwordRecentlyUsed)
             {
 				timeToSheathe += Time.deltaTime;
@@ -348,11 +356,11 @@ public class MainCharacterController : MonoBehaviour
 			
 			if (timeToSheathe >= 5f)
             {
+				USword.Play();
 				StartCoroutine("SheatheSword");
 				anim.SetBool("isSheathing", true);
 				kampilan.gameObject.transform.localPosition = new Vector3(0.1094f, -0.0691f, -0.396f);
 				kampilan.gameObject.transform.localRotation = Quaternion.Euler(-77.863f, -148.234f, 319.526f);
-
 				timeToSheathe = 0f;
 				isSwordRecentlyUsed = false;
 			}
@@ -362,7 +370,7 @@ public class MainCharacterController : MonoBehaviour
 				kampilan.gameObject.transform.localRotation = Quaternion.Euler(-37.614f, -100.303f, 259.229f);
 				anim.SetBool("isSheathing", false);
 			}
-			
+
 		}
 
 
@@ -373,7 +381,7 @@ public class MainCharacterController : MonoBehaviour
 		yield return new WaitForSeconds(0.5f);
 		kampilan.gameObject.SetActive(false);
 		isHoldingSword = false;
-
+		
 		scabbard.gameObject.SetActive(false);
 		scabbardWithSword.gameObject.SetActive(true);
 	}
@@ -384,9 +392,11 @@ public class MainCharacterController : MonoBehaviour
 		//For LightAttack
 		if (Input.GetKeyDown(KeyCode.Mouse0) && lightAttackPossible == true && isBlocking == false && isCrouching == false && groundedPlayer)
 		{
+			Run.Stop();
 			//if player is not holding the sword then withdraw the sword
 			if (!isHoldingSword)
 			{
+				SSword.Play();
 				anim.SetBool("withdrawSword", true);
 				StartCoroutine("ShowSwordOnHand");
 				StartCoroutine("SetWithdrawSwordAnimationToFalse");
@@ -427,7 +437,7 @@ public class MainCharacterController : MonoBehaviour
 
 	public void Combo()
     {
-		if(comboStep == 2)
+		if (comboStep == 2)
         {
 			anim.Play("sword attack 2");
 		}
@@ -460,7 +470,6 @@ public class MainCharacterController : MonoBehaviour
 	//HEAVY ATTACK
 	public void HeavyAttackActionListener()
 	{
-
 		//For Heavy Attack
 		if (Input.GetKeyDown(KeyCode.Mouse1) && playerBars.stamina >= 5f && heavyAttackPossible == true && isBlocking == false && isCrouching == false && groundedPlayer)
 		{
