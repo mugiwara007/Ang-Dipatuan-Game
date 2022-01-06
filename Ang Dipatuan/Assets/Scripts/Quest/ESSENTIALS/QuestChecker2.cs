@@ -38,10 +38,15 @@ public class QuestChecker2 : MonoBehaviour
     GameObject noEntryCollider2;
     GameObject noEntryDetector1;
     GameObject noEntryDetector2;
+    GameObject noEntryCollider3;
+    GameObject noEntryDetector3;
     Quest7Script quest7Script;
     GameObject quest7Collider;
     GameObject quest8ColliderObj;
     GameObject finalWarObject;
+    GameObject quest9Collider;
+    Quest8Script quest8Script;
+    Quest9Script quest9Script;
 
 
     GameObject activeSkill2;
@@ -74,12 +79,16 @@ public class QuestChecker2 : MonoBehaviour
         quest5Script = GameObject.FindGameObjectWithTag("Quest5Collider").GetComponent<Quest5Script>();
         quest6Script = GameObject.FindGameObjectWithTag("Quest6NPC").GetComponent<Quest6Script>();
         quest7Script = GameObject.FindGameObjectWithTag("Quest7Collider").GetComponent<Quest7Script>();
+        quest8Script = GameObject.FindGameObjectWithTag("Quest8Collider").GetComponent<Quest8Script>();
+        quest9Script = GameObject.FindGameObjectWithTag("Quest9Collider").GetComponent<Quest9Script>();
         quest7Collider = GameObject.FindGameObjectWithTag("Quest7Collider");
         quest6Object = GameObject.FindGameObjectWithTag("Quest6NPC");
         noEntryCollider1 = GameObject.FindGameObjectWithTag("NoEntryCollider1");
         noEntryCollider2 = GameObject.FindGameObjectWithTag("NoEntryCollider2");
         noEntryDetector1 = GameObject.FindGameObjectWithTag("NoEntryDetector1");
         noEntryDetector2 = GameObject.FindGameObjectWithTag("NoEntryDetector2");
+        noEntryCollider3 = GameObject.FindGameObjectWithTag("NoEntryCollider3");
+        noEntryDetector3 = GameObject.FindGameObjectWithTag("NoEntryDetector3");
         quest6Detector = quest6Object.transform.Find("Player Detector").gameObject;
         waypointScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<WaypointScript>();
         quest8ColliderObj = GameObject.FindGameObjectWithTag("Quest8Collider");
@@ -93,6 +102,7 @@ public class QuestChecker2 : MonoBehaviour
         dipatuanMode = GameObject.FindGameObjectWithTag("Player").GetComponent<DipatuanMode>();
         saveQuestScript2 = GameObject.FindGameObjectWithTag("Updater2").GetComponent<SaveQuestScript2>();
         finalWarObject = GameObject.FindGameObjectWithTag("WAR");
+        quest9Collider = GameObject.FindGameObjectWithTag("Quest9Collider");
 
         quest4Waypoint.SetActive(false);
         quest4Collider.SetActive(false);
@@ -102,9 +112,10 @@ public class QuestChecker2 : MonoBehaviour
         quest6Waypoint2.SetActive(false);
         quest6Detector.SetActive(false);
         quest7Collider.SetActive(false);
+        quest9Collider.SetActive(false);
         storm.SetActive(false);
         avocadoSpawner.SetActive(false);
-        //finalWarObject.SetActive(false);
+        finalWarObject.SetActive(false);
 
         activeSkill2.SetActive(false);
         activeSkill3.SetActive(false);
@@ -124,6 +135,8 @@ public class QuestChecker2 : MonoBehaviour
             noEntryCollider2.SetActive(false);
             noEntryDetector1.SetActive(false);
             noEntryDetector2.SetActive(false);
+            noEntryCollider3.SetActive(false);
+            noEntryDetector3.SetActive(false);
         }
         
         if (saveQuestScript2.CurrQuest2 >= 4)
@@ -156,6 +169,8 @@ public class QuestChecker2 : MonoBehaviour
         quest5Script.quest.currentQuest = SaveQuestScript2.Instance.CurrQuest2;
         quest6Script.quest.currentQuest = SaveQuestScript2.Instance.CurrQuest2;
         quest7Script.quest.currentQuest = SaveQuestScript2.Instance.CurrQuest2;
+        quest8Script.quest.currentQuest = SaveQuestScript2.Instance.CurrQuest2;
+        quest9Script.quest.currentQuest = SaveQuestScript2.Instance.CurrQuest2;
         gameSceneScript2.qctr = SaveQuestScript2.Instance.questPos2;
     }
 
@@ -278,15 +293,33 @@ public class QuestChecker2 : MonoBehaviour
             noEntryCollider2.SetActive(false);
             noEntryDetector1.SetActive(false);
             noEntryDetector2.SetActive(false);
+            noEntryCollider3.SetActive(false);
+            noEntryDetector3.SetActive(false);
             waypointScript.target = quest8ColliderObj.transform;
         }
         else if (quest.currentQuest == 8)
         {
+            if (canTeleport4)
+            {
+                StartCoroutine("activateCharController4");
+                movement.stun = true;
+                canTeleport4 = false;
+            }
+            waypointMarker.SetActive(false);
+            finalWarObject.SetActive(true);
             braveryMode.enabled = true;
             dipatuanMode.enabled = true;
             activeSkill2.SetActive(true);
             activeSkill3.SetActive(true);
-            //finalWarObject.SetActive(true);
+
+            timer += Time.deltaTime;
+
+            if (timer >= 3)
+            {
+                movement.stun = false;
+                quest9Collider.SetActive(true);
+                timer = 0f;
+            }
         }
 
     }

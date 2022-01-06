@@ -25,7 +25,7 @@ public class Quest9Script : MonoBehaviour
     MainCharacterController movement;
     CinemachineBrain cinemachineBrain;
     QuestChecker2 questChecker2;
-    GameObject warSpawner;
+    GameObject finalWarSpawner;
     SaveQuestScript2 saveQuestScript2;
     PlayerBar player;
 
@@ -40,8 +40,8 @@ public class Quest9Script : MonoBehaviour
         questChecker2 = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker2>();
         saveQuestScript2 = GameObject.FindGameObjectWithTag("Updater2").GetComponent<SaveQuestScript2>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
-        //warSpawner = GameObject.FindGameObjectWithTag("WarSpawner");
-        //warSpawner.SetActive(false);
+        finalWarSpawner = GameObject.FindGameObjectWithTag("FinalWarSpawner");
+        finalWarSpawner.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -53,7 +53,7 @@ public class Quest9Script : MonoBehaviour
             quest.currentQuest += 1;
             questComplete.SetActive(true);
             questChecker2.questNum = quest.currentQuest;
-            warSpawner.SetActive(false);
+            finalWarSpawner.SetActive(false);
             questChecker2.SaveStatQuest2();
             ctr = 1;
             gameSceneScript2.FadeToScene(10);
@@ -76,7 +76,7 @@ public class Quest9Script : MonoBehaviour
             {
                 questFailed.SetActive(false);
                 timer = 0f;
-                gameSceneScript2.FadeToScene(1);
+                gameSceneScript2.FadeToScene(5);
             }
         }
     }
@@ -85,7 +85,7 @@ public class Quest9Script : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (saveQuestScript2.CurrQuest2 == 1)
+            if (saveQuestScript2.CurrQuest2 == 8)
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
@@ -100,7 +100,7 @@ public class Quest9Script : MonoBehaviour
         }
     }
 
-    public void AcceptQuest2()
+    public void AcceptQuest9()
     {
         if (saveQuestScript2.CurrQuest2 == 8)
         {
@@ -112,7 +112,7 @@ public class Quest9Script : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             movement.stun = false;
             cinemachineBrain.enabled = true;
-            //warSpawner.SetActive(true);
+            finalWarSpawner.SetActive(true);
         }
 
     }
