@@ -10,7 +10,7 @@ public class MainCharacterController : MonoBehaviour
 	CharacterController controller;
 	Animator anim;
 
-	//Sound FX
+	//Sound FX Variables
 	public AudioSource Run;
 	public AudioSource Walk;
 	public AudioSource Jmp;
@@ -316,6 +316,10 @@ public class MainCharacterController : MonoBehaviour
 		//Crouch
 		if (Input.GetButton("Crouch") && isJumping == false && canCrouch)
 		{
+			if (!Crch.isPlaying)
+			{
+				Crch.Play();
+			}
 			Walk.Stop();
 			isCrouching = true;
 			//Adjust Crouch Layer in player Animator
@@ -329,6 +333,7 @@ public class MainCharacterController : MonoBehaviour
 		}
 		else
 		{
+			Crch.Stop();
 			isCrouching = false;
 			var currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Crouch"));
 			anim.SetLayerWeight(anim.GetLayerIndex("Crouch"), Mathf.Lerp(currentWeight, 0f, 7f * Time.deltaTime));
