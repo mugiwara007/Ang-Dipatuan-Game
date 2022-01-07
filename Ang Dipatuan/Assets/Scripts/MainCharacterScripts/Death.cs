@@ -12,6 +12,9 @@ public class Death : MonoBehaviour
 
     GameObject followCamera;
 
+    //Sound FX Variables
+    public AudioSource DeathFX;
+
     void Awake()
     {
         playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
@@ -37,6 +40,11 @@ public class Death : MonoBehaviour
             playerAnimator.SetBool("isAlive", false);
             charControl.enabled = false;
 
+            if (!DeathFX.isPlaying)
+            {
+                DeathFX.Play();
+            }
+
             gameObject.GetComponent<UseFruits>().enabled = false;
             gameObject.GetComponent<DipatuanMode>().enabled = false;
             gameObject.GetComponent<BraveryMode>().enabled = false;
@@ -51,6 +59,7 @@ public class Death : MonoBehaviour
         else
         {
             playerAnimator.SetBool("isAlive", true);
+            DeathFX.Stop();
         }
        
     }
