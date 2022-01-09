@@ -61,7 +61,7 @@ public class QuestChecker2 : MonoBehaviour
     DipatuanMode dipatuanMode;
 
     GameSceneScript2 gameSceneScript2;
-    SaveQuestScript2 saveQuestScript2;
+    SaveQuestScript saveQuestScript;
 
     private void Awake()
     {
@@ -100,7 +100,7 @@ public class QuestChecker2 : MonoBehaviour
         unlockSkill3UI = GameObject.FindGameObjectWithTag("Unlock3rdSkillUI");
         braveryMode = GameObject.FindGameObjectWithTag("Player").GetComponent<BraveryMode>();
         dipatuanMode = GameObject.FindGameObjectWithTag("Player").GetComponent<DipatuanMode>();
-        saveQuestScript2 = GameObject.FindGameObjectWithTag("Updater2").GetComponent<SaveQuestScript2>();
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         finalWarObject = GameObject.FindGameObjectWithTag("WAR");
         quest9Collider = GameObject.FindGameObjectWithTag("Quest9Collider");
 
@@ -129,7 +129,7 @@ public class QuestChecker2 : MonoBehaviour
             avocadoSpawner.SetActive(true);
         }
 
-        if (saveQuestScript2.CurrQuest2 >= 7)
+        if (saveQuestScript.CurrQuest >= 7)
         {
             noEntryCollider1.SetActive(false);
             noEntryCollider2.SetActive(false);
@@ -139,13 +139,13 @@ public class QuestChecker2 : MonoBehaviour
             noEntryDetector3.SetActive(false);
         }
         
-        if (saveQuestScript2.CurrQuest2 >= 4)
+        if (saveQuestScript.CurrQuest >= 4)
         {
             braveryMode.enabled = true;
             activeSkill2.SetActive(true);
         }
 
-        if (saveQuestScript2.CurrQuest2 >= 6)
+        if (saveQuestScript.CurrQuest >= 6)
         {
             dipatuanMode.enabled = true;
             activeSkill3.SetActive(true);
@@ -155,23 +155,23 @@ public class QuestChecker2 : MonoBehaviour
 
     public void SaveStatQuest2()
     {
-        SaveQuestScript2.Instance.CurrQuest2 = questNum;
+        SaveQuestScript.Instance.CurrQuest = questNum;
     }
 
     public void SavePos2()
     {
-        SaveQuestScript2.Instance.questPos2 = quest2;
+        SaveQuestScript.Instance.questPos = quest2;
     }
 
     void Start()
     {
-        quest.currentQuest = SaveQuestScript2.Instance.CurrQuest2;
-        quest5Script.quest.currentQuest = SaveQuestScript2.Instance.CurrQuest2;
-        quest6Script.quest.currentQuest = SaveQuestScript2.Instance.CurrQuest2;
-        quest7Script.quest.currentQuest = SaveQuestScript2.Instance.CurrQuest2;
-        quest8Script.quest.currentQuest = SaveQuestScript2.Instance.CurrQuest2;
-        quest9Script.quest.currentQuest = SaveQuestScript2.Instance.CurrQuest2;
-        gameSceneScript2.qctr = SaveQuestScript2.Instance.questPos2;
+        quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        quest5Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        quest6Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        quest7Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        quest8Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        quest9Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        gameSceneScript2.qctr = SaveQuestScript.Instance.questPos;
     }
 
     void Update()

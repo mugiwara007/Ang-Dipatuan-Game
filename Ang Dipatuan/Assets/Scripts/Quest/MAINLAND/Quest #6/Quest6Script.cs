@@ -26,7 +26,7 @@ public class Quest6Script : MonoBehaviour
     MainCharacterController movement;
     CinemachineBrain cinemachineBrain;
     QuestChecker2 questChecker2;
-    SaveQuestScript2 saveQuestScript2;
+    SaveQuestScript saveQuestScript;
     GameObject waypoint4;
     public int avocadoCtr;
     GameObject waypointMarker;
@@ -43,7 +43,7 @@ public class Quest6Script : MonoBehaviour
         playerDetector = GameObject.FindGameObjectWithTag("PlayerDetector1");
         movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
-        saveQuestScript2 = GameObject.FindGameObjectWithTag("Updater2").GetComponent<SaveQuestScript2>();
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         questChecker2 = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker2>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
         gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
@@ -52,7 +52,7 @@ public class Quest6Script : MonoBehaviour
     }
 
     public void Quest6() { 
-            if (saveQuestScript2.CurrQuest2 == 5)
+            if (saveQuestScript.CurrQuest == 5)
             {
                 waypointMarker.SetActive(false);
                 Cursor.visible = true;
@@ -69,7 +69,7 @@ public class Quest6Script : MonoBehaviour
 
     public void AcceptQuest6()
     {
-        if (saveQuestScript2.CurrQuest2 == 5)
+        if (saveQuestScript.CurrQuest == 5)
         {
             waypointMarker.SetActive(true);
             playerDetector.SetActive(false);
@@ -88,7 +88,7 @@ public class Quest6Script : MonoBehaviour
 
     private void Update()
     {
-        if (saveQuestScript2.CurrQuest2 == 5)
+        if (saveQuestScript.CurrQuest == 5)
         {
             if (player.health == 0)
             {
@@ -104,7 +104,7 @@ public class Quest6Script : MonoBehaviour
             }
         }
 
-        if (saveQuestScript2.CurrQuest2 == 5)
+        if (saveQuestScript.CurrQuest == 5)
         {
             if (avocadoCtr >= 3)
             {

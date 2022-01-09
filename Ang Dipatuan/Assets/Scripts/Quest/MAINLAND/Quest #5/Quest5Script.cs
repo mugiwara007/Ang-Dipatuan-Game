@@ -27,7 +27,7 @@ public class Quest5Script : MonoBehaviour
     MainCharacterController movement;
     CinemachineBrain cinemachineBrain;
     QuestChecker2 questChecker2;
-    SaveQuestScript2 saveQuestScript2;
+    SaveQuestScript saveQuestScript;
     GameObject waypointMarker;
 
     private void Awake()
@@ -38,7 +38,7 @@ public class Quest5Script : MonoBehaviour
         box = GameObject.FindGameObjectWithTag("Quest5Collider").GetComponent<BoxCollider>();
         movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
-        saveQuestScript2 = GameObject.FindGameObjectWithTag("Updater2").GetComponent<SaveQuestScript2>();
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         questChecker2 = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker2>();
         waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
     }
@@ -47,7 +47,7 @@ public class Quest5Script : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (saveQuestScript2.CurrQuest2 == 4)
+            if (saveQuestScript.CurrQuest == 4)
             {
                 waypointMarker.SetActive(false);
                 Cursor.visible = true;
@@ -65,7 +65,7 @@ public class Quest5Script : MonoBehaviour
 
     public void AcceptQuest5()
     {
-        if (saveQuestScript2.CurrQuest2 == 4)
+        if (saveQuestScript.CurrQuest == 4)
         {
             waypointMarker.SetActive(true);
             box.enabled = false;
@@ -87,7 +87,7 @@ public class Quest5Script : MonoBehaviour
 
         if (quest.goal.IsReached())
         {
-            if (saveQuestScript2.CurrQuest2 == 4)
+            if (saveQuestScript.CurrQuest == 4)
             {
                 timer += Time.deltaTime;
                 questGoldGiver.QuestComplete(quest.goldReward);

@@ -26,7 +26,7 @@ public class Quest7Script : MonoBehaviour
     MainCharacterController movement;
     CinemachineBrain cinemachineBrain;
     QuestChecker2 questChecker2;
-    SaveQuestScript2 saveQuestScript2;
+    SaveQuestScript saveQuestScript;
     GameObject waypointMarker;
     PlayerBar player;
     GameSceneScript2 gameSceneScript2;
@@ -40,7 +40,7 @@ public class Quest7Script : MonoBehaviour
         box = GameObject.FindGameObjectWithTag("Quest7Collider").GetComponent<BoxCollider>();
         movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
-        saveQuestScript2 = GameObject.FindGameObjectWithTag("Updater2").GetComponent<SaveQuestScript2>();
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         questChecker2 = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker2>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
         gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
@@ -51,7 +51,7 @@ public class Quest7Script : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (saveQuestScript2.CurrQuest2 == 6)
+            if (saveQuestScript.CurrQuest == 6)
             {
                 waypointMarker.SetActive(false);
                 Cursor.visible = true;
@@ -69,7 +69,7 @@ public class Quest7Script : MonoBehaviour
 
     public void AcceptQuest7()
     {
-        if (saveQuestScript2.CurrQuest2 == 6)
+        if (saveQuestScript.CurrQuest == 6)
         {
             waypointMarker.SetActive(true);
             box.enabled = false;
@@ -88,7 +88,7 @@ public class Quest7Script : MonoBehaviour
 
     private void Update()
     {
-        if (saveQuestScript2.CurrQuest2 == 6)
+        if (saveQuestScript.CurrQuest == 6)
         {
             if (player.health == 0)
             {

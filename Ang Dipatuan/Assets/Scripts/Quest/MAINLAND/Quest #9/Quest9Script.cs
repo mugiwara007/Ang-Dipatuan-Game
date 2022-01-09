@@ -26,7 +26,7 @@ public class Quest9Script : MonoBehaviour
     CinemachineBrain cinemachineBrain;
     QuestChecker2 questChecker2;
     GameObject finalWarSpawner;
-    SaveQuestScript2 saveQuestScript2;
+    SaveQuestScript saveQuestScript;
     PlayerBar player;
 
     private void Awake()
@@ -38,7 +38,7 @@ public class Quest9Script : MonoBehaviour
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
         gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
         questChecker2 = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker2>();
-        saveQuestScript2 = GameObject.FindGameObjectWithTag("Updater2").GetComponent<SaveQuestScript2>();
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
         finalWarSpawner = GameObject.FindGameObjectWithTag("FinalWarSpawner");
         finalWarSpawner.SetActive(false);
@@ -85,7 +85,7 @@ public class Quest9Script : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (saveQuestScript2.CurrQuest2 == 8)
+            if (saveQuestScript.CurrQuest == 8)
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
@@ -102,7 +102,7 @@ public class Quest9Script : MonoBehaviour
 
     public void AcceptQuest9()
     {
-        if (saveQuestScript2.CurrQuest2 == 8)
+        if (saveQuestScript.CurrQuest == 8)
         {
             box.enabled = false;
             questWindow.SetActive(false);
