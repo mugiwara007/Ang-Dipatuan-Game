@@ -305,8 +305,6 @@ public class MainCharacterController : MonoBehaviour
 		{
 			anim.SetBool("isBlocking", false);
 			isBlocking = false;
-
-			
 		}
 		//END Block
 	}
@@ -427,7 +425,7 @@ public class MainCharacterController : MonoBehaviour
         }
         if (comboStep != 0)
         {
-            if (comboPossible)
+			if (comboPossible)
             {
 				comboPossible = false;
 				comboStep += 1;
