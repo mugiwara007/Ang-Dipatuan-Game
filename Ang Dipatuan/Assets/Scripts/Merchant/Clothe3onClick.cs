@@ -5,7 +5,9 @@ using UnityEngine;
 public class Clothe3onClick : MonoBehaviour
 {
     BuyClothe BuyButton;
-
+    GameObject desc1;
+    GameObject desc2;
+    GameObject desc3;
 
     private void Awake()
     {

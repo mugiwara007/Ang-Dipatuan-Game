@@ -38,6 +38,12 @@ public class QuestChecker : MonoBehaviour
     private bool canTeleport2 = true;
 
     GameSceneScript gameSceneScript;
+    SaveQuestScript saveQuestScript;
+
+    PlayerBar player;
+    Gold gold;
+    Inventory inventory;
+    ClotheinInventory clothes;
 
     private void Awake()
     {
@@ -61,7 +67,13 @@ public class QuestChecker : MonoBehaviour
         unlock1stSkillUi = GameObject.FindGameObjectWithTag("Unlock1stSkillUI");
         unlock1stSkillUi.SetActive(false);
         unlockSkill1.SetActive(true);
-        
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
+        gold = GameObject.FindGameObjectWithTag("Player").GetComponent<Gold>();
+        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        clothes = GameObject.FindGameObjectWithTag("Player").GetComponent<ClotheinInventory>();
+
         war.SetActive(false);
         actBox.enabled = true;
         escapeObj.SetActive(false);
@@ -88,6 +100,42 @@ public class QuestChecker : MonoBehaviour
         activeSkill1.SetActive(false);
         quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
         gameSceneScript.qctr = SaveQuestScript.Instance.questPos;
+
+        if (saveQuestScript.isLoadActive == false)
+        {
+            SaveSystem.SavePlayer(player, gold, saveQuestScript, inventory, clothes);
+        }
+
+        if (saveQuestScript.isLoadActive == true)
+        {
+            PlayerData data = SaveSystem.LoadPlayer();
+            player.health = data.health;
+            player.mana = data.mana;
+
+            gold.total_gold = data.playerGold;
+
+            saveQuestScript.CurrQuest = data.currentQuest;
+
+            inventory.coconut = data.coconut;
+            inventory.avocado = data.avocado;
+            inventory.pineapple = data.pineapple;
+            inventory.fruitbasket = data.fruitBasket;
+
+            clothes.boughtCloth1 = data.armor1;
+            clothes.boughtCloth2 = data.armor2;
+            clothes.boughtCloth3 = data.armor3;
+
+            Vector3 position;
+
+            position.x = data.position[0];
+            position.y = data.position[1];
+            position.z = data.position[2];
+
+            StartCoroutine(activateCharController(position));
+
+            saveQuestScript.isLoadActive = false;
+        }
+
     }
 
     void Update()
@@ -159,6 +207,20 @@ public class QuestChecker : MonoBehaviour
             enemyCampSpawn2.SetActive(true);
             enemyCampSpawn3.SetActive(true);
         }
+    }
+
+    IEnumerator activateCharController(Vector3 pos)
+    {
+        //set this to false so that you can teleport the position of character
+        GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().enabled = false;
+        GameObject.FindGameObjectWithTag("Player").transform.position = pos;
+        Debug.Log("LIPAT PWESTO");
+
+        //after 0.7 seconds Enable char controller again
+        yield return new WaitForSeconds(0.4f);
+
+        GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().enabled = true;
+
     }
 
     IEnumerator activateCharController1()

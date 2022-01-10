@@ -21,7 +21,9 @@ public class SaveLoadScript : MonoBehaviour
     {
         canvas = gameObject.transform.parent.Find("Canvas").gameObject;
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
+      
         gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
+        
         canSave = false;
         canvas.SetActive(false);
     }

@@ -160,6 +160,30 @@ public class QuestChecker2 : MonoBehaviour
             activeSkill3.SetActive(true);
         }
 
+        
+
+    }
+
+    public void SaveStatQuest2()
+    {
+        SaveQuestScript.Instance.CurrQuest = questNum;
+    }
+
+    public void SavePos2()
+    {
+        SaveQuestScript.Instance.questPos = quest2;
+    }
+
+    void Start()
+    {
+        quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        quest5Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        quest6Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        quest7Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        quest8Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        quest9Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
+        gameSceneScript2.qctr = SaveQuestScript.Instance.questPos;
+
         if (saveQuestScript.isLoadActive == true)
         {
             PlayerData data = SaveSystem.LoadPlayer();
@@ -214,28 +238,6 @@ public class QuestChecker2 : MonoBehaviour
 
             saveQuestScript.isLoadActive = false;
         }
-
-    }
-
-    public void SaveStatQuest2()
-    {
-        SaveQuestScript.Instance.CurrQuest = questNum;
-    }
-
-    public void SavePos2()
-    {
-        SaveQuestScript.Instance.questPos = quest2;
-    }
-
-    void Start()
-    {
-        quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
-        quest5Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
-        quest6Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
-        quest7Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
-        quest8Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
-        quest9Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
-        gameSceneScript2.qctr = SaveQuestScript.Instance.questPos;
     }
 
     void Update()
@@ -393,6 +395,7 @@ public class QuestChecker2 : MonoBehaviour
         //set this to false so that you can teleport the position of character
         GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().enabled = false;
         GameObject.FindGameObjectWithTag("Player").transform.position = pos;
+        Debug.Log("LIPAT PWESTO");
 
         //after 0.7 seconds Enable char controller again
         yield return new WaitForSeconds(0.4f);

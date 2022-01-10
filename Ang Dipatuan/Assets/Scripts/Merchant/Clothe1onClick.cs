@@ -6,7 +6,6 @@ public class Clothe1onClick : MonoBehaviour
 {
     BuyClothe BuyButton;
 
-
     private void Awake()
     {
         BuyButton = gameObject.transform.parent.Find("Buy").gameObject.GetComponent<BuyClothe>();

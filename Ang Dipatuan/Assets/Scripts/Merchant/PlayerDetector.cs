@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerDetector : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PlayerDetector : MonoBehaviour
     private bool canShop;
 
     GameObject shopUI;
+    MainCharacterController movement;
+    CinemachineBrain cinemachineBrain;
 
     private void Awake()
     {
@@ -15,7 +18,12 @@ public class PlayerDetector : MonoBehaviour
         canShop = false;
 
         shopUI = GameObject.FindGameObjectWithTag("ShopUI");
+        movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
+        cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
+    }
 
+    private void Start()
+    {
         shopUI.SetActive(false);
     }
 
@@ -27,6 +35,8 @@ public class PlayerDetector : MonoBehaviour
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.Confined;
+                movement.stun = true;
+                cinemachineBrain.enabled = false;
                 shopUI.SetActive(true);
             }
         }
