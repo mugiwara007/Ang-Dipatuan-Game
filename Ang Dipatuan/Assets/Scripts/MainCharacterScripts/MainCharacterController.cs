@@ -43,7 +43,7 @@ public class MainCharacterController : MonoBehaviour
 	//Attack End
 
 
-	//FOR JUMPING
+	//For Jumping
 	public bool groundedPlayer;
 	private Vector3 playerVelocity;
 	private float jumpHeight = 2.6f;
@@ -201,7 +201,6 @@ public class MainCharacterController : MonoBehaviour
 			isRunning = false;
 		}
 
-
 		playerVelocity.y += gravityValue * Time.deltaTime; //Creates Gravity to Player
 
 		controller.Move(playerVelocity * Time.deltaTime);
@@ -240,7 +239,8 @@ public class MainCharacterController : MonoBehaviour
 			//JUMP WHEN WALKING
 			if (isJumping)
 			{
-				anim.SetBool("isJumping", true);			
+				anim.SetBool("isJumping", true);
+				Walk.Stop();
 			}
 
 			//RUNNING
@@ -314,16 +314,21 @@ public class MainCharacterController : MonoBehaviour
 		//Crouch
 		if (Input.GetButton("Crouch") && isJumping == false && canCrouch)
 		{
-			if (!Crch.isPlaying)
-			{
-				Crch.Play();
-			}
-			Walk.Stop();
 			isCrouching = true;
 			//Adjust Crouch Layer in player Animator
 			var currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Crouch"));
 			anim.SetLayerWeight(anim.GetLayerIndex("Crouch"), Mathf.Lerp(currentWeight, 1.0f, 7f * Time.deltaTime));
 			speed = 3f;
+
+			if (!Crch.isPlaying && anim.GetBool("isWalking") == true)
+			{
+				Crch.Play();
+			}
+			else if(anim.GetBool("isWalking") == false)
+            {
+				Crch.Stop();
+			}
+			Walk.Stop();
 
 			//Makes Camera to go down a little bit when crouching
 			Vector3 NewPos = new Vector3(followCamera.transform.localPosition.x, followCamPosition - 0.5f, followCamera.transform.localPosition.z);
@@ -395,7 +400,6 @@ public class MainCharacterController : MonoBehaviour
 		//For LightAttack
 		if (Input.GetKeyDown(KeyCode.Mouse0) && lightAttackPossible == true && isBlocking == false && isCrouching == false && groundedPlayer)
 		{
-			Run.Stop();
 			//if player is not holding the sword then withdraw the sword
 			if (!isHoldingSword)
 			{
