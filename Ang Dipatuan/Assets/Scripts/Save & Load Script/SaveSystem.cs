@@ -5,7 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 public static class SaveSystem
 {
     //eto yung tatawagin pag mag sasave
-    public static void SavePlayer(PlayerBar player, Gold gold, SaveQuestScript updater, SaveQuestScript2 updater2, Inventory inventory, ClotheinInventory clothes)
+    public static void SavePlayer(PlayerBar player, Gold gold, SaveQuestScript updater, Inventory inventory, ClotheinInventory clothes)
     {
         
         BinaryFormatter formatter = new BinaryFormatter();
@@ -14,7 +14,7 @@ public static class SaveSystem
         FileStream stream = new FileStream(path, FileMode.Create);
 
         //instantiante the class of data holder of player ccreate tong script nato bukod sa script nato bale parang compilation of data ng player yung PlayerData para dun mo nalang kukunin pag isasave mo na
-        PlayerData data = new PlayerData(player, gold,  updater, updater2, inventory, clothes);
+        PlayerData data = new PlayerData(player, gold,  updater, inventory, clothes);
 
         formatter.Serialize(stream, data);
         Debug.Log("PUMASOK");

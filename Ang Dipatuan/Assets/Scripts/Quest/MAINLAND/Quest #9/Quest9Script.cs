@@ -29,6 +29,8 @@ public class Quest9Script : MonoBehaviour
     SaveQuestScript saveQuestScript;
     PlayerBar player;
 
+    private bool qfailed = true;
+
     private void Awake()
     {
         questDesc = GameObject.FindGameObjectWithTag("QuestUI").GetComponent<Text>();
@@ -68,7 +70,7 @@ public class Quest9Script : MonoBehaviour
                 ctr = 0;
             }
         }
-        if (player.health == 0)
+        if (player.health == 0 && qfailed == true)
         {
             timer += Time.deltaTime;
             questFailed.SetActive(true);

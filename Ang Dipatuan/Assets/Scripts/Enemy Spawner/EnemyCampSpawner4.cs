@@ -8,7 +8,7 @@ public class EnemyCampSpawner4 : MonoBehaviour
     public GameObject EnemySoldier3;
     public GameObject SpanishSoldier;
     public GameObject EnemyRifleMan;
-    SaveQuestScript2 saveQuestScript2;
+    SaveQuestScript saveQuestScript;
     Quest7Script quest7Script;
 
     private float timer;
@@ -16,7 +16,7 @@ public class EnemyCampSpawner4 : MonoBehaviour
     private void Awake()
     {
         quest7Script = GameObject.FindGameObjectWithTag("Quest7Collider").GetComponent<Quest7Script>();
-        saveQuestScript2 = GameObject.FindGameObjectWithTag("Updater2").GetComponent<SaveQuestScript2>();
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         InstantiateEnemies();
     }
 
@@ -49,7 +49,7 @@ public class EnemyCampSpawner4 : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            if (saveQuestScript2.CurrQuest2 == 6)
+            if (saveQuestScript.CurrQuest == 6)
             {
                 quest7Script.quest.goal.EnemyKilled();
             }

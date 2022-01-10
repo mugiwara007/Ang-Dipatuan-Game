@@ -30,6 +30,8 @@ public class WarScript : MonoBehaviour
     SaveQuestScript saveQuestScript;
     PlayerBar player;
 
+    private bool qfailed = true;
+
     private void Awake()
     {
         questDesc = GameObject.FindGameObjectWithTag("QuestUI").GetComponent<Text>();
@@ -69,7 +71,7 @@ public class WarScript : MonoBehaviour
                 ctr = 0;
             }
         }
-        if(player.health == 0)
+        if(player.health == 0 && qfailed == true)
         {
             timer += Time.deltaTime;
             questFailed.SetActive(true);

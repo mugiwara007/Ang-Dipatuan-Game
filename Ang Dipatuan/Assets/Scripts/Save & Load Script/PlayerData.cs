@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class PlayerData
@@ -25,10 +26,12 @@ public class PlayerData
 
     public float[] position;
 
+    public int sceneIndex;
+
     //plus lahat ng data na kailangan isave dapat instantiate dito
     
 
-    public PlayerData(PlayerBar player, Gold gold, SaveQuestScript updater, SaveQuestScript2 updater2, Inventory inventory, ClotheinInventory clothes)
+    public PlayerData(PlayerBar player, Gold gold, SaveQuestScript updater, Inventory inventory, ClotheinInventory clothes)
     {
         //Player Stats
         health = player.health;
@@ -38,16 +41,7 @@ public class PlayerData
         playerGold = gold.total_gold;
 
         //Current Quest
-        try
-        {
-           currentQuest = updater.CurrQuest;
-        }
-        catch
-        {
-            currentQuest = 3;
-        }
-        
-        currentQuest2 = updater2.CurrQuest2;
+        currentQuest = updater.CurrQuest;
 
         //Items
         coconut = inventory.coconut;
@@ -60,12 +54,15 @@ public class PlayerData
         armor2 = clothes.boughtCloth2;
         armor3 = clothes.boughtCloth3;
 
-        //create a float array para dito ma store yung Vector 3 position
+        //Create a float array para dito ma store yung Vector 3 position
         position = new float[3];
 
         position[0] = player.transform.position.x;
         position[1] = player.transform.position.y;
         position[2] = player.transform.position.z;
+
+        //Current Scene
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
 }

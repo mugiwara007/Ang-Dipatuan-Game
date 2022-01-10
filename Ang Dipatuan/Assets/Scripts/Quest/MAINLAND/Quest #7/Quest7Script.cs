@@ -90,7 +90,7 @@ public class Quest7Script : MonoBehaviour
     {
         if (saveQuestScript.CurrQuest == 6)
         {
-            if (player.health == 0)
+            if (player.health == 0 && qfailed == true)
             {
                 timer += Time.deltaTime;
                 questFailed.SetActive(true);

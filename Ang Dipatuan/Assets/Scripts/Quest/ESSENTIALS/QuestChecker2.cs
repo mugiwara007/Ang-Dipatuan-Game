@@ -48,6 +48,10 @@ public class QuestChecker2 : MonoBehaviour
     Quest8Script quest8Script;
     Quest9Script quest9Script;
 
+    PlayerBar player;
+    Gold gold;
+    Inventory inventory;
+    ClotheinInventory clothes;
 
     GameObject activeSkill2;
     GameObject activeSkill3;
@@ -104,6 +108,11 @@ public class QuestChecker2 : MonoBehaviour
         finalWarObject = GameObject.FindGameObjectWithTag("WAR");
         quest9Collider = GameObject.FindGameObjectWithTag("Quest9Collider");
 
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
+        gold = GameObject.FindGameObjectWithTag("Player").GetComponent<Gold>();
+        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        clothes = GameObject.FindGameObjectWithTag("Player").GetComponent<ClotheinInventory>();
+
         quest4Waypoint.SetActive(false);
         quest4Collider.SetActive(false);
         quest5Waypoint.SetActive(false);
@@ -149,6 +158,61 @@ public class QuestChecker2 : MonoBehaviour
         {
             dipatuanMode.enabled = true;
             activeSkill3.SetActive(true);
+        }
+
+        if (saveQuestScript.isLoadActive == true)
+        {
+            PlayerData data = SaveSystem.LoadPlayer();
+            player.health = data.health;
+            player.mana = data.mana;
+
+            gold.total_gold = data.playerGold;
+
+            saveQuestScript.CurrQuest = data.currentQuest;
+
+            inventory.coconut = data.coconut;
+            inventory.avocado = data.avocado;
+            inventory.pineapple = data.pineapple;
+            inventory.fruitbasket = data.fruitBasket;
+
+            clothes.boughtCloth1 = data.armor1;
+            clothes.boughtCloth2 = data.armor2;
+            clothes.boughtCloth3 = data.armor3;
+
+            Vector3 position;
+
+            position.x = data.position[0];
+            position.y = data.position[1];
+            position.z = data.position[2];
+
+            StartCoroutine(activateCharController(position));
+
+            if (saveQuestScript.CurrQuest == 4)
+            {
+                canTeleport1 = false;
+            }
+
+            if (saveQuestScript.CurrQuest == 5)
+            {
+                canTeleport2 = false;
+            }
+
+            if (saveQuestScript.CurrQuest == 6)
+            {
+                canTeleport3 = false;
+            }
+
+            if (saveQuestScript.CurrQuest == 7)
+            {
+                canTeleport5 = false;
+            }
+
+            if (saveQuestScript.CurrQuest == 8)
+            {
+                canTeleport4 = false;
+            }
+
+            saveQuestScript.isLoadActive = false;
         }
 
     }
@@ -210,7 +274,7 @@ public class QuestChecker2 : MonoBehaviour
             quest4Waypoint.SetActive(false);
             quest4Collider.SetActive(false);
             timer += Time.deltaTime;
-            if (canTeleport1)
+            if (canTeleport1 == true)
             {
                 StartCoroutine("activateCharController1");
                 canTeleport1 = false;
@@ -231,7 +295,7 @@ public class QuestChecker2 : MonoBehaviour
             unlockSkill3.SetActive(true);
             quest6Detector.SetActive(true);
 
-            if (canTeleport2)
+            if (canTeleport2 == true)
             {
                 StartCoroutine("activateCharController2");
                 canTeleport2 = false;
@@ -264,7 +328,7 @@ public class QuestChecker2 : MonoBehaviour
             }
 
             timer += Time.deltaTime;
-            if (canTeleport3)
+            if (canTeleport3 == true)
             {
                 StartCoroutine("activateCharController3");
                 canTeleport3 = false;
@@ -279,7 +343,7 @@ public class QuestChecker2 : MonoBehaviour
         }
         else if (quest.currentQuest == 7)
         {
-            if (canTeleport5)
+            if (canTeleport5 == true)
             {
                 StartCoroutine("activateCharController5");
                 canTeleport5 = false;
@@ -299,7 +363,7 @@ public class QuestChecker2 : MonoBehaviour
         }
         else if (quest.currentQuest == 8)
         {
-            if (canTeleport4)
+            if (canTeleport4 == true)
             {
                 StartCoroutine("activateCharController4");
                 movement.stun = true;
@@ -321,6 +385,19 @@ public class QuestChecker2 : MonoBehaviour
                 timer = 0f;
             }
         }
+
+    }
+
+    IEnumerator activateCharController(Vector3 pos)
+    {
+        //set this to false so that you can teleport the position of character
+        GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().enabled = false;
+        GameObject.FindGameObjectWithTag("Player").transform.position = pos;
+
+        //after 0.7 seconds Enable char controller again
+        yield return new WaitForSeconds(0.4f);
+
+        GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().enabled = true;
 
     }
 

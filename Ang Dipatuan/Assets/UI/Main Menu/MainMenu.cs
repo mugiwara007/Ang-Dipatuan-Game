@@ -7,6 +7,15 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameSceneScript3 gameSceneScript3;
+    SaveQuestScript saveQuestScript;
+    int sceneToLoad;
+
+    private void Awake()
+    {
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
+    }
+
     public void QuitGame()
     {
         Debug.Log("QUIT");
@@ -20,6 +29,10 @@ public class MainMenu : MonoBehaviour
 
     public void LoadGame()
     {
-        SaveSystem.LoadPlayer();
+        PlayerData data = SaveSystem.LoadPlayer();
+        saveQuestScript.isLoadActive = true;
+        sceneToLoad = data.sceneIndex;
+        Debug.Log(sceneToLoad);
+        gameSceneScript3.FadeToScene(sceneToLoad);
     }
 }
