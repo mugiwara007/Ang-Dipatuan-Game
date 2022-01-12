@@ -10,13 +10,29 @@ public class MainCharacterController : MonoBehaviour
 	CharacterController controller;
 	Animator anim;
 
-	//Sound FX Variables
+	//Sound FX Variables (Movements)
 	public AudioSource Run;
 	public AudioSource Walk;
 	public AudioSource Jmp;
 	public AudioSource SSword;
 	public AudioSource USword;
 	public AudioSource Crch;
+
+	//Sound FX Variables (Attack)
+	public AudioSource SA1;
+	public AudioSource SA2;
+	public AudioSource SA3;
+	public AudioSource SA4;
+	public AudioSource JmpAtk;
+	public AudioSource Stab;
+	//Heavy Atks
+	public AudioSource HA1;
+	public AudioSource HA2;
+	public AudioSource HA3;
+	//Skills
+	public AudioSource Brvry;
+	public AudioSource SloMo;
+	public AudioSource DMode;
 
 	private float speed = 6f;
 
@@ -81,12 +97,29 @@ public class MainCharacterController : MonoBehaviour
 		StartVariables();
 		stun = false;
 
+		//Movements Sound FX
 		Run.playOnAwake = false;
 		Walk.playOnAwake = false;
 		Jmp.playOnAwake = false;
 		SSword.playOnAwake = false;
 		USword.playOnAwake = false;
 		Crch.playOnAwake = false;
+
+		//Attack Sound FX
+		SA1.playOnAwake = false;
+		SA2.playOnAwake = false;
+		SA3.playOnAwake = false;
+		SA4.playOnAwake = false;
+		JmpAtk.playOnAwake = false;
+		Stab.playOnAwake = false;
+		HA1.playOnAwake = false;
+		HA2.playOnAwake = false;
+		HA3.playOnAwake = false;
+
+		//Skills Sound FX
+		Brvry.playOnAwake = false;
+		SloMo.playOnAwake = false;
+		DMode.playOnAwake = false;
 	}
 
 	public void StartVariables()
@@ -646,5 +679,59 @@ public class MainCharacterController : MonoBehaviour
 		cinemachineFreeLookCam.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = frequency;
 	}
 	//End Jump Drop Down Attack
+	
 
+	//Sound FX Functions
+	public void SwordAtk1FX()
+    {
+		SA1.Play();
+    }
+	public void SwordAtk2FX()
+	{
+		SA2.Play();
+	}
+	public void JmpAtkFX()
+	{
+		JmpAtk.Play();
+	}
+	public void SwordAtk4FX()
+	{
+		SA4.Play();
+	}
+	public void SwordAtk3FX()
+	{
+		SA3.Play();
+	}
+	public void StabFX()
+	{
+		Stab.Play();
+	}
+	public void HeavyAtk1FX()
+	{
+		HA1.Play();
+	}
+	public void HeavyAtk2FX()
+	{
+		HA2.Play();
+	}
+	public void HeavyAtk3FX()
+	{
+		HA3.Play();
+	}
+
+	//Skills
+	public void BraveryFX()
+    {
+		Brvry.Play();
+    }
+	public void SlowMoFX()
+    {
+		SloMo.Play();
+    }
+	public void DipatuanModeFX()
+    {
+		DMode.Play();
+	}
+
+	//END Sound FX Functions
 }
