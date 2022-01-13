@@ -17,6 +17,7 @@ public class MainCharacterController : MonoBehaviour
 	public AudioSource SSword;
 	public AudioSource USword;
 	public AudioSource Crch;
+	public AudioSource Hit;
 
 	//Sound FX Variables (Attack)
 	public AudioSource SA1;
@@ -25,6 +26,7 @@ public class MainCharacterController : MonoBehaviour
 	public AudioSource SA4;
 	public AudioSource JmpAtk;
 	public AudioSource Stab;
+
 	//Heavy Atks
 	public AudioSource HA1;
 	public AudioSource HA2;
@@ -104,6 +106,7 @@ public class MainCharacterController : MonoBehaviour
 		SSword.playOnAwake = false;
 		USword.playOnAwake = false;
 		Crch.playOnAwake = false;
+		Hit.playOnAwake = false;
 
 		//Attack Sound FX
 		SA1.playOnAwake = false;
@@ -717,6 +720,10 @@ public class MainCharacterController : MonoBehaviour
 	public void HeavyAtk3FX()
 	{
 		HA3.Play();
+	}
+	public void HitFX()
+	{
+		Hit.Play();
 	}
 
 	//Skills

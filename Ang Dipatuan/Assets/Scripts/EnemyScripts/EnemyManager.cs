@@ -26,13 +26,21 @@ public class EnemyManager : MonoBehaviour
 
     private bool turnAvail = false;
 
-   private void Awake()
+    //Sound FX
+    public AudioSource GunShot;
+    public AudioSource Slsh;
+
+    private void Awake()
    {
         enemyLocomotionManger = GetComponent<EnemyLocomotionManger>();
         enemyAnimatorManager = GetComponent<EnemyAnimatorManager>();
         charStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
 
         enemyPatrolling = true;
+
+        //Sound FX
+        GunShot.playOnAwake = false;
+        Slsh.playOnAwake = false;
 
     }
 
@@ -203,4 +211,14 @@ public class EnemyManager : MonoBehaviour
 
     }
     #endregion
+
+    //Sound FX
+    public void BulletFX()
+    {
+        GunShot.Play();
+    }
+    public void SlashFX()
+    {
+        Slsh.Play();
+    }
 }
