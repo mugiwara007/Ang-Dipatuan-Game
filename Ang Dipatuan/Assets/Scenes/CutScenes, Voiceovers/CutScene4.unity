@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 4855.424, g: 6065.8203, b: 7821.5703, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7228,7 +7228,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 4115cae238013b7439baf914e867d97e, type: 2}
+  sharedProfile: {fileID: 11400000, guid: b5434d7cb2adc874ca7e2af91bec543a, type: 2}
 --- !u!4 &369874054
 Transform:
   m_ObjectHideFlags: 0
@@ -23875,8 +23875,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152764625}
-  m_LocalRotation: {x: -0.087938376, y: 0.7375644, z: -0.0979279, w: -0.66232604}
-  m_LocalPosition: {x: 9.046631, y: 3.7636948, z: 2.2996826}
+  m_LocalRotation: {x: -0.105601445, y: 0.5916761, z: -0.078557976, w: -0.7953593}
+  m_LocalPosition: {x: 9.2404785, y: 3.7643967, z: -1.3696289}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1223250505}
@@ -45280,6 +45280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3c83105464e1242879d2b74050f1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathFX: {fileID: 0}
 --- !u!114 &904595162616901249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47346,12 +47347,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'CC_Base_R_Foot'\n\tTransform 'CC_Base_R_Calf'\n\tTransform
-    'CC_Base_L_Thumb1'\n\tTransform 'CC_Base_L_Clavicle'\n\tTransform 'CC_Base_R_Clavicle'\n\tTransform
-    'CC_Base_L_Mid3'\n\tTransform 'CC_Base_NeckTwist01'\n\tTransform 'CC_Base_R_Index2'\n\tTransform
-    'CC_Base_L_Index2'\n\tTransform 'CC_Base_BoneRoot'\n\tand more ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -59913,6 +59909,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50713c37e2191ec4b87f634dab840bff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Run: {fileID: 0}
+  Walk: {fileID: 0}
+  Jmp: {fileID: 0}
+  SSword: {fileID: 0}
+  USword: {fileID: 0}
+  Crch: {fileID: 0}
+  SA1: {fileID: 0}
+  SA2: {fileID: 0}
+  SA3: {fileID: 0}
+  SA4: {fileID: 0}
+  JmpAtk: {fileID: 0}
+  Stab: {fileID: 0}
+  HA1: {fileID: 0}
+  HA2: {fileID: 0}
+  HA3: {fileID: 0}
+  Brvry: {fileID: 0}
+  SloMo: {fileID: 0}
+  DMode: {fileID: 0}
   turnSmoothTime: 0.1
   stun: 0
   isRunning: 0

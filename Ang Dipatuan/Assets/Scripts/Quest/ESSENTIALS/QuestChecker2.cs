@@ -48,6 +48,11 @@ public class QuestChecker2 : MonoBehaviour
     Quest8Script quest8Script;
     Quest9Script quest9Script;
 
+    public GameObject sky1;
+    public GameObject sky2;
+    public GameObject light1;
+    public GameObject light2;
+
     PlayerBar player;
     Gold gold;
     Inventory inventory;
@@ -132,6 +137,11 @@ public class QuestChecker2 : MonoBehaviour
         unlockSkill2UI.SetActive(false);
         unlockSkill3.SetActive(false);
         unlockSkill3UI.SetActive(false);
+
+        sky1.SetActive(true);
+        light1.SetActive(true);
+        sky2.SetActive(false);
+        light2.SetActive(false);
 
         if (avocadoController == true)
         {
@@ -371,6 +381,11 @@ public class QuestChecker2 : MonoBehaviour
                 movement.stun = true;
                 canTeleport4 = false;
             }
+            sky1.SetActive(false);
+            light1.SetActive(false);
+            storm.SetActive(true);
+            sky2.SetActive(true);
+            light2.SetActive(true);
             waypointMarker.SetActive(false);
             finalWarObject.SetActive(true);
             braveryMode.enabled = true;
