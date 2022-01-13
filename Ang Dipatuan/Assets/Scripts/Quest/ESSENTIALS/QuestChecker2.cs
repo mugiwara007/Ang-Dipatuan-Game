@@ -72,6 +72,9 @@ public class QuestChecker2 : MonoBehaviour
     GameSceneScript2 gameSceneScript2;
     SaveQuestScript saveQuestScript;
 
+    //Sound FX (Environment)
+    public AudioSource rain;
+
     private void Awake()
     {
         gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
@@ -142,6 +145,8 @@ public class QuestChecker2 : MonoBehaviour
         light1.SetActive(true);
         sky2.SetActive(false);
         light2.SetActive(false);
+
+        rain.playOnAwake = false;
 
         if (avocadoController == true)
         {
@@ -392,6 +397,11 @@ public class QuestChecker2 : MonoBehaviour
             dipatuanMode.enabled = true;
             activeSkill2.SetActive(true);
             activeSkill3.SetActive(true);
+
+            if (!rain.isPlaying)
+            {
+                rain.Play();
+            }
 
             timer += Time.deltaTime;
 
