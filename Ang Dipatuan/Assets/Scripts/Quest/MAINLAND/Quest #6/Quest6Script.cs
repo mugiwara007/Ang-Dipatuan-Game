@@ -99,7 +99,7 @@ public class Quest6Script : MonoBehaviour
                     questFailed.SetActive(false);
                     timer = 0f;
                     qfailed = false;
-                    gameSceneScript2.FadeToScene(5);
+                    gameSceneScript2.FadeToScene(6);
                 }
             }
         }
@@ -131,7 +131,7 @@ public class Quest6Script : MonoBehaviour
             if (timer > 3f)
             {
                 questComplete.SetActive(false);
-                gameSceneScript2.FadeToScene(6);
+                gameSceneScript2.FadeToScene(7);
                 timer = 0f;
                 ctr = 0;
             }

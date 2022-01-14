@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestChecker2 : MonoBehaviour
 {
@@ -72,6 +73,8 @@ public class QuestChecker2 : MonoBehaviour
     GameSceneScript2 gameSceneScript2;
     SaveQuestScript saveQuestScript;
 
+    Text questDesc;
+
     //Sound FX (Environment)
     public AudioSource rain;
 
@@ -115,6 +118,7 @@ public class QuestChecker2 : MonoBehaviour
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         finalWarObject = GameObject.FindGameObjectWithTag("WAR");
         quest9Collider = GameObject.FindGameObjectWithTag("Quest9Collider");
+        questDesc = GameObject.FindGameObjectWithTag("QuestUI").GetComponent<Text>();
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
         gold = GameObject.FindGameObjectWithTag("Player").GetComponent<Gold>();
@@ -198,6 +202,12 @@ public class QuestChecker2 : MonoBehaviour
         quest8Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
         quest9Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
         gameSceneScript2.qctr = SaveQuestScript.Instance.questPos;
+
+
+        if (saveQuestScript.CurrQuest == 8)
+        {
+            SaveSystem.SavePlayer(player, gold, saveQuestScript, inventory, clothes);
+        }
 
         if (saveQuestScript.isLoadActive == true)
         {
@@ -365,6 +375,7 @@ public class QuestChecker2 : MonoBehaviour
                 StartCoroutine("activateCharController5");
                 canTeleport5 = false;
             }
+            questDesc.text = "Gather items and upgrade your armor before continuing. Go to the waypoint.";
             braveryMode.enabled = true;
             dipatuanMode.enabled = true;
             activeSkill2.SetActive(true);

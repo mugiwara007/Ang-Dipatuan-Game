@@ -17,7 +17,6 @@ public static class SaveSystem
         PlayerData data = new PlayerData(player, gold,  updater, inventory, clothes);
 
         formatter.Serialize(stream, data);
-        Debug.Log("PUMASOK");
         stream.Close();
 
 

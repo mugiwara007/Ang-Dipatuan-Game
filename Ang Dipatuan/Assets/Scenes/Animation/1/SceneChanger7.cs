@@ -15,7 +15,7 @@ public class SceneChanger7 : MonoBehaviour
         if (time >= 4f)
         {
             time = 0f;
-            FadeToScene(12);
+            FadeToScene(13);
         }
     }
 

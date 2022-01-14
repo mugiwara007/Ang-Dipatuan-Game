@@ -102,7 +102,7 @@ public class EscapeQuest : MonoBehaviour
                     {
                         questFailed.SetActive(false);
                         timer = 0f;
-                        gameSceneScript.FadeToScene(1);
+                        gameSceneScript.FadeToScene(2);
                     }
                 }
             }
@@ -118,7 +118,7 @@ public class EscapeQuest : MonoBehaviour
             questChecker.questNum = quest.currentQuest;
             questChecker.SaveStatQuest();
             ctr += 1;
-            gameSceneScript.FadeToScene(3);
+            gameSceneScript.FadeToScene(4);
         }
         if (ctr == 1)
         {

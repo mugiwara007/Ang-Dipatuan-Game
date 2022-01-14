@@ -106,7 +106,7 @@ public class Quest4Script : MonoBehaviour
                     questFailed.SetActive(false);
                     timer = 0f;
                     qfailed = false;
-                    gameSceneScript2.FadeToScene(5);
+                    gameSceneScript2.FadeToScene(6);
                 }
             }
         }
@@ -123,7 +123,7 @@ public class Quest4Script : MonoBehaviour
             quest4EnemySpawner.SetActive(false);
             questChecker2.SaveStatQuest2();
             ctr += 1;
-            gameSceneScript2.FadeToScene(11);
+            gameSceneScript2.FadeToScene(12);
         }
         if (ctr == 1)
         {

@@ -8,6 +8,7 @@ public class SaveLoadScript : MonoBehaviour
     private bool canSave;
 
     private float timer = 0f;
+    private float time = 0f;
 
     PlayerBar player;
     Gold gold;
@@ -16,6 +17,8 @@ public class SaveLoadScript : MonoBehaviour
     ClotheinInventory clothes;
     SaveQuestScript saveQuestScript;
     GameSceneScript2 gameSceneScript2;
+    GameObject save;
+    private bool isSaved = false;
 
     private void Awake()
     {
@@ -23,7 +26,10 @@ public class SaveLoadScript : MonoBehaviour
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
       
         gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
-        
+
+        save = GameObject.FindGameObjectWithTag("SAVED");
+
+        save.SetActive(false);
         canSave = false;
         canvas.SetActive(false);
     }
@@ -42,6 +48,7 @@ public class SaveLoadScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 SaveSystem.SavePlayer(player, gold, updater, inventory, clothes);
+                isSaved = true;
                 timer = 0;
             }
             if (Input.GetKeyDown(KeyCode.L))
@@ -53,6 +60,18 @@ public class SaveLoadScript : MonoBehaviour
                 PlayerData data = SaveSystem.LoadPlayer();
                 saveQuestScript.isLoadActive = true;
                 gameSceneScript2.FadeToScene(data.sceneIndex);
+            }
+        }
+
+        if (isSaved == true)
+        {
+            save.SetActive(true);
+            time += Time.deltaTime;
+            if (time > 3f)
+            {
+                save.SetActive(false);
+                isSaved = false;
+                time = 0f;
             }
         }
     }

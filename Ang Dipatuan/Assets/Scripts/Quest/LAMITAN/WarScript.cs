@@ -59,7 +59,7 @@ public class WarScript : MonoBehaviour
             warSpawner.SetActive(false);
             questChecker.SaveStatQuest();
             ctr = 1;
-            gameSceneScript.FadeToScene(3);
+            gameSceneScript.FadeToScene(4);
         }
         if (ctr == 1)
         {
@@ -79,7 +79,7 @@ public class WarScript : MonoBehaviour
             {
                 questFailed.SetActive(false);
                 timer = 0f;
-                gameSceneScript.FadeToScene(1);
+                gameSceneScript.FadeToScene(2);
             }
         }
     }

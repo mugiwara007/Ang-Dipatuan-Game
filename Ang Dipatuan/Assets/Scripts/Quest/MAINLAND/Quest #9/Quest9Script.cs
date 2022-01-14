@@ -58,7 +58,7 @@ public class Quest9Script : MonoBehaviour
             finalWarSpawner.SetActive(false);
             questChecker2.SaveStatQuest2();
             ctr = 1;
-            gameSceneScript2.FadeToScene(10);
+            gameSceneScript2.FadeToScene(11);
         }
         if (ctr == 1)
         {
@@ -78,7 +78,7 @@ public class Quest9Script : MonoBehaviour
             {
                 questFailed.SetActive(false);
                 timer = 0f;
-                gameSceneScript2.FadeToScene(5);
+                gameSceneScript2.FadeToScene(6);
             }
         }
     }
