@@ -21,7 +21,7 @@ public class SceneScript : MonoBehaviour
         if (time >= 84f)
         {
             time = 0f;
-            FadeToScene(1);
+            FadeToScene(2);
         }
     }
 

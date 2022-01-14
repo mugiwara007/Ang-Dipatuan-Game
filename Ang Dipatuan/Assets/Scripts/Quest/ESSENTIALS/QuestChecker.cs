@@ -36,6 +36,7 @@ public class QuestChecker : MonoBehaviour
 
     private bool canTeleport1 = true;
     private bool canTeleport2 = true;
+    private bool canSave = true;
 
     GameSceneScript gameSceneScript;
     SaveQuestScript saveQuestScript;
@@ -101,37 +102,14 @@ public class QuestChecker : MonoBehaviour
         quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
         gameSceneScript.qctr = SaveQuestScript.Instance.questPos;
 
-        if (saveQuestScript.isLoadActive == false)
-        {
-            SaveSystem.SavePlayer(player, gold, saveQuestScript, inventory, clothes);
-        }
 
         if (saveQuestScript.isLoadActive == true)
         {
             PlayerData data = SaveSystem.LoadPlayer();
-            player.health = data.health;
-            player.mana = data.mana;
 
             gold.total_gold = data.playerGold;
 
             saveQuestScript.CurrQuest = data.currentQuest;
-
-            inventory.coconut = data.coconut;
-            inventory.avocado = data.avocado;
-            inventory.pineapple = data.pineapple;
-            inventory.fruitbasket = data.fruitBasket;
-
-            clothes.boughtCloth1 = data.armor1;
-            clothes.boughtCloth2 = data.armor2;
-            clothes.boughtCloth3 = data.armor3;
-
-            Vector3 position;
-
-            position.x = data.position[0];
-            position.y = data.position[1];
-            position.z = data.position[2];
-
-            StartCoroutine(activateCharController(position));
 
             saveQuestScript.isLoadActive = false;
         }
@@ -140,12 +118,17 @@ public class QuestChecker : MonoBehaviour
 
     void Update()
     {
-        
-        if (quest.currentQuest == 0)
+        if (saveQuestScript.isLoadActive == false && canSave == true)
+        {
+            SaveSystem.SavePlayer(player, gold, saveQuestScript, inventory, clothes);
+            canSave = false;
+        }
+
+        if (saveQuestScript.CurrQuest == 0)
         {
             activator.SetActive(true);
         }
-        else if (quest.currentQuest == 1 && gameSceneScript.qctr >= 1)
+        else if (saveQuestScript.CurrQuest == 1)
         {
             warCollider.SetActive(false);
             war.SetActive(true);
@@ -169,7 +152,7 @@ public class QuestChecker : MonoBehaviour
             enemyCamp2.SetActive(true);
 
         }
-        else if (quest.currentQuest == 2)
+        else if (saveQuestScript.CurrQuest == 2)
         {
             if (ifDone == true)
             {

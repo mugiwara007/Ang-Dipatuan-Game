@@ -38,6 +38,11 @@ public class Pause : MonoBehaviour
             cinemachineBrain.enabled = isPaused;
             Cursor.visible = pauseOpen;
             Cursor.lockState = CursorLockMode.Confined;
+            Time.timeScale = 0;
+            if (pauseOpen == false)
+            {
+                Time.timeScale = 1;
+            }
         }
     }
 }
