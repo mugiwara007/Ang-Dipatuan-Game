@@ -7,13 +7,19 @@ public class SceneChanger3 : MonoBehaviour
     public Animator animator;
     private int sceneToLoad;
     float time;
-    //float skipTimer;
+    SaveQuestScript SaveQ;
+
+    void Start()
+    {
+        SaveQ = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
+    }
 
     void Update()
     {
         time += Time.deltaTime;
         if (time >= 41f)
         {
+            SaveQ.thirdQuest = true;
             time = 0f;
             FadeToScene(2);
         }

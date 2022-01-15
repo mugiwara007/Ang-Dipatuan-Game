@@ -27,9 +27,11 @@ public class PlayerData
     public float[] position;
 
     public int sceneIndex;
+    public bool Save2;
+    public bool Save3;
 
     //plus lahat ng data na kailangan isave dapat instantiate dito
-    
+
 
     public PlayerData(PlayerBar player, Gold gold, SaveQuestScript updater, Inventory inventory, ClotheinInventory clothes)
     {
@@ -63,6 +65,9 @@ public class PlayerData
 
         //Current Scene
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        Save2 = updater.secondQuest;
+        Save3 = updater.thirdQuest;
     }
 
 }

@@ -106,6 +106,8 @@ public class QuestChecker : MonoBehaviour
         if (saveQuestScript.isLoadActive == true)
         {
             PlayerData data = SaveSystem.LoadPlayer();
+            saveQuestScript.secondQuest = data.Save2;
+            saveQuestScript.thirdQuest = data.Save3;
 
             gold.total_gold = data.playerGold;
 
@@ -128,7 +130,7 @@ public class QuestChecker : MonoBehaviour
         {
             activator.SetActive(true);
         }
-        else if (saveQuestScript.CurrQuest == 1)
+        else if (saveQuestScript.CurrQuest == 1 && saveQuestScript.secondQuest == true)
         {
             warCollider.SetActive(false);
             war.SetActive(true);
@@ -152,7 +154,7 @@ public class QuestChecker : MonoBehaviour
             enemyCamp2.SetActive(true);
 
         }
-        else if (saveQuestScript.CurrQuest == 2)
+        else if (saveQuestScript.CurrQuest == 2 && saveQuestScript.thirdQuest == true)
         {
             if (ifDone == true)
             {

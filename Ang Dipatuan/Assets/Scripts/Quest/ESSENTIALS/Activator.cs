@@ -96,7 +96,6 @@ public class Activator : MonoBehaviour
             questChecker.questNum = quest.currentQuest;
             questChecker.SaveStatQuest();
             ctr += 1;
-            gameSceneScript.FadeToScene(3);
         }
         if (ctr == 1)
         {
@@ -107,6 +106,7 @@ public class Activator : MonoBehaviour
                 timer = 0f;
                 ctr = 0;
                 training.SetActive(false);
+                gameSceneScript.FadeToScene(3);
             }
         }
     }

@@ -9,6 +9,8 @@ public class SaveQuestScript : MonoBehaviour
     public int CurrQuest;
     public int questPos;
     public bool isLoadActive = false;
+    public bool secondQuest = false;
+    public bool thirdQuest = false;
 
     void Awake()
     {
