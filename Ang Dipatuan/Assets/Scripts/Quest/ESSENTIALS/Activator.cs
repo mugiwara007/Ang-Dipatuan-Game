@@ -105,7 +105,6 @@ public class Activator : MonoBehaviour
                 questComplete.SetActive(false);
                 timer = 0f;
                 ctr = 0;
-                training.SetActive(false);
                 gameSceneScript.FadeToScene(3);
             }
         }

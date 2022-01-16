@@ -70,6 +70,9 @@ public class QuestChecker2 : MonoBehaviour
     BraveryMode braveryMode;
     DipatuanMode dipatuanMode;
 
+    GameObject SkillsTextToType1;
+    GameObject SkillsTextToType3;
+
     GameSceneScript2 gameSceneScript2;
     SaveQuestScript saveQuestScript;
 
@@ -125,6 +128,9 @@ public class QuestChecker2 : MonoBehaviour
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         clothes = GameObject.FindGameObjectWithTag("Player").GetComponent<ClotheinInventory>();
 
+        SkillsTextToType3 = GameObject.FindGameObjectWithTag("SkillsTextToType3");
+        SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
+
         quest4Waypoint.SetActive(false);
         quest4Collider.SetActive(false);
         quest5Waypoint.SetActive(false);
@@ -149,6 +155,9 @@ public class QuestChecker2 : MonoBehaviour
         light1.SetActive(true);
         sky2.SetActive(false);
         light2.SetActive(false);
+
+        SkillsTextToType3.SetActive(false);
+        SkillsTextToType1.SetActive(false);
 
         rain.playOnAwake = false;
 

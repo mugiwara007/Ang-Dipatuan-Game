@@ -41,6 +41,9 @@ public class QuestChecker : MonoBehaviour
     GameSceneScript gameSceneScript;
     SaveQuestScript saveQuestScript;
 
+    GameObject SkillsTextToType1;
+    GameObject SkillsTextToType3;
+
     PlayerBar player;
     Gold gold;
     Inventory inventory;
@@ -75,6 +78,9 @@ public class QuestChecker : MonoBehaviour
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         clothes = GameObject.FindGameObjectWithTag("Player").GetComponent<ClotheinInventory>();
 
+        SkillsTextToType3 = GameObject.FindGameObjectWithTag("SkillsTextToType3");
+        SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
+
         war.SetActive(false);
         actBox.enabled = true;
         escapeObj.SetActive(false);
@@ -83,6 +89,8 @@ public class QuestChecker : MonoBehaviour
         enemyCampSpawn3.SetActive(false);
         enemyCamp2.SetActive(false);
         enemyEscape.SetActive(false);
+        SkillsTextToType3.SetActive(false);
+        SkillsTextToType1.SetActive(false);
     }
 
     public void SaveStatQuest()
