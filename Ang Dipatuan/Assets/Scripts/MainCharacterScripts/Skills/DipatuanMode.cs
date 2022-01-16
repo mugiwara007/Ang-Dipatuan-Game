@@ -22,7 +22,7 @@ public class DipatuanMode : MonoBehaviour
     GameObject kampilan;
 
     //text that will pop up to type
-    GameObject SkillsTextToType1;
+    public GameObject SkillsTextToType1;
 
     private int correctedLetters = 0;
 
@@ -48,7 +48,7 @@ public class DipatuanMode : MonoBehaviour
         ember = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(7).gameObject;
 
         //text that will pop up to type
-        SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
+        //SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
 
         //text that will pop up to type show hide
         SkillsTextToType1.SetActive(false);

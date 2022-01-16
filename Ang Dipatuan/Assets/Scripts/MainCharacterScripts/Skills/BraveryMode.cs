@@ -18,7 +18,7 @@ public class BraveryMode : MonoBehaviour
     MainCharacterController charControl;
 
     //text that will pop up to type
-    GameObject SkillsTextToType3;
+    public GameObject SkillsTextToType3;
 
     private int correctedLetters = 0;
 
@@ -41,7 +41,7 @@ public class BraveryMode : MonoBehaviour
         onCooldown = false;
 
         //text that will pop up to type
-        SkillsTextToType3 = GameObject.FindGameObjectWithTag("SkillsTextToType3");
+        //SkillsTextToType3 = GameObject.FindGameObjectWithTag("SkillsTextToType3");
 
         //text that will pop up to type show hide
         SkillsTextToType3.SetActive(false);

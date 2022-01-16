@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        gameSceneScript3.FadeToScene(1);
     }
 
     public void LoadGame()
