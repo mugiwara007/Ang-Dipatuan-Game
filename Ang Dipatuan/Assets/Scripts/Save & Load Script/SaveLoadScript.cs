@@ -17,8 +17,8 @@ public class SaveLoadScript : MonoBehaviour
     ClotheinInventory clothes;
     SaveQuestScript saveQuestScript;
     GameSceneScript2 gameSceneScript2;
-    GameObject save;
-    private bool isSaved = false;
+    public GameObject save;
+    public bool isSaved = false;
 
     private void Awake()
     {
@@ -26,8 +26,6 @@ public class SaveLoadScript : MonoBehaviour
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
       
         gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
-
-        save = GameObject.FindGameObjectWithTag("SAVED");
 
         save.SetActive(false);
         canSave = false;
@@ -49,6 +47,7 @@ public class SaveLoadScript : MonoBehaviour
             {
                 SaveSystem.SavePlayer(player, gold, updater, inventory, clothes);
                 isSaved = true;
+                Debug.Log("SAVED");
                 timer = 0;
             }
             if (Input.GetKeyDown(KeyCode.L))

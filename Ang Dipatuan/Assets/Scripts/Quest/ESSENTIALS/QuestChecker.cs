@@ -28,7 +28,7 @@ public class QuestChecker : MonoBehaviour
     float timer;
     bool ifDone = true;
 
-    GameObject activeSkill1;
+    Image activeSkill1;
     GameObject unlockSkill1;
     GameObject unlock1stSkillUi;
 
@@ -42,56 +42,18 @@ public class QuestChecker : MonoBehaviour
     SaveQuestScript saveQuestScript;
 
     GameObject SkillsTextToType1;
+    GameObject SkillsTextToType2;
     GameObject SkillsTextToType3;
+
+    BraveryMode braveryMode;
+    DipatuanMode dipatuanMode;
 
     PlayerBar player;
     Gold gold;
     Inventory inventory;
     ClotheinInventory clothes;
 
-    private void Awake()
-    {
-        enemyCampSpawn2 = GameObject.FindGameObjectWithTag("E2");
-        enemyCampSpawn3 = GameObject.FindGameObjectWithTag("E3");
-        enemyEscape = GameObject.FindGameObjectWithTag("E4");
-        enemyCamp2 = GameObject.FindGameObjectWithTag("EC2");
-        tutorialScript = GameObject.FindGameObjectWithTag("Player").GetComponent<TutorialScript>();
-        gameSceneScript = GameObject.FindGameObjectWithTag("G1").GetComponent<GameSceneScript>();
-        storm = GameObject.FindGameObjectWithTag("Storm");
-        movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
-        escapeObj = GameObject.FindGameObjectWithTag("EscapeObj");
-        escapeCollider = GameObject.FindGameObjectWithTag("EscapeCollider");
-        actBox = GameObject.FindGameObjectWithTag("Activator").GetComponent<BoxCollider>();
-        warCollider = GameObject.FindGameObjectWithTag("TELEPORT");
-        war = GameObject.FindGameObjectWithTag("WAR");
-        activator = GameObject.FindGameObjectWithTag("Activator");
-        slowMotion = GameObject.FindGameObjectWithTag("Player").GetComponent<SlowMotionMode>();
-        escapeCollider.SetActive(false);
-        unlockSkill1 = GameObject.FindGameObjectWithTag("UnlockSkill1");
-        unlock1stSkillUi = GameObject.FindGameObjectWithTag("Unlock1stSkillUI");
-        unlock1stSkillUi.SetActive(false);
-        unlockSkill1.SetActive(true);
-        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
-
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
-        gold = GameObject.FindGameObjectWithTag("Player").GetComponent<Gold>();
-        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-        clothes = GameObject.FindGameObjectWithTag("Player").GetComponent<ClotheinInventory>();
-
-        SkillsTextToType3 = GameObject.FindGameObjectWithTag("SkillsTextToType3");
-        SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
-
-        war.SetActive(false);
-        actBox.enabled = true;
-        escapeObj.SetActive(false);
-        storm.SetActive(false);
-        enemyCampSpawn2.SetActive(false);
-        enemyCampSpawn3.SetActive(false);
-        enemyCamp2.SetActive(false);
-        enemyEscape.SetActive(false);
-        SkillsTextToType3.SetActive(false);
-        SkillsTextToType1.SetActive(false);
-    }
+    
 
     public void SaveStatQuest()
     {
@@ -105,8 +67,7 @@ public class QuestChecker : MonoBehaviour
 
     void Start()
     {
-        activeSkill1 = GameObject.FindGameObjectWithTag("SlowMoSkillYellowImage");
-        activeSkill1.SetActive(false);
+        InstantiateObjects();
         quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
         gameSceneScript.qctr = SaveQuestScript.Instance.questPos;
 
@@ -176,7 +137,7 @@ public class QuestChecker : MonoBehaviour
                 timer = 0f;
                 ifDone = false;
             }
-            activeSkill1.SetActive(true);
+            activeSkill1.enabled = true;
             unlockSkill1.SetActive(false);
             slowMotion.enabled = true;
             tutorialScript.enabled = false;
@@ -241,5 +202,59 @@ public class QuestChecker : MonoBehaviour
 
         gameObject.GetComponent<CharacterController>().enabled = true;
 
+    }
+
+    private void InstantiateObjects()
+    {
+        enemyCampSpawn2 = GameObject.FindGameObjectWithTag("E2");
+        enemyCampSpawn3 = GameObject.FindGameObjectWithTag("E3");
+        enemyEscape = GameObject.FindGameObjectWithTag("E4");
+        enemyCamp2 = GameObject.FindGameObjectWithTag("EC2");
+        tutorialScript = GameObject.FindGameObjectWithTag("Player").GetComponent<TutorialScript>();
+        gameSceneScript = GameObject.FindGameObjectWithTag("G1").GetComponent<GameSceneScript>();
+        storm = GameObject.FindGameObjectWithTag("Storm");
+        movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
+        escapeObj = GameObject.FindGameObjectWithTag("EscapeObj");
+        escapeCollider = GameObject.FindGameObjectWithTag("EscapeCollider");
+        actBox = GameObject.FindGameObjectWithTag("Activator").GetComponent<BoxCollider>();
+        warCollider = GameObject.FindGameObjectWithTag("TELEPORT");
+        war = GameObject.FindGameObjectWithTag("WAR");
+        activator = GameObject.FindGameObjectWithTag("Activator");
+        slowMotion = GameObject.FindGameObjectWithTag("Player").GetComponent<SlowMotionMode>();
+        braveryMode = GameObject.FindGameObjectWithTag("Player").GetComponent<BraveryMode>();
+        dipatuanMode = GameObject.FindGameObjectWithTag("Player").GetComponent<DipatuanMode>();
+        escapeCollider.SetActive(false);
+        unlockSkill1 = GameObject.FindGameObjectWithTag("UnlockSkill1");
+
+        unlock1stSkillUi = GameObject.FindGameObjectWithTag("Unlock1stSkillUI");
+        unlock1stSkillUi.SetActive(false);
+        unlockSkill1.SetActive(true);
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
+        gold = GameObject.FindGameObjectWithTag("Player").GetComponent<Gold>();
+        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        clothes = GameObject.FindGameObjectWithTag("Player").GetComponent<ClotheinInventory>();
+
+        SkillsTextToType3 = GameObject.FindGameObjectWithTag("SkillsTextToType3");
+        SkillsTextToType2 = GameObject.FindGameObjectWithTag("SkillsTextToType2");
+        SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
+
+        activeSkill1 = GameObject.FindGameObjectWithTag("SlowMoSkillYellowImage").GetComponent<Image>();
+        activeSkill1.enabled = false;
+
+        war.SetActive(false);
+        actBox.enabled = true;
+        escapeObj.SetActive(false);
+        storm.SetActive(false);
+        enemyCampSpawn2.SetActive(false);
+        enemyCampSpawn3.SetActive(false);
+        enemyCamp2.SetActive(false);
+        enemyEscape.SetActive(false);
+        SkillsTextToType3.SetActive(false);
+        SkillsTextToType1.SetActive(false);
+        slowMotion.enabled = false;
+        braveryMode.enabled = false;
+        dipatuanMode.enabled = false;
     }
 }

@@ -282,7 +282,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -335,7 +335,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -5416,7 +5416,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -5469,7 +5469,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -10236,6 +10236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d7ee56dac798a4f8f96371f5f4c267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  save: {fileID: 7295580647106357310, guid: 224319ee82a5e044a9ee0d574da56d0b, type: 3}
 --- !u!136 &3337818080242980889
 CapsuleCollider:
   m_ObjectHideFlags: 0

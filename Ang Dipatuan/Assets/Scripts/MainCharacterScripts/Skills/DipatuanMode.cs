@@ -34,7 +34,7 @@ public class DipatuanMode : MonoBehaviour
 
     PlayerBar manaStats;
 
-    private void Awake()
+    void Start()
     {
         kampilan = GameObject.FindGameObjectWithTag("KampilanArmed");
 
