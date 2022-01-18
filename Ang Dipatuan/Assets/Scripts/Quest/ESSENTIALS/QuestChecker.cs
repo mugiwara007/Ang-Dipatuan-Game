@@ -11,6 +11,8 @@ public class QuestChecker : MonoBehaviour
 
     TutorialScript tutorialScript;
 
+    public AudioSource BGQ2;
+
     public GameObject waypoint;
     GameObject activator;
     GameObject enemyCampSpawn2;
@@ -71,7 +73,6 @@ public class QuestChecker : MonoBehaviour
         quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
         gameSceneScript.qctr = SaveQuestScript.Instance.questPos;
 
-
         if (saveQuestScript.isLoadActive == true)
         {
             PlayerData data = SaveSystem.LoadPlayer();
@@ -107,6 +108,11 @@ public class QuestChecker : MonoBehaviour
             movement.stun = true;
             time += Time.deltaTime;
 
+            if(!BGQ2.isPlaying)
+            {
+                BGQ2.Play();
+            }
+
             //So that the Coroutine will only be called once and in the next frame canTeleport will be false and will not go in this statement
             if (canTeleport1)
             {
@@ -118,6 +124,8 @@ public class QuestChecker : MonoBehaviour
                 movement.stun = false;
                 warCollider.SetActive(true);
             }
+
+            
 
             tutorialScript.enabled = false;
             enemyCamp2.SetActive(true);
