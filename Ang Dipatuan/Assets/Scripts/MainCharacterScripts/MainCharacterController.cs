@@ -219,14 +219,12 @@ public class MainCharacterController : MonoBehaviour
 
 				anim.SetBool("isJumping", true);
 				isJumping = true;
-				Jmp.Play();
 			}
 		}
 		else if (groundedPlayer)
 		{
 			anim.SetBool("isJumping", false);
 			isJumping = false;
-			Jmp.Stop();
 		}
 
 		if (Input.GetButtonUp("Shift"))
@@ -264,17 +262,11 @@ public class MainCharacterController : MonoBehaviour
 			}
 
 			anim.SetBool("isWalking", true);
-			
-			if(!Walk.isPlaying)
-            {
-				Walk.Play();
-			}
 
 			//JUMP WHEN WALKING
 			if (isJumping)
 			{
 				anim.SetBool("isJumping", true);
-				Walk.Stop();
 			}
 
 			//RUNNING
@@ -285,18 +277,11 @@ public class MainCharacterController : MonoBehaviour
 				speed = 13f;
 				jumpHeight = 3f;
 
-				if(!Run.isPlaying)
-                {
-					Run.Play();
-				}
-
 				//JUMP WHEN RUNNING
 				if (isJumping)
 				{
 					anim.SetBool("isJumping", true);
 					speed = 4f;
-					Run.Stop();
-					Walk.Stop();
 				}
 
 				
@@ -307,7 +292,6 @@ public class MainCharacterController : MonoBehaviour
 				speed = 4f;
 				jumpHeight = 2.6f;
 				isRunning = false;
-				Run.Stop();
 			}	
 		}
 		else
@@ -315,8 +299,6 @@ public class MainCharacterController : MonoBehaviour
 			anim.SetBool("isRunning", false);
 			anim.SetBool("isWalking", false);
 			isRunning = false;
-			Walk.Stop();
-			Run.Stop();
 		}
 
 		//End Movement
@@ -354,23 +336,12 @@ public class MainCharacterController : MonoBehaviour
 			anim.SetLayerWeight(anim.GetLayerIndex("Crouch"), Mathf.Lerp(currentWeight, 1.0f, 7f * Time.deltaTime));
 			speed = 3f;
 
-			if (!Crch.isPlaying && anim.GetBool("isWalking") == true)
-			{
-				Crch.Play();
-			}
-			else if(anim.GetBool("isWalking") == false)
-            {
-				Crch.Stop();
-			}
-			Walk.Stop();
-
 			//Makes Camera to go down a little bit when crouching
 			Vector3 NewPos = new Vector3(followCamera.transform.localPosition.x, followCamPosition - 0.5f, followCamera.transform.localPosition.z);
 			followCamera.transform.localPosition = Vector3.Lerp(followCamera.transform.localPosition, NewPos, 7f * Time.deltaTime);
 		}
 		else
 		{
-			Crch.Stop();
 			isCrouching = false;
 			var currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Crouch"));
 			anim.SetLayerWeight(anim.GetLayerIndex("Crouch"), Mathf.Lerp(currentWeight, 0f, 7f * Time.deltaTime));
@@ -722,6 +693,24 @@ public class MainCharacterController : MonoBehaviour
 	public void HitFX()
 	{
 		Hit.Play();
+	}
+
+	//Movements
+	public void WalkFX()
+	{
+		Walk.Play();
+	}
+	public void RunFX()
+	{
+		Run.Play();
+	}
+	public void JumpFX()
+	{
+		Jmp.Play();
+	}
+	public void CrouchFX()
+	{
+		Crch.Play();
 	}
 
 	//Skills
