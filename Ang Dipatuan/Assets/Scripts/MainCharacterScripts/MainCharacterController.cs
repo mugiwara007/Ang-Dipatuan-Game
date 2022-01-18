@@ -208,6 +208,7 @@ public class MainCharacterController : MonoBehaviour
 		// allow jump as long as the player is on the ground
 		if (Input.GetButtonDown("Jump"))
 		{
+			
 			// must have been grounded recently to allow jump
 			if (groundedTimer > 0)
 			{
@@ -263,6 +264,7 @@ public class MainCharacterController : MonoBehaviour
 
 			anim.SetBool("isWalking", true);
 
+
 			//JUMP WHEN WALKING
 			if (isJumping)
 			{
@@ -276,6 +278,7 @@ public class MainCharacterController : MonoBehaviour
 				anim.SetBool("isRunning", true);
 				speed = 13f;
 				jumpHeight = 3f;
+				
 
 				//JUMP WHEN RUNNING
 				if (isJumping)
@@ -331,6 +334,7 @@ public class MainCharacterController : MonoBehaviour
 		if (Input.GetButton("Crouch") && isJumping == false && canCrouch)
 		{
 			isCrouching = true;
+			
 			//Adjust Crouch Layer in player Animator
 			var currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Crouch"));
 			anim.SetLayerWeight(anim.GetLayerIndex("Crouch"), Mathf.Lerp(currentWeight, 1.0f, 7f * Time.deltaTime));
@@ -598,7 +602,6 @@ public class MainCharacterController : MonoBehaviour
 				kampilan.gameObject.transform.localPosition = new Vector3(0.179f, -0.122f, -0.281f);
 				kampilan.gameObject.transform.localRotation = Quaternion.Euler(-35.251f, -128.959f, 297.612f);
 
-
 				scabbard.gameObject.SetActive(true);
 				scabbardWithSword.gameObject.SetActive(false);
 
@@ -697,20 +700,114 @@ public class MainCharacterController : MonoBehaviour
 
 	//Movements
 	public void WalkFX()
-	{
-		Walk.Play();
+    {
+		//START
+		if(!Walk.isPlaying)
+        {
+			Walk.Play();
+        }
+		
+	}
+
+	public void WalkFIX()
+    {
+		//STOP
+		if (Run.isPlaying)
+		{
+			Run.Stop();
+		}
+		if (Crch.isPlaying)
+		{
+			Crch.Stop();
+		}
+		if (Jmp.isPlaying)
+		{
+			Jmp.Stop();
+		}
 	}
 	public void RunFX()
 	{
-		Run.Play();
+		//START
+		if (!Run.isPlaying)
+		{
+			Run.Play();
+		}
 	}
-	public void JumpFX()
-	{
-		Jmp.Play();
+	
+	public void RunFIX()
+    {
+		//STOP
+		if (Walk.isPlaying)
+		{
+			Walk.Stop();
+		}
+		if (Crch.isPlaying)
+		{
+			Crch.Stop();
+		}
+		if (Jmp.isPlaying)
+		{
+			Jmp.Stop();
+		}
 	}
 	public void CrouchFX()
 	{
-		Crch.Play();
+		//START
+		if (!Crch.isPlaying)
+		{
+			Crch.Play();
+		}
+	}
+
+	public void CrouchFIX()
+    {
+		//STOP
+		if (Run.isPlaying)
+		{
+			Run.Stop();
+		}
+		if (Walk.isPlaying)
+		{
+			Walk.Stop();
+		}
+		if (Jmp.isPlaying)
+		{
+			Jmp.Stop();
+		}
+	}
+
+	public void JumpFX()
+    {
+		//START
+		if (!Jmp.isPlaying)
+		{
+			Jmp.Play();
+		}
+	}
+
+	public void JumpFIX()
+    {
+		//STOP
+		if (Run.isPlaying)
+		{
+			Run.Stop();
+		}
+		if (Walk.isPlaying)
+		{
+			Walk.Stop();
+		}
+		if (Crch.isPlaying)
+		{
+			Crch.Stop();
+		}
+	}
+
+	public void IdleFX()
+    {
+		Run.Stop();
+		Walk.Stop();
+		Crch.Stop();
+		Jmp.Stop();
 	}
 
 	//Skills
