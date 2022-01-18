@@ -236,9 +236,9 @@ public class QuestChecker : MonoBehaviour
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         clothes = GameObject.FindGameObjectWithTag("Player").GetComponent<ClotheinInventory>();
 
-        SkillsTextToType3 = GameObject.FindGameObjectWithTag("SkillsTextToType3");
-        SkillsTextToType2 = GameObject.FindGameObjectWithTag("SkillsTextToType2");
-        SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
+        //SkillsTextToType3 = GameObject.FindGameObjectWithTag("SkillsTextToType3");
+        //SkillsTextToType2 = GameObject.FindGameObjectWithTag("SkillsTextToType2");
+        //SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
 
         activeSkill1 = GameObject.FindGameObjectWithTag("SlowMoSkillYellowImage").GetComponent<Image>();
         activeSkill1.enabled = false;
@@ -251,8 +251,16 @@ public class QuestChecker : MonoBehaviour
         enemyCampSpawn3.SetActive(false);
         enemyCamp2.SetActive(false);
         enemyEscape.SetActive(false);
-        SkillsTextToType3.SetActive(false);
-        SkillsTextToType1.SetActive(false);
+        //SkillsTextToType3.SetActive(false);
+        //SkillsTextToType1.SetActive(false);
+        
+        StartCoroutine("activateSkillDisable");
+    }
+
+    IEnumerator activateSkillDisable()
+    {
+        yield return new WaitForSeconds(2f);
+
         slowMotion.enabled = false;
         braveryMode.enabled = false;
         dipatuanMode.enabled = false;

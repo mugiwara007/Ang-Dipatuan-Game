@@ -22,7 +22,7 @@ public class DipatuanMode : MonoBehaviour
     GameObject kampilan;
 
     //text that will pop up to type
-    public GameObject SkillsTextToType1;
+    GameObject SkillsTextToType1;
 
     private int correctedLetters = 0;
 
@@ -34,24 +34,20 @@ public class DipatuanMode : MonoBehaviour
 
     PlayerBar manaStats;
 
+    private bool isHidden = false;
+
     void Start()
     {
-        kampilan = GameObject.FindGameObjectWithTag("KampilanArmed");
-
-        damageEnemyScript = GameObject.FindGameObjectWithTag("KampilanArmed").GetComponent<DamageEnemy>();
         skillColorYellow = GameObject.FindGameObjectWithTag("DipatuanSkillYellowImage").GetComponent<Image>();
 
-        fireOnSword1 = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(2).gameObject;
-
-        fireOnSword2 = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(3).gameObject;
-
-        ember = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(7).gameObject;
-
-        //text that will pop up to type
-        //SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
-
-        //text that will pop up to type show hide
-        SkillsTextToType1.SetActive(false);
+        try
+        {
+            //text that will pop up to type
+            SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
+        } catch
+        {
+            Debug.Log("SkillTextToType1 cannot be found.");
+        }
 
         onCooldown = false;
 
@@ -61,11 +57,21 @@ public class DipatuanMode : MonoBehaviour
         SetCurrentWord();
 
         manaStats = gameObject.GetComponent<PlayerBar>();
+        isHidden = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
+
+        if (isHidden == true)
+        {
+            //text that will pop up to type show hide
+            SkillsTextToType1.SetActive(false);
+            isHidden = false;
+        }
+
         if (typingMode)
         {
             gameObject.GetComponent<SlowMotionMode>().enabled = false;
@@ -109,7 +115,14 @@ public class DipatuanMode : MonoBehaviour
                 typingMode = true;
 
                 //show text that will pop up to type 
-                SkillsTextToType1.SetActive(true);
+                try
+                {
+                    SkillsTextToType1.SetActive(true);
+                } catch
+                {
+                    Debug.Log("Error DP MODE UPDATE");
+                }
+                
 
                 StartCoroutine("StopTypingMode");
 
@@ -126,8 +139,17 @@ public class DipatuanMode : MonoBehaviour
             }
         }
 
+        kampilan = GameObject.FindGameObjectWithTag("KampilanArmed");
 
-        
+        damageEnemyScript = GameObject.FindGameObjectWithTag("KampilanArmed").GetComponent<DamageEnemy>();
+
+
+        fireOnSword1 = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(2).gameObject;
+
+        fireOnSword2 = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(3).gameObject;
+
+        ember = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(7).gameObject;
+
 
     }
 
