@@ -12,6 +12,9 @@ public class PauseInGame : MonoBehaviour
     GameObject pauseUI;
     GameObject optionUI;
     GameObject exitVerUI;
+    GameObject updater;
+    GameSceneScript gameSceneScript;
+    GameSceneScript2 gameSceneScript2;
 
     private void Awake()
     {
@@ -21,12 +24,27 @@ public class PauseInGame : MonoBehaviour
         pauseUI = GameObject.FindGameObjectWithTag("PauseBtn");
         optionUI = GameObject.FindGameObjectWithTag("OptionMenu");
         exitVerUI = GameObject.FindGameObjectWithTag("ExitGame");
+        updater = GameObject.FindGameObjectWithTag("Updater");
+        
+        try
+        {
+            gameSceneScript = GameObject.FindGameObjectWithTag("G1").GetComponent<GameSceneScript>();
+        } catch
+        {
+            gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
+        }
     }
 
     public void QuitGame()
     {
-        Debug.Log("EXIT GAME");
-        Application.Quit();
+        Destroy(updater);
+        try
+        {
+            gameSceneScript.FadeToScene(0);
+        } catch
+        {
+            gameSceneScript2.FadeToScene(0);
+        }
     }
 
     public void CancelQuit()
@@ -38,11 +56,11 @@ public class PauseInGame : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
-        cinemachineBrain.enabled = true;
+        //cinemachineBrain.enabled = true;
         movement.stun = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
     }
 
     public void OptionMenu()

@@ -35,14 +35,14 @@ public class Pause : MonoBehaviour
             isPaused = !isPaused;
             movement.stun = pauseOpen;
             pauseMenu.SetActive(pauseOpen);
-            cinemachineBrain.enabled = isPaused;
+            //cinemachineBrain.enabled = isPaused;
             Cursor.visible = pauseOpen;
             Cursor.lockState = CursorLockMode.Confined;
-            Time.timeScale = 0;
-            if (pauseOpen == false)
-            {
-                Time.timeScale = 1;
-            }
+            //Time.timeScale = 0;
+            //if (pauseOpen == false)
+            //{
+                //Time.timeScale = 1;
+            //}
         }
     }
 }
