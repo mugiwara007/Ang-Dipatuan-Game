@@ -49,6 +49,8 @@ public class PauseInGame : MonoBehaviour
 
     public void CancelQuit()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         exitVerUI.SetActive(false);
         pauseUI.SetActive(true);
     }
