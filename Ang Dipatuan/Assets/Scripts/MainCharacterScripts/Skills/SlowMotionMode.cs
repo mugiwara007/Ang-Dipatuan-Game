@@ -22,9 +22,12 @@ public class SlowMotionMode : MonoBehaviour
 
     private bool typingMode = false;
 
+    private bool isUnlocked2 = false;
 
     private string remainingWord = string.Empty;
     private string currentWord = "kahangtoran";
+
+    SaveQuestScript saveQuestScript;
 
     PlayerBar manaStats;
 
@@ -33,6 +36,8 @@ public class SlowMotionMode : MonoBehaviour
         skillColorYellow = GameObject.FindGameObjectWithTag("SlowMoSkillYellowImage").GetComponent<Image>();
         bwPost = GameObject.FindGameObjectWithTag("NormalPost").transform.GetChild(0).gameObject;
         onCooldown = false;
+
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
 
         anim = gameObject.GetComponent<Animator>();
         charControl = gameObject.GetComponent<MainCharacterController>();
@@ -51,53 +56,62 @@ public class SlowMotionMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (typingMode)
+        if (saveQuestScript.CurrQuest > 2)
         {
-            if (Input.anyKeyDown)
-            {
-                string keyPressed = Input.inputString;
-
-
-                if (keyPressed.Length == 1)
-                    EnterLetter(keyPressed);
-            }
+            isUnlocked2 = true;
         }
 
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-
-        if(manaStats.mana >= 25)
-        {
-            if (Input.GetButtonDown("SlowMotionMode") && onCooldown == false)
+        
+            if (typingMode)
             {
-                manaStats.ReduceMana(25);
-                setLetterColorToBlack();
-                StartCoroutine("StopTypingMode");
-                if (Time.timeScale == 1.0f)
+                if (Input.anyKeyDown)
                 {
-                    Time.timeScale = 0.2f;
+                    string keyPressed = Input.inputString;
+
+
+                    if (keyPressed.Length == 1)
+                        EnterLetter(keyPressed);
                 }
-                //Sets typing mode to true
-                typingMode = true;
-
-                //show text that will pop up to type 
-                SkillsTextToType2.SetActive(true);
-
-                StartCoroutine("StopTypingMode");
             }
-        }
 
-        if (onCooldown)
-        {
-            skillColorYellow.fillAmount = skillColorYellow.fillAmount += 0.02f * Time.deltaTime;
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-            if(skillColorYellow.fillAmount >= 1f)
+
+            if (manaStats.mana >= 25)
             {
-                onCooldown = false;
+                if (Input.GetButtonDown("SlowMotionMode") && onCooldown == false)
+                {
+                if (isUnlocked2 == true)
+                {
+                    manaStats.ReduceMana(25);
+                    setLetterColorToBlack();
+                    StartCoroutine("StopTypingMode");
+                    if (Time.timeScale == 1.0f)
+                    {
+                        Time.timeScale = 0.2f;
+                    }
+                    //Sets typing mode to true
+                    typingMode = true;
+
+                    //show text that will pop up to type 
+                    SkillsTextToType2.SetActive(true);
+
+                    StartCoroutine("StopTypingMode");
+                }
+                }
             }
-        }
 
+            if (onCooldown)
+            {
+                skillColorYellow.fillAmount = skillColorYellow.fillAmount += 0.02f * Time.deltaTime;
 
+                if (skillColorYellow.fillAmount >= 1f)
+                {
+                    onCooldown = false;
+                }
+            }
+
+        
     }
 
     IEnumerator backToNormalSpeed()

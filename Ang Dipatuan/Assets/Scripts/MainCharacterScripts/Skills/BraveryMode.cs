@@ -24,8 +24,12 @@ public class BraveryMode : MonoBehaviour
 
     private bool typingMode = false;
 
+    private bool isUnlocked3 = false;
+
     private string remainingWord = string.Empty;
     private string currentWord = "juramentado";
+
+    SaveQuestScript saveQuestScript;
 
     PlayerBar manaStats;
 
@@ -39,6 +43,8 @@ public class BraveryMode : MonoBehaviour
         skillColorYellow = GameObject.FindGameObjectWithTag("BraverySkillYellowImage").GetComponent<Image>();
         forceField = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
         onCooldown = false;
+
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
 
         //text that will pop up to type
         //SkillsTextToType3 = GameObject.FindGameObjectWithTag("SkillsTextToType3");
@@ -54,6 +60,12 @@ public class BraveryMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (saveQuestScript.CurrQuest > 3)
+        {
+            isUnlocked3 = true;
+        }
+
+        
             if (typingMode)
             {
                 gameObject.GetComponent<DipatuanMode>().enabled = false;
@@ -75,7 +87,9 @@ public class BraveryMode : MonoBehaviour
 
             if (manaStats.mana >= 15)
             {
-                if (Input.GetButtonDown("BraveryMode") && onCooldown == false)
+            if (Input.GetButtonDown("BraveryMode") && onCooldown == false)
+            {
+                if (isUnlocked3 == true)
                 {
                     manaStats.ReduceMana(15);
                     setLetterColorToBlack();
@@ -92,6 +106,7 @@ public class BraveryMode : MonoBehaviour
 
                     StartCoroutine("StopTypingMode");
                 }
+            }
             }
 
             if (onCooldown)

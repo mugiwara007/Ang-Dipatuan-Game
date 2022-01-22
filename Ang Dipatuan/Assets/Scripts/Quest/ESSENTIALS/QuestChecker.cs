@@ -43,10 +43,6 @@ public class QuestChecker : MonoBehaviour
     GameSceneScript gameSceneScript;
     SaveQuestScript saveQuestScript;
 
-    GameObject SkillsTextToType1;
-    GameObject SkillsTextToType2;
-    GameObject SkillsTextToType3;
-
     BraveryMode braveryMode;
     DipatuanMode dipatuanMode;
 
@@ -125,8 +121,6 @@ public class QuestChecker : MonoBehaviour
                 warCollider.SetActive(true);
             }
 
-            
-
             tutorialScript.enabled = false;
             enemyCamp2.SetActive(true);
 
@@ -147,7 +141,6 @@ public class QuestChecker : MonoBehaviour
             }
             activeSkill1.enabled = true;
             unlockSkill1.SetActive(false);
-            slowMotion.enabled = true;
             tutorialScript.enabled = false;
             escapeObj.SetActive(true);
             movement.stun = true;
@@ -261,16 +254,5 @@ public class QuestChecker : MonoBehaviour
         enemyEscape.SetActive(false);
         //SkillsTextToType3.SetActive(false);
         //SkillsTextToType1.SetActive(false);
-        
-        StartCoroutine("activateSkillDisable");
-    }
-
-    IEnumerator activateSkillDisable()
-    {
-        yield return new WaitForSeconds(2f);
-
-        slowMotion.enabled = false;
-        braveryMode.enabled = false;
-        dipatuanMode.enabled = false;
     }
 }

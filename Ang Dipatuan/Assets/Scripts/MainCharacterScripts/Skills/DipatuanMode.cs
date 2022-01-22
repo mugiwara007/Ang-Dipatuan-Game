@@ -28,23 +28,31 @@ public class DipatuanMode : MonoBehaviour
 
     private bool typingMode = false;
 
+    private bool isUnlocked2 = false;
 
     private string remainingWord = string.Empty;
     private string currentWord = "dipatuan";
 
     PlayerBar manaStats;
 
+    private bool isUnlocked1;
+
     private bool isHidden = false;
+
+    SaveQuestScript saveQuestScript;
 
     void Start()
     {
         skillColorYellow = GameObject.FindGameObjectWithTag("DipatuanSkillYellowImage").GetComponent<Image>();
 
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
+
         try
         {
             //text that will pop up to type
             SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
-        } catch
+        }
+        catch
         {
             Debug.Log("SkillTextToType1 cannot be found.");
         }
@@ -65,6 +73,11 @@ public class DipatuanMode : MonoBehaviour
     {
         SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
 
+        if (saveQuestScript.CurrQuest > 4)
+        {
+            isUnlocked1 = true;
+        }
+
         if (isHidden == true)
         {
             //text that will pop up to type show hide
@@ -80,7 +93,7 @@ public class DipatuanMode : MonoBehaviour
             {
                 string keyPressed = Input.inputString;
 
-                
+
                 if (keyPressed.Length == 1)
                     EnterLetter(keyPressed);
             }
@@ -91,41 +104,71 @@ public class DipatuanMode : MonoBehaviour
             gameObject.GetComponent<BraveryMode>().enabled = true;
         }
 
+        
+
+        try
+        {
+            kampilan = GameObject.FindGameObjectWithTag("KampilanArmed");
+
+            damageEnemyScript = GameObject.FindGameObjectWithTag("KampilanArmed").GetComponent<DamageEnemy>();
+
+            fireOnSword1 = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(2).gameObject;
+
+            fireOnSword2 = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(3).gameObject;
+
+            ember = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(7).gameObject;
+        }
+        catch
+        {
+
+        }
+
 
         if (fireTurnOff)
         {
-            fireOnSword1.SetActive(true);
-            fireOnSword2.SetActive(false);
-            ember.SetActive(false);
+            try
+            {
+                fireOnSword1.SetActive(true);
+                fireOnSword2.SetActive(false);
+                ember.SetActive(false);
+            }
+            catch
+            {
+
+            }
+            
         }
 
         if (manaStats.mana >= 5)
         {
             if (Input.GetButtonDown("DipatuanMode") && onCooldown == false)
             {
-                manaStats.ReduceMana(12);
-                setLetterColorToBlack();
-                StartCoroutine("StopTypingMode");
-                if (Time.timeScale == 1.0f)
+                if (isUnlocked1 == true)
                 {
-                    Time.timeScale = 0.2f;
+                    manaStats.ReduceMana(12);
+                    setLetterColorToBlack();
+                    StartCoroutine("StopTypingMode");
+                    if (Time.timeScale == 1.0f)
+                    {
+                        Time.timeScale = 0.2f;
+                    }
+
+                    //Sets typing mode to true
+                    typingMode = true;
+
+                    //show text that will pop up to type 
+                    try
+                    {
+                        SkillsTextToType1.SetActive(true);
+                    }
+                    catch
+                    {
+                        Debug.Log("Error DP MODE UPDATE");
+                    }
+
+
+                    StartCoroutine("StopTypingMode");
                 }
-
-                //Sets typing mode to true
-                typingMode = true;
-
-                //show text that will pop up to type 
-                try
-                {
-                    SkillsTextToType1.SetActive(true);
-                } catch
-                {
-                    Debug.Log("Error DP MODE UPDATE");
-                }
-                
-
-                StartCoroutine("StopTypingMode");
-
             }
         }
 
@@ -139,18 +182,7 @@ public class DipatuanMode : MonoBehaviour
             }
         }
 
-        kampilan = GameObject.FindGameObjectWithTag("KampilanArmed");
-
-        damageEnemyScript = GameObject.FindGameObjectWithTag("KampilanArmed").GetComponent<DamageEnemy>();
-
-
-        fireOnSword1 = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(2).gameObject;
-
-        fireOnSword2 = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(3).gameObject;
-
-        ember = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(7).gameObject;
-
-
+        
     }
 
     private void SetCurrentWord()
@@ -281,7 +313,7 @@ public class DipatuanMode : MonoBehaviour
     private bool IsCorrectLetter(string letter)
     {
         //0 because this returns the first letter of the remaining words
-        return remainingWord.IndexOf(letter) == 0; 
+        return remainingWord.IndexOf(letter) == 0;
     }
 
     private void RemoveLetter()
@@ -310,7 +342,7 @@ public class DipatuanMode : MonoBehaviour
         SkillsTextToType1.transform.GetChild(5).GetComponent<Text>().color = Color.red;
         SkillsTextToType1.transform.GetChild(6).GetComponent<Text>().color = Color.red;
         SkillsTextToType1.transform.GetChild(7).GetComponent<Text>().color = Color.red;
-            }
+    }
 
     private void setLetterColorToBlack()
     {

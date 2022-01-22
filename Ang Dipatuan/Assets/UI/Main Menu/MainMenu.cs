@@ -24,6 +24,8 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         gameSceneScript3.FadeToScene(1);
     }
 

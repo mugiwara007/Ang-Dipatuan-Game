@@ -175,13 +175,11 @@ public class QuestChecker2 : MonoBehaviour
         
         if (saveQuestScript.CurrQuest >= 4)
         {
-            braveryMode.enabled = true;
             activeSkill2.SetActive(true);
         }
 
         if (saveQuestScript.CurrQuest >= 6)
         {
-            dipatuanMode.enabled = true;
             activeSkill3.SetActive(true);
         }
 
@@ -275,8 +273,6 @@ public class QuestChecker2 : MonoBehaviour
     {
         if (quest.currentQuest == 3)
         {
-            braveryMode.enabled = false;
-            dipatuanMode.enabled = false;
             unlockSkill2.SetActive(true);
             unlockSkill3.SetActive(true);
             quest4Collider.SetActive(true);
@@ -284,8 +280,6 @@ public class QuestChecker2 : MonoBehaviour
         }
         else if (quest.currentQuest == 4)
         {
-            braveryMode.enabled = true;
-            dipatuanMode.enabled = false;
             activeSkill2.SetActive(true);
             unlockSkill3.SetActive(true);
 
@@ -307,6 +301,7 @@ public class QuestChecker2 : MonoBehaviour
             quest4Waypoint.SetActive(false);
             quest4Collider.SetActive(false);
             timer += Time.deltaTime;
+
             if (canTeleport1 == true)
             {
                 StartCoroutine("activateCharController1");
@@ -322,8 +317,6 @@ public class QuestChecker2 : MonoBehaviour
         }
         else if (quest.currentQuest == 5)
         {
-            braveryMode.enabled = true;
-            dipatuanMode.enabled = false;
             activeSkill2.SetActive(true);
             unlockSkill3.SetActive(true);
             quest6Detector.SetActive(true);
@@ -336,8 +329,6 @@ public class QuestChecker2 : MonoBehaviour
         }
         else if (quest.currentQuest == 6)
         {
-            braveryMode.enabled = true;
-            dipatuanMode.enabled = true;
             activeSkill2.SetActive(true);
             activeSkill3.SetActive(true);
             quest6Detector.SetActive(false);
@@ -382,8 +373,6 @@ public class QuestChecker2 : MonoBehaviour
                 canTeleport5 = false;
             }
             questDesc.text = "Gather items and upgrade your armor before continuing. Go to the waypoint.";
-            braveryMode.enabled = true;
-            dipatuanMode.enabled = true;
             activeSkill2.SetActive(true);
             activeSkill3.SetActive(true);
             quest7Collider.SetActive(false);
@@ -410,8 +399,6 @@ public class QuestChecker2 : MonoBehaviour
             light2.SetActive(true);
             waypointMarker.SetActive(false);
             finalWarObject.SetActive(true);
-            braveryMode.enabled = true;
-            dipatuanMode.enabled = true;
             activeSkill2.SetActive(true);
             activeSkill3.SetActive(true);
 
