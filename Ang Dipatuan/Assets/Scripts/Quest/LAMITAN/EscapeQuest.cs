@@ -118,7 +118,7 @@ public class EscapeQuest : MonoBehaviour
             questChecker.questNum = quest.currentQuest;
             questChecker.SaveStatQuest();
             ctr += 1;
-            gameSceneScript.FadeToScene(4);
+            
         }
         if (ctr == 1)
         {
@@ -128,6 +128,7 @@ public class EscapeQuest : MonoBehaviour
                 questComplete.SetActive(false);
                 timer = 0f;
                 ctr = 0;
+                gameSceneScript.FadeToScene(5);
             }
         }
     }

@@ -59,7 +59,7 @@ public class WarScript : MonoBehaviour
             warSpawner.SetActive(false);
             questChecker.SaveStatQuest();
             ctr = 1;
-            gameSceneScript.FadeToScene(4);
+            
         }
         if (ctr == 1)
         {
@@ -69,6 +69,7 @@ public class WarScript : MonoBehaviour
                 questComplete.SetActive(false);
                 timer = 0f;
                 ctr = 0;
+                gameSceneScript.FadeToScene(4);
             }
         }
         if(player.health == 0 && qfailed == true)
