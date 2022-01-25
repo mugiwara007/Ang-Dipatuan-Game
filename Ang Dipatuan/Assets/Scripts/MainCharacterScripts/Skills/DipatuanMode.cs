@@ -37,7 +37,7 @@ public class DipatuanMode : MonoBehaviour
 
     private bool isUnlocked1;
 
-    private bool isHidden = false;
+    private bool isHidden = true;
 
     SaveQuestScript saveQuestScript;
 
@@ -57,6 +57,8 @@ public class DipatuanMode : MonoBehaviour
             Debug.Log("SkillTextToType1 cannot be found.");
         }
 
+        SkillsTextToType1.SetActive(false);
+
         onCooldown = false;
 
         anim = gameObject.GetComponent<Animator>();
@@ -65,25 +67,32 @@ public class DipatuanMode : MonoBehaviour
         SetCurrentWord();
 
         manaStats = gameObject.GetComponent<PlayerBar>();
-        isHidden = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
+        //try
+        //{
+        //    SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
+        //} catch
+        //{
+        //    Debug.Log("SkillTextToType1 no found.");
+        //}
+        
 
-        if (saveQuestScript.CurrQuest > 4)
+        if (saveQuestScript.CurrQuest > 5)
         {
             isUnlocked1 = true;
         }
 
-        if (isHidden == true)
-        {
-            //text that will pop up to type show hide
-            SkillsTextToType1.SetActive(false);
-            isHidden = false;
-        }
+        //if (isHidden == true)
+        //{
+        //    //text that will pop up to type show hide
+        //    Debug.Log("Pumasok sa hidden");
+        //    SkillsTextToType1.SetActive(false);
+        //    isHidden = false;
+        //}
 
         if (typingMode)
         {

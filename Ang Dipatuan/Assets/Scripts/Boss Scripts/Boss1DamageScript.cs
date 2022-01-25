@@ -42,7 +42,7 @@ public class Boss1DamageScript : MonoBehaviour
                     playerAnimator.SetTrigger("isDamage");
 
                     //damage player
-                    playerHealth.Damage(22f);
+                    playerHealth.Damage(9f);
 
                     //Set boolean of taking damage to true so that player cant do anything when Taking damage
                     playerControl.isTakingDamage = true;
@@ -50,7 +50,7 @@ public class Boss1DamageScript : MonoBehaviour
                 else
                 {
                     //damage player
-                    playerHealth.Damage(13f);
+                    playerHealth.Damage(4f);
                 }
 
 

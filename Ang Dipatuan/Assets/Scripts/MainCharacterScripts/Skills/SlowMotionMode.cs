@@ -56,7 +56,7 @@ public class SlowMotionMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (saveQuestScript.CurrQuest > 2)
+        if (saveQuestScript.CurrQuest > 1)
         {
             isUnlocked2 = true;
         }

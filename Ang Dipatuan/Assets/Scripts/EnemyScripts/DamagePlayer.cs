@@ -43,7 +43,7 @@ public class DamagePlayer : MonoBehaviour
                     playerAnimator.SetTrigger("isDamage");
 
                     //damage player
-                    playerHealth.Damage(12f);
+                    playerHealth.Damage(5f);
 
                     //Set boolean of taking damage to true so that player cant do anything when Taking damage
                     playerControl.isTakingDamage = true;
@@ -51,7 +51,7 @@ public class DamagePlayer : MonoBehaviour
                 else
                 {
                     //damage player
-                    playerHealth.Damage(4f);
+                    playerHealth.Damage(2f);
                 }
            
 

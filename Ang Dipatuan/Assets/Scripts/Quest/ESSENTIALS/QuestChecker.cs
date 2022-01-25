@@ -34,17 +34,12 @@ public class QuestChecker : MonoBehaviour
     GameObject unlockSkill1;
     GameObject unlock1stSkillUi;
 
-    SlowMotionMode slowMotion;
-
     private bool canTeleport1 = true;
     private bool canTeleport2 = true;
     private bool canSave = true;
 
     GameSceneScript gameSceneScript;
     SaveQuestScript saveQuestScript;
-
-    BraveryMode braveryMode;
-    DipatuanMode dipatuanMode;
 
     PlayerBar player;
     Gold gold;
@@ -221,9 +216,6 @@ public class QuestChecker : MonoBehaviour
         warCollider = GameObject.FindGameObjectWithTag("TELEPORT");
         war = GameObject.FindGameObjectWithTag("WAR");
         activator = GameObject.FindGameObjectWithTag("Activator");
-        slowMotion = GameObject.FindGameObjectWithTag("Player").GetComponent<SlowMotionMode>();
-        braveryMode = GameObject.FindGameObjectWithTag("Player").GetComponent<BraveryMode>();
-        dipatuanMode = GameObject.FindGameObjectWithTag("Player").GetComponent<DipatuanMode>();
         escapeCollider.SetActive(false);
         unlockSkill1 = GameObject.FindGameObjectWithTag("UnlockSkill1");
 
@@ -237,10 +229,6 @@ public class QuestChecker : MonoBehaviour
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         clothes = GameObject.FindGameObjectWithTag("Player").GetComponent<ClotheinInventory>();
 
-        //SkillsTextToType3 = GameObject.FindGameObjectWithTag("SkillsTextToType3");
-        //SkillsTextToType2 = GameObject.FindGameObjectWithTag("SkillsTextToType2");
-        //SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
-
         activeSkill1 = GameObject.FindGameObjectWithTag("SlowMoSkillYellowImage").GetComponent<Image>();
         activeSkill1.enabled = false;
 
@@ -252,7 +240,5 @@ public class QuestChecker : MonoBehaviour
         enemyCampSpawn3.SetActive(false);
         enemyCamp2.SetActive(false);
         enemyEscape.SetActive(false);
-        //SkillsTextToType3.SetActive(false);
-        //SkillsTextToType1.SetActive(false);
     }
 }
