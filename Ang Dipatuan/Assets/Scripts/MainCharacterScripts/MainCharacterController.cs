@@ -264,30 +264,39 @@ public class MainCharacterController : MonoBehaviour
 
 			anim.SetBool("isWalking", true);
 
+			if(!Walk.isPlaying)
+            {
+				Walk.Play();
+			}
 
 			//JUMP WHEN WALKING
 			if (isJumping)
 			{
 				anim.SetBool("isJumping", true);
+				Walk.Stop();
 			}
 
 			//RUNNING
 			if (Input.GetButton("Shift") && playerBars.stamina > 0 && isCrouching == false && isBlocking == false)
 			{
 				isRunning = true;
-				anim.SetBool("isRunning", true);
+				anim.SetBool("isRunning", true); 
 				speed = 13f;
-				jumpHeight = 3f;
-				
+				jumpHeight = 2f;
+
+				if(!Run.isPlaying)
+                {
+					Run.Play();
+                }
 
 				//JUMP WHEN RUNNING
 				if (isJumping)
 				{
 					anim.SetBool("isJumping", true);
 					speed = 4f;
+					Run.Stop();
+					Walk.Stop();
 				}
-
-				
 			}
 			else
 			{
@@ -295,6 +304,7 @@ public class MainCharacterController : MonoBehaviour
 				speed = 4f;
 				jumpHeight = 2.6f;
 				isRunning = false;
+				Run.Stop();
 			}	
 		}
 		else
@@ -319,6 +329,9 @@ public class MainCharacterController : MonoBehaviour
 			isBlocking = true;
 			ComboReset();
 			HeavyComboReset();
+			Walk.Stop();
+			Run.Stop();
+			Crch.Stop();
 		}
 		else
 		{
@@ -334,7 +347,8 @@ public class MainCharacterController : MonoBehaviour
 		if (Input.GetButton("Crouch") && isJumping == false && canCrouch)
 		{
 			isCrouching = true;
-			
+			Walk.Stop();
+			Run.Stop();
 			//Adjust Crouch Layer in player Animator
 			var currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Crouch"));
 			anim.SetLayerWeight(anim.GetLayerIndex("Crouch"), Mathf.Lerp(currentWeight, 1.0f, 7f * Time.deltaTime));
@@ -430,12 +444,14 @@ public class MainCharacterController : MonoBehaviour
 	public void Attack()
     {
 		isLightAttacking = true;
+		Run.Stop();
+
 		if (comboStep == 0)
         {
 			anim.Play("sword attack 1");
 			comboStep = 1;
 			return;
-        }
+		}
         if (comboStep != 0)
         {
 			if (comboPossible)
@@ -508,11 +524,14 @@ public class MainCharacterController : MonoBehaviour
 	public void HeavyAttack()
 	{
 		isHeavyAttacking = true;
+		Run.Stop();
+
 		if (heavyAttackcomboStep == 0)
 		{
 			anim.Play("heavy attack 1");
 			heavyAttackcomboStep = 1;
 			return;
+			Run.Stop();
 		}
 		if (heavyAttackcomboStep != 0)
 		{
@@ -534,10 +553,12 @@ public class MainCharacterController : MonoBehaviour
 		if (heavyAttackcomboStep == 2)
 		{
 			anim.Play("heavy attack 2");
+			Run.Stop();
 		}
 		if (heavyAttackcomboStep == 3)
 		{
 			anim.Play("heavy attack 3");
+			Run.Stop();
 		}
 	}
 
@@ -699,57 +720,6 @@ public class MainCharacterController : MonoBehaviour
 	}
 
 	//Movements
-	public void WalkFX()
-    {
-		//START
-		if(!Walk.isPlaying)
-        {
-			Walk.Play();
-        }
-		
-	}
-
-	public void WalkFIX()
-    {
-		//STOP
-		if (Run.isPlaying)
-		{
-			Run.Stop();
-		}
-		if (Crch.isPlaying)
-		{
-			Crch.Stop();
-		}
-		if (Jmp.isPlaying)
-		{
-			Jmp.Stop();
-		}
-	}
-	public void RunFX()
-	{
-		//START
-		if (!Run.isPlaying)
-		{
-			Run.Play();
-		}
-	}
-	
-	public void RunFIX()
-    {
-		//STOP
-		if (Walk.isPlaying)
-		{
-			Walk.Stop();
-		}
-		if (Crch.isPlaying)
-		{
-			Crch.Stop();
-		}
-		if (Jmp.isPlaying)
-		{
-			Jmp.Stop();
-		}
-	}
 	public void CrouchFX()
 	{
 		//START
