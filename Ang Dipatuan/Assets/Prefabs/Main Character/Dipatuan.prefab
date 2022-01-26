@@ -3389,6 +3389,7 @@ MonoBehaviour:
   USword: {fileID: 7161754016602014319}
   Crch: {fileID: 4297700386757762525}
   Hit: {fileID: 4863934251351926280}
+  jmpCLP: {fileID: 8300000, guid: 7ae64fb209860eb46a37e5f042432a2c, type: 3}
   SA1: {fileID: -2938955587749655802}
   SA2: {fileID: 643351351521601543}
   SA3: {fileID: -2678685276361339249}
@@ -3534,6 +3535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBraveryModeActivated: 0
+  SkillsTextToType3: {fileID: 0}
 --- !u!114 &7853382041813814212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3662,6 +3664,7 @@ MonoBehaviour:
       currentAmount: 0
   questNum: 0
   quest2: 0
+  BGQ2: {fileID: 0}
   waypoint: {fileID: 0}
 --- !u!82 &-8099453544666682885
 AudioSource:

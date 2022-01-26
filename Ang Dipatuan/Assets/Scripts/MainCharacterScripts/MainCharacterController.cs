@@ -204,11 +204,14 @@ public class MainCharacterController : MonoBehaviour
 			groundedTimer -= Time.deltaTime;
 		}
 
-
 		// allow jump as long as the player is on the ground
 		if (Input.GetButtonDown("Jump"))
 		{
-			
+			/*if(!Jmp.isPlaying)
+            {
+				Jmp.Play();
+            }*/
+			Jmp.Play();
 			// must have been grounded recently to allow jump
 			if (groundedTimer > 0)
 			{
@@ -226,6 +229,7 @@ public class MainCharacterController : MonoBehaviour
 		{
 			anim.SetBool("isJumping", false);
 			isJumping = false;
+			Jmp.Stop();
 		}
 
 		if (Input.GetButtonUp("Shift"))
@@ -287,7 +291,7 @@ public class MainCharacterController : MonoBehaviour
 				if(!Run.isPlaying)
                 {
 					Run.Play();
-                }
+				}
 
 				//JUMP WHEN RUNNING
 				if (isJumping)
@@ -361,6 +365,7 @@ public class MainCharacterController : MonoBehaviour
 		else
 		{
 			isCrouching = false;
+			Crch.Stop();
 			var currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Crouch"));
 			anim.SetLayerWeight(anim.GetLayerIndex("Crouch"), Mathf.Lerp(currentWeight, 0f, 7f * Time.deltaTime));
 			Vector3 NewPos = new Vector3(followCamera.transform.localPosition.x, followCamPosition, followCamera.transform.localPosition.z);
@@ -743,15 +748,6 @@ public class MainCharacterController : MonoBehaviour
 		if (Jmp.isPlaying)
 		{
 			Jmp.Stop();
-		}
-	}
-
-	public void JumpFX()
-    {
-		//START
-		if (!Jmp.isPlaying)
-		{
-			Jmp.Play();
 		}
 	}
 
