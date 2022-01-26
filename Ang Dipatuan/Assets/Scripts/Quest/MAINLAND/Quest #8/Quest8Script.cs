@@ -107,11 +107,12 @@ public class Quest8Script : MonoBehaviour
             }
         }
 
-        if (quest.goal.IsReached())
+        if (quest.goal.IsReached() && ctr == 0)
         {
             timer += Time.deltaTime;
             questGoldGiver.QuestComplete(quest.goldReward);
             quest.goal.currentAmount = 0;
+            quest.currentQuest = saveQuestScript.CurrQuest;
             quest.currentQuest += 1;
             questComplete.SetActive(true);
             questChecker2.questNum = quest.currentQuest;

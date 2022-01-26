@@ -127,6 +127,10 @@ public class QuestChecker2 : MonoBehaviour
             clothes.boughtCloth2 = data.armor2;
             clothes.boughtCloth3 = data.armor3;
 
+            saveQuestScript.secondQuest = data.Save2;
+            saveQuestScript.thirdQuest = data.Save3;
+            saveQuestScript.fourthQuest = data.Save4;
+
             Vector3 position;
 
             position.x = data.position[0];
@@ -166,19 +170,24 @@ public class QuestChecker2 : MonoBehaviour
 
     void Update()
     {
-        if (quest.currentQuest == 3)
+        if (saveQuestScript.CurrQuest == 3)
         {
+            questDesc.text = "Go to the waypoint.";
             unlockSkill2.SetActive(true);
             unlockSkill3.SetActive(true);
             quest4Collider.SetActive(true);
             quest4Waypoint.SetActive(true);
         }
-        else if (quest.currentQuest == 4)
+        else if (saveQuestScript.CurrQuest == 4)
         {
-            activeSkill2.enabled = true;
-            unlockSkill3.SetActive(true);
+            if (saveQuestScript.fourthQuest == true)
+            {
+                activeSkill2.enabled = true;
+                unlockSkill3.SetActive(true);
+            }
+            
 
-            if (ifDone1 == true)
+            if (ifDone1 == true && saveQuestScript.fourthQuest == true)
             {
                 waypointMarker.SetActive(false);
                 unlockSkill2UI.SetActive(true);
@@ -197,7 +206,7 @@ public class QuestChecker2 : MonoBehaviour
             quest4Collider.SetActive(false);
             timer += Time.deltaTime;
 
-            if (canTeleport1 == true)
+            if (canTeleport1 == true && saveQuestScript.fourthQuest == true)
             {
                 StartCoroutine("activateCharController1");
                 canTeleport1 = false;
@@ -210,7 +219,7 @@ public class QuestChecker2 : MonoBehaviour
                 quest5Waypoint.SetActive(true);
             }
         }
-        else if (quest.currentQuest == 5)
+        else if (saveQuestScript.CurrQuest == 5)
         {
             activeSkill2.enabled = true;
             unlockSkill3.SetActive(true);
@@ -222,7 +231,7 @@ public class QuestChecker2 : MonoBehaviour
                 canTeleport2 = false;
             }
         }
-        else if (quest.currentQuest == 6)
+        else if (saveQuestScript.CurrQuest == 6)
         {
             activeSkill2.enabled = true;
             activeSkill3.enabled = true;
@@ -260,7 +269,7 @@ public class QuestChecker2 : MonoBehaviour
                 timer = 0f;
             }
         }
-        else if (quest.currentQuest == 7)
+        else if (saveQuestScript.CurrQuest == 7)
         {
             if (canTeleport5 == true)
             {
@@ -279,7 +288,7 @@ public class QuestChecker2 : MonoBehaviour
             noEntryDetector3.SetActive(false);
             waypointScript.target = quest8ColliderObj.transform;
         }
-        else if (quest.currentQuest == 8)
+        else if (saveQuestScript.CurrQuest == 8)
         {
             if (canTeleport4 == true)
             {

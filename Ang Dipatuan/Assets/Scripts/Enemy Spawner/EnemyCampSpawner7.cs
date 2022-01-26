@@ -13,9 +13,12 @@ public class EnemyCampSpawner7 : MonoBehaviour
 
     private float timer;
 
+    SaveQuestScript saveQuestScript;
+
     private void Awake()
     {
         avocado = GameObject.FindGameObjectWithTag("AvocadoSpawner");
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         quest6Script = GameObject.FindGameObjectWithTag("Quest6NPC").GetComponent<Quest6Script>();
         InstantiateEnemies();
     }
@@ -49,7 +52,7 @@ public class EnemyCampSpawner7 : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            if(quest6Script.quest.isActive == true && quest6Script.quest.currentQuest == 5)
+            if(quest6Script.quest.isActive == true && saveQuestScript.CurrQuest == 5)
             {
                 avocado.SetActive(true);
 

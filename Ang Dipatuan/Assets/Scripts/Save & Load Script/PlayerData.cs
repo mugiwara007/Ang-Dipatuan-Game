@@ -29,7 +29,7 @@ public class PlayerData
     public int sceneIndex;
     public bool Save2;
     public bool Save3;
-
+    public bool Save4;
     //plus lahat ng data na kailangan isave dapat instantiate dito
 
 
@@ -68,6 +68,9 @@ public class PlayerData
 
         Save2 = updater.secondQuest;
         Save3 = updater.thirdQuest;
+        Save4 = updater.fourthQuest;
+
+
     }
 
 }

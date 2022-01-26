@@ -87,11 +87,12 @@ public class Quest5Script : MonoBehaviour
 
         if (quest.goal.IsReached())
         {
-            if (saveQuestScript.CurrQuest == 4)
+            if (saveQuestScript.CurrQuest == 4 && ctr == 0)
             {
                 timer += Time.deltaTime;
                 questGoldGiver.QuestComplete(quest.goldReward);
                 quest.goal.currentAmount = 0;
+                quest.currentQuest = saveQuestScript.CurrQuest;
                 quest.currentQuest += 1;
                 questComplete.SetActive(true);
                 questChecker2.questNum = quest.currentQuest;

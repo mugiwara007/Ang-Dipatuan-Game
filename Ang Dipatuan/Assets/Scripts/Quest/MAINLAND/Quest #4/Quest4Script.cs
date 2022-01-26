@@ -32,6 +32,7 @@ public class Quest4Script : MonoBehaviour
     GameObject quest4EnemySpawner;
     public GameObject wall;
     PlayerBar player;
+    GameObject waypointMarker;
 
     private bool qfailed = true;
 
@@ -49,6 +50,7 @@ public class Quest4Script : MonoBehaviour
         questChecker2 = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker2>();
         quest4EnemySpawner = GameObject.FindGameObjectWithTag("Quest4EnemySpawner");
         quest4EnemySpawner.SetActive(false);
+        waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
         wall.SetActive(false);
     }
 
@@ -111,19 +113,22 @@ public class Quest4Script : MonoBehaviour
             }
         }
 
-        if (quest.goal.IsReached())
+        if (quest.goal.IsReached() && ctr == 0)
         {
             timer += Time.deltaTime;
             questGoldGiver.QuestComplete(quest.goldReward);
             quest.goal.currentAmount = 0;
+            quest.currentQuest = saveQuestScript.CurrQuest;
             quest.currentQuest += 1;
+            Debug.Log(quest.currentQuest);
             questComplete.SetActive(true);
             questChecker2.questNum = quest.currentQuest;
             wall.SetActive(false);
             quest4EnemySpawner.SetActive(false);
             questChecker2.SaveStatQuest2();
-            ctr += 1;
             gameSceneScript2.FadeToScene(12);
+            waypointMarker.SetActive(false);
+            ctr = 1;
         }
         if (ctr == 1)
         {

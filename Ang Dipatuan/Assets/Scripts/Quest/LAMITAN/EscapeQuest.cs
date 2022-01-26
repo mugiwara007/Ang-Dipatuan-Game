@@ -31,6 +31,7 @@ public class EscapeQuest : MonoBehaviour
     QuestChecker questChecker;
     EnemyLocomotionManger locomotionManager;
     SaveQuestScript saveQuestScript;
+    GameObject waypointMarker;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class EscapeQuest : MonoBehaviour
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
         gameSceneScript = GameObject.FindGameObjectWithTag("G1").GetComponent<GameSceneScript>();
         questChecker = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker>();
+        waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         enemyLocomotionManger = GameObject.FindGameObjectsWithTag("Enemy");
     }
@@ -113,10 +115,12 @@ public class EscapeQuest : MonoBehaviour
             timer += Time.deltaTime;
             questGoldGiver.QuestComplete(quest.goldReward);
             quest.goal.currentAmount = 0;
-            quest.currentQuest = 3;
+            quest.currentQuest = saveQuestScript.CurrQuest;
+            quest.currentQuest += 1;
             questComplete.SetActive(true);
             questChecker.questNum = quest.currentQuest;
             questChecker.SaveStatQuest();
+            waypointMarker.SetActive(false);
             ctr += 1;
             
         }

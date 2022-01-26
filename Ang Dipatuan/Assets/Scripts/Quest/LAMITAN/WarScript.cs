@@ -49,11 +49,12 @@ public class WarScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (quest.goal.IsReached())
+        if (quest.goal.IsReached() && ctr == 0)
         {
             questGoldGiver.QuestComplete(quest.goldReward);
             quest.goal.currentAmount = 0;
-            quest.currentQuest =2;
+            quest.currentQuest = saveQuestScript.CurrQuest;
+            quest.currentQuest += 1;
             questComplete.SetActive(true);
             questChecker.questNum = quest.currentQuest;
             warSpawner.SetActive(false);

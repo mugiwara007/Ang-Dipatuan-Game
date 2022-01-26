@@ -11,6 +11,7 @@ public class SaveQuestScript : MonoBehaviour
     public bool isLoadActive = false;
     public bool secondQuest = false;
     public bool thirdQuest = false;
+    public bool fourthQuest = false;
 
     void Awake()
     {
