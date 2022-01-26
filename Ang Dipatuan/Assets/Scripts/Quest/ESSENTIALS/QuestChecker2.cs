@@ -141,6 +141,7 @@ public class QuestChecker2 : MonoBehaviour
 
             if (saveQuestScript.CurrQuest == 4)
             {
+                ifDone1 = false;
                 canTeleport1 = false;
             }
 
@@ -151,6 +152,7 @@ public class QuestChecker2 : MonoBehaviour
 
             if (saveQuestScript.CurrQuest == 6)
             {
+                ifDone2 = false;
                 canTeleport3 = false;
             }
 
