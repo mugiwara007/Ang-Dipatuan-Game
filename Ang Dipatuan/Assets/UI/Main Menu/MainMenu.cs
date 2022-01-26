@@ -4,16 +4,35 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
     public GameSceneScript3 gameSceneScript3;
     SaveQuestScript saveQuestScript;
+    Image cbtn;
     int sceneToLoad;
+    public Text continueTxt;
 
     private void Awake()
     {
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
+        cbtn = GameObject.FindGameObjectWithTag("ContinueBtn").GetComponent<Image>();
+    }
+
+    private void Start()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+        if (data == null)
+        {
+            cbtn.enabled = false;
+            continueTxt.color = Color.gray;
+        }
+        else
+        {
+            cbtn.enabled = true;
+            continueTxt.color = Color.white;
+        }
     }
 
     public void QuitGame()

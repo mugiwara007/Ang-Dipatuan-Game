@@ -174,7 +174,7 @@ public class QuestChecker2 : MonoBehaviour
     {
         if (saveQuestScript.CurrQuest == 3)
         {
-            questDesc.text = "Go to the waypoint.";
+            questDesc.text = "Save the game by using the campfire and go to the waypoint.";
             unlockSkill2.SetActive(true);
             unlockSkill3.SetActive(true);
             quest4Collider.SetActive(true);
