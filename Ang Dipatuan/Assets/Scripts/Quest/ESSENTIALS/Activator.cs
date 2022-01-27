@@ -90,6 +90,7 @@ public class Activator : MonoBehaviour
         {
             timer += Time.deltaTime;
             questGoldGiver.QuestComplete(quest.goldReward);
+            saveQuestScript.gold += quest.goldReward;
             quest.goal.currentAmount = 0;
             quest.currentQuest = saveQuestScript.CurrQuest;
             quest.currentQuest += 1;

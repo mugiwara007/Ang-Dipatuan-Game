@@ -30,7 +30,7 @@ public class QuestChecker2 : MonoBehaviour
     bool ifDone1 = true;
     bool ifDone2 = true;
     public bool avocadoController = false;
-    GameObject avocadoSpawner;
+    GameObject[] avocadoSpawner;
     GameObject waypointMarker;
     WaypointScript waypointScript;
     Quest5Script quest5Script;
@@ -75,6 +75,13 @@ public class QuestChecker2 : MonoBehaviour
 
     GameSceneScript2 gameSceneScript2;
     SaveQuestScript saveQuestScript;
+
+    Quest4Script quest4;
+    Quest5Script quest5;
+    Quest6Script quest6;
+    Quest7Script quest7;
+    Quest8Script quest8;
+    Quest9Script quest9;
 
     Text questDesc;
 
@@ -137,6 +144,13 @@ public class QuestChecker2 : MonoBehaviour
             position.y = data.position[1];
             position.z = data.position[2];
 
+            saveQuestScript.quest4Accepted = data.q4Accepted;
+            saveQuestScript.quest5Accepted = data.q5Accepted;
+            saveQuestScript.quest6Accepted = data.q6Accepted;
+            saveQuestScript.quest7Accepted = data.q7Accepted;
+            saveQuestScript.quest8Accepted = data.q8Accepted;
+            saveQuestScript.quest9Accepted = data.q9Accepted;
+
             StartCoroutine(activateCharController(position));
 
             if (saveQuestScript.CurrQuest == 4)
@@ -154,16 +168,58 @@ public class QuestChecker2 : MonoBehaviour
             {
                 ifDone2 = false;
                 canTeleport3 = false;
+                foreach (GameObject spawn in avocadoSpawner)
+                {
+                    spawn.SetActive(true);
+                }
             }
 
             if (saveQuestScript.CurrQuest == 7)
             {
                 canTeleport5 = false;
+                foreach (GameObject spawn in avocadoSpawner)
+                {
+                    spawn.SetActive(true);
+                }
             }
 
             if (saveQuestScript.CurrQuest == 8)
             {
                 canTeleport4 = false;
+                foreach (GameObject spawn in avocadoSpawner)
+                {
+                    spawn.SetActive(true);
+                }
+            }
+
+            if (saveQuestScript.quest4Accepted == true)
+            {
+                quest4.AcceptQuest4();
+            }
+
+            if (saveQuestScript.quest5Accepted == true)
+            {
+                quest5.AcceptQuest5();
+            }
+
+            if (saveQuestScript.quest6Accepted == true)
+            {
+                quest6.AcceptQuest6();
+            }
+
+            if (saveQuestScript.quest7Accepted == true)
+            {
+                quest7.AcceptQuest7();
+            }
+
+            if (saveQuestScript.quest8Accepted == true)
+            {
+                quest8.AcceptQuest8();
+            }
+
+            if (saveQuestScript.quest9Accepted == true)
+            {
+                quest9.AcceptQuest9();
             }
 
             saveQuestScript.isLoadActive = false;
@@ -240,7 +296,10 @@ public class QuestChecker2 : MonoBehaviour
             quest6Detector.SetActive(false);
             quest6Waypoint1.SetActive(false);
             quest6Waypoint2.SetActive(false);
-            avocadoSpawner.SetActive(true);
+            foreach (GameObject spawn in avocadoSpawner)
+            {
+                spawn.SetActive(true);
+            }
             movement.stun = true;
 
             if (ifDone2 == true)
@@ -288,6 +347,10 @@ public class QuestChecker2 : MonoBehaviour
             noEntryDetector2.SetActive(false);
             noEntryCollider3.SetActive(false);
             noEntryDetector3.SetActive(false);
+            foreach (GameObject spawn in avocadoSpawner)
+            {
+                spawn.SetActive(true);
+            }
             waypointScript.target = quest8ColliderObj.transform;
         }
         else if (saveQuestScript.CurrQuest == 8)
@@ -297,6 +360,10 @@ public class QuestChecker2 : MonoBehaviour
                 StartCoroutine("activateCharController4");
                 movement.stun = true;
                 canTeleport4 = false;
+            }
+            foreach (GameObject spawn in avocadoSpawner)
+            {
+                spawn.SetActive(true);
             }
             sky1.SetActive(false);
             light1.SetActive(false);
@@ -420,7 +487,7 @@ public class QuestChecker2 : MonoBehaviour
         quest5Waypoint = GameObject.FindGameObjectWithTag("Waypoint2");
         quest6Waypoint1 = GameObject.FindGameObjectWithTag("Waypoint3");
         quest6Waypoint2 = GameObject.FindGameObjectWithTag("Waypoint4");
-        avocadoSpawner = GameObject.FindGameObjectWithTag("AvocadoSpawner");
+        avocadoSpawner = GameObject.FindGameObjectsWithTag("AvocadoSpawner");
         waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
         quest5Script = GameObject.FindGameObjectWithTag("Quest5Collider").GetComponent<Quest5Script>();
         quest6Script = GameObject.FindGameObjectWithTag("Quest6NPC").GetComponent<Quest6Script>();
@@ -451,10 +518,19 @@ public class QuestChecker2 : MonoBehaviour
         quest9Collider = GameObject.FindGameObjectWithTag("Quest9Collider");
         questDesc = GameObject.FindGameObjectWithTag("QuestUI").GetComponent<Text>();
 
+        quest4 = GameObject.FindGameObjectWithTag("Quest4Collider").GetComponent<Quest4Script>();
+        quest5 = GameObject.FindGameObjectWithTag("Quest5Collider").GetComponent<Quest5Script>();
+        quest6 = GameObject.FindGameObjectWithTag("Quest6NPC").GetComponent<Quest6Script>();
+        quest7 = GameObject.FindGameObjectWithTag("Quest7Collider").GetComponent<Quest7Script>();
+        quest8 = GameObject.FindGameObjectWithTag("Quest8Collider").GetComponent<Quest8Script>();
+        quest9 = GameObject.FindGameObjectWithTag("Quest9Collider").GetComponent<Quest9Script>();
+
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
         gold = GameObject.FindGameObjectWithTag("Player").GetComponent<Gold>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         clothes = GameObject.FindGameObjectWithTag("Player").GetComponent<ClotheinInventory>();
+
+        gold.total_gold = saveQuestScript.gold;
 
         quest4Waypoint.SetActive(false);
         quest4Collider.SetActive(false);
@@ -466,7 +542,10 @@ public class QuestChecker2 : MonoBehaviour
         quest7Collider.SetActive(false);
         quest9Collider.SetActive(false);
         storm.SetActive(false);
-        avocadoSpawner.SetActive(false);
+        foreach (GameObject spawn in avocadoSpawner)
+        {
+            spawn.SetActive(false);
+        }
         finalWarObject.SetActive(false);
 
         activeSkill2.enabled = false;
@@ -488,7 +567,10 @@ public class QuestChecker2 : MonoBehaviour
 
         if (avocadoController == true)
         {
-            avocadoSpawner.SetActive(true);
+            foreach (GameObject spawn in avocadoSpawner)
+            {
+                spawn.SetActive(true);
+            }
         }
 
         if (saveQuestScript.CurrQuest >= 7)

@@ -46,7 +46,7 @@ public class DipatuanMode : MonoBehaviour
         skillColorYellow = GameObject.FindGameObjectWithTag("DipatuanSkillYellowImage").GetComponent<Image>();
 
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
-
+        manaStats = gameObject.GetComponent<PlayerBar>();
         try
         {
             //text that will pop up to type
@@ -66,7 +66,7 @@ public class DipatuanMode : MonoBehaviour
 
         SetCurrentWord();
 
-        manaStats = gameObject.GetComponent<PlayerBar>();
+       
     }
 
     // Update is called once per frame
@@ -143,7 +143,7 @@ public class DipatuanMode : MonoBehaviour
             }
             catch
             {
-
+                Debug.Log("Firesword not found.");
             }
             
         }

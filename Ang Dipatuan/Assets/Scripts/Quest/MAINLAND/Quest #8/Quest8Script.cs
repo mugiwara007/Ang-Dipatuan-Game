@@ -74,6 +74,7 @@ public class Quest8Script : MonoBehaviour
     {
         if (saveQuestScript.CurrQuest == 7)
         {
+            saveQuestScript.quest8Accepted = true;
             wall1.SetActive(true);
             waypointMarker.SetActive(true);
             box.enabled = false;
@@ -110,7 +111,9 @@ public class Quest8Script : MonoBehaviour
         if (quest.goal.IsReached() && ctr == 0)
         {
             timer += Time.deltaTime;
+            saveQuestScript.quest8Accepted = false;
             questGoldGiver.QuestComplete(quest.goldReward);
+            saveQuestScript.gold += quest.goldReward;
             quest.goal.currentAmount = 0;
             quest.currentQuest = saveQuestScript.CurrQuest;
             quest.currentQuest += 1;

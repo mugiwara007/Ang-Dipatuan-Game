@@ -71,11 +71,12 @@ public class Quest7Script : MonoBehaviour
     {
         if (saveQuestScript.CurrQuest == 6)
         {
+            saveQuestScript.quest7Accepted = true;
             waypointMarker.SetActive(true);
             box.enabled = false;
             questWindow.SetActive(false);
             quest.isActive = true;
-            questDesc.text = quest.desc;
+            questDesc.text = "Find and kill all enemies in their camp.";
             waypointScript.target = waypoint.transform;
             waypoint.SetActive(true);
             Cursor.visible = false;
@@ -107,7 +108,9 @@ public class Quest7Script : MonoBehaviour
         if (quest.goal.IsReached() && ctr == 0)
         {
             timer += Time.deltaTime;
+            saveQuestScript.quest7Accepted = false;
             questGoldGiver.QuestComplete(quest.goldReward);
+            saveQuestScript.gold += quest.goldReward;
             quest.goal.currentAmount = 0;
             quest.currentQuest = saveQuestScript.CurrQuest;
             quest.currentQuest += 1;

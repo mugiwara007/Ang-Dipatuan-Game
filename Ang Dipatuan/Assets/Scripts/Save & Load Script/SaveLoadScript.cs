@@ -47,7 +47,6 @@ public class SaveLoadScript : MonoBehaviour
             {
                 SaveSystem.SavePlayer(player, gold, updater, inventory, clothes);
                 isSaved = true;
-                Debug.Log("SAVED");
                 timer = 0;
             }
             if (Input.GetKeyDown(KeyCode.L))

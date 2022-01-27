@@ -21,7 +21,6 @@ public class Waypoint3 : MonoBehaviour
         {
             waypoint.SetActive(false);
             box.SetActive(false);
-
         }
     }
 }

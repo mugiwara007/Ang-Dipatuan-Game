@@ -50,7 +50,9 @@ public class Quest9Script : MonoBehaviour
     {
         if (quest.goal.IsReached() && ctr == 0)
         {
+            saveQuestScript.quest9Accepted = false;
             questGoldGiver.QuestComplete(quest.goldReward);
+            saveQuestScript.gold += quest.goldReward;
             quest.goal.currentAmount = 0;
             quest.currentQuest = saveQuestScript.CurrQuest;
             quest.currentQuest += 1;
@@ -107,6 +109,7 @@ public class Quest9Script : MonoBehaviour
     {
         if (saveQuestScript.CurrQuest == 8)
         {
+            saveQuestScript.quest9Accepted = true;
             box.enabled = false;
             questWindow.SetActive(false);
             quest.isActive = true;

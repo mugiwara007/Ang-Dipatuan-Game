@@ -232,6 +232,8 @@ public class QuestChecker : MonoBehaviour
         activeSkill1 = GameObject.FindGameObjectWithTag("SlowMoSkillYellowImage").GetComponent<Image>();
         activeSkill1.enabled = false;
 
+        gold.total_gold = saveQuestScript.gold;
+
         war.SetActive(false);
         actBox.enabled = true;
         escapeObj.SetActive(false);

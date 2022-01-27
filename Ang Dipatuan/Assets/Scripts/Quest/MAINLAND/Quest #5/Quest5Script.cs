@@ -67,11 +67,12 @@ public class Quest5Script : MonoBehaviour
     {
         if (saveQuestScript.CurrQuest == 4)
         {
+            saveQuestScript.quest5Accepted = true;
             waypointMarker.SetActive(true);
             box.enabled = false;
             questWindow.SetActive(false);
             quest.isActive = true;
-            questDesc.text = quest.desc;
+            questDesc.text = "Follow the Waypoint to the Village.";
             waypointScript.target = waypoint.transform;
             waypoint.SetActive(true);
             Cursor.visible = false;
@@ -90,7 +91,9 @@ public class Quest5Script : MonoBehaviour
             if (saveQuestScript.CurrQuest == 4 && ctr == 0)
             {
                 timer += Time.deltaTime;
+                saveQuestScript.quest5Accepted = false;
                 questGoldGiver.QuestComplete(quest.goldReward);
+                saveQuestScript.gold += quest.goldReward;
                 quest.goal.currentAmount = 0;
                 quest.currentQuest = saveQuestScript.CurrQuest;
                 quest.currentQuest += 1;

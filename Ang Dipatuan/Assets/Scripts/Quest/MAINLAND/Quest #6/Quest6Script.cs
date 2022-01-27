@@ -71,13 +71,14 @@ public class Quest6Script : MonoBehaviour
     {
         if (saveQuestScript.CurrQuest == 5)
         {
+            saveQuestScript.quest6Accepted = true;
             waypointMarker.SetActive(true);
             playerDetector.SetActive(false);
             questWindow.SetActive(false);
             quest.isActive = true;
-            questDesc.text = quest.desc;
-            waypointScript.target = waypoint.transform;
+            questDesc.text = "Kill all enemies in the camp and collect 3 Avocadoes.";
             waypoint.SetActive(true);
+            waypointScript.target = waypoint.transform;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             movement.stun = false;
@@ -108,7 +109,9 @@ public class Quest6Script : MonoBehaviour
         {
             if (avocadoCtr >= 3)
             {
+                questDesc.text = "Return to the village and deliver the Avocadoes.";
                 waypoint4.SetActive(true);
+                waypointMarker.SetActive(true);
                 waypointScript.target = gameObject.transform;
             }
         }
@@ -116,7 +119,9 @@ public class Quest6Script : MonoBehaviour
         if (quest.goal.IsReached() && ctr == 0)
         {
             timer += Time.deltaTime;
+            saveQuestScript.quest6Accepted = false;
             questGoldGiver.QuestComplete(quest.goldReward);
+            saveQuestScript.gold += quest.goldReward;
             quest.goal.currentAmount = 0;
             quest.currentQuest = saveQuestScript.CurrQuest;
             quest.currentQuest += 1;

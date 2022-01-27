@@ -9,7 +9,7 @@ public class EnemyCampSpawner7 : MonoBehaviour
     public GameObject SpanishSoldier;
     public GameObject EnemyRifleMan;
     Quest6Script quest6Script;
-    GameObject avocado;
+    GameObject[] avocado;
 
     private float timer;
 
@@ -17,7 +17,7 @@ public class EnemyCampSpawner7 : MonoBehaviour
 
     private void Awake()
     {
-        avocado = GameObject.FindGameObjectWithTag("AvocadoSpawner");
+        avocado = GameObject.FindGameObjectsWithTag("AvocadoSpawner");
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         quest6Script = GameObject.FindGameObjectWithTag("Quest6NPC").GetComponent<Quest6Script>();
         InstantiateEnemies();
@@ -54,7 +54,10 @@ public class EnemyCampSpawner7 : MonoBehaviour
 
             if(quest6Script.quest.isActive == true && saveQuestScript.CurrQuest == 5)
             {
-                avocado.SetActive(true);
+                foreach (GameObject spawn in avocado)
+                {
+                    spawn.SetActive(true);
+                }
 
             }
 

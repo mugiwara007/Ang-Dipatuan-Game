@@ -78,11 +78,12 @@ public class Quest4Script : MonoBehaviour
     {
         if (saveQuestScript.CurrQuest == 3)
         {
+            saveQuestScript.quest4Accepted = true;
             box.enabled = false;
             wall.SetActive(true);
             questWindow.SetActive(false);
             quest.isActive = true;
-            questDesc.text = quest.desc;
+            questDesc.text = "Make your way to the Waypoint.";
             waypointScript.target = waypoint.transform;
             waypoint.SetActive(true);
             Cursor.visible = false;
@@ -117,6 +118,8 @@ public class Quest4Script : MonoBehaviour
         {
             timer += Time.deltaTime;
             questGoldGiver.QuestComplete(quest.goldReward);
+            saveQuestScript.gold += quest.goldReward;
+            saveQuestScript.quest4Accepted = false;
             quest.goal.currentAmount = 0;
             quest.currentQuest = saveQuestScript.CurrQuest;
             quest.currentQuest += 1;

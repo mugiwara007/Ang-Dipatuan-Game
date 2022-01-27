@@ -52,6 +52,7 @@ public class WarScript : MonoBehaviour
         if (quest.goal.IsReached() && ctr == 0)
         {
             questGoldGiver.QuestComplete(quest.goldReward);
+            saveQuestScript.gold += quest.goldReward;
             quest.goal.currentAmount = 0;
             quest.currentQuest = saveQuestScript.CurrQuest;
             quest.currentQuest += 1;

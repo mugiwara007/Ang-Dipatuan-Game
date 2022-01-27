@@ -30,6 +30,14 @@ public class PlayerData
     public bool Save2;
     public bool Save3;
     public bool Save4;
+
+    public bool q4Accepted;
+    public bool q5Accepted;
+    public bool q6Accepted;
+    public bool q7Accepted;
+    public bool q8Accepted;
+    public bool q9Accepted;
+
     //plus lahat ng data na kailangan isave dapat instantiate dito
 
 
@@ -70,7 +78,12 @@ public class PlayerData
         Save3 = updater.thirdQuest;
         Save4 = updater.fourthQuest;
 
-
-    }
+        q4Accepted = updater.quest4Accepted;
+        q5Accepted = updater.quest5Accepted;
+        q6Accepted = updater.quest6Accepted;
+        q7Accepted = updater.quest7Accepted;
+        q8Accepted = updater.quest8Accepted;
+        q9Accepted = updater.quest9Accepted;
+}
 
 }
