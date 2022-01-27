@@ -3287,6 +3287,7 @@ GameObject:
   - component: {fileID: 2821880511496451363}
   - component: {fileID: -5475644450342526943}
   - component: {fileID: 4863934251351926280}
+  - component: {fileID: 6684243106384490972}
   m_Layer: 3
   m_Name: Dipatuan
   m_TagString: Player
@@ -3389,7 +3390,6 @@ MonoBehaviour:
   USword: {fileID: 7161754016602014319}
   Crch: {fileID: 4297700386757762525}
   Hit: {fileID: 4863934251351926280}
-  jmpCLP: {fileID: 8300000, guid: 7ae64fb209860eb46a37e5f042432a2c, type: 3}
   SA1: {fileID: -2938955587749655802}
   SA2: {fileID: 643351351521601543}
   SA3: {fileID: -2678685276361339249}
@@ -5586,6 +5586,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6684243106384490972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5428265270087804671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 607c03c281def714c833250b5042feb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5478717096714712063
 GameObject:
   m_ObjectHideFlags: 0

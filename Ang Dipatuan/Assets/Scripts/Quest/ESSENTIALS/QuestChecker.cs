@@ -46,7 +46,7 @@ public class QuestChecker : MonoBehaviour
     Inventory inventory;
     ClotheinInventory clothes;
 
-    
+    GameObject holdUI;
 
     public void SaveStatQuest()
     {
@@ -124,12 +124,14 @@ public class QuestChecker : MonoBehaviour
         {
             if (ifDone == true)
             {
+                holdUI.SetActive(true);
                 unlock1stSkillUi.SetActive(true);
             }
             
             timer += Time.deltaTime;
             if (timer > 4f && ifDone == true)
             {
+                holdUI.SetActive(false);
                 unlock1stSkillUi.SetActive(false);
                 timer = 0f;
                 ifDone = false;
@@ -231,6 +233,9 @@ public class QuestChecker : MonoBehaviour
 
         activeSkill1 = GameObject.FindGameObjectWithTag("SlowMoSkillYellowImage").GetComponent<Image>();
         activeSkill1.enabled = false;
+
+        holdUI = GameObject.FindGameObjectWithTag("HoldUI");
+        holdUI.SetActive(false);
 
         gold.total_gold = saveQuestScript.gold;
 

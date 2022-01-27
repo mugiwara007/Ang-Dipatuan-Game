@@ -32,6 +32,7 @@ public class Quest6Script : MonoBehaviour
     GameObject waypointMarker;
     GameSceneScript2 gameSceneScript2;
     PlayerBar player;
+    GameObject canvas;
 
     private bool qfailed = true;
 
@@ -49,6 +50,7 @@ public class Quest6Script : MonoBehaviour
         gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
         waypoint4 = GameObject.FindGameObjectWithTag("Waypoint4");
         waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
+        canvas = GameObject.FindGameObjectWithTag("Quest6E");
     }
 
     public void Quest6() { 
@@ -74,6 +76,7 @@ public class Quest6Script : MonoBehaviour
             saveQuestScript.quest6Accepted = true;
             waypointMarker.SetActive(true);
             playerDetector.SetActive(false);
+            canvas.SetActive(false);
             questWindow.SetActive(false);
             quest.isActive = true;
             questDesc.text = "Kill all enemies in the camp and collect 3 Avocadoes.";
@@ -112,7 +115,7 @@ public class Quest6Script : MonoBehaviour
                 questDesc.text = "Return to the village and deliver the Avocadoes.";
                 waypoint4.SetActive(true);
                 waypointMarker.SetActive(true);
-                waypointScript.target = gameObject.transform;
+                waypointScript.target = waypoint4.transform;
             }
         }
 

@@ -81,8 +81,8 @@ public class QuestChecker2 : MonoBehaviour
     Quest5Script quest5;
     Quest6Script quest6;
     Quest7Script quest7;
-    Quest8Script quest8;
-    Quest9Script quest9;
+
+    GameObject holdUI;
 
     Text questDesc;
 
@@ -238,6 +238,7 @@ public class QuestChecker2 : MonoBehaviour
 
             if (ifDone1 == true && saveQuestScript.fourthQuest == true)
             {
+                holdUI.SetActive(true);
                 waypointMarker.SetActive(false);
                 unlockSkill2UI.SetActive(true);
             }
@@ -245,6 +246,7 @@ public class QuestChecker2 : MonoBehaviour
             time += Time.deltaTime;
             if (time > 4f && ifDone1 == true)
             {
+                holdUI.SetActive(false);
                 unlockSkill2UI.SetActive(false);
                 timer = 0f;
                 ifDone1 = false;
@@ -296,6 +298,7 @@ public class QuestChecker2 : MonoBehaviour
 
             if (ifDone2 == true)
             {
+                holdUI.SetActive(true);
                 waypointMarker.SetActive(false);
                 unlockSkill3UI.SetActive(true);
             }
@@ -303,6 +306,7 @@ public class QuestChecker2 : MonoBehaviour
             time += Time.deltaTime;
             if (time > 4f && ifDone2 == true)
             {
+                holdUI.SetActive(false);
                 unlockSkill3UI.SetActive(false);
                 timer = 0f;
                 ifDone2 = false;
@@ -514,13 +518,14 @@ public class QuestChecker2 : MonoBehaviour
         quest5 = GameObject.FindGameObjectWithTag("Quest5Collider").GetComponent<Quest5Script>();
         quest6 = GameObject.FindGameObjectWithTag("Quest6NPC").GetComponent<Quest6Script>();
         quest7 = GameObject.FindGameObjectWithTag("Quest7Collider").GetComponent<Quest7Script>();
-        quest8 = GameObject.FindGameObjectWithTag("Quest8Collider").GetComponent<Quest8Script>();
-        quest9 = GameObject.FindGameObjectWithTag("Quest9Collider").GetComponent<Quest9Script>();
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
         gold = GameObject.FindGameObjectWithTag("Player").GetComponent<Gold>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         clothes = GameObject.FindGameObjectWithTag("Player").GetComponent<ClotheinInventory>();
+
+        holdUI = GameObject.FindGameObjectWithTag("HoldUI");
+        holdUI.SetActive(false);
 
         gold.total_gold = saveQuestScript.gold;
 
