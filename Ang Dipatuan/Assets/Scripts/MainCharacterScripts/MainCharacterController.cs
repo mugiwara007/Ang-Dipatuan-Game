@@ -207,11 +207,10 @@ public class MainCharacterController : MonoBehaviour
 		// allow jump as long as the player is on the ground
 		if (Input.GetButtonDown("Jump"))
 		{
-			/*if(!Jmp.isPlaying)
+			if(!Jmp.isPlaying)
             {
 				Jmp.Play();
-            }*/
-			Jmp.Play();
+            }
 			// must have been grounded recently to allow jump
 			if (groundedTimer > 0)
 			{
