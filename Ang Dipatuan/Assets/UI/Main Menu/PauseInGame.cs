@@ -37,6 +37,8 @@ public class PauseInGame : MonoBehaviour
 
     public void QuitGame()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         Destroy(updater);
         try
         {

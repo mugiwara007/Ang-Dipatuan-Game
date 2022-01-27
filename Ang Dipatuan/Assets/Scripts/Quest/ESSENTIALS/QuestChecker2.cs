@@ -29,6 +29,7 @@ public class QuestChecker2 : MonoBehaviour
     float time = 0f;
     bool ifDone1 = true;
     bool ifDone2 = true;
+    bool isEntered = false;
     public bool avocadoController = false;
     GameObject[] avocadoSpawner;
     GameObject waypointMarker;
@@ -148,8 +149,8 @@ public class QuestChecker2 : MonoBehaviour
             saveQuestScript.quest5Accepted = data.q5Accepted;
             saveQuestScript.quest6Accepted = data.q6Accepted;
             saveQuestScript.quest7Accepted = data.q7Accepted;
-            saveQuestScript.quest8Accepted = data.q8Accepted;
-            saveQuestScript.quest9Accepted = data.q9Accepted;
+
+            isEntered = true;
 
             StartCoroutine(activateCharController(position));
 
@@ -212,16 +213,6 @@ public class QuestChecker2 : MonoBehaviour
                 quest7.AcceptQuest7();
             }
 
-            if (saveQuestScript.quest8Accepted == true)
-            {
-                quest8.AcceptQuest8();
-            }
-
-            if (saveQuestScript.quest9Accepted == true)
-            {
-                quest9.AcceptQuest9();
-            }
-
             saveQuestScript.isLoadActive = false;
         }
     }
@@ -275,6 +266,7 @@ public class QuestChecker2 : MonoBehaviour
                 movement.stun = false;
                 quest5Collider.SetActive(true);
                 quest5Waypoint.SetActive(true);
+                isEntered = true;
             }
         }
         else if (saveQuestScript.CurrQuest == 5)
@@ -283,7 +275,7 @@ public class QuestChecker2 : MonoBehaviour
             unlockSkill3.SetActive(true);
             quest6Detector.SetActive(true);
 
-            if (canTeleport2 == true)
+            if (canTeleport2 == true && isEntered == false)
             {
                 StartCoroutine("activateCharController2");
                 canTeleport2 = false;

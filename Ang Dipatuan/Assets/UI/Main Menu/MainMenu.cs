@@ -50,6 +50,8 @@ public class MainMenu : MonoBehaviour
 
     public void LoadGame()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         PlayerData data = SaveSystem.LoadPlayer();
         saveQuestScript.isLoadActive = true;
         sceneToLoad = data.sceneIndex;

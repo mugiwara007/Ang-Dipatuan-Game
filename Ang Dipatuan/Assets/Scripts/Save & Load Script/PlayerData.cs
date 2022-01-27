@@ -35,8 +35,6 @@ public class PlayerData
     public bool q5Accepted;
     public bool q6Accepted;
     public bool q7Accepted;
-    public bool q8Accepted;
-    public bool q9Accepted;
 
     //plus lahat ng data na kailangan isave dapat instantiate dito
 
@@ -82,8 +80,6 @@ public class PlayerData
         q5Accepted = updater.quest5Accepted;
         q6Accepted = updater.quest6Accepted;
         q7Accepted = updater.quest7Accepted;
-        q8Accepted = updater.quest8Accepted;
-        q9Accepted = updater.quest9Accepted;
 }
 
 }

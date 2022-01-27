@@ -18,8 +18,6 @@ public class SaveQuestScript : MonoBehaviour
     public bool quest5Accepted = false;
     public bool quest6Accepted = false;
     public bool quest7Accepted = false;
-    public bool quest8Accepted = false;
-    public bool quest9Accepted = false;
 
     void Awake()
     {

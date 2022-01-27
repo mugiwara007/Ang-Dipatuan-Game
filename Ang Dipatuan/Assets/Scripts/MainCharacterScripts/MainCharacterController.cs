@@ -62,7 +62,7 @@ public class MainCharacterController : MonoBehaviour
 	//For Jumping
 	public bool groundedPlayer;
 	private Vector3 playerVelocity;
-	private float jumpHeight = 2.6f;
+	private float jumpHeight = 1.5f;
 	private float gravityValue = -9.81f;
 	private bool isJumping;
 	private float groundedTimer;     // to allow jumping when going down ramps
@@ -234,7 +234,7 @@ public class MainCharacterController : MonoBehaviour
 
 		if (Input.GetButtonUp("Shift"))
 		{
-			jumpHeight = 2.6f;
+			jumpHeight = 1.5f;
 			isRunning = false;
 		}
 

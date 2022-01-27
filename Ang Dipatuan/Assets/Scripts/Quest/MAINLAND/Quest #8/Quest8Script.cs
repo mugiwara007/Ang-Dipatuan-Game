@@ -33,7 +33,6 @@ public class Quest8Script : MonoBehaviour
     GameSceneScript2 gameSceneScript2;
     private bool qfailed = true;
 
-
     private void Awake()
     {
         questDesc = GameObject.FindGameObjectWithTag("QuestUI").GetComponent<Text>();
@@ -74,7 +73,6 @@ public class Quest8Script : MonoBehaviour
     {
         if (saveQuestScript.CurrQuest == 7)
         {
-            saveQuestScript.quest8Accepted = true;
             wall1.SetActive(true);
             waypointMarker.SetActive(true);
             box.enabled = false;
@@ -103,6 +101,7 @@ public class Quest8Script : MonoBehaviour
                     questFailed.SetActive(false);
                     timer = 0f;
                     qfailed = false;
+                    saveQuestScript.isLoadActive = true;
                     gameSceneScript2.FadeToScene(6);
                 }
             }
@@ -111,7 +110,6 @@ public class Quest8Script : MonoBehaviour
         if (quest.goal.IsReached() && ctr == 0)
         {
             timer += Time.deltaTime;
-            saveQuestScript.quest8Accepted = false;
             questGoldGiver.QuestComplete(quest.goldReward);
             saveQuestScript.gold += quest.goldReward;
             quest.goal.currentAmount = 0;

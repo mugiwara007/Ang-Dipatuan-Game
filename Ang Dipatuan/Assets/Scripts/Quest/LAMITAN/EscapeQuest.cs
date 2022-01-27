@@ -75,7 +75,7 @@ public class EscapeQuest : MonoBehaviour
             box.enabled = false;
             questWindow.SetActive(false);
             quest.isActive = true;
-            questDesc.text = quest.desc;
+            questDesc.text = "Avoid enemy detection and go to the Waypoint.";
             waypointScript.target = waypoint.transform;
             waypoint.SetActive(true);
             Cursor.visible = false;
