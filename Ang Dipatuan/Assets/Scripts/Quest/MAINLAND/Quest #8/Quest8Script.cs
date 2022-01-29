@@ -78,9 +78,9 @@ public class Quest8Script : MonoBehaviour
             box.enabled = false;
             questWindow.SetActive(false);
             quest.isActive = true;
-            questDesc.text = quest.desc;
-            waypointScript.target = waypoint.transform;
+            questDesc.text = "Defeat all waves of enemies and 3 Spanish Captains.";
             waypoint.SetActive(true);
+            waypointScript.target = waypoint.transform;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             movement.stun = false;
@@ -107,7 +107,7 @@ public class Quest8Script : MonoBehaviour
             }
         }
 
-        if (quest.goal.IsReached() && ctr == 0)
+        if (quest.goal.IsReached())
         {
             timer += Time.deltaTime;
             questGoldGiver.QuestComplete(quest.goldReward);
@@ -118,18 +118,7 @@ public class Quest8Script : MonoBehaviour
             questComplete.SetActive(true);
             questChecker2.questNum = quest.currentQuest;
             questChecker2.SaveStatQuest2();
-            ctr += 1;
-        }
-        if (ctr == 1)
-        {
-            timer += Time.deltaTime;
-            if (timer > 3f)
-            {
-                questComplete.SetActive(false);
-                gameSceneScript2.FadeToScene(9);
-                timer = 0f;
-                ctr = 0;
-            }
+            gameSceneScript2.FadeToScene(9);
         }
     }
 }

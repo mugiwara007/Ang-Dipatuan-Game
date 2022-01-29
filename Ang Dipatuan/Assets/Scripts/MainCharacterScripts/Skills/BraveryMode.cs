@@ -123,7 +123,7 @@ public class BraveryMode : MonoBehaviour
 
     IEnumerator braveryModeTurnOff()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(8.5f);
         forceField.SetActive(false);
         isBraveryModeActivated = false;
 

@@ -33,12 +33,16 @@ public class Quest8EnemySpawner : MonoBehaviour
 
     private bool canSpawn1 = true, canSpawn2 = true, canSpawn3 = true, canSpawn4 = true, canSpawn5 = true;
 
+    private int counter = 0;
+
     public bool wallActive1 = false, wallActive2 = false, wallActive3 = false, wallActive4 = false, wallActive5 = false;
 
     private void Awake()
     {
         waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
         quest8Script = GameObject.FindGameObjectWithTag("Quest8Collider").GetComponent<Quest8Script>();
+
+        waypointScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<WaypointScript>();
 
         wall4.SetActive(true);
         wall5.SetActive(false);
@@ -92,6 +96,8 @@ public class Quest8EnemySpawner : MonoBehaviour
                 var enemySoldier8 = Instantiate(Boss1, gameObject.transform.GetChild(7).position, gameObject.transform.GetChild(7).rotation);
                 enemySoldier8.transform.parent = gameObject.transform.GetChild(7);
 
+                counter = 1;
+
                 canSpawn1 = false;
                 wallActive1 = false;
             }
@@ -100,9 +106,8 @@ public class Quest8EnemySpawner : MonoBehaviour
 
         if (canSpawn2 == true)
         {
-            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true &&  ctr2 == true)
+            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true &&  ctr2 == true && counter == 1)
             {
-                SecondStageWallStart.SetActive(false);
 
                 var fruit1 = Instantiate(coconut, gameObject.transform.GetChild(24).position, gameObject.transform.GetChild(24).rotation);
                 fruit1.transform.parent = gameObject.transform.GetChild(24);
@@ -122,8 +127,14 @@ public class Quest8EnemySpawner : MonoBehaviour
                 ctr2 = false;
             }
 
+            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && Fruit1() == true)
+            {
+                SecondStageWallStart.SetActive(false);
+            }
+
             if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && wallActive2 == true)
             {
+
                 var enemySoldier9 = Instantiate(EnemySoldier3, gameObject.transform.GetChild(8).position, gameObject.transform.GetChild(8).rotation);
                 enemySoldier9.transform.parent = gameObject.transform.GetChild(8);
 
@@ -133,6 +144,8 @@ public class Quest8EnemySpawner : MonoBehaviour
                 var enemySoldier11 = Instantiate(EnemyRifleMan, gameObject.transform.GetChild(10).position, gameObject.transform.GetChild(10).rotation);
                 enemySoldier11.transform.parent = gameObject.transform.GetChild(10);
 
+                counter = 2;
+
                 canSpawn2 = false;
                 wallActive2 = false;
             }
@@ -140,10 +153,9 @@ public class Quest8EnemySpawner : MonoBehaviour
 
         if (canSpawn3 == true)
         {
-            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && ctr3 == true)
+            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true)
             {
                 SecondStageWallMid.SetActive(false);
-                ctr3 = false;
             }
 
             if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && wallActive3 == true)
@@ -163,6 +175,8 @@ public class Quest8EnemySpawner : MonoBehaviour
                 var enemySoldier16 = Instantiate(Boss2, gameObject.transform.GetChild(15).position, gameObject.transform.GetChild(15).rotation);
                 enemySoldier16.transform.parent = gameObject.transform.GetChild(15);
 
+                counter = 3;
+
                 canSpawn3 = false;
                 wallActive3 = false;
             }
@@ -170,9 +184,8 @@ public class Quest8EnemySpawner : MonoBehaviour
 
         if (canSpawn4 == true)
         {
-            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true && ctr4 == true)
+            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true && ctr4 == true && counter == 3)
             {
-                SecondStageWallEnd.SetActive(false);
 
                 var fruit6 = Instantiate(coconut, gameObject.transform.GetChild(29).position, gameObject.transform.GetChild(29).rotation);
                 fruit6.transform.parent = gameObject.transform.GetChild(29);
@@ -189,7 +202,13 @@ public class Quest8EnemySpawner : MonoBehaviour
                 var fruit10 = Instantiate(basket, gameObject.transform.GetChild(33).position, gameObject.transform.GetChild(33).rotation);
                 fruit10.transform.parent = gameObject.transform.GetChild(33);
 
+                counter = 4;
                 ctr4 = false;
+            }
+
+            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true && Fruit2() == true)
+            {
+                SecondStageWallEnd.SetActive(false);
             }
 
             if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true && wallActive4 == true)
@@ -203,6 +222,8 @@ public class Quest8EnemySpawner : MonoBehaviour
                 var enemySoldier19 = Instantiate(SpanishSoldier, gameObject.transform.GetChild(18).position, gameObject.transform.GetChild(18).rotation);
                 enemySoldier19.transform.parent = gameObject.transform.GetChild(18);
 
+                counter = 5;
+
                 canSpawn4 = false;
                 wallActive4 = false;
             }
@@ -210,9 +231,8 @@ public class Quest8EnemySpawner : MonoBehaviour
 
         if (canSpawn5 == true)
         {
-            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true && IsThirdWaveKilled() == true && ctr5 == true)
+            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true && IsThirdWaveKilled() == true && ctr5 == true && counter == 5)
             {
-                ThirdStageWall.SetActive(false);
 
                 var fruit11 = Instantiate(coconut, gameObject.transform.GetChild(34).position, gameObject.transform.GetChild(34).rotation);
                 fruit11.transform.parent = gameObject.transform.GetChild(34);
@@ -229,7 +249,13 @@ public class Quest8EnemySpawner : MonoBehaviour
                 var fruit15 = Instantiate(basket, gameObject.transform.GetChild(38).position, gameObject.transform.GetChild(38).rotation);
                 fruit15.transform.parent = gameObject.transform.GetChild(38);
 
+                counter = 6;
                 ctr5 = false;
+            }
+
+            if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true && IsThirdWaveKilled() == true && Fruit2() == true)
+            {
+                ThirdStageWall.SetActive(false);
             }
 
             if (IsFirstWaveKilled() == true && IsFirstBossKilled() == true && IsSecondWaveKilled() == true && IsSecondBossKilled() == true && IsThirdWaveKilled() == true && wallActive5 == true)
@@ -281,24 +307,30 @@ public class Quest8EnemySpawner : MonoBehaviour
 
     public bool IsSecondWaveKilled()
     {
+        ctr3 = true;
         return gameObject.transform.GetChild(8).childCount == 0
             && gameObject.transform.GetChild(9).childCount == 0
-            && gameObject.transform.GetChild(10).childCount == 0;
+            && gameObject.transform.GetChild(10).childCount == 0
+            && ctr3;
     }
 
     public bool IsSecondBossKilled()
     {
+        ctr4 = true;
         return gameObject.transform.GetChild(11).childCount == 0
             && gameObject.transform.GetChild(12).childCount == 0
             && gameObject.transform.GetChild(13).childCount == 0
             && gameObject.transform.GetChild(14).childCount == 0
-            && gameObject.transform.GetChild(15).childCount == 0;
+            && gameObject.transform.GetChild(15).childCount == 0
+            && ctr4;
     }
     public bool IsThirdWaveKilled()
     {
+        ctr5 = true;
         return gameObject.transform.GetChild(16).childCount == 0
             && gameObject.transform.GetChild(17).childCount == 0
-            && gameObject.transform.GetChild(18).childCount == 0;
+            && gameObject.transform.GetChild(18).childCount == 0
+            && ctr5;
     }
 
     public bool IsThirdBossKilled()
@@ -308,5 +340,23 @@ public class Quest8EnemySpawner : MonoBehaviour
             && gameObject.transform.GetChild(21).childCount == 0
             && gameObject.transform.GetChild(22).childCount == 0
             && gameObject.transform.GetChild(23).childCount == 0;
+    }
+
+    public bool Fruit1()
+    {
+        return gameObject.transform.GetChild(24).childCount == 0
+            && gameObject.transform.GetChild(25).childCount == 0
+            && gameObject.transform.GetChild(26).childCount == 0
+            && gameObject.transform.GetChild(27).childCount == 0
+            && gameObject.transform.GetChild(28).childCount == 0;
+    }
+
+    public bool Fruit2()
+    {
+        return gameObject.transform.GetChild(29).childCount == 0
+            && gameObject.transform.GetChild(30).childCount == 0
+            && gameObject.transform.GetChild(31).childCount == 0
+            && gameObject.transform.GetChild(32).childCount == 0
+            && gameObject.transform.GetChild(33).childCount == 0;
     }
 }

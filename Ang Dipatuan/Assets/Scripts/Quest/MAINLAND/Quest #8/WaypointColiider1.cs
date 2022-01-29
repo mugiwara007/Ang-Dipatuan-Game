@@ -17,7 +17,6 @@ public class WaypointColiider1 : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            waypointMarker.SetActive(false);
             box.SetActive(false);
             quest8EnemySpawner.wallActive1 = true;
         }

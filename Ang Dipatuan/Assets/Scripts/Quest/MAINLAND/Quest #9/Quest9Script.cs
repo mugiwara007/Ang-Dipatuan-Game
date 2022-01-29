@@ -48,7 +48,7 @@ public class Quest9Script : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (quest.goal.IsReached() && ctr == 0)
+        if (quest.goal.IsReached())
         {
             questGoldGiver.QuestComplete(quest.goldReward);
             saveQuestScript.gold += quest.goldReward;
@@ -60,6 +60,7 @@ public class Quest9Script : MonoBehaviour
             finalWarSpawner.SetActive(false);
             questChecker2.SaveStatQuest2();
             ctr = 1;
+            saveQuestScript.isLoadActive = true;
             gameSceneScript2.FadeToScene(11);
         }
         if (ctr == 1)
@@ -111,7 +112,7 @@ public class Quest9Script : MonoBehaviour
             box.enabled = false;
             questWindow.SetActive(false);
             quest.isActive = true;
-            questDesc.text = quest.desc;
+            questDesc.text = "Defeat all waves of enemies.";
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             movement.stun = false;

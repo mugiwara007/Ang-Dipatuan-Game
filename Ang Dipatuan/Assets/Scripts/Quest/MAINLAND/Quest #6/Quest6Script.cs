@@ -119,7 +119,7 @@ public class Quest6Script : MonoBehaviour
             }
         }
 
-        if (quest.goal.IsReached() && ctr == 0)
+        if (quest.goal.IsReached())
         {
             timer += Time.deltaTime;
             saveQuestScript.quest6Accepted = false;
@@ -140,6 +140,7 @@ public class Quest6Script : MonoBehaviour
             if (timer > 3f)
             {
                 questComplete.SetActive(false);
+                saveQuestScript.isLoadActive = true;
                 gameSceneScript2.FadeToScene(7);
                 timer = 0f;
                 ctr = 0;

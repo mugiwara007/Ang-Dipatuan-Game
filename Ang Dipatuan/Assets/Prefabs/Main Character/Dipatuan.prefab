@@ -3548,6 +3548,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee416321ce890b648b88aadba6448981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireOnSword1: {fileID: 6142619653018406060}
+  fireOnSword2: {fileID: 2264208258363055614}
+  ember: {fileID: 1111912305862450019}
 --- !u!114 &1611481630362410812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7648,14 +7651,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9d37a90bfebd584daf9f89ef0eaa82b, type: 3}
---- !u!4 &640908784073201730 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1271510388358248353, guid: a9d37a90bfebd584daf9f89ef0eaa82b, type: 3}
+--- !u!1 &6142619653018406060 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5512195752801952591, guid: a9d37a90bfebd584daf9f89ef0eaa82b, type: 3}
   m_PrefabInstance: {fileID: 1819938939106209763}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &265474368688882424 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1940663701442899227, guid: a9d37a90bfebd584daf9f89ef0eaa82b, type: 3}
+  m_PrefabInstance: {fileID: 1819938939106209763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &640908784073201730 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1271510388358248353, guid: a9d37a90bfebd584daf9f89ef0eaa82b, type: 3}
+  m_PrefabInstance: {fileID: 1819938939106209763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1111912305862450019 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1598767470775284864, guid: a9d37a90bfebd584daf9f89ef0eaa82b, type: 3}
+  m_PrefabInstance: {fileID: 1819938939106209763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2264208258363055614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 445202946975592989, guid: a9d37a90bfebd584daf9f89ef0eaa82b, type: 3}
   m_PrefabInstance: {fileID: 1819938939106209763}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2820538889014110177

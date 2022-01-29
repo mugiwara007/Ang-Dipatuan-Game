@@ -12,7 +12,7 @@ public class SceneChanger12 : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if (time >= 36f)
+        if (time >= 34f)
         {
             time = 0f;
             FadeToScene(15);

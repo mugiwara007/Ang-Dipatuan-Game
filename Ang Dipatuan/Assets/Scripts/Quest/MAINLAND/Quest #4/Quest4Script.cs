@@ -114,7 +114,7 @@ public class Quest4Script : MonoBehaviour
             }
         }
 
-        if (quest.goal.IsReached() && ctr == 0)
+        if (quest.goal.IsReached())
         {
             timer += Time.deltaTime;
             questGoldGiver.QuestComplete(quest.goldReward);

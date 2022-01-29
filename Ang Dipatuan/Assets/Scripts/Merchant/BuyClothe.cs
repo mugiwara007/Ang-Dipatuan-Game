@@ -11,6 +11,7 @@ public class BuyClothe : MonoBehaviour
     Gold playerGold;
 
     GameObject Clothe1Shop, Clothe2Shop, Clothe3Shop;
+    SaveQuestScript saveQuestScript;
 
     Text NotEnoughGold;
 
@@ -18,11 +19,26 @@ public class BuyClothe : MonoBehaviour
     {
         playerClothe = GameObject.FindGameObjectWithTag("Player").GetComponent<ClotheinInventory>();
         playerGold = GameObject.FindGameObjectWithTag("Player").GetComponent<Gold>();
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
 
         NotEnoughGold = GameObject.FindGameObjectWithTag("NotEnoughGold").GetComponent<Text>();
 
 
         NotEnoughGold.enabled = false;
+
+        if (saveQuestScript.armor1 == true){
+            Destroy(Clothe1Shop);
+        }
+
+        if (saveQuestScript.armor2 == true)
+        {
+            Destroy(Clothe2Shop);
+        }
+
+        if (saveQuestScript.armor3 == true)
+        {
+            Destroy(Clothe3Shop);
+        }
     }
 
     // Update is called once per frame
@@ -41,6 +57,7 @@ public class BuyClothe : MonoBehaviour
             {
                 playerGold.total_gold -= 800;
                 playerClothe.boughtCloth1 = true;
+                saveQuestScript.armor1 = true;
                 Destroy(Clothe1Shop);
             }
             else
@@ -56,6 +73,7 @@ public class BuyClothe : MonoBehaviour
             {
                 playerGold.total_gold -= 1200;
                 playerClothe.boughtCloth2 = true;
+                saveQuestScript.armor2 = true;
                 Destroy(Clothe2Shop);
             }
             else
@@ -71,6 +89,7 @@ public class BuyClothe : MonoBehaviour
             {
                 playerGold.total_gold -= 1500;
                 playerClothe.boughtCloth3 = true;
+                saveQuestScript.armor3 = true;
                 Destroy(Clothe3Shop);
             }
             else

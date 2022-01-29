@@ -116,7 +116,7 @@ public class SlowMotionMode : MonoBehaviour
 
     IEnumerator backToNormalSpeed()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(8.5f);
 
         bwPost.SetActive(false);
 

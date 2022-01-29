@@ -100,12 +100,13 @@ public class Quest7Script : MonoBehaviour
                     questFailed.SetActive(false);
                     timer = 0f;
                     qfailed = false;
+                    saveQuestScript.isLoadActive = true;
                     gameSceneScript2.FadeToScene(6);
                 }
             }
         }
 
-        if (quest.goal.IsReached() && ctr == 0)
+        if (quest.goal.IsReached())
         {
             timer += Time.deltaTime;
             saveQuestScript.quest7Accepted = false;
@@ -117,18 +118,7 @@ public class Quest7Script : MonoBehaviour
             questComplete.SetActive(true);
             questChecker2.questNum = quest.currentQuest;
             questChecker2.SaveStatQuest2();
-            ctr += 1;
-        }
-        if (ctr == 1)
-        {
-            timer += Time.deltaTime;
-            if (timer > 3f)
-            {
-                questComplete.SetActive(false);
-                gameSceneScript2.FadeToScene(8);
-                timer = 0f;
-                ctr = 0;
-            }
+            gameSceneScript2.FadeToScene(8);
         }
     }
 }

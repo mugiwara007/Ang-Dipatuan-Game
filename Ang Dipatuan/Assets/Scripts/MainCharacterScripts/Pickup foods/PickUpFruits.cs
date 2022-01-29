@@ -14,15 +14,23 @@ public class PickUpFruits : MonoBehaviour
 
     Text InventoryFullText;
 
+    SaveQuestScript saveQuestScript;
+
     private void Awake()
     {
         canPickUp = false;
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
     }
 
     private void Start()
     {
         InventoryFullText = GameObject.FindGameObjectWithTag("InventoryFullText").GetComponent<Text>();
         InventoryFullText.enabled = false;
+
+        gameObject.GetComponent<Inventory>().pineapple = saveQuestScript.pineapple;
+        gameObject.GetComponent<Inventory>().fruitbasket = saveQuestScript.basket;
+        gameObject.GetComponent<Inventory>().avocado = saveQuestScript.avocado;
+        gameObject.GetComponent<Inventory>().coconut = saveQuestScript.coconut;
     }
 
     // Update is called once per frame
@@ -130,7 +138,7 @@ public class PickUpFruits : MonoBehaviour
             if (gameObject.GetComponent<Inventory>().avocado < 5)
             {
                 gameObject.GetComponent<Inventory>().avocado += 1;
-            }
+        }
             else
             {
                 InventoryFullText.enabled = true;

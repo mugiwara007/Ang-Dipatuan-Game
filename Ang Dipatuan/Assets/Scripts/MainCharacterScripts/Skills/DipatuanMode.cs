@@ -11,7 +11,7 @@ public class DipatuanMode : MonoBehaviour
 
     DamageEnemy damageEnemyScript;
 
-    GameObject fireOnSword1, fireOnSword2, ember;
+    public GameObject fireOnSword1, fireOnSword2, ember;
 
     private bool fireTurnOff = true;
 
@@ -37,8 +37,6 @@ public class DipatuanMode : MonoBehaviour
 
     private bool isUnlocked1;
 
-    private bool isHidden = true;
-
     SaveQuestScript saveQuestScript;
 
     void Start()
@@ -54,7 +52,7 @@ public class DipatuanMode : MonoBehaviour
         }
         catch
         {
-            Debug.Log("SkillTextToType1 cannot be found.");
+            //Ignore error
         }
 
         SkillsTextToType1.SetActive(false);
@@ -72,27 +70,10 @@ public class DipatuanMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //try
-        //{
-        //    SkillsTextToType1 = GameObject.FindGameObjectWithTag("SkillsTextToType1");
-        //} catch
-        //{
-        //    Debug.Log("SkillTextToType1 no found.");
-        //}
-        
-
         if (saveQuestScript.CurrQuest > 5)
         {
             isUnlocked1 = true;
         }
-
-        //if (isHidden == true)
-        //{
-        //    //text that will pop up to type show hide
-        //    Debug.Log("Pumasok sa hidden");
-        //    SkillsTextToType1.SetActive(false);
-        //    isHidden = false;
-        //}
 
         if (typingMode)
         {
@@ -121,31 +102,18 @@ public class DipatuanMode : MonoBehaviour
 
             damageEnemyScript = GameObject.FindGameObjectWithTag("KampilanArmed").GetComponent<DamageEnemy>();
 
-            fireOnSword1 = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(2).gameObject;
-
-            fireOnSword2 = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(3).gameObject;
-
-            ember = GameObject.FindGameObjectWithTag("KampilanArmed").transform.GetChild(7).gameObject;
         }
         catch
         {
-
+            //Ignore error
         }
 
 
         if (fireTurnOff)
         {
-            try
-            {
-                fireOnSword1.SetActive(true);
-                fireOnSword2.SetActive(false);
-                ember.SetActive(false);
-            }
-            catch
-            {
-                Debug.Log("Firesword not found.");
-            }
-            
+            fireOnSword1.SetActive(true);
+            fireOnSword2.SetActive(false);
+            ember.SetActive(false);
         }
 
         if (manaStats.mana >= 5)
@@ -367,7 +335,7 @@ public class DipatuanMode : MonoBehaviour
 
     IEnumerator DipatuanModeOff()
     {
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(10f);
 
         damageEnemyScript.isDipatuanModeActivated = false;
 

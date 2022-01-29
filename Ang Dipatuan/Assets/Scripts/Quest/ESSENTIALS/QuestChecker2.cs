@@ -82,6 +82,8 @@ public class QuestChecker2 : MonoBehaviour
     Quest6Script quest6;
     Quest7Script quest7;
 
+    public GameObject youDiedUI;
+
     GameObject holdUI;
 
     Text questDesc;
@@ -169,6 +171,10 @@ public class QuestChecker2 : MonoBehaviour
             {
                 ifDone2 = false;
                 canTeleport3 = false;
+            }
+
+            if (saveQuestScript.CurrQuest > 6)
+            {
                 foreach (GameObject spawn in avocadoSpawner)
                 {
                     spawn.SetActive(true);
@@ -178,19 +184,6 @@ public class QuestChecker2 : MonoBehaviour
             if (saveQuestScript.CurrQuest == 7)
             {
                 canTeleport5 = false;
-                foreach (GameObject spawn in avocadoSpawner)
-                {
-                    spawn.SetActive(true);
-                }
-            }
-
-            if (saveQuestScript.CurrQuest == 8)
-            {
-                canTeleport4 = false;
-                foreach (GameObject spawn in avocadoSpawner)
-                {
-                    spawn.SetActive(true);
-                }
             }
 
             if (saveQuestScript.quest4Accepted == true)
@@ -213,12 +206,49 @@ public class QuestChecker2 : MonoBehaviour
                 quest7.AcceptQuest7();
             }
 
+            if (saveQuestScript.CurrQuest == 8)
+            {
+                saveQuestScript.lastQuest = data.lquest;
+            }
+
             saveQuestScript.isLoadActive = false;
         }
     }
 
     void Update()
     {
+        if (saveQuestScript.CurrQuest == 8 && quest8Script.quest.isActive == false)
+        {
+            if(player.health == 0)
+            {
+                timer += Time.deltaTime;
+                youDiedUI.SetActive(true);
+                if (timer > 3f)
+                {
+                    youDiedUI.SetActive(false);
+                    timer = 0f;
+                    saveQuestScript.isLoadActive = true;
+                    gameSceneScript2.FadeToScene(6);
+                }
+            }
+        }
+
+        if (saveQuestScript.CurrQuest == 4)
+        {
+            if (player.health == 0)
+            {
+                timer += Time.deltaTime;
+                youDiedUI.SetActive(true);
+                if (timer > 3f)
+                {
+                    youDiedUI.SetActive(false);
+                    timer = 0f;
+                    saveQuestScript.isLoadActive = true;
+                    gameSceneScript2.FadeToScene(6);
+                }
+            }
+        }
+
         if (saveQuestScript.CurrQuest == 3)
         {
             questDesc.text = "Save the game by using the campfire and go to the waypoint.";
@@ -250,9 +280,10 @@ public class QuestChecker2 : MonoBehaviour
                 unlockSkill2UI.SetActive(false);
                 timer = 0f;
                 ifDone1 = false;
+                movement.stun = true;
             }
 
-            movement.stun = true;
+            
             quest4Waypoint.SetActive(false);
             quest4Collider.SetActive(false);
             timer += Time.deltaTime;
@@ -261,6 +292,7 @@ public class QuestChecker2 : MonoBehaviour
             {
                 StartCoroutine("activateCharController1");
                 canTeleport1 = false;
+                movement.stun = true;
             }
 
             if (time >= 4)
@@ -290,17 +322,18 @@ public class QuestChecker2 : MonoBehaviour
             quest6Detector.SetActive(false);
             quest6Waypoint1.SetActive(false);
             quest6Waypoint2.SetActive(false);
+
             foreach (GameObject spawn in avocadoSpawner)
             {
                 spawn.SetActive(true);
             }
-            movement.stun = true;
 
             if (ifDone2 == true)
             {
                 holdUI.SetActive(true);
                 waypointMarker.SetActive(false);
                 unlockSkill3UI.SetActive(true);
+                movement.stun = true;
             }
 
             time += Time.deltaTime;
@@ -308,7 +341,7 @@ public class QuestChecker2 : MonoBehaviour
             {
                 holdUI.SetActive(false);
                 unlockSkill3UI.SetActive(false);
-                timer = 0f;
+                time = 0f;
                 ifDone2 = false;
             }
 
@@ -317,6 +350,7 @@ public class QuestChecker2 : MonoBehaviour
             {
                 StartCoroutine("activateCharController3");
                 canTeleport3 = false;
+                movement.stun = true;
             }
 
             if (timer >= 4)
@@ -331,9 +365,12 @@ public class QuestChecker2 : MonoBehaviour
             if (canTeleport5 == true)
             {
                 StartCoroutine("activateCharController5");
+                questDesc.text = "Gather items and upgrade your armor before continuing. Go to the waypoint.";
+                waypointScript.target = quest8ColliderObj.transform;
                 canTeleport5 = false;
             }
-            questDesc.text = "Gather items and upgrade your armor before continuing. Go to the waypoint.";
+
+            
             activeSkill2.enabled = true;
             activeSkill3.enabled = true;
             quest7Collider.SetActive(false);
@@ -343,19 +380,22 @@ public class QuestChecker2 : MonoBehaviour
             noEntryDetector2.SetActive(false);
             noEntryCollider3.SetActive(false);
             noEntryDetector3.SetActive(false);
+
             foreach (GameObject spawn in avocadoSpawner)
             {
                 spawn.SetActive(true);
             }
-            waypointScript.target = quest8ColliderObj.transform;
+
+            
         }
         else if (saveQuestScript.CurrQuest == 8)
         {
-            if (canTeleport4 == true)
+            if (canTeleport4 == true && saveQuestScript.lastQuest == true)
             {
                 StartCoroutine("activateCharController4");
                 movement.stun = true;
                 canTeleport4 = false;
+                SaveSystem.SavePlayer(player, gold, saveQuestScript, inventory, clothes);
             }
             foreach (GameObject spawn in avocadoSpawner)
             {
@@ -393,7 +433,6 @@ public class QuestChecker2 : MonoBehaviour
         //set this to false so that you can teleport the position of character
         GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().enabled = false;
         GameObject.FindGameObjectWithTag("Player").transform.position = pos;
-        Debug.Log("LIPAT PWESTO");
 
         //after 0.7 seconds Enable char controller again
         yield return new WaitForSeconds(0.4f);
