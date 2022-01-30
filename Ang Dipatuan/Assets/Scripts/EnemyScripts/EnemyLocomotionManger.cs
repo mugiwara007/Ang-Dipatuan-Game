@@ -49,12 +49,8 @@ using UnityEngine.AI;
             float distanctToTarget = Vector3.Distance(transform.position, targetDirection);
             if (!Physics.Raycast(transform.position, targetDirection.normalized, distanctToTarget, obstacleMask))
             {
-                Debug.Log("OBSTACLE!!!");
-
                 if (characterStats != null)
                 {
-
-                    Debug.Log("I SAW HIM!!!");
                     if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
                     {
                         currentTarget = characterStats;

@@ -50,7 +50,7 @@ public class BulletCollider : MonoBehaviour
 
 
             //Deduct 13 hitpoints from PLayer Health
-            playerStats.Damage(13f);
+            playerStats.Damage(11f);
 
             //Set boolean of taking damage to true so that player cant do anything when Taking damage
             playerControl.isTakingDamage = true;
