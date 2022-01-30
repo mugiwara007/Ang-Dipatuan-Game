@@ -131,17 +131,6 @@ public class Quest4Script : MonoBehaviour
             questChecker2.SaveStatQuest2();
             gameSceneScript2.FadeToScene(12);
             waypointMarker.SetActive(false);
-            ctr = 1;
-        }
-        if (ctr == 1)
-        {
-            timer += Time.deltaTime;
-            if (timer > 3f)
-            {
-                questComplete.SetActive(false);
-                timer = 0f;
-                ctr = 0;
-            }
         }
     }
 }

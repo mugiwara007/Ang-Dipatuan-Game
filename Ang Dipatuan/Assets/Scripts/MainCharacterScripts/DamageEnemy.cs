@@ -13,10 +13,12 @@ public class DamageEnemy : MonoBehaviour
 
     EnemyBlocking blockingScript;
 
+    public AudioSource dpBlock;
+
     // Start is called before the first frame update
     private void Awake()
     {
-
+        dpBlock.playOnAwake = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,6 +36,9 @@ public class DamageEnemy : MonoBehaviour
             {
                 enemyAnimator.SetTrigger("hit");
                 enemyStats.Damage(dmgPts);
+            } else
+            {
+                dpBlock.Play();
             }
 
             

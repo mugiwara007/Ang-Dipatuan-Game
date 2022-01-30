@@ -24,6 +24,8 @@ public class SlowMotionMode : MonoBehaviour
 
     private bool isUnlocked2 = false;
 
+    public bool isSlowMoActive = false;
+
     private string remainingWord = string.Empty;
     private string currentWord = "kahangtoran";
 
@@ -123,9 +125,9 @@ public class SlowMotionMode : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             Animator enemyAnim = enemy.GetComponent<Animator>();
-
             enemyAnim.SetFloat("animationSpeed", 1f);
         }
+        isSlowMoActive = false;
     }
 
     IEnumerator moveAgain()
@@ -234,6 +236,7 @@ public class SlowMotionMode : MonoBehaviour
         //Activate Black & White Effect
         bwPost.SetActive(true);
 
+        isSlowMoActive = true;
 
         //Activate animation for bravery mode
         anim.SetTrigger("slowmotionMode");

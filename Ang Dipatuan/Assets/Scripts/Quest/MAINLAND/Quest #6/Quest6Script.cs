@@ -22,7 +22,7 @@ public class Quest6Script : MonoBehaviour
     public GameObject questFailed;
     private float timer = 0f;
     private int ctr = 0;
-    GameObject playerDetector;
+    PlayerDetector2 playerDetector;
     MainCharacterController movement;
     CinemachineBrain cinemachineBrain;
     QuestChecker2 questChecker2;
@@ -32,7 +32,7 @@ public class Quest6Script : MonoBehaviour
     GameObject waypointMarker;
     GameSceneScript2 gameSceneScript2;
     PlayerBar player;
-    GameObject canvas;
+    Canvas canvas;
 
     private bool qfailed = true;
 
@@ -41,7 +41,7 @@ public class Quest6Script : MonoBehaviour
         questDesc = GameObject.FindGameObjectWithTag("QuestUI").GetComponent<Text>();
         questGoldGiver = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestGoldGiver>();
         waypointScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<WaypointScript>();
-        playerDetector = GameObject.FindGameObjectWithTag("PlayerDetector1");
+        playerDetector = GameObject.FindGameObjectWithTag("PlayerDetector1").GetComponent<PlayerDetector2>();
         movement = GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterController>();
         cinemachineBrain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>();
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
@@ -50,7 +50,7 @@ public class Quest6Script : MonoBehaviour
         gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
         waypoint4 = GameObject.FindGameObjectWithTag("Waypoint4");
         waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
-        canvas = GameObject.FindGameObjectWithTag("Quest6E");
+        canvas = GameObject.FindGameObjectWithTag("Quest6E").GetComponent<Canvas>();
     }
 
     public void Quest6() { 
@@ -75,8 +75,8 @@ public class Quest6Script : MonoBehaviour
         {
             saveQuestScript.quest6Accepted = true;
             waypointMarker.SetActive(true);
-            playerDetector.SetActive(false);
-            canvas.SetActive(false);
+            playerDetector.enabled = false;
+            canvas.enabled = false;
             questWindow.SetActive(false);
             quest.isActive = true;
             questDesc.text = "Kill all enemies in the camp and collect 3 Avocadoes.";
@@ -110,7 +110,7 @@ public class Quest6Script : MonoBehaviour
 
         if (saveQuestScript.CurrQuest == 5)
         {
-            if (avocadoCtr >= 3)
+            if (avocadoCtr == 3)
             {
                 questDesc.text = "Return to the village and deliver the Avocadoes.";
                 waypoint4.SetActive(true);
@@ -132,19 +132,7 @@ public class Quest6Script : MonoBehaviour
             questChecker2.questNum = quest.currentQuest;
             questChecker2.avocadoController = true;
             questChecker2.SaveStatQuest2();
-            ctr += 1;
-        }
-        if (ctr == 1)
-        {
-            timer += Time.deltaTime;
-            if (timer > 3f)
-            {
-                questComplete.SetActive(false);
-                saveQuestScript.isLoadActive = true;
-                gameSceneScript2.FadeToScene(7);
-                timer = 0f;
-                ctr = 0;
-            }
+            gameSceneScript2.FadeToScene(7);
         }
     }
 }

@@ -11,10 +11,14 @@ public class DamagePlayer : MonoBehaviour
 
     BraveryMode isBraveryModeActivated;
 
+    public AudioSource blockAudio;
+
     void Awake()
     {
         isBraveryModeActivated = GameObject.FindGameObjectWithTag("Player").GetComponent<BraveryMode>();
         playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+
+        blockAudio.playOnAwake = false;
     }
 
 
@@ -52,6 +56,7 @@ public class DamagePlayer : MonoBehaviour
                 {
                     //damage player
                     playerHealth.Damage(3f);
+                    blockAudio.Play();
                 }
            
 

@@ -17,7 +17,14 @@ public class Waypoint5 : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             waypointMarker.SetActive(false);
-            box.SetActive(false);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            waypointMarker.SetActive(true);
         }
     }
 }

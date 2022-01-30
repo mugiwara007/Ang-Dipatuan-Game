@@ -55,6 +55,8 @@ public class QuestChecker2 : MonoBehaviour
     public GameObject light1;
     public GameObject light2;
 
+    bool isDone = true;
+
     PlayerBar player;
     Gold gold;
     Inventory inventory;
@@ -251,7 +253,11 @@ public class QuestChecker2 : MonoBehaviour
 
         if (saveQuestScript.CurrQuest == 3)
         {
-            questDesc.text = "Save the game by using the campfire and go to the waypoint.";
+            if (isDone == true)
+            {
+                questDesc.text = "Save the game by using the campfire and go to the waypoint.";
+                isDone = false;
+            }
             unlockSkill2.SetActive(true);
             unlockSkill3.SetActive(true);
             quest4Collider.SetActive(true);

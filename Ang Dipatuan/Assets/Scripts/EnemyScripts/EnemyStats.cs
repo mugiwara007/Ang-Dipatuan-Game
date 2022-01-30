@@ -12,6 +12,8 @@ public class EnemyStats : MonoBehaviour
 
     Animator anim;
 
+    public AudioSource eDeath;
+
     private void Awake()
     {
         emaxHealth = 100;
@@ -36,6 +38,7 @@ public class EnemyStats : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
 
         anim.SetBool("isAlive", true);
+        eDeath.playOnAwake = false;
     }
 
     public void Damage(float dmgPoint)
@@ -67,6 +70,7 @@ public class EnemyStats : MonoBehaviour
 
         if (ehealth <= 0)
         {
+
             anim.SetBool("isAlive", false);
 
             EnemyManager enemymanager = gameObject.GetComponent<EnemyManager>();
@@ -86,5 +90,10 @@ public class EnemyStats : MonoBehaviour
     public void HealthBarFiller()
     {
         healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, ehealth / emaxHealth, lerpSpeed);
+    }
+
+    public void playerDeath()
+    {
+        eDeath.Play();
     }
 }

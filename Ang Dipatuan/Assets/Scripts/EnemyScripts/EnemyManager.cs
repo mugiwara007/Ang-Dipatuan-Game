@@ -41,7 +41,6 @@ public class EnemyManager : MonoBehaviour
         //Sound FX
         GunShot.playOnAwake = false;
         Slsh.playOnAwake = false;
-
     }
 
     private void Update()

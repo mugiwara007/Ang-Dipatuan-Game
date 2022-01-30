@@ -18,6 +18,8 @@ public class MainMenu : MonoBehaviour
     {
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         cbtn = GameObject.FindGameObjectWithTag("ContinueBtn").GetComponent<Image>();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void Start()

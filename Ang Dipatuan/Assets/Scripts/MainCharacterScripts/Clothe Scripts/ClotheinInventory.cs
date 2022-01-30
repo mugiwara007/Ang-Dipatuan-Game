@@ -19,6 +19,7 @@ public class ClotheinInventory : MonoBehaviour
         boughtCloth1 = false;
         boughtCloth2 = false;
         boughtCloth3 = false;
+
     }
 
 

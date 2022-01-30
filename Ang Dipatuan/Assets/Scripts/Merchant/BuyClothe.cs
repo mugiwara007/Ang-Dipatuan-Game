@@ -27,16 +27,19 @@ public class BuyClothe : MonoBehaviour
         NotEnoughGold.enabled = false;
 
         if (saveQuestScript.armor1 == true){
+            playerClothe.boughtCloth1 = true;
             Destroy(Clothe1Shop);
         }
 
         if (saveQuestScript.armor2 == true)
         {
+            playerClothe.boughtCloth2 = true;
             Destroy(Clothe2Shop);
         }
 
         if (saveQuestScript.armor3 == true)
         {
+            playerClothe.boughtCloth3 = true;
             Destroy(Clothe3Shop);
         }
     }
