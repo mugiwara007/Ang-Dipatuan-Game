@@ -399,6 +399,21 @@ public class QuestChecker2 : MonoBehaviour
             if (canTeleport4 == true && saveQuestScript.lastQuest == true)
             {
                 StartCoroutine("activateCharController4");
+                if (!rain.isPlaying)
+                {
+                    rain.Play();
+                }
+
+                sky1.SetActive(false);
+                light1.SetActive(false);
+                storm.SetActive(true);
+                sky2.SetActive(true);
+                light2.SetActive(true);
+                waypointMarker.SetActive(false);
+                finalWarObject.SetActive(true);
+                activeSkill2.enabled = true;
+                activeSkill3.enabled = true;
+
                 movement.stun = true;
                 canTeleport4 = false;
                 SaveSystem.SavePlayer(player, gold, saveQuestScript, inventory, clothes);
@@ -406,20 +421,6 @@ public class QuestChecker2 : MonoBehaviour
             foreach (GameObject spawn in avocadoSpawner)
             {
                 spawn.SetActive(true);
-            }
-            sky1.SetActive(false);
-            light1.SetActive(false);
-            storm.SetActive(true);
-            sky2.SetActive(true);
-            light2.SetActive(true);
-            waypointMarker.SetActive(false);
-            finalWarObject.SetActive(true);
-            activeSkill2.enabled = true;
-            activeSkill3.enabled = true;
-
-            if (!rain.isPlaying)
-            {
-                rain.Play();
             }
 
             timer += Time.deltaTime;

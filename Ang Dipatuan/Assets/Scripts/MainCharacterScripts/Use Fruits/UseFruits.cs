@@ -11,8 +11,6 @@ public class UseFruits : MonoBehaviour
 
     PlayerBar playerStats;
 
-    SaveQuestScript saveQuestScript;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +22,6 @@ public class UseFruits : MonoBehaviour
         notEnough = GameObject.FindGameObjectWithTag("NotEnoughFruits").GetComponent<Text>();
         inventory = gameObject.GetComponent<Inventory>();
         playerStats = gameObject.GetComponent<PlayerBar>();
-        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
     }
 
     // Update is called once per frame
@@ -40,7 +37,6 @@ public class UseFruits : MonoBehaviour
             else
             {
                 inventory.coconut -= 1;
-                saveQuestScript.coconut -= 1;
                 playerStats.Heal(16);
             }
         }
@@ -55,7 +51,6 @@ public class UseFruits : MonoBehaviour
             else
             {
                 inventory.pineapple -= 1;
-                saveQuestScript.pineapple -= 1;
                 playerStats.enableMaxStamina();
 
                 StartCoroutine("DisablePineappleEffect");
@@ -72,7 +67,6 @@ public class UseFruits : MonoBehaviour
             else
             {
                 inventory.avocado -= 1;
-                saveQuestScript.avocado -= 1;
                 playerStats.AddMana(17);
             }
         }
@@ -87,7 +81,6 @@ public class UseFruits : MonoBehaviour
             else
             {
                 inventory.fruitbasket -= 1;
-                saveQuestScript.basket -= 1;
                 playerStats.MaxManaHealth();
             }
         }
