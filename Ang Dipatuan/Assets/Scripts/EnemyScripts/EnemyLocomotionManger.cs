@@ -17,12 +17,16 @@ using UnityEngine.AI;
     public float stoppingDistance = 5f;
     public float rotationSpeed = 15f;
 
+    public AudioSource spottedFX;
+
     private void Awake()
     {
         enemyManager = GetComponent<EnemyManager>();
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         enemyRigidbody = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+
+        spottedFX.playOnAwake = false;
     }
 
     private void Start()
@@ -54,6 +58,7 @@ using UnityEngine.AI;
                     if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
                     {
                         currentTarget = characterStats;
+                        spottedFX.Play();
                     }
                 }
 
@@ -61,6 +66,7 @@ using UnityEngine.AI;
             }
 
         }
+
     }
 
     public void HandleMoveToTarget()
