@@ -30,6 +30,8 @@ public class PlayerData
     public bool Save2;
     public bool Save3;
     public bool Save4;
+    public bool Save5;
+    public bool Save6;
 
     public bool q4Accepted;
     public bool q5Accepted;
@@ -76,6 +78,9 @@ public class PlayerData
         Save2 = updater.secondQuest;
         Save3 = updater.thirdQuest;
         Save4 = updater.fourthQuest;
+        Save5 = updater.seventhQuest;
+        Save6 = updater.eightQuest;
+
 
         q4Accepted = updater.quest4Accepted;
         q5Accepted = updater.quest5Accepted;

@@ -8,6 +8,12 @@ public class SceneChanger6 : MonoBehaviour
     public Animator animator;
     private int sceneToLoad;
     float time;
+    SaveQuestScript saveQuestScript;
+
+    private void Awake()
+    {
+        saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
+    }
 
     void Update()
     {
@@ -21,6 +27,7 @@ public class SceneChanger6 : MonoBehaviour
 
     public void FadeToScene(int sceneIndex)
     {
+        saveQuestScript.eightQuest = true;
         sceneToLoad = sceneIndex;
         animator.SetTrigger("FadeOut");
     }

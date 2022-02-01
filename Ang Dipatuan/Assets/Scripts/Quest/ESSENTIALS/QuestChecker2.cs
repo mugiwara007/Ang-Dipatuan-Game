@@ -114,6 +114,15 @@ public class QuestChecker2 : MonoBehaviour
         quest9Script.quest.currentQuest = SaveQuestScript.Instance.CurrQuest;
         gameSceneScript2.qctr = SaveQuestScript.Instance.questPos;
 
+        if (saveQuestScript.CurrQuest > 3)
+        {
+            activeSkill2.enabled = true;
+        }
+
+        if (saveQuestScript.CurrQuest > 5)
+        {
+            activeSkill3.enabled = true;
+        }
 
         if (saveQuestScript.CurrQuest == 8)
         {
@@ -142,6 +151,9 @@ public class QuestChecker2 : MonoBehaviour
             saveQuestScript.secondQuest = data.Save2;
             saveQuestScript.thirdQuest = data.Save3;
             saveQuestScript.fourthQuest = data.Save4;
+            saveQuestScript.seventhQuest = data.Save5;
+            saveQuestScript.eightQuest = data.Save6;
+            saveQuestScript.lastQuest = data.lquest;
 
             Vector3 position;
 
@@ -267,7 +279,6 @@ public class QuestChecker2 : MonoBehaviour
         {
             if (saveQuestScript.fourthQuest == true)
             {
-                activeSkill2.enabled = true;
                 unlockSkill3.SetActive(true);
             }
             
@@ -311,7 +322,6 @@ public class QuestChecker2 : MonoBehaviour
         }
         else if (saveQuestScript.CurrQuest == 5)
         {
-            activeSkill2.enabled = true;
             unlockSkill3.SetActive(true);
             quest6Detector.SetActive(true);
 
@@ -323,8 +333,6 @@ public class QuestChecker2 : MonoBehaviour
         }
         else if (saveQuestScript.CurrQuest == 6)
         {
-            activeSkill2.enabled = true;
-            activeSkill3.enabled = true;
             quest6Detector.SetActive(false);
             quest6Waypoint1.SetActive(false);
             quest6Waypoint2.SetActive(false);
@@ -352,7 +360,7 @@ public class QuestChecker2 : MonoBehaviour
             }
 
             timer += Time.deltaTime;
-            if (canTeleport3 == true)
+            if (canTeleport3 == true && saveQuestScript.seventhQuest == true)
             {
                 StartCoroutine("activateCharController3");
                 canTeleport3 = false;
@@ -368,17 +376,13 @@ public class QuestChecker2 : MonoBehaviour
         }
         else if (saveQuestScript.CurrQuest == 7)
         {
-            if (canTeleport5 == true)
+            if (canTeleport5 == true && saveQuestScript.eightQuest == true)
             {
                 StartCoroutine("activateCharController5");
                 questDesc.text = "Gather items and upgrade your armor before continuing. Go to the waypoint.";
                 waypointScript.target = quest8ColliderObj.transform;
                 canTeleport5 = false;
             }
-
-            
-            activeSkill2.enabled = true;
-            activeSkill3.enabled = true;
             quest7Collider.SetActive(false);
             noEntryCollider1.SetActive(false);
             noEntryCollider2.SetActive(false);
@@ -403,7 +407,6 @@ public class QuestChecker2 : MonoBehaviour
                 {
                     rain.Play();
                 }
-
                 sky1.SetActive(false);
                 light1.SetActive(false);
                 storm.SetActive(true);
@@ -411,9 +414,6 @@ public class QuestChecker2 : MonoBehaviour
                 light2.SetActive(true);
                 waypointMarker.SetActive(false);
                 finalWarObject.SetActive(true);
-                activeSkill2.enabled = true;
-                activeSkill3.enabled = true;
-
                 movement.stun = true;
                 canTeleport4 = false;
                 SaveSystem.SavePlayer(player, gold, saveQuestScript, inventory, clothes);

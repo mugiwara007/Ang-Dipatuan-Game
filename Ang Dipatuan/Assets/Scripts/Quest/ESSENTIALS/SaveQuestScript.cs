@@ -13,6 +13,8 @@ public class SaveQuestScript : MonoBehaviour
     public bool secondQuest = false;
     public bool thirdQuest = false;
     public bool fourthQuest = false;
+    public bool seventhQuest = false;
+    public bool eightQuest = false;
     public bool lastQuest = false;
 
     public bool quest4Accepted = false;
