@@ -9,7 +9,7 @@ public class DipatuanMode : MonoBehaviour
 
     private bool onCooldown;
 
-    DamageEnemy damageEnemyScript;
+    public DamageEnemy damageEnemyScript;
 
     public GameObject fireOnSword1, fireOnSword2, ember;
 
@@ -19,14 +19,14 @@ public class DipatuanMode : MonoBehaviour
 
     MainCharacterController charControl;
 
-    GameObject kampilan;
+    public GameObject kampilan;
 
     //text that will pop up to type
     GameObject SkillsTextToType1;
 
     private int correctedLetters = 0;
 
-    private bool typingMode = false;
+    public bool typingMode = false;
 
     private bool isUnlocked2 = false;
 
@@ -94,19 +94,19 @@ public class DipatuanMode : MonoBehaviour
             gameObject.GetComponent<BraveryMode>().enabled = true;
         }
 
-        
 
-        try
-        {
-            kampilan = GameObject.FindGameObjectWithTag("KampilanArmed");
 
-            damageEnemyScript = GameObject.FindGameObjectWithTag("KampilanArmed").GetComponent<DamageEnemy>();
+        //try
+        //{
+        //    kampilan = GameObject.FindGameObjectWithTag("KampilanArmed");
 
-        }
-        catch
-        {
-            //Ignore error
-        }
+        //    damageEnemyScript = GameObject.FindGameObjectWithTag("KampilanArmed").GetComponent<DamageEnemy>();
+
+        //}
+        //catch
+        //{
+        //    //Ignore error
+        //}
 
 
         if (fireTurnOff)
@@ -118,7 +118,7 @@ public class DipatuanMode : MonoBehaviour
 
         if (manaStats.mana >= 5)
         {
-            if (Input.GetButtonDown("DipatuanMode") && onCooldown == false)
+            if (Input.GetButtonDown("DipatuanMode") && onCooldown == false && gameObject.GetComponent<BraveryMode>().typingMode == false && gameObject.GetComponent<SlowMotionMode>().typingMode == false)
             {
                 if (isUnlocked1 == true)
                 {
@@ -200,7 +200,7 @@ public class DipatuanMode : MonoBehaviour
 
     IEnumerator DelayedStop()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         correctedLetters = 0;
 
@@ -224,7 +224,7 @@ public class DipatuanMode : MonoBehaviour
 
     IEnumerator StopTypingMode()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.7f);
 
         setLetterColorToRed();
 
@@ -335,7 +335,7 @@ public class DipatuanMode : MonoBehaviour
 
     IEnumerator DipatuanModeOff()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(8.9f);
 
         damageEnemyScript.isDipatuanModeActivated = false;
 

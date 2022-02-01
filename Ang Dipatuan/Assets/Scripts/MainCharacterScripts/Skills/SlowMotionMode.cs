@@ -20,7 +20,7 @@ public class SlowMotionMode : MonoBehaviour
 
     private int correctedLetters = 0;
 
-    private bool typingMode = false;
+    public bool typingMode = false;
 
     private bool isUnlocked2 = false;
 
@@ -81,7 +81,7 @@ public class SlowMotionMode : MonoBehaviour
 
             if (manaStats.mana >= 25)
             {
-                if (Input.GetButtonDown("SlowMotionMode") && onCooldown == false)
+                if (Input.GetButtonDown("SlowMotionMode") && onCooldown == false && gameObject.GetComponent<DipatuanMode>().typingMode == false && gameObject.GetComponent<BraveryMode>().typingMode == false)
                 {
                 if (isUnlocked2 == true)
                 {
@@ -175,7 +175,7 @@ public class SlowMotionMode : MonoBehaviour
 
     IEnumerator DelayedStop()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         correctedLetters = 0;
 
@@ -199,7 +199,7 @@ public class SlowMotionMode : MonoBehaviour
 
     IEnumerator StopTypingMode()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.7f);
 
         setLetterColorToRed();
 

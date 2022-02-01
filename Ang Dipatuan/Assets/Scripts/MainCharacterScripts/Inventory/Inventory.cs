@@ -17,11 +17,13 @@ public class Inventory : MonoBehaviour
         fruitbasketCounter = GameObject.FindGameObjectWithTag("FruitBasketCounter").GetComponent<Text>();
         coconutCounter = GameObject.FindGameObjectWithTag("CoconutCounter").GetComponent<Text>();
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
-
-        coconut = saveQuestScript.coconut;
-        avocado = saveQuestScript.avocado;
-        fruitbasket = saveQuestScript.basket;
-        pineapple = saveQuestScript.pineapple;
+        if (saveQuestScript.isLoadActive == false)
+        {
+            coconut = saveQuestScript.coconut;
+            avocado = saveQuestScript.avocado;
+            fruitbasket = saveQuestScript.basket;
+            pineapple = saveQuestScript.pineapple;
+        }
     }
 
     // Update is called once per frame

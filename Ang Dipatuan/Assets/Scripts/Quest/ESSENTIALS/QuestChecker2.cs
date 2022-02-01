@@ -103,6 +103,14 @@ public class QuestChecker2 : MonoBehaviour
         SaveQuestScript.Instance.questPos = quest2;
     }
 
+    public void FruitSaver()
+    {
+        saveQuestScript.coconut = inventory.coconut;
+        saveQuestScript.avocado = inventory.avocado;
+        saveQuestScript.pineapple = inventory.pineapple;
+        saveQuestScript.basket = inventory.fruitbasket;
+    }
+
     void Start()
     {
         Instantiate2();

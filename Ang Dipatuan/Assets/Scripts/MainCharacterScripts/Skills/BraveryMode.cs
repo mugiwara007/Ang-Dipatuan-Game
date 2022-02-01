@@ -22,7 +22,7 @@ public class BraveryMode : MonoBehaviour
 
     private int correctedLetters = 0;
 
-    private bool typingMode = false;
+    public bool typingMode = false;
 
     private bool isUnlocked3 = false;
 
@@ -87,7 +87,7 @@ public class BraveryMode : MonoBehaviour
 
             if (manaStats.mana >= 15)
             {
-            if (Input.GetButtonDown("BraveryMode") && onCooldown == false)
+            if (Input.GetButtonDown("BraveryMode") && onCooldown == false && gameObject.GetComponent<DipatuanMode>().typingMode == false && gameObject.GetComponent<SlowMotionMode>().typingMode == false)
             {
                 if (isUnlocked3 == true)
                 {
@@ -174,7 +174,7 @@ public class BraveryMode : MonoBehaviour
 
     IEnumerator DelayedStop()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         correctedLetters = 0;
 
@@ -198,7 +198,7 @@ public class BraveryMode : MonoBehaviour
 
     IEnumerator StopTypingMode()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.7f);
 
         setLetterColorToRed();
 

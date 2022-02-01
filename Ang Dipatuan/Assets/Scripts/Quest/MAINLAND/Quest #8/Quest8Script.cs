@@ -122,6 +122,7 @@ public class Quest8Script : MonoBehaviour
             questComplete.SetActive(true);
             questChecker2.questNum = quest.currentQuest;
             questChecker2.SaveStatQuest2();
+            questChecker2.FruitSaver();
             gameSceneScript2.FadeToScene(9);
             QFX.Stop();
         }

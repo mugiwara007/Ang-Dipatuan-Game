@@ -35,6 +35,7 @@ public class Quest4Script : MonoBehaviour
     public GameObject wall;
     PlayerBar player;
     GameObject waypointMarker;
+    Inventory inventory;
 
     private bool qfailed = true;
 
@@ -53,6 +54,7 @@ public class Quest4Script : MonoBehaviour
         quest4EnemySpawner = GameObject.FindGameObjectWithTag("Quest4EnemySpawner");
         quest4EnemySpawner.SetActive(false);
         waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
+        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         wall.SetActive(false);
         QFX.playOnAwake = false;
     }
@@ -132,6 +134,7 @@ public class Quest4Script : MonoBehaviour
             wall.SetActive(false);
             quest4EnemySpawner.SetActive(false);
             questChecker2.SaveStatQuest2();
+            questChecker2.FruitSaver();
             gameSceneScript2.FadeToScene(12);
             waypointMarker.SetActive(false);
             QFX.Stop();

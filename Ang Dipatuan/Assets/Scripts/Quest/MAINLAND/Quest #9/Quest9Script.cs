@@ -61,6 +61,7 @@ public class Quest9Script : MonoBehaviour
             questComplete.SetActive(true);
             questChecker2.questNum = quest.currentQuest;
             finalWarSpawner.SetActive(false);
+            questChecker2.FruitSaver();
             questChecker2.SaveStatQuest2();
             ctr = 1;
             saveQuestScript.isLoadActive = true;

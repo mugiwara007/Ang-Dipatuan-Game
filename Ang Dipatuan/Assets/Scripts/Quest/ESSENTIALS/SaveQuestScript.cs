@@ -55,18 +55,4 @@ public class SaveQuestScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void Update()
-    {
-        try
-        {
-            coconut = inventory.coconut;
-            pineapple = inventory.pineapple;
-            avocado = inventory.avocado;
-            basket = inventory.fruitbasket;
-        } catch
-        {
-            //Ignore error
-        }
-    }
 }

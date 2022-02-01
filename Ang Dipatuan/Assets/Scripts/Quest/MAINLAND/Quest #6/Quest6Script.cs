@@ -136,6 +136,7 @@ public class Quest6Script : MonoBehaviour
             questChecker2.questNum = quest.currentQuest;
             questChecker2.avocadoController = true;
             questChecker2.SaveStatQuest2();
+            questChecker2.FruitSaver();
             gameSceneScript2.FadeToScene(7);
             QFX.Stop();
         }
