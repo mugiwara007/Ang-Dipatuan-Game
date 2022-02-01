@@ -14,6 +14,8 @@ public class Quest4Script : MonoBehaviour
 
     public Text questDesc;
 
+    public AudioSource QFX;
+
     public GameObject questWindow;
     public GameObject waypoint;
     public Text titleText;
@@ -52,6 +54,7 @@ public class Quest4Script : MonoBehaviour
         quest4EnemySpawner.SetActive(false);
         waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
         wall.SetActive(false);
+        QFX.playOnAwake = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -92,8 +95,8 @@ public class Quest4Script : MonoBehaviour
             waypointScript.enabled = true;
             movement.stun = false;
             cinemachineBrain.enabled = true;
+            QFX.Play();
         }
-
     }
 
     private void Update()
@@ -131,6 +134,7 @@ public class Quest4Script : MonoBehaviour
             questChecker2.SaveStatQuest2();
             gameSceneScript2.FadeToScene(12);
             waypointMarker.SetActive(false);
+            QFX.Stop();
         }
     }
 }

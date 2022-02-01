@@ -13,6 +13,8 @@ public class WarScript : MonoBehaviour
 
     public Text questDesc;
 
+    public AudioSource QFX;
+
     public GameObject questWindow;
     public GameObject waypoint;
     public Text titleText;
@@ -45,6 +47,7 @@ public class WarScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
         warSpawner = GameObject.FindGameObjectWithTag("WarSpawner");
         warSpawner.SetActive(false);
+        QFX.playOnAwake = false;
     }
 
     private void FixedUpdate()
@@ -61,7 +64,7 @@ public class WarScript : MonoBehaviour
             warSpawner.SetActive(false);
             questChecker.SaveStatQuest();
             ctr = 1;
-            
+            QFX.Stop();
         }
         if (ctr == 1)
         {
@@ -121,6 +124,7 @@ public class WarScript : MonoBehaviour
             movement.stun = false;
             cinemachineBrain.enabled = true;
             warSpawner.SetActive(true);
+            QFX.Play();
         }
 
     }

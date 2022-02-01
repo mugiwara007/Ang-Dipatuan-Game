@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Quest9Script : MonoBehaviour
 {
+    public AudioSource QFX;
+
     public QuestUI quest;
 
     QuestGoldGiver questGoldGiver;
@@ -44,6 +46,7 @@ public class Quest9Script : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBar>();
         finalWarSpawner = GameObject.FindGameObjectWithTag("FinalWarSpawner");
         finalWarSpawner.SetActive(false);
+        QFX.playOnAwake = false;
     }
 
     private void FixedUpdate()
@@ -62,6 +65,7 @@ public class Quest9Script : MonoBehaviour
             ctr = 1;
             saveQuestScript.isLoadActive = true;
             gameSceneScript2.FadeToScene(11);
+            QFX.Stop();
         }
         if (ctr == 1)
         {
@@ -118,6 +122,7 @@ public class Quest9Script : MonoBehaviour
             movement.stun = false;
             cinemachineBrain.enabled = true;
             finalWarSpawner.SetActive(true);
+            QFX.Play();
         }
 
     }

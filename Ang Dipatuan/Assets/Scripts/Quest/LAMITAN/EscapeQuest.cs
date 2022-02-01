@@ -14,6 +14,8 @@ public class EscapeQuest : MonoBehaviour
 
     public Text questDesc;
 
+    public AudioSource QFX;
+
     public GameObject questWindow;
     public GameObject waypoint;
     public Text titleText;
@@ -46,6 +48,7 @@ public class EscapeQuest : MonoBehaviour
         waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         enemyLocomotionManger = GameObject.FindGameObjectsWithTag("Enemy");
+        QFX.playOnAwake = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -84,6 +87,7 @@ public class EscapeQuest : MonoBehaviour
             movement.stun = false;
             cinemachineBrain.enabled = true;
             enemyEscape.SetActive(true);
+            QFX.Play();
         }
         
     }
@@ -123,7 +127,8 @@ public class EscapeQuest : MonoBehaviour
             questChecker.SaveStatQuest();
             waypointMarker.SetActive(false);
             ctr += 1;
-            
+            QFX.Stop();
+
         }
         if (ctr == 1)
         {

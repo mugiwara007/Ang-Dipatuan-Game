@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Quest8Script : MonoBehaviour
 {
+    public AudioSource QFX;
+
     public QuestUI quest;
 
     QuestGoldGiver questGoldGiver;
@@ -47,6 +49,7 @@ public class Quest8Script : MonoBehaviour
         gameSceneScript2 = GameObject.FindGameObjectWithTag("G2").GetComponent<GameSceneScript2>();
         waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
         wall1.SetActive(false);
+        QFX.playOnAwake = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -85,6 +88,7 @@ public class Quest8Script : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             movement.stun = false;
             cinemachineBrain.enabled = true;
+            QFX.Play();
         }
     }
 
@@ -119,6 +123,7 @@ public class Quest8Script : MonoBehaviour
             questChecker2.questNum = quest.currentQuest;
             questChecker2.SaveStatQuest2();
             gameSceneScript2.FadeToScene(9);
+            QFX.Stop();
         }
     }
 }

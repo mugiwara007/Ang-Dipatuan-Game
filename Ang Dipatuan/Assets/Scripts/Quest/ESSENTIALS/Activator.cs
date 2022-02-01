@@ -14,6 +14,8 @@ public class Activator : MonoBehaviour
 
     public Text questDesc;
 
+    public AudioSource QFX;
+
     public GameObject questWindow;
     public GameObject waypoint;
     public Text titleText;
@@ -42,6 +44,7 @@ public class Activator : MonoBehaviour
         saveQuestScript = GameObject.FindGameObjectWithTag("Updater").GetComponent<SaveQuestScript>();
         questChecker = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestChecker>();
         training.SetActive(false);
+        QFX.playOnAwake = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -80,6 +83,7 @@ public class Activator : MonoBehaviour
             training.SetActive(true);
             movement.stun = false;
             cinemachineBrain.enabled = true;
+            QFX.Play();
         }
         
     }
@@ -97,6 +101,7 @@ public class Activator : MonoBehaviour
             questComplete.SetActive(true);
             questChecker.questNum = quest.currentQuest;
             questChecker.SaveStatQuest();
+            QFX.Stop();
             ctr += 1;
         }
         if (ctr == 1)

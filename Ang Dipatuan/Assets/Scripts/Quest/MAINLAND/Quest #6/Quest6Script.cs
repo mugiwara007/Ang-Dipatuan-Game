@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Quest6Script : MonoBehaviour
 {
+    public AudioSource QFX;
+
     public QuestUI quest;
 
     QuestGoldGiver questGoldGiver;
@@ -51,6 +53,7 @@ public class Quest6Script : MonoBehaviour
         waypoint4 = GameObject.FindGameObjectWithTag("Waypoint4");
         waypointMarker = GameObject.FindGameObjectWithTag("Waypont");
         canvas = GameObject.FindGameObjectWithTag("Quest6E").GetComponent<Canvas>();
+        QFX.playOnAwake = false;
     }
 
     public void Quest6() { 
@@ -86,6 +89,7 @@ public class Quest6Script : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             movement.stun = false;
             cinemachineBrain.enabled = true;
+            QFX.Play();
         }
 
     }
@@ -133,6 +137,7 @@ public class Quest6Script : MonoBehaviour
             questChecker2.avocadoController = true;
             questChecker2.SaveStatQuest2();
             gameSceneScript2.FadeToScene(7);
+            QFX.Stop();
         }
     }
 }
